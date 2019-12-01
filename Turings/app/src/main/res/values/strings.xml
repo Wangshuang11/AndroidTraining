@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Turings</string>
+    <string name="indent">\t\t\t\t</string>
+    <string name="newline">\n</string>
+    <string name="ip">10.7.89.205</string>
+    <string name="connUrl">http://10.7.89.98:8080/Turings</string>
 </resources>
