@@ -8,4 +8,8 @@
     <color name="sxn_un_normal">#fff</color>
     <color name="sxn_big_background">#9f9</color>
     <color name="sxn_background">#1aa8b7</color>
+    <color name="tab_text_selected">#0084e8</color>
+    <color name="tab_text_normal">#7597b3</color>
+    <color name="grey">#888888</color>
+    <color name="white">#ffffff</color>
 </resources>

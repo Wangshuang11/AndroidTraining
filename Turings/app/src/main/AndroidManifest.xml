@@ -16,20 +16,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".myself.sxn.MyAchieveActivity" />
+        <activity android:name=".myself.sxn.MyAvatarActivity" />
+        <activity android:name=".myself.sxn.MyConcernActivity" />
+        <activity android:name=".myself.sxn.MyFansActivity" />
+        <activity android:name=".myself.sxn.MyMottoActivity" />
+        <activity android:name=".myself.sxn.MyNicknameActivity" />
+        <activity android:name=".myself.sxn.MySchoolActivity" />
+        <activity android:name=".myself.sxn.MyShareActivity" />
+        <activity android:name=".myself.sxn.PersonalDataActivity" />
+        <activity android:name=".UrlActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
-
-        <activity android:name=".myself.sxn.MyAchieveActivity"/>
-        <activity android:name=".myself.sxn.MyAvatarActivity"/>
-        <activity android:name=".myself.sxn.MyConcernActivity"/>
-        <activity android:name=".myself.sxn.MyFansActivity"/>
-        <activity android:name=".myself.sxn.MyMottoActivity"/>
-        <activity android:name=".myself.sxn.MyNicknameActivity"/>
-        <activity android:name=".myself.sxn.MySchoolActivity"/>
-        <activity android:name=".myself.sxn.MyShareActivity"/>
-        <activity android:name=".myself.sxn.PersonalDataActivity"/>
-
     </application>
 
 </manifest>
