@@ -4,11 +4,16 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "org.turings.turings"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
     }
     buildTypes {
         release {
@@ -18,12 +23,21 @@ android {
     }
 }
 
-dependencies {
+dependencies {/*重复的包，不要重复的添加*/
+    /*登录注册用包：*/
+    implementation 'com.carson_ho:Super_EditText:1.0.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.+'
+    implementation 'com.android.support:design:26.+'
+    implementation 'com.jakewharton:butterknife:7.0.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    /*首页用包：*/
     implementation 'com.android.support:design:26.0.0'
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-12'
     implementation 'com.github.bumptech.glide:glide:4.0.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.android.support:recyclerview-v7:26.0.0'
+    /*创建时自带的包：*/
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'

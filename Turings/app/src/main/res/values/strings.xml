@@ -4,4 +4,5 @@
     <string name="newline">\n</string>
     <string name="ip">10.7.89.205</string>
     <string name="connUrl">http://10.7.89.98:8080/Turings</string>
+    <string name="ipConfig">10.7.89.174</string><!--登录模块的：-->
 </resources>
