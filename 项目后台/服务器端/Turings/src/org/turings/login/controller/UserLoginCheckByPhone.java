@@ -35,8 +35,6 @@ public class UserLoginCheckByPhone extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		String uTel = request.getParameter("uTel");
-		/*System.out.println("ws");
-		System.out.println("ws"+uTel);*/
 		User user=new User();
 		user.setuTel(uTel);
 		writer.write(new UserService().loginCheckByPhone(user)+"");

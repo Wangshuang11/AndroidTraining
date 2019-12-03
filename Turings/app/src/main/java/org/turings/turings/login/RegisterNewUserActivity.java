@@ -1,11 +1,9 @@
 package org.turings.turings.login;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -37,7 +35,7 @@ public class RegisterNewUserActivity extends AppCompatActivity {
     private String uPwd;//用户输入的密码
     private String uCode;//用户输入的验证码
     private String result="";//后台服务器验证结果
-    private int code;//随机4位验证码
+    private String code;//后台生成的随机4位验证码也是用户短信验证码
     private TextView tvRegister_ws;//注册新用户按钮
     private Handler handler=new Handler(){
         @Override
@@ -85,7 +83,6 @@ public class RegisterNewUserActivity extends AppCompatActivity {
 
         //发送验证码短信
         getAPhoneCodeMessage();
-        //sendSmsByJPush();
 
         //在用户填写姓名时，检查姓名是否唯一
         checkUserNameIsOnly();
@@ -97,28 +94,6 @@ public class RegisterNewUserActivity extends AppCompatActivity {
         addAUser();
     }
 
-    //调用JPush接口，发送验证码短信
-   /* private void sendSmsByJPush() {
-        //点击"获得验证码"
-        tvGetCode_ws.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //调用JPush接口，给用户手机号发送一条验证码短信
-                SMSSDK.getInstance().getSmsCodeAsyn(uTel,1+"", new SmscodeListener() {
-                    @Override
-                    public void getCodeSuccess(final String uuid) {
-                        Toast.makeText(getApplicationContext(),uuid,Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void getCodeFail(int errCode, final String errmsg) {
-                        Toast.makeText(getApplicationContext(),errmsg,Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-    }*/
-
     //新增一个用户
     private void addAUser() {
         tvRegister_ws.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +101,7 @@ public class RegisterNewUserActivity extends AppCompatActivity {
             public void onClick(View view) {
                 uPwd=input_password_ws.getText().toString();
                 uCode=input_code_ws.getText().toString();
-                if (uCode.equals(code+"")){
+                if (uCode.equals(code)){
                     new Thread(){
                         @Override
                         public void run() {
@@ -154,41 +129,6 @@ public class RegisterNewUserActivity extends AppCompatActivity {
                 }
             }
         });
-
-            /*//2、调用调用JPush接口，验证用户输入的验证码是否正确
-            SMSSDK.getInstance().checkSmsCodeAsyn(uTel, uCode, new SmscheckListener() {
-                @Override
-                public void checkCodeSuccess(final String code) {
-                    Toast.makeText(getApplicationContext(),code,Toast.LENGTH_SHORT).show();
-                    new Thread(){
-                        @Override
-                        public void run() {
-                            OkHttpClient okHttpClient=new OkHttpClient();
-                            //post-FormBody传输，在一定程度上保证用户信息的安全
-                            FormBody formBody=new FormBody.Builder()
-                                    .add("uTel",uTel)
-                                    .add("uName",uName)
-                                    .add("uPwd",uPwd)
-                                    .build();
-                            Request request=new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/UserRegister").post(formBody).build();
-                            Call call = okHttpClient.newCall(request);
-                            try {
-                                result=call.execute().body().string();
-                                Message message=new Message();
-                                message.what=100;
-                                handler.sendMessage(message);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }.start();
-                }
-                @Override
-                public void checkCodeFail(int errCode, final String errmsg) {
-                    result="false";
-                    Toast.makeText(getApplicationContext(),errmsg,Toast.LENGTH_SHORT).show();
-                }
-            });*/
     }
 
     //在用户填写手机号时，检查是否已经有人用过
@@ -257,17 +197,30 @@ public class RegisterNewUserActivity extends AppCompatActivity {
         });
     }
 
-    //点击获得验证码，随机生成一个验证码，并向手机发送一条短信
+    //点击获得验证码短信
     private void getAPhoneCodeMessage() {
         tvGetCode_ws.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //随机4位验证码，存入后台，用于验证
-                code= (int) (Math.random()*10000);
                 //向用户手机号发送一条短信
                 uTel=input_phone_ws.getText().toString();
-                ActivityCompat.requestPermissions(RegisterNewUserActivity.this, new String[]{Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.RECEIVE_SMS}, 1);
-                MsmUtils.sendMsm(RegisterNewUserActivity.this,uTel,"您的验证码是"+code+",请勿泄露，谨防被盗。");
+                new Thread(){
+                    @Override
+                    public void run() {
+                        OkHttpClient okHttpClient=new OkHttpClient();
+                        //post-FormBody传输，在一定程度上保证用户信息的安全
+                        FormBody formBody=new FormBody.Builder()
+                                .add("uTel",uTel)
+                                .build();
+                        Request request=new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/SendCodeSmsToUser").post(formBody).build();
+                        Call call = okHttpClient.newCall(request);
+                        try {
+                            code=call.execute().body().string();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
             }
         });
     }

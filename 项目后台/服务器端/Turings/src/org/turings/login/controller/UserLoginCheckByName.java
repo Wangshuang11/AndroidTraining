@@ -35,7 +35,6 @@ public class UserLoginCheckByName extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		String uName = request.getParameter("uName");
-		/*System.out.println("ws"+uTel);*/
 		User user=new User();
 		user.setuName(uName);
 		writer.write(new UserService().loginCheckByName(user)+"");

@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +20,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import org.turings.turings.R;
 import org.turings.turings.login.LoginActivity;
+import org.turings.turings.login.RegisterNewUserActivity;
 import org.turings.turings.myself.sxn.MyAchieveActivity;
 import org.turings.turings.myself.sxn.MyAvatarActivity;
 import org.turings.turings.myself.sxn.MyConcernActivity;
@@ -46,7 +46,9 @@ public class MyselfFragment extends Fragment {
     private TextView scoreT;
     private MyListener myListener=new MyListener();;
     private ImageView ivBackground_ws;//头像上方的封面图片
-    private Button btnJumpLogin_ws;//未登录界面的登录按钮
+    private TextView tvJumpLogin_ws;//未登录界面的登录按钮
+    private ImageView ivUnLogin_ws;//未登录界面的上方图片
+    private TextView tvJumpRegister_ws;//未登录界面的注册按钮
     private View view;
 
     @Nullable
@@ -55,7 +57,9 @@ public class MyselfFragment extends Fragment {
         //用户是否登录
         if(!checkUserIsLogin()){//未登录
             view = inflater.inflate(R.layout.sxn_activity_unlogged, container,false);
-            //点击登录跳转按钮，跳到登录界面
+            //加载上方图片
+            loadTopImg();
+            //点击跳转按钮，跳到登录或注册界面
             jumpToLogin();
             return view;
         }
@@ -82,13 +86,28 @@ public class MyselfFragment extends Fragment {
         return view;
     }
 
-    //点击登录跳转按钮，跳到登录界面
+    //加载上方图片
+    private void loadTopImg() {
+        ivUnLogin_ws=view.findViewById(R.id.ivUnLogin_ws);
+        RequestOptions requestOptions=new RequestOptions().circleCrop();
+        Glide.with(getContext()).asGif().load(R.mipmap.myselfthinkingtwo).apply(requestOptions).into(ivUnLogin_ws);
+    }
+
+    //点击跳转按钮，跳到登录或注册界面
     private void jumpToLogin() {
-        btnJumpLogin_ws= view.findViewById(R.id.btnJumpLogin_ws);
-        btnJumpLogin_ws.setOnClickListener(new View.OnClickListener() {//跳到登录界面
+        tvJumpLogin_ws= view.findViewById(R.id.tvJumpLogin_ws);
+        tvJumpRegister_ws=view.findViewById(R.id.tvJumpRegister_ws);
+        tvJumpLogin_ws.setOnClickListener(new View.OnClickListener() {//跳到登录界面
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        tvJumpRegister_ws.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), RegisterNewUserActivity.class);
                 startActivity(intent);
             }
         });

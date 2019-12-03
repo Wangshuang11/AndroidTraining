@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.turings.login.entity.SendSms;
 import org.turings.login.entity.User;
 import org.turings.login.service.UserService;
 
-
 /**
- * Servlet implementation class UserLoginCheckByUserPwd
+ * Servlet implementation class SendCodeSmsToUser
  */
-@WebServlet("/UserLoginCheckByUserPwd")
-public class UserLoginCheckByUserPwd extends HttpServlet {
+@WebServlet("/SendCodeSmsToUser")
+public class SendCodeSmsToUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserLoginCheckByUserPwd() {
+    public SendCodeSmsToUser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,12 +35,10 @@ public class UserLoginCheckByUserPwd extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter writer = response.getWriter();
-		String uName = request.getParameter("uName");
-		String uPwd = request.getParameter("uPwd");
-		User user=new User();
-		user.setuName(uName);
-		user.setuPwd(uPwd);
-		writer.write(new UserService().loginCheckByUserPwd(user)+"");
+		String uTel = request.getParameter("uTel");
+		int code=(int) (Math.random()*10000);
+		SendSms.sendSms(uTel,code);
+		writer.write(code+"");//返回随机生成的验证码
 	}
 
 	/**
