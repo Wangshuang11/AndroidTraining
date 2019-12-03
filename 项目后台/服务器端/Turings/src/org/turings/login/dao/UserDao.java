@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.turings.DbUtil;
+import org.turings.login.DbUtil;
 
 
 public class UserDao {

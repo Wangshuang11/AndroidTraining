@@ -1,4 +1,4 @@
-package net.wangshuang.util;
+package org.turings.login;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,7 +21,7 @@ public class DbUtil {
 		}
 		return dbUtil;
 	}
-	//»ñÈ¡Êý¾Ý¿âÁ¬½Ó
+	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
 	public Connection getConnection() throws ClassNotFoundException, SQLException {
 		if(null == conn || conn.isClosed()) {
 			Class.forName(DRIVER_STR);
@@ -30,7 +30,7 @@ public class DbUtil {
 		return conn;
 		
 	}
-	//¹Ø±ÕÁ¬½Ó
+	//ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void closeConnection() throws SQLException {
 		if(null != conn || !conn.isClosed()) {
 			conn.close();
