@@ -11,7 +11,7 @@ import com.aliyuncs.profile.DefaultProfile;
 
 public class SendSms {
     public static void sendSms(String uTel,int code) {
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4FrAGuiodb8JgCBNPxDQ", "puFDV1nJCw0ecT4Mb9JDBDKCd6M95K");
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "用之前先改这个：阿里云子账号", "用之前先改这个：阿里云子账号密码");
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();
