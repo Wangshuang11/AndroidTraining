@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 
+import org.turings.turings.R;
 import org.turings.turings.index.SpacesItemDecoration;
 import org.turings.turings.index.adapter.RecyclerAdapter;
 import org.turings.turings.index.adapter.RecyclerListAdapter;

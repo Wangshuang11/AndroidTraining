@@ -36,6 +36,9 @@ public class UserModifyPwdByPhone extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		String uTel = request.getParameter("uTel");
 		String uPwd = request.getParameter("uPwd");
+		System.out.println("ws");
+		System.out.println("wsTel"+uTel);
+		System.out.println("wsPwd"+uPwd);
 		User user=new User();
 		user.setuTel(uTel);
 		user.setuPwd(uPwd);

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.turings.turings.MyFragmentPager;
+import org.turings.turings.R;
 import org.turings.turings.index.fragment.FirstFragment;
 import org.turings.turings.index.fragment.SecondFragment;
 import org.turings.turings.index.fragment.ThirdFragment;

@@ -12,4 +12,6 @@
     <color name="tab_text_normal">#7597b3</color>
     <color name="grey">#888888</color>
     <color name="white">#ffffff</color>
+    <color name="colorDeafult">#9b9b9b</color>
+    <color name="colorfocus">#1296db</color>
 </resources>

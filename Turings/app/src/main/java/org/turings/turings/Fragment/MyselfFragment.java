@@ -1,6 +1,7 @@
 package org.turings.turings.Fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -17,12 +20,15 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import org.turings.turings.R;
+import org.turings.turings.login.LoginActivity;
 import org.turings.turings.myself.sxn.MyAchieveActivity;
 import org.turings.turings.myself.sxn.MyAvatarActivity;
 import org.turings.turings.myself.sxn.MyConcernActivity;
 import org.turings.turings.myself.sxn.MyFansActivity;
 import org.turings.turings.myself.sxn.MySchoolActivity;
 import org.turings.turings.myself.sxn.PersonalDataActivity;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class MyselfFragment extends Fragment {
@@ -40,13 +46,21 @@ public class MyselfFragment extends Fragment {
     private TextView scoreT;
     private MyListener myListener=new MyListener();;
     private ImageView ivBackground_ws;//头像上方的封面图片
+    private Button btnJumpLogin_ws;//未登录界面的登录按钮
     private View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //用户登没录的判断
-        //if(false){
+        //用户是否登录
+        if(!checkUserIsLogin()){//未登录
+            view = inflater.inflate(R.layout.sxn_activity_unlogged, container,false);
+            //点击登录跳转按钮，跳到登录界面
+            jumpToLogin();
+            return view;
+        }
+
+        //登录
         view = inflater.inflate(R.layout.sxn_activity_logged, container,false);
 
         //初始化控件
@@ -66,6 +80,30 @@ public class MyselfFragment extends Fragment {
 
 
         return view;
+    }
+
+    //点击登录跳转按钮，跳到登录界面
+    private void jumpToLogin() {
+        btnJumpLogin_ws= view.findViewById(R.id.btnJumpLogin_ws);
+        btnJumpLogin_ws.setOnClickListener(new View.OnClickListener() {//跳到登录界面
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    //用户是否登录
+    private boolean checkUserIsLogin() {
+        SharedPreferences sharedPreferences=getContext().getSharedPreferences("userInfo",MODE_PRIVATE);
+        String uName=sharedPreferences.getString("name","");
+        String uTel=sharedPreferences.getString("phone","");
+        if (uName.equals("") && uTel.equals("")){//用户名或者密码两个都为空，就是用户没登录
+            return false;
+        }else{//只要用户名或者密码有一个不为空，就是用户登录了
+            return true;
+        }
     }
 
     //绑定事件监听器

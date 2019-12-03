@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import org.turings.turings.R;
 import org.turings.turings.UrlActivity;
 import org.turings.turings.index.entity.School;
 

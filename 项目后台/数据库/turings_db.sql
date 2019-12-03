@@ -10,7 +10,11 @@ Target Server Type    : MYSQL
 Target Server Version : 50506
 File Encoding         : 65001
 
+<<<<<<< HEAD
 Date: 2019-12-03 10:13:34
+=======
+Date: 2019-12-02 21:35:03
+>>>>>>> 51d0c77bb411ba3ea11635c80441e3a3e06776b2
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -266,23 +270,23 @@ INSERT INTO `tbl_self_schools_favorite` VALUES ('7', '3');
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_self_user`;
 CREATE TABLE `tbl_self_user` (
-  `uId` int(11) NOT NULL DEFAULT '0',
-  `uTel` char(11) DEFAULT NULL,
-  `uName` varchar(20) DEFAULT NULL,
-  `uPwd` varchar(20) DEFAULT NULL,
+  `uId` int(11) NOT NULL AUTO_INCREMENT,
+  `uTel` char(11) NOT NULL,
+  `uName` varchar(20) NOT NULL,
+  `uPwd` varchar(20) NOT NULL,
   `uMotto` varchar(60) DEFAULT NULL,
   `uAvatar` varchar(100) DEFAULT NULL,
   `uTime` int(11) DEFAULT NULL,
   `uScore` int(11) DEFAULT NULL,
   PRIMARY KEY (`uId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_self_user
 -- ----------------------------
 INSERT INTO `tbl_self_user` VALUES ('0', '13010001000', '第一个用户', '000000', '这是第一条座右铭', 'img', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('1', '13010001001', '王大爽', 'wangshuang', '王大爽的座右铭', 'img', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('2', '13000001002', '单小楠', 'shanxinnan', '单鑫楠的座右铭', 'img', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('1', '15227859968', '王大爽', '123456', '王大爽的座右铭', 'img', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('2', '15232167052', '单小楠', '111', '单鑫楠的座右铭', 'img', '0', '0');
 INSERT INTO `tbl_self_user` VALUES ('3', '13000001003', '金小媛', 'jinxinyuan', '金小媛的座右铭', 'img', '0', '0');
 INSERT INTO `tbl_self_user` VALUES ('4', '13000001004', '杨小鑫', 'yangliuxin', '杨小鑫的座右铭', 'img', '0', '0');
 INSERT INTO `tbl_self_user` VALUES ('5', '13000001005', '吕小浩', 'lvyihao', '吕小浩的座右铭', 'img', '0', '0');

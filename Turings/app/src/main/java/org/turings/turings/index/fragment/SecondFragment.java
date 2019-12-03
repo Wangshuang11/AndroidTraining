@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.turings.turings.R;
+
 public class SecondFragment extends Fragment{
     @Nullable
     @Override
