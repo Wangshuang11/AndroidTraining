@@ -1,5 +1,6 @@
 package org.turings.turings;
 
+import android.content.Intent;
 import android.graphics.Color;
 
 import android.support.v4.app.FragmentTabHost;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
         FragmentTabHost fragmentTabHost=findViewById(android.R.id.tabhost);
         fragmentTabHost.setup(this,getSupportFragmentManager(),android.R.id.tabcontent);
         TabHost.TabSpec tabSpec1=fragmentTabHost.newTabSpec("tag1")
@@ -92,6 +94,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        if(intent != null && intent.getAction().equals("mistake")){
+            fragmentTabHost.setCurrentTab(1);
+            imageViewMap.get("tag2").setImageResource(R.mipmap.mistakenblue);
+            textViewHashMap.get("tag2").setTextColor(Color.argb(100,26,168,215));
+        }else {
+            fragmentTabHost.setCurrentTab(0);
+            imageViewMap.get("tag1").setImageResource(R.mipmap.indexblue);
+            textViewHashMap.get("tag1").setTextColor(Color.argb(100,26,168,215));
+        }
     }
 
     //加载选项卡布局:

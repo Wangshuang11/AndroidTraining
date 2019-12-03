@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.turings.turings">
-
     <!-- 授予发送短信的权限 -->
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!-- 授予接收短信的权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 授予接收短信的权限 -->
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
-
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -18,6 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".mistaken.RedoWrongBigQuestionActivity"></activity>
         <activity android:name=".index.IndexActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".myself.sxn.MyAchieveActivity" />
         <activity android:name=".myself.sxn.MyAvatarActivity" />
         <activity android:name=".myself.sxn.MyConcernActivity" />
@@ -39,12 +38,13 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
-        </activity>
-
-        <!--登录注册的三个页面-->
-        <activity android:name=".login.ForgetPasswordActivity"/>
+        </activity> <!-- 登录注册的三个页面 -->
+        <activity android:name=".login.ForgetPasswordActivity" />
         <activity android:name=".login.RegisterNewUserActivity" />
-        <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".login.LoginActivity" /> <!-- 错题本的页面 -->
+        <activity android:name=".mistaken.LookUpAndErrorReDoActivity" />
+        <activity android:name=".mistaken.RedoWrongQuestionsActivity" />
+        <activity android:name=".mistaken.UploadWrongQuestionsActivity" />
     </application>
 
 </manifest>
