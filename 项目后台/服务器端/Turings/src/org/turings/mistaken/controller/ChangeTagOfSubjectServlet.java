@@ -35,7 +35,6 @@ public class ChangeTagOfSubjectServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		int id = Integer.parseInt(request.getParameter("id"));
 		String tag = request.getParameter("tag");
-		System.out.print("id"+id+":"+"tag"+tag);
 		PrintWriter out = response.getWriter();
 		//在数据库中更改标签
 		int n = new MistakenService().changeTagOfSubjectService(id, tag);

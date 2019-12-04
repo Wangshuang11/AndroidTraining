@@ -60,11 +60,19 @@ public class MisTakenDao {
 		ResultSet rs = null;
 		try {
 			conn = dbUtil.getConnection();
-			String sql = "select * from tbl_mistaken where subject = ? and uId = ? and tag = ?";
-			pstm = conn.prepareStatement(sql);
-			pstm.setString(1,subject);
-			pstm.setInt(2,uId);
-			pstm.setString(3,tag);
+			String sql = "";
+			if(tag.equals("null")) {
+				sql = "select * from tbl_mistaken where subject = ? and uId = ?";
+				pstm = conn.prepareStatement(sql);
+				pstm.setString(1,subject);
+				pstm.setInt(2,uId);
+			}else {
+				sql = "select * from tbl_mistaken where subject = ? and uId = ? and tag = ?";
+				pstm = conn.prepareStatement(sql);
+				pstm.setString(1,subject);
+				pstm.setInt(2,uId);
+				pstm.setString(3,tag);
+			}
 			rs = pstm.executeQuery();
 			while(rs.next()) {
 				SubjectMsg subjectMsg = new SubjectMsg(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate("time"),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getInt(12));

@@ -46,7 +46,6 @@ public class SearchPreSubjectServlet extends HttpServlet {
 		if(subjectMsgs != null) {
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String subjectMsg = gson.toJson(subjectMsgs);
-			System.out.print(subjectMsg);
 			out.write(subjectMsg);
 		}else {
 			out.write("这已经是第一题了");
