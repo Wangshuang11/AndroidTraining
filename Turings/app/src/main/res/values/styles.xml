@@ -19,4 +19,11 @@
         <item name="android:paddingRight">50dp</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="PopupWindowAnimation" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowEnterAnimation">@anim/popup_in</item>
+        <item name="android:windowExitAnimation">@anim/popup_out</item>
+    </style>
+    <style name="popupMenu">
+        <item name="android:textColor">@color/themeColor</item>
+    </style>
 </resources>

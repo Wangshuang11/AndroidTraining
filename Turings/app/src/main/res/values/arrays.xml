@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinner">
+        <item>集合</item>
+        <item>映射</item>
+        <item>函数</item>
+        <item>导数</item>
+        <item>微积分</item>
+        <item>三角函数</item>
+        <item>平面向量</item>
+        <item>数列</item>
+    </string-array>
+</resources>
