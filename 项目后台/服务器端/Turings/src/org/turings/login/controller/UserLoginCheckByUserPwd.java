@@ -40,7 +40,7 @@ public class UserLoginCheckByUserPwd extends HttpServlet {
 		User user=new User();
 		user.setuName(uName);
 		user.setuPwd(uPwd);
-		writer.write(new UserService().loginCheckByUserPwd(user)+"");
+		writer.write(new UserService().loginCheckByUserPwd(user));
 	}
 
 	/**

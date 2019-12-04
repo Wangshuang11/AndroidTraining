@@ -37,7 +37,7 @@ public class UserLoginCheckByPhone extends HttpServlet {
 		String uTel = request.getParameter("uTel");
 		User user=new User();
 		user.setuTel(uTel);
-		writer.write(new UserService().loginCheckByPhone(user)+"");
+		writer.write(new UserService().loginCheckByPhone(user));
 	}
 
 	/**

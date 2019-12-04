@@ -37,7 +37,7 @@ public class UserLoginCheckByName extends HttpServlet {
 		String uName = request.getParameter("uName");
 		User user=new User();
 		user.setuName(uName);
-		writer.write(new UserService().loginCheckByName(user)+"");
+		writer.write(new UserService().loginCheckByName(user));
 	}
 
 	/**
