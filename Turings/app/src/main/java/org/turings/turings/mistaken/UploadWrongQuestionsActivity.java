@@ -1,10 +1,13 @@
 package org.turings.turings.mistaken;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -30,7 +33,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class UploadWrongQuestionsActivity extends AppCompatActivity {
 
@@ -57,15 +62,40 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
     private ViewGroup.LayoutParams ap;//选择题答题框layoutparam
     private ViewGroup.LayoutParams lp;//大题答题框layoutparam
     private TextView question_content_ylx;//“题面”二字
-    private static final String[] tags  ={"集合","映射","函数","导数","微积分","三角函数","平面向量","数列"};
+    private static String[] tags;
+    private List<String> list;//存tag
     private ArrayAdapter<String> tagAdapter;
     private String path;//图片存储的路径
     private org.turings.turings.mistaken.SubjectMsg subjectMsg ;//上传的题目
     private Bitmap photo;//相机拍下的照片
+    private String uId;//用户的id
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 100:
+                    tags = getResources().getStringArray(R.array.spinnerChinese);
+                    notifyList();
+                    break;
+                case 200:
+                    tags = getResources().getStringArray(R.array.spinner);
+                    notifyList();
+                    break;
+                case 300:
+                    tags = getResources().getStringArray(R.array.spinnerEnglish);
+                    notifyList();
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_look_up_layout_ylx);
+        //获取用户的id
+        SharedPreferences sp = getSharedPreferences("userInfo",MODE_PRIVATE);
+        uId = sp.getString("uId",null);
         //初始化数据（默认数据）
         initData();
         //获取控件
@@ -75,7 +105,12 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         //展示拍照后的图片
         showWrongQuestionPhoto();
         //给标签绑定adapter
-        tagAdapter = new ArrayAdapter<String>(this, R.layout.spinner_layout_ylx,tags);
+        tags = getResources().getStringArray(R.array.spinner);
+        list = new ArrayList<>();
+        for(String str:tags){
+            list.add(str);
+        }
+        tagAdapter = new ArrayAdapter<String>(this, R.layout.spinner_layout_ylx,list);
         spinner_ylx.setAdapter(tagAdapter);
         spinner_ylx.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -90,8 +125,16 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
 
     }
 
+    //更新数据的方法
+    private void notifyList() {
+        list.clear();
+        for(String str:tags){
+            list.add(str);
+        }
+        tagAdapter.notifyDataSetChanged();
+    }
     private void initData() {
-        subjectMsg = new org.turings.turings.mistaken.SubjectMsg(1,"数学","集合","填空题",new Date(),"files","","","","","",1);
+        subjectMsg = new org.turings.turings.mistaken.SubjectMsg(1,"数学","集合","填空题",new Date(),"files","","","","","",Integer.parseInt(uId));
     }
 
     //展示拍照后的图片
@@ -100,7 +143,6 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         byte[] bytes=intent.getByteArrayExtra("photo");
         Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
         path = saveImgToFile(bitmap);
-        Log.i("lww", "showWrongQuestionPhoto: 第一次"+path);
         subjectMsg.setTitleImg(path);
         question_img_ylx.setImageBitmap(bitmap);
     }
@@ -112,7 +154,6 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         if (requestCode == 6666 && resultCode == RESULT_OK){
             photo = (Bitmap) data.getExtras().get("data");
             path = saveImgToFile(photo);
-            Log.i("lww", "onActivityResult: 图片存储路径第二次："+path);
             subjectMsg.setTitleImg(path);
             question_img_ylx.setScaleType(ImageView.ScaleType.FIT_XY);
             question_img_ylx.setImageBitmap(photo);
@@ -124,7 +165,6 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
     //保存拍的图片到系统中
     private String saveImgToFile(Bitmap photo) {
         String dataFileStr = getFilesDir().getAbsolutePath()+"/";
-        Log.i("lww", "saveImgToFile: "+dataFileStr);
         String fileName = System.currentTimeMillis() + ".jpg";
         File file = new File(dataFileStr+fileName);
         try {                                       // 写入图片
@@ -217,7 +257,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
                     uploadWrongQuestionPhotoAgain();
                     break;
                 case R.id.img_ylx://点击返回
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     intent.setAction("mistake");
                     startActivity(intent);
                     finish();
@@ -227,21 +267,33 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
                     chinese_ylx.setBackgroundColor(getResources().getColor(R.color.themeColor));
                     math_ylx.setBackgroundColor(Color.WHITE);
                     english_ylx.setBackgroundColor(Color.WHITE);
+                    Message msg = Message.obtain();
+                    msg.obj = "语文";
+                    msg.what=100;
+                    handler.sendMessage(msg);
                     subjectMsg.setSubject("语文");
                     break;
                 case R.id.math_ylx://选择数学学科
                     chinese_ylx.setBackgroundColor(Color.WHITE);
                     math_ylx.setBackgroundColor(getResources().getColor(R.color.themeColor));
                     english_ylx.setBackgroundColor(Color.WHITE);
+                    Message msg1 = Message.obtain();
+                    msg1.obj = "数学";
+                    msg1.what=200;
+                    handler.sendMessage(msg1);
                     subjectMsg.setSubject("数学");
                     break;
                 case R.id.english_ylx://选择英语学科
                     chinese_ylx.setBackgroundColor(Color.WHITE);
                     math_ylx.setBackgroundColor(Color.WHITE);
                     english_ylx.setBackgroundColor(getResources().getColor(R.color.themeColor));
+                    Message msg2 = Message.obtain();
+                    msg2.obj = "英语";
+                    msg2.what=300;
+                    handler.sendMessage(msg2);
                     subjectMsg.setSubject("英语");
                     break;
-                    //选择题型
+                //选择题型
                 case R.id.choose_ylx://选择题
                     choose_ylx.setBackgroundColor(getResources().getColor(R.color.themeColor));
                     fill_ylx.setBackgroundColor(Color.WHITE);
@@ -272,7 +324,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
                     answer_big_ylx.setLayoutParams(lp);
                     subjectMsg.setType("大题");
                     break;
-                    //信息填写完毕添加错题到数据库
+                //信息填写完毕添加错题到数据库
                 case R.id.add_wrong_questions_ylx:
                     //错题答案
                     if(subjectMsg.getType().equals("选择题")){
@@ -310,7 +362,6 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         }
         //传入要上传的数据
         customDialog.subjectMsgData(subjectMsg);
-        Log.i("lww", "showCustomDialog: "+subjectMsg);
         //显示Fragment
         transaction.show(customDialog);
         //提交，只有提交了上面的操作才会生效

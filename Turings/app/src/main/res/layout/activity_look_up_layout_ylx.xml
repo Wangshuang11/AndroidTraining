@@ -135,7 +135,6 @@
                         android:layout_width="match_parent"
                         android:layout_marginRight="15dp"
                         android:layout_marginLeft="15dp"
-                        android:entries="@array/tag"
                         android:layout_height="40dp"/>
                 </LinearLayout>
             </LinearLayout>
@@ -278,7 +277,8 @@
                         android:id="@+id/option_answer_ylx"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:hint="请在此处输入正确答案，如A，B，C，D，"/>
+                        android:textSize="15sp"
+                        android:hint="请在此处输入正确答案，如A，B，C，D"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout

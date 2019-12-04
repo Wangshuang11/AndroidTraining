@@ -79,13 +79,14 @@ public class CustomDialogYLX extends DialogFragment {
         windowParams.alpha = 1f;
         //设置弹出框距离上面的距离
         windowParams.y = 100;
+        window.setBackgroundDrawableResource(R.drawable.dialog_stroke_layout_ylx);
+        windowParams.width = 900;// 调整该值可以设置对话框显示的宽度
         window.setAttributes(windowParams);
         //DisplayMetrics类 获取手机显示屏的基本信息 包括尺寸、密度、字体缩放等信息
         DisplayMetrics dm = new DisplayMetrics();
         //将屏幕尺寸赋给dm
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         //设置弹出框的高度和宽度
-        window.setLayout((int) (dm.widthPixels * 0.85), (int) (dm.heightPixels * 0.45));
     }
     public void subjectMsgData(SubjectMsg subjectMsg){
         subjectMsgDa = subjectMsg;
@@ -95,7 +96,6 @@ public class CustomDialogYLX extends DialogFragment {
     private void uploadToDataBase(SubjectMsg subjectMsg) {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         String subject = gson.toJson(subjectMsg);
-        Log.i("lww", "uploadToDataBase: "+subject);
         okHttpClient = new OkHttpClient();
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),subject);
         String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/UploadWrongQuestionsServlet";

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/item_one"
+        android:title="七选五" />
+    <item android:id="@+id/item_two"
+        android:title="英语知识运用" />
+    <item android:id="@+id/item_three"
+        android:title="语法填空"/>
+    <item android:id="@+id/item_four"
+        android:title="短文改错"/>
+    <item android:id="@+id/item_five"
+        android:title="书面表达"/>
+</menu>
