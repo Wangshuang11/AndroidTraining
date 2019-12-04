@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -69,8 +70,9 @@ public class LoginActivity extends AppCompatActivity {
                     break;
                 case 101:
                     /*Toast.makeText(getApplicationContext(),"验证成功，转跳",Toast.LENGTH_SHORT).show();*/
-                    //应该是是转跳到我的页面，这是暂时是首页
+                    //转跳到我的页面
                     Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    intent.setAction("loginBackMyself");
                     startActivity(intent);
                     break;
             }
@@ -111,8 +113,9 @@ public class LoginActivity extends AppCompatActivity {
     private void backMyFragment() {
         ivBackMyFragment_ws.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {//实现效果其实是返回首页，待改
+            public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+                intent.setAction("loginBackMyself");
                 startActivity(intent);
             }
         });
@@ -198,6 +201,7 @@ public class LoginActivity extends AppCompatActivity {
                         String uPwd=etPassWord_ws.getText().toString();
                         String uTel=etPhone_ws.getText().toString();
                         String uCode=etCode_ws.getText().toString();
+                        //若登录验证成功，返回用户在用户表的id，即uId
                         if (tvPhoneCodeLogin_ws.getText().toString().equals("手机验证码登录")){
                             //账号密码验证登录
                             result=userLoginCheck("uName",uName,"http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/UserLoginCheckByUserPwd","uPwd",uPwd);
@@ -205,21 +209,20 @@ public class LoginActivity extends AppCompatActivity {
                             //手机验证码验证登录:
                             //1、验证手机号存不存在
                             result=userLoginCheck("uTel",uTel,"http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/UserLoginCheckByPhone","uCode",uCode);
-                            if(result.equals("true")){//2、验证用户输入的验证码对不对
-                                if(uCode.equals(code)){
-                                    result="true";
-                                }else{
+                            if(!result.equals("false")){//2、验证用户输入的验证码对不对
+                                if(!uCode.equals(code)){
                                     result="false";
                                 }
                             }
                         }
                         Message message=new Message();
-                        if(result.equals("true")){//匹配
+                        if(!result.equals("false")){//匹配
                             SharedPreferences sharedPreferences=getSharedPreferences("userInfo",MODE_PRIVATE);
                             SharedPreferences.Editor editor=sharedPreferences.edit();
                             editor.putString("name",uName);
                             editor.putString("password",uPwd);
                             editor.putString("phone",uTel);
+                            editor.putString("uId",result);
                             editor.commit();
                             message.what=101;
                         }else{//不匹配

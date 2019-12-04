@@ -39,6 +39,7 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.turings.turings.mistaken.SubjectMsg;
 
 public class LookUpAndErrorReDoActivity extends AppCompatActivity {
 
@@ -59,13 +60,13 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
     private ImageView drop_more_menu_ylx;//下拉加载更多tag标签
     private ListView subject_list_ylx;//题目listView
     private CustomClickListener listener;//点击事件监听器
-    private List<org.turings.mistaken.SubjectMsg> list;//列表要展示的题目资源
+    private List<SubjectMsg> list;//列表要展示的题目资源
     private Menu menu;
     private String subject ="数学";//选中的学科
     private String tag = "集合";
     private OkHttpClient okHttpClient;
     private CustomAdapterYLX customAdapterYLX;//适配器
-    private List<org.turings.mistaken.SubjectMsg> lists;//列表要展示的题目资源
+    private List<SubjectMsg> lists;//列表要展示的题目资源
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -73,7 +74,7 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
             String ms = (String) msg.obj;
             if(ms.equals("刷新")){
                 list.clear();
-                for(org.turings.mistaken.SubjectMsg subjectMsg : lists){
+                for(SubjectMsg subjectMsg : lists){
                     list.add(subjectMsg);
                     customAdapterYLX.notifyDataSetChanged();
                 }
@@ -109,7 +110,7 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
     }
 
     //进入错题重做页
-    private void redoErrorQuestions(org.turings.mistaken.SubjectMsg msg) {
+    private void redoErrorQuestions(SubjectMsg msg) {
         if(msg.getType().equals("选择题")){
             Intent intent = new Intent();
             intent.setClass(getApplicationContext(), RedoWrongQuestionsActivity.class);
@@ -319,7 +320,7 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
                 .add("tag",tag)
                 .add("uId", "1")
                 .build();
-        String url = "http://10.7.89.192:8080/Turings/SearchSubjectMsgBySubjectServlet";
+        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/SearchSubjectMsgBySubjectServlet";
 //        String url = "http://192.168.2.142:8080/Turings/SearchSubjectMsgBySubjectServlet";
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
@@ -336,7 +337,7 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                        Type type = new TypeToken<List<org.turings.mistaken.SubjectMsg>>(){}
+                        Type type = new TypeToken<List<SubjectMsg>>(){}
                                 .getType();
                         //反序列化
                         lists = new ArrayList<>();

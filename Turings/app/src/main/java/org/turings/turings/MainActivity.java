@@ -94,15 +94,37 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        if(intent != null && intent.getAction().equals("mistake")){
-            fragmentTabHost.setCurrentTab(1);
-            imageViewMap.get("tag2").setImageResource(R.mipmap.mistakenblue);
-            textViewHashMap.get("tag2").setTextColor(Color.argb(100,26,168,215));
-        }else {
+
+        //根据不同intent的action，返回指定的fragment
+        if(intent!=null){
+            switch (intent.getAction()){
+                case "mistake"://返回错题本fragment
+                    fragmentTabHost.setCurrentTab(1);
+                    imageViewMap.get("tag2").setImageResource(R.mipmap.mistakenblue);
+                    textViewHashMap.get("tag2").setTextColor(Color.argb(100,26,168,215));
+                    break;
+                case "loginBackMyself"://返回我的fragment
+                    fragmentTabHost.setCurrentTab(3);
+                    imageViewMap.get("tag4").setImageResource(R.mipmap.myselfblue);
+                    textViewHashMap.get("tag4").setTextColor(Color.argb(100,26,168,215));
+                    break;
+                case "跳广告"://跳广告转跳到首页：包括点击和自动播完
+                    fragmentTabHost.setCurrentTab(0);
+                    imageViewMap.get("tag1").setImageResource(R.mipmap.indexblue);
+                    textViewHashMap.get("tag1").setTextColor(Color.argb(100,26,168,215));
+            }
+        }else{
             fragmentTabHost.setCurrentTab(0);
             imageViewMap.get("tag1").setImageResource(R.mipmap.indexblue);
             textViewHashMap.get("tag1").setTextColor(Color.argb(100,26,168,215));
         }
+        /*if(intent != null && intent.getAction().equals("mistake")){
+            fragmentTabHost.setCurrentTab(1);
+            imageViewMap.get("tag2").setImageResource(R.mipmap.mistakenblue);
+            textViewHashMap.get("tag2").setTextColor(Color.argb(100,26,168,215));
+        }else {
+
+        }*/
     }
 
     //加载选项卡布局:

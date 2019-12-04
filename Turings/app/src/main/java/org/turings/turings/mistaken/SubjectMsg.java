@@ -1,4 +1,4 @@
-package org.turings.mistaken;
+package org.turings.turings.mistaken;
 
 
 import java.io.Serializable;

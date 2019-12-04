@@ -42,11 +42,14 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"修改密码失败！",Toast.LENGTH_SHORT).show();
                     break;
                 case 101:
+                    //返回我的页面
+                    Toast.makeText(getApplicationContext(),"修改密码成功！",Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+                    intent.setAction("loginBackMyself");
                     startActivity(intent);
                     break;
                 case 102:
-                    if (result.equals("true")){//存在
+                    if (!result.equals("false")){//存在
                         ivCheckPhoneNum_ws.setImageResource(R.mipmap.loginyes);
                     }else{//不存在
                         ivCheckPhoneNum_ws.setImageResource(R.mipmap.loginno);

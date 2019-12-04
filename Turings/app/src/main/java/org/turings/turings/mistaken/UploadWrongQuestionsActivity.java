@@ -60,7 +60,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
     private static final String[] tags  ={"集合","映射","函数","导数","微积分","三角函数","平面向量","数列"};
     private ArrayAdapter<String> tagAdapter;
     private String path;//图片存储的路径
-    private org.turings.mistaken.SubjectMsg subjectMsg ;//上传的题目
+    private org.turings.turings.mistaken.SubjectMsg subjectMsg ;//上传的题目
     private Bitmap photo;//相机拍下的照片
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +91,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        subjectMsg = new org.turings.mistaken.SubjectMsg(1,"数学","集合","填空题",new Date(),"files","","","","","",1);
+        subjectMsg = new org.turings.turings.mistaken.SubjectMsg(1,"数学","集合","填空题",new Date(),"files","","","","","",1);
     }
 
     //展示拍照后的图片
@@ -297,7 +297,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
     }
 
     //确认添加弹出框
-    private void showCustomDialog(org.turings.mistaken.SubjectMsg subjectMsg) {
+    private void showCustomDialog(org.turings.turings.mistaken.SubjectMsg subjectMsg) {
         //管理多个Fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         //事务（一系列原子性操作）

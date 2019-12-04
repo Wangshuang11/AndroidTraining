@@ -14,7 +14,7 @@ import org.turings.turings.R;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
-import org.turings.mistaken.SubjectMsg;
+import org.turings.turings.mistaken.SubjectMsg;
 
 public class CustomAdapterYLX extends BaseAdapter {
     private List<SubjectMsg> list;//数据源

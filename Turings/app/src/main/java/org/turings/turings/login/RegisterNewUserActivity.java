@@ -43,6 +43,7 @@ public class RegisterNewUserActivity extends AppCompatActivity {
             switch (msg.what){
                 case 100:
                     if (result.equals("true")){
+                        Toast.makeText(getApplicationContext(),"注册成功！",Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
                         startActivity(intent);
                     }else{

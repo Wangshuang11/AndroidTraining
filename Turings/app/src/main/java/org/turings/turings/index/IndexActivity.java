@@ -27,6 +27,7 @@ public class IndexActivity extends AppCompatActivity {
                 if("success".equals(info)){
                     Intent intent=new Intent();
                     intent.setClass(IndexActivity.this, MainActivity.class);
+                    intent.setAction("跳广告");
                     startActivity(intent);
                     overridePendingTransition(R.anim.in, R.anim.out);
                     IndexActivity.this.finish();

@@ -27,10 +27,10 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.turings.turings.R;
-import org.turings.turings.mistaken.*;
+import org.turings.turings.mistaken.SubjectMsg;
 
 public class CustomDialogYLX extends DialogFragment {
-    private org.turings.mistaken.SubjectMsg subjectMsgDa;//需上传的数据
+    private SubjectMsg subjectMsgDa;//需上传的数据
     private OkHttpClient okHttpClient;
     private Response response;//响应
     @Nullable
@@ -87,18 +87,18 @@ public class CustomDialogYLX extends DialogFragment {
         //设置弹出框的高度和宽度
         window.setLayout((int) (dm.widthPixels * 0.85), (int) (dm.heightPixels * 0.45));
     }
-    public void subjectMsgData(org.turings.mistaken.SubjectMsg subjectMsg){
+    public void subjectMsgData(SubjectMsg subjectMsg){
         subjectMsgDa = subjectMsg;
     }
 
     //访问服务器上传至数据库
-    private void uploadToDataBase(org.turings.mistaken.SubjectMsg subjectMsg) {
+    private void uploadToDataBase(SubjectMsg subjectMsg) {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         String subject = gson.toJson(subjectMsg);
         Log.i("lww", "uploadToDataBase: "+subject);
         okHttpClient = new OkHttpClient();
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),subject);
-        String url = "http://10.7.89.192:8080/Turings/UploadWrongQuestionsServlet";
+        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/UploadWrongQuestionsServlet";
 //        String url = "http://192.168.2.142:8080/Turings/UploadWrongQuestionsServlet";
         Request request = new Request.Builder().post(requestBody).url(url).build();
         final Call call = okHttpClient.newCall(request);

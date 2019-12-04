@@ -41,6 +41,7 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.turings.turings.mistaken.SubjectMsg;
 
 public class RedoWrongBigQuestionActivity extends AppCompatActivity {
 
@@ -53,7 +54,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
     private Button next_question_ylx;//下一题
     private CustomOnclickListener listener;//监听器
     private PopupWindow popupWindow;
-    private org.turings.mistaken.SubjectMsg msgs;//题目内容
+    private SubjectMsg msgs;//题目内容
     private OkHttpClient okHttpClient;
     private String tagChange;//标签（存更改的标签）
     private String subjectChange;//学科(存更改的学科)
@@ -70,7 +71,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                     }else if(ms.equals("这已经是最后一道题了")){
                         Toast.makeText(getApplicationContext(),"这已经是最后一道题了",Toast.LENGTH_SHORT).show();
                     }else {
-                        msgs = gson.fromJson(ms, org.turings.mistaken.SubjectMsg.class);
+                        msgs = gson.fromJson(ms,SubjectMsg.class);
                         //获取图片id,从data的files目录下取出来
                         String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
                         Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
@@ -109,7 +110,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                         showAlertDialog();
 
                     }else{
-                        msgs = gson.fromJson(ms, org.turings.mistaken.SubjectMsg.class);
+                        msgs = gson.fromJson(ms, SubjectMsg.class);
                         //获取图片id,从data的files目录下取出来
                         String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
                         Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
@@ -138,7 +139,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
     //获取从LookUpAndErrorReDoActivity传来的数据
     private void initData() {
         Intent intent = getIntent();
-        msgs = (org.turings.mistaken.SubjectMsg) intent.getSerializableExtra("subject");
+        msgs = (SubjectMsg) intent.getSerializableExtra("subject");
         //获取图片id,从data的files目录下取出来
         String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
         Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
@@ -199,13 +200,13 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
 
     //查询上一题
     private void searchPreSubject() {
-        String url = "http://10.7.89.192:8080/Turings/SearchPreSubjectServlet";
+        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/SearchPreSubjectServlet";
         searchSubjectFromServlet(url);
     }
 
     //查询下一题
     private void searchNextSubject() {
-        String url = "http://10.7.89.192:8080/Turings/SearchNextSubjectServlet";
+        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/SearchNextSubjectServlet";
         searchSubjectFromServlet(url);
     }
 
@@ -218,8 +219,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                 .add("tag",msgs.getTag())
                 .add("uId", "1")
                 .build();
-//        String url = "http://10.7.89.192:8080/Turings/SearchSubjectMsgBySubjectServlet";
-//        String url = "http://192.168.2.142:8080/Turings/SearchSubjectMsgBySubjectServlet";
+
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
         new Thread(new Runnable() {
@@ -412,7 +412,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                 .add("id", String.valueOf(msgs.getId()))
                 .add("tag",tagChange)
                 .build();
-        String url = "http://10.7.89.192:8080/Turings/ChangeTagOfSubjectServlet";
+        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/ChangeTagOfSubjectServlet";
 //        String url = "http://192.168.2.142:8080/Turings/ChangeTagOfSubjectServlet";
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
@@ -463,7 +463,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                 .add("id", String.valueOf(msgs.getId()))
                 .add("subject",subjectChange)
                 .build();
-        String url = "http://10.7.89.192:8080/Turings/ChangeSjtOfSubjectServlet";
+        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/ChangeSjtOfSubjectServlet";
 //        String url = "http://192.168.2.142:8080/Turings/ChangeSjtOfSubjectServlet";
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
@@ -499,7 +499,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                 .add("tag",msgs.getTag())
                 .add("uId", "1")
                 .build();
-        String url = "http://10.7.89.192:8080/Turings/DeleteSubjectServlet";
+        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/DeleteSubjectServlet";
 //        String url = "http://192.168.2.142:8080/Turings/DeleteSubjectServlet";
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
