@@ -6,9 +6,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +27,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.yalantis.ucrop.UCrop;
+import com.yalantis.ucrop.UCropActivity;
 
 import org.turings.turings.MainActivity;
 import org.turings.turings.R;
@@ -39,6 +46,17 @@ import java.util.List;
 
 public class UploadWrongQuestionsActivity extends AppCompatActivity {
 
+    // 拍照回传码
+    public final static int CAMERA_REQUEST_CODE = 0;
+    // 相册选择回传吗
+    public final static int GALLERY_REQUEST_CODE = 1;
+    // 拍照的照片的存储位置
+    private String mTempPhotoPath;
+    // 照片所在的Uri地址
+    private Uri imageUri;
+    //裁剪图片保存的地址
+    private String pathCropPhoto;
+    private String dataFileStr;//file绝对路径
     private ImageView back_ylx;
     private ImageView delete_ylx;//错题图片删除按钮
     private ImageView question_img_ylx;//错题图片
@@ -93,6 +111,10 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_look_up_layout_ylx);
+        // android 7.0系统解决拍照的问题（防止api24手机以上报错）
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
         //获取用户的id
         SharedPreferences sp = getSharedPreferences("userInfo",MODE_PRIVATE);
         uId = sp.getString("uId",null);
@@ -151,23 +173,57 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //获得用户拍照上传的照片
-        if (requestCode == 6666 && resultCode == RESULT_OK){
-            photo = (Bitmap) data.getExtras().get("data");
-            path = saveImgToFile(photo);
-            subjectMsg.setTitleImg(path);
-            question_img_ylx.setScaleType(ImageView.ScaleType.FIT_XY);
-            question_img_ylx.setImageBitmap(photo);
-            delete_ylx.setVisibility(View.VISIBLE);
-            question_content_ylx.setVisibility(View.VISIBLE);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {                // 选择请求码
+                case CAMERA_REQUEST_CODE:
+                    try {
+                        // 裁剪
+                        startCrop();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case UCrop.REQUEST_CROP:
+                    //保存裁剪后的图片并显示
+                    final Uri croppedUri = UCrop.getOutput(data);
+                    try {
+                        if (croppedUri != null) {
+                            photo =BitmapFactory.decodeStream(getContentResolver().openInputStream(croppedUri));
+                            path = saveImgToFile(photo);
+                            subjectMsg.setTitleImg(path);
+                            question_img_ylx.setScaleType(ImageView.ScaleType.FIT_XY);
+                            question_img_ylx.setImageBitmap(photo);
+                            delete_ylx.setVisibility(View.VISIBLE);
+                            question_content_ylx.setVisibility(View.VISIBLE);
+                            //删除裁剪后保存的图片
+                            deletePathFromFile(pathCropPhoto);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+
+                case UCrop.RESULT_ERROR:
+                    final Throwable cropError = UCrop.getError(data);
+                    break;
+            }
+        }
+    }
+
+    //删除file目录下指定路径的图片
+    private void deletePathFromFile(String pathCropPhoto) {
+        File file = new File(pathCropPhoto);
+        if (file.exists()) {
+           file.delete();
         }
     }
 
     //保存拍的图片到系统中
     private String saveImgToFile(Bitmap photo) {
-        String dataFileStr = getFilesDir().getAbsolutePath()+"/";
+        dataFileStr = getFilesDir().getAbsolutePath()+"/";
         String fileName = System.currentTimeMillis() + ".jpg";
         File file = new File(dataFileStr+fileName);
-        try {                                       // 写入图片
+        try {// 写入图片
             FileOutputStream fos = new FileOutputStream(file);
             BufferedOutputStream bos = new BufferedOutputStream(fos);
             photo.compress(Bitmap.CompressFormat.JPEG, 100, bos);
@@ -196,17 +252,50 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
                 question_img_ylx.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 delete_ylx.setVisibility(View.INVISIBLE);
                 question_content_ylx.setVisibility(View.INVISIBLE);
+                //删除刚刚保存的图片
+                deletePathFromFile(dataFileStr+path);
             }
         });
         question_img_ylx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //调用手机照相机
-                Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,6666);
+                takePhoto();
             }
         });
     }
+    //调用相机拍照
+    private void takePhoto(){
+        // 跳转到系统的拍照界面
+        Intent intentToTakePhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // 指定照片存储位置为sd卡本目录下
+        // 这里设置为固定名字 这样就只会只有一张temp图 如果要所有中间图片都保存可以通过时间或者加其他东西设置图片的名称
+        // File.separator为系统自带的分隔符 是一个固定的常量
+        mTempPhotoPath = Environment.getExternalStorageDirectory() + File.separator + "photo.jpeg";
+        // 获取图片所在位置的Uri路径    *****这里为什么这么做参考问题2*****
+        imageUri = Uri.fromFile(new File(mTempPhotoPath));
+        //下面这句指定调用相机拍照后的照片存储的路径
+        intentToTakePhoto.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        startActivityForResult(intentToTakePhoto,CAMERA_REQUEST_CODE);
+    }
+    //裁剪图片
+    private void startCrop() {
+        String dataFileStr = getFilesDir().getAbsolutePath()+"/";
+        String fileName = System.currentTimeMillis() + ".jpg";
+        pathCropPhoto = dataFileStr+fileName;
+        Uri destinationUri = Uri.fromFile(new File(dataFileStr+fileName));
+        UCrop uCrop = UCrop.of(imageUri, destinationUri);
+        UCrop.Options options = new UCrop.Options();
+        //设置裁剪图片可操作的手势
+        options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.ROTATE, UCropActivity.ALL);
+        //设置toolbar颜色
+        options.setToolbarColor(ActivityCompat.getColor(getApplicationContext(),R.color.themeColor));
+        //设置状态栏颜色
+        options.setStatusBarColor(ActivityCompat.getColor(getApplicationContext(), R.color.themeColor));
+        uCrop.withOptions(options);
+        uCrop.start(this);
+    }
+
     //绑定事件
     private void registerListener() {
         listener = new CustomOnclickListener();

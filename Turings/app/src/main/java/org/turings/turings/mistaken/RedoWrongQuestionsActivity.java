@@ -36,6 +36,7 @@ import com.google.gson.GsonBuilder;
 import org.turings.turings.MainActivity;
 import org.turings.turings.R;
 
+import java.io.File;
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -87,6 +88,13 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"这已经是最后一道题了",Toast.LENGTH_SHORT).show();
                     }else {
                         msgs = gson.fromJson(ms,SubjectMsg.class);
+                        if(!msgs.getType().equals("选择题")){
+                            Intent intent = new Intent();
+                            intent.setClass(getApplicationContext(), RedoWrongBigQuestionActivity.class);
+                            intent.putExtra("subject", msgs);
+                            startActivity(intent);
+                            finish();
+                        }
                         //获取图片id,从data的files目录下取出来
                         String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
                         Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
@@ -117,6 +125,8 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                     if(ms.equals("删除失败，请重新删除")){
                         Toast.makeText(getApplicationContext(),"删除失败，请重试",Toast.LENGTH_SHORT).show();
                     }else if(ms.equals("最后一道题被删除了呢，请重新筛选题目吧")){//设计一个弹出框吧
+                        //删除file目录下上一道题
+                        deletePathFromFile(getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg());
                         msgs = null;
                         subjectImg_ylx.setVisibility(View.INVISIBLE);
                         answer_show_ylx.setVisibility(View.INVISIBLE);
@@ -125,7 +135,16 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                         showAlertDialog();
 
                     }else{
+                        //删除file目录下上一道题
+                        deletePathFromFile(getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg());
                         msgs = gson.fromJson(ms,SubjectMsg.class);
+                        if(!msgs.getType().equals("选择题")){
+                            Intent intent = new Intent();
+                            intent.setClass(getApplicationContext(), RedoWrongBigQuestionActivity.class);
+                            intent.putExtra("subject", msgs);
+                            startActivity(intent);
+                            finish();
+                        }
                         //获取图片id,从data的files目录下取出来
                         String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
                         Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
@@ -168,6 +187,13 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
         c_choose_text_ylx.setText(msgs.getOptionC());
         d_choose_text_ylx.setText(msgs.getOptionD());
 
+    }
+    //删除file目录下指定路径的图片
+    private void deletePathFromFile(String pathCropPhoto) {
+        File file = new File(pathCropPhoto);
+        if (file.exists()) {
+            Boolean b  = file.delete();
+        }
     }
     private void registerOnclickListener() {
         listener = new CustomOnclickListener();
@@ -454,7 +480,6 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                 .add("tag",tagChange)
                 .build();
         String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/ChangeTagOfSubjectServlet";
-//        String url = "http://192.168.2.142:8080/Turings/ChangeTagOfSubjectServlet";
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
         new Thread(new Runnable() {
@@ -565,7 +590,6 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                 .add("subject",subjectChange)
                 .build();
         String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/ChangeSjtOfSubjectServlet";
-//        String url = "http://192.168.2.142:8080/Turings/ChangeSjtOfSubjectServlet";
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
         new Thread(new Runnable() {

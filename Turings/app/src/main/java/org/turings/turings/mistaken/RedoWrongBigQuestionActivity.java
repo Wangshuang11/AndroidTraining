@@ -36,6 +36,7 @@ import com.google.gson.GsonBuilder;
 import org.turings.turings.MainActivity;
 import org.turings.turings.R;
 
+import java.io.File;
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -77,6 +78,13 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"这已经是最后一道题了",Toast.LENGTH_SHORT).show();
                     }else {
                         msgs = gson.fromJson(ms,SubjectMsg.class);
+                        if(msgs.getType().equals("选择题")){
+                            Intent intent = new Intent();
+                            intent.setClass(getApplicationContext(), RedoWrongQuestionsActivity.class);
+                            intent.putExtra("subject", msgs);
+                            startActivity(intent);
+                            finish();
+                        }
                         //获取图片id,从data的files目录下取出来
                         String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
                         Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
@@ -107,15 +115,26 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                     if(ms.equals("删除失败，请重新删除")){
                         Toast.makeText(getApplicationContext(),"删除失败，请重试",Toast.LENGTH_SHORT).show();
                     }else if(ms.equals("最后一道题被删除了呢，请重新筛选题目吧")){//设计一个弹出框吧
+                        //删除file目录下上一道题
+                        deletePathFromFile(getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg());
                         msgs = null;
                         subjectImg_ylx.setVisibility(View.INVISIBLE);
                         answer_show_ylx.setVisibility(View.INVISIBLE);
                         Toast.makeText(getApplicationContext(),"最后一道题被删除了呢，请重新筛选题目吧",Toast.LENGTH_SHORT).show();
-                        //没有符合您筛选条件的题目了，请重新筛选或者立即上传新的题目
+                        //没有符合您筛选条件的题目了，请重新上传
                         showAlertDialog();
 
                     }else{
+                        //删除file目录下上一道题
+                        deletePathFromFile(getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg());
                         msgs = gson.fromJson(ms, SubjectMsg.class);
+                        if(msgs.getType().equals("选择题")){
+                            Intent intent = new Intent();
+                            intent.setClass(getApplicationContext(), RedoWrongQuestionsActivity.class);
+                            intent.putExtra("subject", msgs);
+                            startActivity(intent);
+                            finish();
+                        }
                         //获取图片id,从data的files目录下取出来
                         String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
                         Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
@@ -155,6 +174,13 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
         subjectImg_ylx.setImageBitmap(bitmap);
     }
 
+    //删除file目录下指定路径的图片
+    private void deletePathFromFile(String pathCropPhoto) {
+        File file = new File(pathCropPhoto);
+        if (file.exists()) {
+            Boolean b  = file.delete();
+        }
+    }
     private void registerOnclickListener() {
         listener = new CustomOnclickListener();
         img_ylx.setOnClickListener(listener);
@@ -422,7 +448,6 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                 .add("tag",tagChange)
                 .build();
         String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/ChangeTagOfSubjectServlet";
-//        String url = "http://192.168.2.142:8080/Turings/ChangeTagOfSubjectServlet";
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
         new Thread(new Runnable() {
@@ -473,7 +498,6 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                 .add("subject",subjectChange)
                 .build();
         String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/ChangeSjtOfSubjectServlet";
-//        String url = "http://192.168.2.142:8080/Turings/ChangeSjtOfSubjectServlet";
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
         new Thread(new Runnable() {
@@ -506,10 +530,9 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                 .add("id", String.valueOf(msgs.getId()))
                 .add("subject",msgs.getSubject())
                 .add("tag",msgs.getTag())
-                .add("uId", "1")
+                .add("uId", String.valueOf(uId))
                 .build();
         String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/DeleteSubjectServlet";
-//        String url = "http://192.168.2.142:8080/Turings/DeleteSubjectServlet";
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
         new Thread(new Runnable() {

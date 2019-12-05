@@ -44,4 +44,6 @@ dependencies {/*重复的包，不要重复的添加*/
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    /*错题集用的包*/
+    implementation 'com.yalantis:ucrop:1.4.1'
 }
