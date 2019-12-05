@@ -23,12 +23,9 @@ android {
     }
 }
 
-dependencies {/*重复的包，不要重复的添加*/
+dependencies {/*重复的包，不要重复添加*/
     /*登录注册用包：*/
     implementation 'com.carson_ho:Super_EditText:1.0.0'
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.+'
-    implementation 'com.android.support:design:26.+'
     implementation 'com.jakewharton:butterknife:7.0.1'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     /*首页用包：*/
@@ -46,4 +43,7 @@ dependencies {/*重复的包，不要重复的添加*/
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     /*错题集用的包*/
     implementation 'com.yalantis:ucrop:1.4.1'
+    implementation ('com.github.good-good-study:Chart:1.0.0.0'){
+        exclude group: 'com.android.support'
+    }
 }

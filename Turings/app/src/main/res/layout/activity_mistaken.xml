@@ -1,120 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white">
-    <RelativeLayout
+    <ImageView
+        android:id="@+id/ivClimbMountain_ws"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/themeColor"
-        android:padding="10dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/backylx"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="26sp"
-            android:layout_centerInParent="true"
-            android:text="错题集"
-            android:textColor="@android:color/white"/>
-
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:scaleType="matrix"
-            android:src="@mipmap/rotate22" />
-
-        <ImageView
-            android:id="@+id/ivFootTop_ws"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="20dp"
-            android:src="@mipmap/mistakenfoot" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/ivFootMiddle_ws"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/mistakenfootleft"
-            android:layout_marginLeft="35dp"
-            android:layout_alignBottom="@id/btnSeeAll_ws"
-            android:paddingBottom="140dp"/>
-
-        <ImageView
-            android:id="@+id/ivCamera_ws"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:src="@mipmap/mistakencamera" />
-        <Button
-            android:id="@+id/btnSeeAll_ws"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="查看错题"
-            android:textColor="@android:color/white"
-            android:background="@color/themeColor"
-            android:textSize="26sp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:layout_below="@id/ivCamera_ws"
-            android:layout_marginBottom="10dp"/>
-    </RelativeLayout>
-
-
+        android:layout_height="150dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/gifIv_ws"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="7dp">
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/mistakengif"
-            android:paddingLeft="10dp"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
             <ImageView
-                android:id="@+id/ivFootBottom_ws"
+                android:id="@+id/btnSeeAll_ws"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="15dp"
-                android:src="@mipmap/mistakenfootright" />
+                android:src="@mipmap/mistakeniconone" />
+            <TextView
+                android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="错题本"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <ImageView
+                android:id="@+id/ivCamera_ws"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/mistakeniconthree" />
+            <TextView
+                android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上传错题"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/mistakeniconfour" />
+            <TextView
+                android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自主组卷"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/mistakenicontwo" />
+            <TextView
+                android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的回顾"/>
+        </LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/colorMistakenThree"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" >
+            <ImageView
+                android:id="@+id/ivLeftOneIcon_ws"
+                android:layout_width="3dp"
+                android:layout_height="21dp"
+                android:background="@color/colorBlue"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="5dp"
+                android:layout_centerVertical="true" />
             <TextView
                 android:id="@+id/tvLizhi_ws"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/qipao3"
-                android:layout_marginTop="45dp"
-                android:paddingLeft="20dp"
-                android:paddingTop="5dp"
-                android:text="学而不思则罔，思而不学则殆"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"/>
-
+                android:text="知己知彼"
+                android:textSize="22sp"
+                android:textColor="@android:color/black"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/ivLeftOneIcon_ws"/>
         </RelativeLayout>
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+            <ImageView
+                android:id="@+id/ivLeftTwoIcon_ws"
+                android:layout_width="3dp"
+                android:layout_height="14dp"
+                android:background="@color/colorMistakenFour"
+                android:layout_marginLeft="22dp"
+                android:layout_marginRight="5dp"
+                android:layout_centerVertical="true" />
+            <TextView
+                android:id="@+id/tvInfo_ws"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已添加错题 0 道   已组 0 套试卷"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/ivLeftTwoIcon_ws"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/line_layout_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutAnimation="@anim/layout_animation_vertical"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+        </LinearLayout>
     </LinearLayout>
-
-
 </LinearLayout>

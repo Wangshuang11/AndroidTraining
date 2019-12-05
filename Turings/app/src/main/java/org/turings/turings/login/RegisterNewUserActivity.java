@@ -51,14 +51,16 @@ public class RegisterNewUserActivity extends AppCompatActivity {
                     }
                     break;
                 case 101:
-                    if (result.equals("false")){//唯一
+                    uName=input_name_ws.getText().toString();
+                    if (result.equals("false") && !uName.equals("")){//唯一且输入姓名不为空
                         ivCheckNewName_ws.setImageResource(R.mipmap.loginyes);
                     }else{//不唯一
                         ivCheckNewName_ws.setImageResource(R.mipmap.loginno);
                     }
                     break;
                 case 102:
-                    if (result.equals("false")){//唯一
+                    uTel=input_phone_ws.getText().toString();
+                    if (result.equals("false") && uTel.length()==11){//唯一且输入手机号为11位
                         ivCheckNewPhone_ws.setImageResource(R.mipmap.loginyes);
                     }else{//不唯一
                         ivCheckNewPhone_ws.setImageResource(R.mipmap.loginno);

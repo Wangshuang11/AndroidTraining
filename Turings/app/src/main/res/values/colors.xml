@@ -17,4 +17,8 @@
     <color name="ws_color_thinking">#5e5078</color>
     <color name="themeColor">#1AA8D7</color>
     <color name="answerColor">#808080</color>
+    <color name="colorMistakenOne">#fc9804</color>
+    <color name="colorMistakenTwo">#fed000</color>
+    <color name="colorMistakenThree">#f7f4f8</color>
+    <color name="colorMistakenFour">#ff7657</color>
 </resources>

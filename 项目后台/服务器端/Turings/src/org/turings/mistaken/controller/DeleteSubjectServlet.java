@@ -52,6 +52,7 @@ public class DeleteSubjectServlet extends HttpServlet {
 			}else {//返回题目
 				Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 				String msg = gson.toJson(subjectMsg);
+				System.out.print(msg);
 				out.write(msg);
 			}
 		}else {//表示删除失败，提示用户重新删除

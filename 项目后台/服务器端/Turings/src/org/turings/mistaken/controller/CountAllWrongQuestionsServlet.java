@@ -11,17 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.turings.mistaken.service.MistakenService;
 
+
+
 /**
- * Servlet implementation class ChangeTagOfSubjectServlet
+ * Servlet implementation class CountAllWrongQuestionsServlet
  */
-@WebServlet("/ChangeTagOfSubjectServlet")
-public class ChangeTagOfSubjectServlet extends HttpServlet {
+@WebServlet("/CountAllWrongQuestionsServlet")
+public class CountAllWrongQuestionsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangeTagOfSubjectServlet() {
+    public CountAllWrongQuestionsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,21 +32,11 @@ public class ChangeTagOfSubjectServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		int id = Integer.parseInt(request.getParameter("id"));
-		String tag = request.getParameter("tag");
-		System.out.print("id"+id+":"+"tag"+tag);
-		PrintWriter out = response.getWriter();
-		//在数据库中更改标签
-		int n = new MistakenService().changeTagOfSubjectService(id, tag);
-		if(n>0) {
-			out.write("修改成功");
-		}else {
-			out.write("修改失败");
-		}
-		out.close();
+		PrintWriter writer = response.getWriter();
+		int uId = Integer.parseInt(request.getParameter("uId"));
+		writer.write(new MistakenService().countAllWrongQuestions(uId)+"");//返回所有错题的数量
 	}
 
 	/**

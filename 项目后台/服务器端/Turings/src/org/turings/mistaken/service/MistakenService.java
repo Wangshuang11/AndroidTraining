@@ -39,4 +39,9 @@ public class MistakenService {
 	public int deleteSubjectService(int id) {
 		return new MisTakenDao().deleteSubjectDao(id);
 	}
+	
+	//返回所有错题的数量
+	public int countAllWrongQuestions(int uId) {
+		return new MisTakenDao().countAllWrongQuestions("select * from tbl_mistaken where uId="+1+"");
+	}
 }

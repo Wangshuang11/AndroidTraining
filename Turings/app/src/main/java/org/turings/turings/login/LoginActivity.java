@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.turings.turings.Fragment.MyselfFragment;
 import org.turings.turings.MainActivity;
 import org.turings.turings.R;
 
@@ -69,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
                    }
                     break;
                 case 101:
-                    /*Toast.makeText(getApplicationContext(),"验证成功，转跳",Toast.LENGTH_SHORT).show();*/
                     //转跳到我的页面
                     Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                     intent.setAction("loginBackMyself");

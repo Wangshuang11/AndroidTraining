@@ -1,11 +1,9 @@
 package org.turings.turings.Fragment;
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,27 +15,39 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.sxt.library.chart.ChartPie;
+import com.sxt.library.chart.bean.ChartPieBean;
 import com.yalantis.ucrop.UCrop;
 import com.yalantis.ucrop.UCropActivity;
 
 import org.turings.turings.R;
+import org.turings.turings.login.LoginActivity;
+import org.turings.turings.login.RegisterNewUserActivity;
 import org.turings.turings.mistaken.LookUpAndErrorReDoActivity;
 import org.turings.turings.mistaken.UploadWrongQuestionsActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class MistakenFragment extends Fragment {
@@ -51,14 +61,16 @@ public class MistakenFragment extends Fragment {
     private Uri imageUri;
     //裁剪图片保存的地址
     private String pathCropPhoto;
-    private ImageView ivFootTop_ws;//上部脚印
-    private ImageView ivFootMiddle_ws;//中部脚印
-    private ImageView ivFootBottom_ws;//底部脚印
-    private ImageView wsIvCamera;//中部相机按钮
+    private ImageView wsIvCamera;////拍照上传
     private TextView tvLizhi_ws;//底部励志的话
-    private ImageView gifIv_ws;//底部动态logo
     private List<String> lists;//励志名言集合
-    private Button btnSeeAll;//查看全部错题
+    private ImageView btnSeeAll;//查看错题
+    private List<ChartPieBean> pieBeanList;//饼图数据集合
+    private LinearLayout lineLayoutList;//饼图线性布局
+    private ImageView ivClimbMountain_ws;//顶部背景图
+    private View view;
+    private TextView tvInfo_ws;//错题以及组卷信息控件
+    private String num;//用户添加错题的数量
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -66,24 +78,54 @@ public class MistakenFragment extends Fragment {
                 case 100:
                     tvLizhi_ws.setText(lists.get((Integer) msg.obj));
                     break;
+                case 101:
+                    tvInfo_ws.setText("已添加错题 "+num+" 道   已组 0 套试卷");
+                    break;
             }
         }
     };
+    private int uId;//用户在用户表的id
+    private TextView tvJumpLogin_ws;//未登录界面的登录按钮
+    private ImageView ivUnLogin_ws;//未登录界面的上方图片
+    private TextView tvJumpRegister_ws;//未登录界面的注册按钮
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //用户是否登录
+        if(!checkUserIsLogin()){//未登录
+            view = inflater.inflate(R.layout.sxn_activity_unlogged, container,false);
+            //加载上方图片
+            loadTopImg();
+            //点击跳转按钮，跳到登录或注册界面
+            jumpToLogin();
+            return view;
+        }
+
         // android 7.0系统解决拍照的问题（防止API24以上手机报错）
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         builder.detectFileUriExposure();
-        View view=inflater.inflate(R.layout.activity_mistaken,container,false);
-        ivFootTop_ws=view.findViewById(R.id.ivFootTop_ws);
-        ivFootMiddle_ws=view.findViewById(R.id.ivFootMiddle_ws);
-        ivFootBottom_ws=view.findViewById(R.id.ivFootBottom_ws);
-        wsIvCamera=view.findViewById(R.id.ivCamera_ws);
-        tvLizhi_ws=view.findViewById(R.id.tvLizhi_ws);
-        gifIv_ws=view.findViewById(R.id.gifIv_ws);
-        btnSeeAll = view.findViewById(R.id.btnSeeAll_ws);
+
+        view=inflater.inflate(R.layout.activity_mistaken,container,false);
+
+        //初始化控件
+        initController();
+
+        //无缝填充顶部图片
+        loadImgOnTop();
+
+        //饼图数据
+        initData();
+
+        //开始画饼图
+        drawPie();
+
+        //初始化励志名言集合
+        initLizhiList();
+
+        //动态输出中部励志的话
+        addTextOnBubble();
 
         //点击查看全部错题
         btnSeeAll.setOnClickListener(new View.OnClickListener(){
@@ -93,8 +135,6 @@ public class MistakenFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        //初始化励志名言集合
-        initLizhiList();
 
         //点击中部相机按钮，调用手机照相机
         wsIvCamera.setOnClickListener(new View.OnClickListener() {
@@ -106,52 +146,83 @@ public class MistakenFragment extends Fragment {
             }
         });
 
-        //添加底部logo动画
-        addBottomGifLogo();
+        //后台统计已添加错题的数量
+        countMyMistaken();
 
-        //动态输出底部励志的话
-        addTextOnBubble();
-
-        //动态化脚印
-        dynamicFoot();
         return view;
     }
 
-    //动态化脚印
-    private void dynamicFoot() {
-        ObjectAnimator objectAnimator=ObjectAnimator.ofFloat(ivFootBottom_ws,"alpha",1,0,1);
-        objectAnimator.setDuration(3000);
-        objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        objectAnimator.start();
-
-        ObjectAnimator objectAnimator2=ObjectAnimator.ofFloat(ivFootTop_ws,"alpha",1,0,1);
-        objectAnimator2.setDuration(3000);
-        objectAnimator2.setRepeatCount(ValueAnimator.INFINITE);
-        objectAnimator2.setStartDelay(2000);
-        objectAnimator2.start();
-
-        ObjectAnimator objectAnimator3=ObjectAnimator.ofFloat(ivFootMiddle_ws,"alpha",1,0,1);
-        objectAnimator3.setDuration(3000);
-        objectAnimator3.setRepeatCount(ValueAnimator.INFINITE);
-        objectAnimator3.setStartDelay(1000);
-        objectAnimator3.start();
+    //后台统计已添加错题的数量
+    private void countMyMistaken() {
+        new Thread(){
+            @Override
+            public void run() {
+                OkHttpClient okHttpClient=new OkHttpClient();
+                //post-FormBody传输，在一定程度上保证用户信息的安全
+                FormBody formBody=new FormBody.Builder()
+                        .add("uId",uId+"")
+                        .build();
+                Request request=new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/CountAllWrongQuestionsServlet").post(formBody).build();
+                Call call = okHttpClient.newCall(request);
+                try {
+                    num=call.execute().body().string();
+                    Message message=new Message();
+                    message.obj=num;
+                    message.what=101;
+                    handler.sendMessage(message);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
+    //初始化控件
+    private void initController() {
+        uId= Integer.parseInt(getContext().getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
+        lineLayoutList = view.findViewById(R.id.line_layout_list);
+        ivClimbMountain_ws=view.findViewById(R.id.ivClimbMountain_ws);
+        tvLizhi_ws=view.findViewById(R.id.tvLizhi_ws);
+        wsIvCamera=view.findViewById(R.id.ivCamera_ws);
+        btnSeeAll=view.findViewById(R.id.btnSeeAll_ws);
+        tvInfo_ws=view.findViewById(R.id.tvInfo_ws);
+    }
+
+    //无缝填充顶部图片
+    private void loadImgOnTop() {
+        RequestOptions requestOptions=new RequestOptions().centerCrop();
+        Glide.with(getContext()).load(R.mipmap.mistakenlizhi).apply(requestOptions).into(ivClimbMountain_ws);
+    }
+
+    //饼图数据
+    private void initData() {
+        pieBeanList = new ArrayList<>();
+        pieBeanList.add(new ChartPieBean(20, "选择", R.color.colorMistakenTwo));
+        pieBeanList.add(new ChartPieBean(20, "综合", R.color.colorAccent));
+        pieBeanList.add(new ChartPieBean(10, "判断", R.color.colorBlue));
+        pieBeanList.add(new ChartPieBean(20, "简答", R.color.colorMistakenOne));
+        pieBeanList.add(new ChartPieBean(30, "填空",R.color.colorPrimary));
+    }
+
+    //开始画饼图
+    private void drawPie() {
+        View childAt = View.inflate(getContext(), R.layout.item_chart_pie, null);
+        lineLayoutList.removeAllViews();
+        lineLayoutList.addView(childAt);
+        ChartPie chartPie = childAt.findViewById(R.id.chart_pie);
+        chartPie.setData(pieBeanList).start();
+        chartPie.start();
+    }
 
     //初始化励志名言集合
     private void initLizhiList() {
         lists=new ArrayList<>();
-        lists.add("千里之行，始于足下。");
-        lists.add("恰同学少年，风华正茂。");
-        lists.add("山重水复疑无路，柳暗花明又一村");
-        lists.add("业精于勤,荒于嬉;行成于思,毁于随");
-        lists.add("不积跬步，无以至千里；不积小流，无以成江海");
-    }
-
-    //添加底部logo动画
-    private void addBottomGifLogo() {
-        AnimationDrawable animationDrawable= (AnimationDrawable) gifIv_ws.getDrawable();
-        animationDrawable.start();
+        lists.add("千里之行，始于足下");
+        lists.add("恰同学少年，风华正茂");
+        lists.add("有志者，事竟成");
+        lists.add("业精于勤，荒于嬉");
+        lists.add("不积跬步，无以至千里");
+        lists.add("知己知彼，百战不殆");
     }
 
     //动态输出底部励志的话
@@ -161,7 +232,7 @@ public class MistakenFragment extends Fragment {
             public void run() {
                 try {
                     for(int i=0;i<lists.size();i++){
-                        //每隔两秒改变一句话
+                        //每隔5秒改变一句话
                         sleep(5000);
                         Message message=new Message();
                         message.obj=i;
@@ -251,6 +322,45 @@ public class MistakenFragment extends Fragment {
         File file = new File(pathCropPhoto);
         if (file.exists()) {
             file.delete();
+        }
+    }
+
+    //加载上方图片
+    private void loadTopImg() {
+        ivUnLogin_ws=view.findViewById(R.id.ivUnLogin_ws);
+        RequestOptions requestOptions=new RequestOptions().circleCrop();
+        Glide.with(getContext()).asGif().load(R.mipmap.myselfthinkingtwo).apply(requestOptions).into(ivUnLogin_ws);
+    }
+
+    //点击跳转按钮，跳到登录或注册界面
+    private void jumpToLogin() {
+        tvJumpLogin_ws= view.findViewById(R.id.tvJumpLogin_ws);
+        tvJumpRegister_ws=view.findViewById(R.id.tvJumpRegister_ws);
+        tvJumpLogin_ws.setOnClickListener(new View.OnClickListener() {//跳到登录界面
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        tvJumpRegister_ws.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), RegisterNewUserActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    //用户是否登录
+    private boolean checkUserIsLogin() {
+        SharedPreferences sharedPreferences=getContext().getSharedPreferences("userInfo",MODE_PRIVATE);
+        String uName=sharedPreferences.getString("name","");
+        String uTel=sharedPreferences.getString("phone","");
+        if (uName.equals("") && uTel.equals("")){//用户名或者密码两个都为空，就是用户没登录
+            return false;
+        }else{//只要用户名或者密码有一个不为空，就是用户登录了
+            return true;
         }
     }
 }

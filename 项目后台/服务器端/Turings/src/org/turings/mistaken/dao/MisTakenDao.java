@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,19 +61,11 @@ public class MisTakenDao {
 		ResultSet rs = null;
 		try {
 			conn = dbUtil.getConnection();
-			String sql = "";
-			if(tag.equals("null")) {
-				sql = "select * from tbl_mistaken where subject = ? and uId = ?";
-				pstm = conn.prepareStatement(sql);
-				pstm.setString(1,subject);
-				pstm.setInt(2,uId);
-			}else {
-				sql = "select * from tbl_mistaken where subject = ? and uId = ? and tag = ?";
-				pstm = conn.prepareStatement(sql);
-				pstm.setString(1,subject);
-				pstm.setInt(2,uId);
-				pstm.setString(3,tag);
-			}
+			String sql = "select * from tbl_mistaken where subject = ? and uId = ? and tag = ?";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1,subject);
+			pstm.setInt(2,uId);
+			pstm.setString(3,tag);
 			rs = pstm.executeQuery();
 			while(rs.next()) {
 				SubjectMsg subjectMsg = new SubjectMsg(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate("time"),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getInt(12));
@@ -259,6 +252,26 @@ public class MisTakenDao {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+	
+	//返回所有错题的数量
+	public int countAllWrongQuestions(String sql) {
+		int num=0;
+		DbUtil dbUtil = DbUtil.getInstance();
+		Connection conn = null;
+		try {
+			conn = dbUtil.getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				num++;
+			} 
+			dbUtil.closeConnection();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return num;
 	}
 	
 }

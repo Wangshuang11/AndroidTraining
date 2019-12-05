@@ -35,28 +35,28 @@
             android:orientation="vertical">
 
             <!--  Name Label -->
-            <android.support.design.widget.TextInputLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-                <RelativeLayout
+                android:layout_height="wrap_content">
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
                     <EditText android:id="@+id/input_name_ws"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textCapWords"
                         android:hint="姓名" />
-                    <ImageView
-                        android:id="@+id/ivCheckNewName_ws"
-                        android:paddingRight="10dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </RelativeLayout>
-            </android.support.design.widget.TextInputLayout>
+                </android.support.design.widget.TextInputLayout>
+                <ImageView
+                    android:id="@+id/ivCheckNewName_ws"
+                    android:paddingRight="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
 
             <!-- Password Label -->
             <android.support.design.widget.TextInputLayout
@@ -72,28 +72,28 @@
             </android.support.design.widget.TextInputLayout>
 
             <!-- PhoneNumber Label -->
-            <android.support.design.widget.TextInputLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-                <RelativeLayout
+                android:layout_height="wrap_content">
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
                     <EditText android:id="@+id/input_phone_ws"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="phone"
                         android:hint="手机号" />
-                    <ImageView
-                        android:id="@+id/ivCheckNewPhone_ws"
-                        android:paddingRight="10dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </RelativeLayout>
-            </android.support.design.widget.TextInputLayout>
+                </android.support.design.widget.TextInputLayout>
+                <ImageView
+                    android:id="@+id/ivCheckNewPhone_ws"
+                    android:paddingRight="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
 
             <!-- PhoneCode Label -->
             <RelativeLayout
