@@ -10,4 +10,23 @@
         <item>平面向量</item>
         <item>数列</item>
     </string-array>
+    <string-array name="spinnerEnglish">
+        <item>听力</item>
+        <item>阅读</item>
+        <item>完型</item>
+        <item>七选五</item>
+        <item>英语知识运用</item>
+        <item>三角函数</item>
+        <item>语法填空</item>
+        <item>短文改错</item>
+    </string-array>
+    <string-array name="spinnerChinese">
+        <item>阅读</item>
+        <item>古文</item>
+        <item>作文</item>
+        <item>文句翻译</item>
+        <item>诗歌鉴赏</item>
+        <item>名句名篇</item>
+        <item>文字表达</item>
+    </string-array>
 </resources>

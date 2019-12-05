@@ -36,7 +36,7 @@
                 android:id="@+id/btn_math_ylx"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:background="@drawable/subject_btn_background"
+                android:background="@drawable/subject_choose_btn_background"
                 android:layout_marginLeft="15dp"
                 android:layout_weight="1"
                 android:layout_marginRight="10dp"

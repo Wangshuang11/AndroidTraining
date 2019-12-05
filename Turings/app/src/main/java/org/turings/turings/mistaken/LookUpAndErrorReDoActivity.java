@@ -1,6 +1,7 @@
 package org.turings.turings.mistaken;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -67,6 +68,7 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
     private OkHttpClient okHttpClient;
     private CustomAdapterYLX customAdapterYLX;//适配器
     private List<SubjectMsg> lists;//列表要展示的题目资源
+    private String uId;//用户的id
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -88,6 +90,9 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_look_up_and_error_re_do_ylx);
+        //获取用户的id
+        SharedPreferences sp = getSharedPreferences("userInfo",MODE_PRIVATE);
+        uId = sp.getString("uId",null);
         //获取控件
         getViews();
         //初始化数据（数据应该从数据库中获取）
@@ -128,6 +133,7 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
     private void InitData() {
         list = new ArrayList<>();
         subject = "数学";
+        tag = "null";
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -174,7 +180,7 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.img_ylx:
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     intent.setAction("mistake");
                     startActivity(intent);
                     finish();
@@ -207,7 +213,13 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
                     }).start();
                     break;
                 case R.id.drop_more_menu_ylx://点击更多tag
-                    showPopupMenu(drop_more_menu_ylx);
+                    if(subject.equals("数学")){
+                        showPopupMenu(drop_more_menu_ylx);
+                    }else if(subject.equals("语文")){
+                        showPopupChineseMenu(drop_more_menu_ylx);
+                    }else {
+                        showPopupEnglishMenu(drop_more_menu_ylx);
+                    }
                     break;
                 case R.id.math_text_ylx://选中数学
                     selectionMop();
@@ -227,8 +239,12 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
         english_text_ylx.setBackground(getResources().getDrawable(R.drawable.tab_subject_background));
         chinese_text_ylx.setBackgroundColor(Color.WHITE);
         math_text_ylx.setBackgroundColor(Color.WHITE);
+        leaf_one_text_ylx.setText("听力");
+        leaf_two_text_ylx.setText("阅读");
+        leaf_three_text_ylx.setText("完型");
         //去数据库中搜索符合条件的题目展示在listView当中
         subject = "英语";
+        tag = "null";
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -243,8 +259,12 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
         chinese_text_ylx.setBackground(getResources().getDrawable(R.drawable.tab_subject_background));
         math_text_ylx.setBackgroundColor(Color.WHITE);
         english_text_ylx.setBackgroundColor(Color.WHITE);
+        leaf_one_text_ylx.setText("阅读");
+        leaf_two_text_ylx.setText("古文");
+        leaf_three_text_ylx.setText("作文");
         //去数据库中搜索符合条件的题目展示在listView当中
         subject = "语文";
+        tag = "null";
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -258,8 +278,12 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
         math_text_ylx.setBackground(getResources().getDrawable(R.drawable.tab_subject_background));
         chinese_text_ylx.setBackgroundColor(Color.WHITE);
         english_text_ylx.setBackgroundColor(Color.WHITE);
+        leaf_one_text_ylx.setText("集合");
+        leaf_two_text_ylx.setText("映射");
+        leaf_three_text_ylx.setText("函数");
         //去数据库中搜索符合条件的题目展示在listView当中
         subject = "数学";
+        tag = "null";
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -305,6 +329,80 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
         popupMenu.show();
     }
 
+    //英语条件下的更多标签显示方法
+    private void showPopupEnglishMenu(View view) {
+        //popupMenu显示在view的相对位置
+        PopupMenu popupMenu = new PopupMenu(this,view);
+        //menu布局
+        popupMenu.getMenuInflater().inflate(R.menu.tag_menu_english_ylx_layout, popupMenu.getMenu());
+        menu = popupMenu.getMenu();
+        //设置字体颜色为蓝色
+        fixTextColor(R.id.item_one,"七选五",0,3);
+        fixTextColor(R.id.item_two,"英语知识运用",0,6);
+        fixTextColor(R.id.item_three,"三角函数",0,4);
+        fixTextColor(R.id.item_four,"语法填空",0,4);
+        fixTextColor(R.id.item_five,"短文改错",0,4);
+        // menu的item点击事件
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                //要去数据库进行搜索符合条件的题目展示在listView中
+                tag = item.getTitle().toString();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        searchSubjectMsgBySubjectAndTag(subject,tag);
+                    }
+                }).start();
+                return false;
+            }
+        });
+        // PopupMenu关闭事件
+        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+            @Override
+            public void onDismiss(PopupMenu menu) {
+            }
+        });
+        popupMenu.show();
+
+    }
+    //语文条件下的更多标签显示方法
+    private void showPopupChineseMenu(View view) {
+        //popupMenu显示在view的相对位置
+        PopupMenu popupMenu = new PopupMenu(this,view);
+        //menu布局
+        popupMenu.getMenuInflater().inflate(R.menu.tag_menu_chinese_ylx_layout, popupMenu.getMenu());
+        menu = popupMenu.getMenu();
+        //设置字体颜色为蓝色
+        fixTextColor(R.id.item_one,"文句翻译",0,4);
+        fixTextColor(R.id.item_two,"诗歌鉴赏",0,4);
+        fixTextColor(R.id.item_three,"名句名篇",0,4);
+        fixTextColor(R.id.item_four,"文字表达",0,4);
+        // menu的item点击事件
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                //要去数据库进行搜索符合条件的题目展示在listView中
+                tag = item.getTitle().toString();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        searchSubjectMsgBySubjectAndTag(subject,tag);
+                    }
+                }).start();
+                return false;
+            }
+        });
+        // PopupMenu关闭事件
+        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+            @Override
+            public void onDismiss(PopupMenu menu) {
+            }
+        });
+        popupMenu.show();
+
+    }
+
     //改变pupopMenu的字体颜色的方法
     private void fixTextColor(int id,String title,int start,int end) {
         SpannableStringBuilder builder = new SpannableStringBuilder(title);
@@ -318,7 +416,7 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
         FormBody formBody = new FormBody.Builder()
                 .add("subject",subject)
                 .add("tag",tag)
-                .add("uId", "1")
+                .add("uId", uId)
                 .build();
         String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/SearchSubjectMsgBySubjectServlet";
 //        String url = "http://192.168.2.142:8080/Turings/SearchSubjectMsgBySubjectServlet";

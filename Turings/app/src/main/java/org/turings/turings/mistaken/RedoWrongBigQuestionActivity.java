@@ -3,6 +3,7 @@ package org.turings.turings.mistaken;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -17,6 +18,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -31,8 +33,10 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.turings.turings.MainActivity;
 import org.turings.turings.R;
 
+import java.io.File;
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -56,8 +60,10 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
     private PopupWindow popupWindow;
     private SubjectMsg msgs;//题目内容
     private OkHttpClient okHttpClient;
+    private int uId;//用户的id
     private String tagChange;//标签（存更改的标签）
     private String subjectChange;//学科(存更改的学科)
+    private AlertDialog alertDialog;
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -72,6 +78,13 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"这已经是最后一道题了",Toast.LENGTH_SHORT).show();
                     }else {
                         msgs = gson.fromJson(ms,SubjectMsg.class);
+                        if(msgs.getType().equals("选择题")){
+                            Intent intent = new Intent();
+                            intent.setClass(getApplicationContext(), RedoWrongQuestionsActivity.class);
+                            intent.putExtra("subject", msgs);
+                            startActivity(intent);
+                            finish();
+                        }
                         //获取图片id,从data的files目录下取出来
                         String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
                         Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
@@ -102,15 +115,26 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                     if(ms.equals("删除失败，请重新删除")){
                         Toast.makeText(getApplicationContext(),"删除失败，请重试",Toast.LENGTH_SHORT).show();
                     }else if(ms.equals("最后一道题被删除了呢，请重新筛选题目吧")){//设计一个弹出框吧
+                        //删除file目录下上一道题
+                        deletePathFromFile(getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg());
                         msgs = null;
                         subjectImg_ylx.setVisibility(View.INVISIBLE);
                         answer_show_ylx.setVisibility(View.INVISIBLE);
                         Toast.makeText(getApplicationContext(),"最后一道题被删除了呢，请重新筛选题目吧",Toast.LENGTH_SHORT).show();
-                        //没有符合您筛选条件的题目了，请重新筛选或者立即上传新的题目
+                        //没有符合您筛选条件的题目了，请重新上传
                         showAlertDialog();
 
                     }else{
+                        //删除file目录下上一道题
+                        deletePathFromFile(getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg());
                         msgs = gson.fromJson(ms, SubjectMsg.class);
+                        if(msgs.getType().equals("选择题")){
+                            Intent intent = new Intent();
+                            intent.setClass(getApplicationContext(), RedoWrongQuestionsActivity.class);
+                            intent.putExtra("subject", msgs);
+                            startActivity(intent);
+                            finish();
+                        }
                         //获取图片id,从data的files目录下取出来
                         String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
                         Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
@@ -128,6 +152,9 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redo_wrong_big_question_ylx);
+        //获取用户的id
+        SharedPreferences sp = getSharedPreferences("userInfo",MODE_PRIVATE);
+        uId = Integer.parseInt(sp.getString("uId",null));
         //获取控件
         getViews();
         //获取从LookUpAndErrorReDoActivity传来的数据
@@ -147,6 +174,13 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
         subjectImg_ylx.setImageBitmap(bitmap);
     }
 
+    //删除file目录下指定路径的图片
+    private void deletePathFromFile(String pathCropPhoto) {
+        File file = new File(pathCropPhoto);
+        if (file.exists()) {
+            Boolean b  = file.delete();
+        }
+    }
     private void registerOnclickListener() {
         listener = new CustomOnclickListener();
         img_ylx.setOnClickListener(listener);
@@ -217,7 +251,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                 .add("id", String.valueOf(msgs.getId()))
                 .add("subject",msgs.getSubject())
                 .add("tag",msgs.getTag())
-                .add("uId", "1")
+                .add("uId", String.valueOf(uId))
                 .build();
 
         final Request request = new Request.Builder().post(formBody).url(url).build();
@@ -297,6 +331,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
         //显示弹出窗口
         popupWindow.showAtLocation(parent, Gravity.BOTTOM,0,0);
     }
+
 
 
     //展示修改科目的popupWindow
@@ -413,7 +448,6 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                 .add("tag",tagChange)
                 .build();
         String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/ChangeTagOfSubjectServlet";
-//        String url = "http://192.168.2.142:8080/Turings/ChangeTagOfSubjectServlet";
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
         new Thread(new Runnable() {
@@ -464,7 +498,6 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                 .add("subject",subjectChange)
                 .build();
         String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/ChangeSjtOfSubjectServlet";
-//        String url = "http://192.168.2.142:8080/Turings/ChangeSjtOfSubjectServlet";
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
         new Thread(new Runnable() {
@@ -497,10 +530,9 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                 .add("id", String.valueOf(msgs.getId()))
                 .add("subject",msgs.getSubject())
                 .add("tag",msgs.getTag())
-                .add("uId", "1")
+                .add("uId", String.valueOf(uId))
                 .build();
         String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/DeleteSubjectServlet";
-//        String url = "http://192.168.2.142:8080/Turings/DeleteSubjectServlet";
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
         new Thread(new Runnable() {
@@ -527,20 +559,38 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
     }
     //弹出框，去拍照上传题目or去筛选重新定义筛选条件
     private void showAlertDialog() {
-        new AlertDialog.Builder(this)
-                .setTitle("目前没有符合您筛选条件的题目了")
-                .setMessage("您可以选择重新指定筛选条件继续学习或者立即上传题目？")
-                .setNegativeButton("去筛选", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+        // 构建dialog显示的view布局
+        View view_dialog = getLayoutInflater().from(this).inflate(R.layout.dialog_layout_ylx, null);
 
-                    }
-                })
-                .setPositiveButton("去拍照", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+        if (alertDialog == null){
+            // 创建AlertDialog对象
+            alertDialog = new AlertDialog.Builder(this)
+                    .create();
+            alertDialog.show();
+            // 设置点击可取消
+            alertDialog.setCancelable(true);
 
-                    }
-                }).create().show();
+            // 获取Window对象
+            Window window = alertDialog.getWindow();
+            window.setBackgroundDrawableResource(R.drawable.dialog_stroke_layout_ylx);
+            WindowManager.LayoutParams lp = alertDialog.getWindow().getAttributes();
+            lp.width = 900;// 调整该值可以设置对话框显示的宽度
+            window.setAttributes(lp);
+            // 设置显示视图内容
+            window.setContentView(view_dialog);
+            Button button = view_dialog.findViewById(R.id.button_ylx);
+            //去上传
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.setAction("mistake");
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }else {
+            alertDialog.show();
+        }
     }
 }

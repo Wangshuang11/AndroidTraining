@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/item_one"
+        android:title="文句翻译" />
+    <item android:id="@+id/item_two"
+        android:title="诗歌鉴赏" />
+    <item android:id="@+id/item_three"
+        android:title="名句名篇"/>
+    <item android:id="@+id/item_four"
+        android:title="文字表达"/>
+</menu>
