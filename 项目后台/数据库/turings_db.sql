@@ -1,4 +1,4 @@
-/*
+﻿/*
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50506
 File Encoding         : 65001
 
-Date: 2019-12-04 10:39:31
+Date: 2019-12-06 10:13:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -268,28 +268,31 @@ INSERT INTO `tbl_self_schools_favorite` VALUES ('7', '3');
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_self_user`;
 CREATE TABLE `tbl_self_user` (
-  `uId` int(11) NOT NULL AUTO_INCREMENT,
-  `uTel` char(11) NOT NULL,
-  `uName` varchar(20) NOT NULL,
-  `uPwd` varchar(20) NOT NULL,
+  `uId` int(11) NOT NULL DEFAULT '0',
+  `uTel` char(11) DEFAULT NULL,
+  `uName` varchar(20) DEFAULT NULL,
+  `uPwd` varchar(20) DEFAULT NULL,
   `uMotto` varchar(60) DEFAULT NULL,
   `uAvatar` varchar(100) DEFAULT NULL,
   `uTime` int(11) DEFAULT NULL,
   `uScore` int(11) DEFAULT NULL,
+  `uFanscount` int(11) DEFAULT '0',
+  `uAttentioncount` int(11) DEFAULT '0',
+  `uAchievecount` int(11) DEFAULT '0',
   PRIMARY KEY (`uId`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_self_user
 -- ----------------------------
-INSERT INTO `tbl_self_user` VALUES ('0', '13010001000', '第一个用户', '000000', '这是第一条座右铭', 'img', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('1', '15227859968', '王大爽', '666666', '王大爽的座右铭', 'img', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('2', '15232167052', '单小楠', '111', '单鑫楠的座右铭', 'img', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('3', '13000001003', '金小媛', 'jinxinyuan', '金小媛的座右铭', 'img', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('4', '13000001004', '杨小鑫', 'yangliuxin', '杨小鑫的座右铭', 'img', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('5', '13000001005', '吕小浩', 'lvyihao', '吕小浩的座右铭', 'img', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('6', '13000001006', '郭小伟', 'guowei', '郭小伟的座右铭', 'img', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('7', '13000001007', '刘小辉', 'liupenghui', '刘小辉的座右铭', 'img', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('0', '13010001000', '第一个用户', '000000', '这是第一条座右铭', 'img', '0', '0', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('1', '13010001001', '王大爽', 'wangshuang', '王大爽的座右铭', 'img', '0', '0', '6', '5', '0');
+INSERT INTO `tbl_self_user` VALUES ('2', '13000001002', '单小楠', 'shanxinnan', '单鑫楠的座右铭', 'img', '0', '0', '3', '3', '0');
+INSERT INTO `tbl_self_user` VALUES ('3', '13000001003', '金哈哈', 'jinxinyuan', '金哈哈', 'img', '0', '0', '5', '4', '0');
+INSERT INTO `tbl_self_user` VALUES ('4', '13000001004', '杨小鑫', 'yangliuxin', '杨小鑫的座右铭', 'img', '0', '0', '3', '2', '0');
+INSERT INTO `tbl_self_user` VALUES ('5', '13000001005', '吕小浩', 'lvyihao', '吕小浩的座右铭', 'img', '0', '0', '3', '3', '0');
+INSERT INTO `tbl_self_user` VALUES ('6', '13000001006', '郭小伟', 'guowei', '郭小伟的座右铭', 'img', '0', '0', '2', '5', '0');
+INSERT INTO `tbl_self_user` VALUES ('7', '13000001007', '刘小辉', 'liupenghui', '刘小辉的座右铭', 'img', '0', '0', '3', '3', '0');
 
 -- ----------------------------
 -- Table structure for `tbl_share`
