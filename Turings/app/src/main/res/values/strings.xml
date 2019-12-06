@@ -2,9 +2,9 @@
     <string name="app_name">Turings</string>
     <string name="indent">\t\t\t\t</string>
     <string name="newline">\n</string>
-    <string name="ip">10.7.90.23</string>
-    <string name="connUrl">http:/10.7.90.23:8080/Turings</string>
-    <string name="ipConfig">10.7.90.23</string><!--"登录"和"附近的人"模块使用：-->
+    <string name="ip">10.7.89.174</string>
+    <string name="connUrl">http:/10.7.89.174:8080/Turings</string>
+    <string name="ipConfig">10.7.89.174</string><!--"登录"和"附近的人"模块使用：-->
     <string-array name="tag">
         <item>集合</item>
         <item>映射</item>

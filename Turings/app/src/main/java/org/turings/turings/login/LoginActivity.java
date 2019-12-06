@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                         recovery(layout_nameAndPwd_ws,etName_ws,etPassWord_ws);
                     }else{
                         Toast.makeText(getApplicationContext(),"信息有误！",Toast.LENGTH_SHORT).show();
+                        tvGetCode_ws.setVisibility(View.VISIBLE);
                         recovery(layout_phoneAndCode_ws,etPhone_ws,etCode_ws);
                    }
                     break;
@@ -91,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         //点击手机验证码登陆，切换登录方式
         changeLoginMethod();
 
-        //下次登录是否记住密码
+        //下次登录是否自动登录
         nextLoginRememberNameAndPwd();
 
         //点击获得验证码短信
@@ -119,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    //下次登录是否记住密码
+    //下次登录是否自动登录
     private void nextLoginRememberNameAndPwd() {
         if(cbRememberPwd_ws.isChecked()){
             SharedPreferences sharedPreferences=getSharedPreferences("userInfo",MODE_PRIVATE);
@@ -177,13 +178,17 @@ public class LoginActivity extends AppCompatActivity {
                 // 1、计算出控件的高与宽：
                 mWidth = tvLogin_ws.getMeasuredWidth();
                 mHeight = tvLogin_ws.getMeasuredHeight();
-                // 2、隐藏输入框
-                etName_ws.setVisibility(View.INVISIBLE);
-                etPassWord_ws.setVisibility(View.INVISIBLE);
-                //3、开始动画
+
                 if(tvPhoneCodeLogin_ws.getText().toString().equals("手机验证码登录")){
+                    // 2、隐藏输入框
+                    etName_ws.setVisibility(View.INVISIBLE);
+                    etPassWord_ws.setVisibility(View.INVISIBLE);
+                    //3、开始动画
                     inputAnimator(layout_nameAndPwd_ws, mWidth, mHeight);
                 }else{
+                    etCode_ws.setVisibility(View.INVISIBLE);
+                    etPhone_ws.setVisibility(View.INVISIBLE);
+                    tvGetCode_ws.setVisibility(View.INVISIBLE);
                     inputAnimator(layout_phoneAndCode_ws, mWidth, mHeight);
                 }
                 //4、判断用户输入信息是否匹配。若不匹配，结束动画，加载登录样式；若匹配，登录跳转
@@ -191,7 +196,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            Thread.sleep(3000);
+                            Thread.sleep(2000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
