@@ -25,7 +25,7 @@ public class IndexActivity extends AppCompatActivity implements ViewPager.OnPage
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_index2);
+        setContentView(R.layout.activity_index);
         initViews();
         innitDots();
     }
@@ -33,7 +33,7 @@ public class IndexActivity extends AppCompatActivity implements ViewPager.OnPage
     private void initViews() {
         LayoutInflater inflater= LayoutInflater.from(this);
         views=new ArrayList<>();
-        views.add(inflater.inflate(R.layout.lph_one,null));
+        views.add(inflater.inflate(R.layout.one,null));
         views.add(inflater.inflate(R.layout.two,null));
         views.add(inflater.inflate(R.layout.three,null));
         vpAdapter=new ViewPagerAdapter(views,this);
@@ -44,6 +44,7 @@ public class IndexActivity extends AppCompatActivity implements ViewPager.OnPage
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent();
+	intent.setAction("Ìø¹ã¸æ");
                 intent.setClass(IndexActivity.this,MainActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.in, R.anim.out);
