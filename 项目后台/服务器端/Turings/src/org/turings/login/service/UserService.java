@@ -9,14 +9,14 @@ public class UserService {
 		// TODO Auto-generated constructor stub
 	}
 
-	public boolean loginCheckByUserPwd(User user) {
+	public String loginCheckByUserPwd(User user) {
 		String uName=user.getuName();
 		String uPwd=user.getuPwd();
 		String sql="select * from tbl_self_user where uName='"+uName+"' and uPwd='"+uPwd+"'";
 		return new UserDao().queryUser(sql);
 	}
 	
-	public boolean loginCheckByPhone(User user) {
+	public String loginCheckByPhone(User user) {
 		String uTel=user.getuTel();
 		String sql="select * from tbl_self_user where uTel='"+uTel+"'";
 		return new UserDao().queryUser(sql);
@@ -29,7 +29,7 @@ public class UserService {
 		return new UserDao().modifyUser(sql);
 	}
 
-	public boolean loginCheckByName(User user) {
+	public String loginCheckByName(User user) {
 		String uName=user.getuName();
 		String sql="select * from tbl_self_user where uName='"+uName+"'";
 		return new UserDao().queryUser(sql);

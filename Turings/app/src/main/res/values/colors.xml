@@ -14,6 +14,16 @@
     <color name="white">#ffffff</color>
     <color name="colorDeafult">#9b9b9b</color>
     <color name="colorfocus">#1296db</color>
+<<<<<<< HEAD
     <color name="green">#00ff99</color>
     <color name="black">#000000</color>
+=======
+    <color name="ws_color_thinking">#5e5078</color>
+    <color name="themeColor">#1AA8D7</color>
+    <color name="answerColor">#808080</color>
+    <color name="colorMistakenOne">#fc9804</color>
+    <color name="colorMistakenTwo">#fed000</color>
+    <color name="colorMistakenThree">#f7f4f8</color>
+    <color name="colorMistakenFour">#ff7657</color>
+>>>>>>> c7bd281828a9da59fc3e210c495963092f5f132c
 </resources>

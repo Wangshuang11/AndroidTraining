@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
+        android:id="@+id/parent_ws"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -54,10 +55,13 @@
                     </LinearLayout>
                 </LinearLayout>
                 <ImageView
+                    android:id="@+id/ivUnLogOfMyself_ws"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/myselfjifen"
-                    android:layout_alignParentRight="true"/>
+                    android:src="@mipmap/myselfunlogin"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"/>
             </RelativeLayout>
         </RelativeLayout>
 

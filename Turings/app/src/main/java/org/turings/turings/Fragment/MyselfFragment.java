@@ -6,21 +6,24 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import org.turings.turings.MainActivity;
 import org.turings.turings.R;
 import org.turings.turings.login.LoginActivity;
+import org.turings.turings.login.RegisterNewUserActivity;
 import org.turings.turings.myself.sxn.MyAchieveActivity;
 import org.turings.turings.myself.sxn.MyAvatarActivity;
 import org.turings.turings.myself.sxn.MyConcernActivity;
@@ -44,9 +47,14 @@ public class MyselfFragment extends Fragment {
     private TextView nameT;
     private TextView mottoT;
     private TextView scoreT;
-    private MyListener myListener=new MyListener();;
+    private MyListener myListener=new MyListener();
+
+    private ImageView ivUnLogOfMyself_ws;//退出登录按钮
+    private  LinearLayout parent_ws;//弹出窗口父视图
     private ImageView ivBackground_ws;//头像上方的封面图片
-    private Button btnJumpLogin_ws;//未登录界面的登录按钮
+    private TextView tvJumpLogin_ws;//未登录界面的登录按钮
+    private ImageView ivUnLogin_ws;//未登录界面的上方图片
+    private TextView tvJumpRegister_ws;//未登录界面的注册按钮
     private View view;
 
     @Nullable
@@ -55,7 +63,9 @@ public class MyselfFragment extends Fragment {
         //用户是否登录
         if(!checkUserIsLogin()){//未登录
             view = inflater.inflate(R.layout.sxn_activity_unlogged, container,false);
-            //点击登录跳转按钮，跳到登录界面
+            //加载上方图片
+            loadTopImg();
+            //点击跳转按钮，跳到登录或注册界面
             jumpToLogin();
             return view;
         }
@@ -72,23 +82,77 @@ public class MyselfFragment extends Fragment {
         //无缝填充头像上方的封面
         centerCropCoverPhoto();
 
-//            单鑫楠的逻辑代码
-        //}else{
-//            view = inflater.inflate(R.layout.login_layout, container,false);
-//            金鑫媛的裸机代码
-        // }
-
+        //退出登录
+        unLogin();
 
         return view;
     }
 
-    //点击登录跳转按钮，跳到登录界面
+    //退出登录
+    private void unLogin() {
+        ivUnLogOfMyself_ws.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //弹出PopupWindow  ：样式待改，和修改昵称的相同
+                final PopupWindow popupWindow=new PopupWindow(getContext());
+                popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+                LayoutInflater layoutInflater=getLayoutInflater();
+                View popupView=layoutInflater.inflate(R.layout.ws_popup_unlogin,null);
+                Button btnCancel_ws=popupView.findViewById(R.id.btnCancel_ws);
+                btnCancel_ws.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+                Button btnUnLogin_ws=popupView.findViewById(R.id.btnUnLogin_ws);
+                btnUnLogin_ws.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //清空个人登录信息
+                        SharedPreferences sharedPreferences=getContext().getSharedPreferences("userInfo",MODE_PRIVATE);
+                        SharedPreferences.Editor editor=sharedPreferences.edit();
+                        editor.putString("name","");
+                        editor.putString("password","");
+                        editor.putString("phone","");
+                        editor.putString("uId","");
+                        editor.commit();
+                        //跳回我的fragment
+                        popupWindow.dismiss();
+                        Intent intent=new Intent(getContext(), MainActivity.class);
+                        intent.setAction("loginBackMyself");
+                        startActivity(intent);
+                    }
+                });
+                popupWindow.setContentView(popupView);
+                popupWindow.showAtLocation(parent_ws, Gravity.CENTER,0,0);
+                }
+
+        });
+    }
+
+    //加载上方图片
+    private void loadTopImg() {
+        ivUnLogin_ws=view.findViewById(R.id.ivUnLogin_ws);
+        RequestOptions requestOptions=new RequestOptions().circleCrop();
+        Glide.with(getContext()).asGif().load(R.mipmap.myselfthinkingtwo).apply(requestOptions).into(ivUnLogin_ws);
+    }
+
+    //点击跳转按钮，跳到登录或注册界面
     private void jumpToLogin() {
-        btnJumpLogin_ws= view.findViewById(R.id.btnJumpLogin_ws);
-        btnJumpLogin_ws.setOnClickListener(new View.OnClickListener() {//跳到登录界面
+        tvJumpLogin_ws= view.findViewById(R.id.tvJumpLogin_ws);
+        tvJumpRegister_ws=view.findViewById(R.id.tvJumpRegister_ws);
+        tvJumpLogin_ws.setOnClickListener(new View.OnClickListener() {//跳到登录界面
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        tvJumpRegister_ws.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), RegisterNewUserActivity.class);
                 startActivity(intent);
             }
         });
@@ -137,6 +201,8 @@ public class MyselfFragment extends Fragment {
         nameT=view.findViewById(R.id.sxn_nickname_text);
         //本页面我的motto
         mottoT=view.findViewById(R.id.sxn_motto_text);
+        ivUnLogOfMyself_ws=view.findViewById(R.id.ivUnLogOfMyself_ws);
+        parent_ws=view.findViewById(R.id.parent_ws);
     }
 
 
@@ -177,5 +243,5 @@ public class MyselfFragment extends Fragment {
             }
         }
     }
-    //方法：获得个人信息
+
 }

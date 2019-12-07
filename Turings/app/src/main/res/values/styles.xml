@@ -11,4 +11,19 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textAllCaps">false</item>
     </style>
+    <style name="jes_btn_style">
+        <item name="android:background">@drawable/jes_shape_btn_blue_radius</item>
+        <item name="android:textSize">24dp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:paddingLeft">50dp</item>
+        <item name="android:paddingRight">50dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="PopupWindowAnimation" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowEnterAnimation">@anim/popup_in</item>
+        <item name="android:windowExitAnimation">@anim/popup_out</item>
+    </style>
+    <style name="popupMenu">
+        <item name="android:textColor">@color/themeColor</item>
+    </style>
 </resources>

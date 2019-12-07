@@ -1,11 +1,9 @@
 package org.turings.turings.login;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -13,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.turings.turings.MainActivity;
 import org.turings.turings.R;
 
 import java.io.IOException;
@@ -34,7 +33,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     private String uTel;//用户输入的手机号
     private String uCode;//用户输入的验证码
     private String uPwd;//用户输入的新密码
-    private int code;//随机4位验证码
+    private String code;//随机4位验证码
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -43,11 +42,14 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"修改密码失败！",Toast.LENGTH_SHORT).show();
                     break;
                 case 101:
-                    Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
+                    //返回我的页面
+                    Toast.makeText(getApplicationContext(),"修改密码成功！",Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+                    intent.setAction("loginBackMyself");
                     startActivity(intent);
                     break;
                 case 102:
-                    if (result.equals("true")){//存在
+                    if (!result.equals("false")){//存在
                         ivCheckPhoneNum_ws.setImageResource(R.mipmap.loginyes);
                     }else{//不存在
                         ivCheckPhoneNum_ws.setImageResource(R.mipmap.loginno);
@@ -69,7 +71,6 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         backLogin();
 
         //发送验证码短信
-        //sendSmsByJPush();
         getAPhoneCodeMessage();
 
         //修改密码
@@ -86,7 +87,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 uCode=et_forget_code_ws.getText().toString();
-                if(uCode.equals(code+"")){
+                if(uCode.equals(code)){
                     result="true";
                     modifyUserPwdByPhone();
                 }else{
@@ -186,12 +187,25 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         tvGetCode_ws.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //随机4位验证码，存入后台，用于验证
-                code= (int) (Math.random()*10000);
                 //向用户手机号发送一条短信
                 uTel=et_forget_phone_ws.getText().toString();
-                ActivityCompat.requestPermissions(ForgetPasswordActivity.this, new String[]{Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.RECEIVE_SMS}, 1);
-                MsmUtils.sendMsm(ForgetPasswordActivity.this,uTel,"您的验证码是"+code+",请勿泄露，谨防被盗。");
+                new Thread(){
+                    @Override
+                    public void run() {
+                        OkHttpClient okHttpClient=new OkHttpClient();
+                        //post-FormBody传输，在一定程度上保证用户信息的安全
+                        FormBody formBody=new FormBody.Builder()
+                                .add("uTel",uTel)
+                                .build();
+                        Request request=new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/SendCodeSmsToUser").post(formBody).build();
+                        Call call = okHttpClient.newCall(request);
+                        try {
+                            code=call.execute().body().string();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
             }
         });
     }

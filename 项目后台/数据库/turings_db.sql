@@ -1,4 +1,4 @@
-/*
+﻿/*
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
@@ -10,11 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50506
 File Encoding         : 65001
 
-<<<<<<< HEAD
-Date: 2019-12-03 10:13:34
-=======
-Date: 2019-12-02 21:35:03
->>>>>>> 51d0c77bb411ba3ea11635c80441e3a3e06776b2
+Date: 2019-12-06 10:13:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -143,14 +139,16 @@ CREATE TABLE `tbl_mistaken` (
   `optionC` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `optionD` varchar(255) DEFAULT NULL,
   `answer` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `uId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_mistaken
 -- ----------------------------
-INSERT INTO `tbl_mistaken` VALUES ('1', '已知向量a，b满足|a|=1，a·b=-1，则a·（2a-b）=？', '数学', '选择', '20191126', 'img', '4', '3', '2', '0', 'D');
-INSERT INTO `tbl_mistaken` VALUES ('2', '曲线y=2ln(x+1)在点（0,0）处的切线方程为', '数学', '填空', '20191126', 'img', null, null, null, null, 'y=2x');
+INSERT INTO `tbl_mistaken` VALUES ('1', '已知向量a，b满足|a|=1，a·b=-1，则a·（2a-b）=？', '数学', '选择', '20191126', 'img', '4', '3', '2', '0', 'D', '1');
+INSERT INTO `tbl_mistaken` VALUES ('2', '曲线y=2ln(x+1)在点（0,0）处的切线方程为', '数学', '填空', '20191126', 'img', null, null, null, null, 'y=2x', null);
+INSERT INTO `tbl_mistaken` VALUES ('4', '数学', '映射', '选择题', '2019-12-04', '1575420821774.jpg', '1', '2', '3', '4', '', '1');
 
 -- ----------------------------
 -- Table structure for `tbl_position`
@@ -270,28 +268,31 @@ INSERT INTO `tbl_self_schools_favorite` VALUES ('7', '3');
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_self_user`;
 CREATE TABLE `tbl_self_user` (
-  `uId` int(11) NOT NULL AUTO_INCREMENT,
-  `uTel` char(11) NOT NULL,
-  `uName` varchar(20) NOT NULL,
-  `uPwd` varchar(20) NOT NULL,
+  `uId` int(11) NOT NULL DEFAULT '0',
+  `uTel` char(11) DEFAULT NULL,
+  `uName` varchar(20) DEFAULT NULL,
+  `uPwd` varchar(20) DEFAULT NULL,
   `uMotto` varchar(60) DEFAULT NULL,
   `uAvatar` varchar(100) DEFAULT NULL,
   `uTime` int(11) DEFAULT NULL,
   `uScore` int(11) DEFAULT NULL,
+  `uFanscount` int(11) DEFAULT '0',
+  `uAttentioncount` int(11) DEFAULT '0',
+  `uAchievecount` int(11) DEFAULT '0',
   PRIMARY KEY (`uId`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_self_user
 -- ----------------------------
-INSERT INTO `tbl_self_user` VALUES ('0', '13010001000', '第一个用户', '000000', '这是第一条座右铭', 'img', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('1', '15227859968', '王大爽', '123456', '王大爽的座右铭', 'img', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('2', '15232167052', '单小楠', '111', '单鑫楠的座右铭', 'img', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('3', '13000001003', '金小媛', 'jinxinyuan', '金小媛的座右铭', 'img', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('4', '13000001004', '杨小鑫', 'yangliuxin', '杨小鑫的座右铭', 'img', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('5', '13000001005', '吕小浩', 'lvyihao', '吕小浩的座右铭', 'img', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('6', '13000001006', '郭小伟', 'guowei', '郭小伟的座右铭', 'img', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('7', '13000001007', '刘小辉', 'liupenghui', '刘小辉的座右铭', 'img', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('0', '13010001000', '第一个用户', '000000', '这是第一条座右铭', 'img', '0', '0', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('1', '13010001001', '王大爽', 'wangshuang', '王大爽的座右铭', 'img', '0', '0', '6', '5', '0');
+INSERT INTO `tbl_self_user` VALUES ('2', '13000001002', '单小楠', 'shanxinnan', '单鑫楠的座右铭', 'img', '0', '0', '3', '3', '0');
+INSERT INTO `tbl_self_user` VALUES ('3', '13000001003', '金哈哈', 'jinxinyuan', '金哈哈', 'img', '0', '0', '5', '4', '0');
+INSERT INTO `tbl_self_user` VALUES ('4', '13000001004', '杨小鑫', 'yangliuxin', '杨小鑫的座右铭', 'img', '0', '0', '3', '2', '0');
+INSERT INTO `tbl_self_user` VALUES ('5', '13000001005', '吕小浩', 'lvyihao', '吕小浩的座右铭', 'img', '0', '0', '3', '3', '0');
+INSERT INTO `tbl_self_user` VALUES ('6', '13000001006', '郭小伟', 'guowei', '郭小伟的座右铭', 'img', '0', '0', '2', '5', '0');
+INSERT INTO `tbl_self_user` VALUES ('7', '13000001007', '刘小辉', 'liupenghui', '刘小辉的座右铭', 'img', '0', '0', '3', '3', '0');
 
 -- ----------------------------
 -- Table structure for `tbl_share`
@@ -313,26 +314,3 @@ INSERT INTO `tbl_share` VALUES ('1', '我们的小组成立了', '2019年11月�
 INSERT INTO `tbl_share` VALUES ('2', '开始写代码了', '又报错了，无奈……', 'img');
 INSERT INTO `tbl_share` VALUES ('3', '今天在写数据库', '代码写不出，先写点假数据吧', 'img');
 INSERT INTO `tbl_share` VALUES ('3', '分享一个高中数学的模块', 'https://wenku.baidu.com/view/4cf90f12591b6bd97f192279168884868762b87e.html', 'img');
-
--- ----------------------------
--- Table structure for `tbl_story`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_story`;
-CREATE TABLE `tbl_story` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) DEFAULT NULL,
-  `img1` varchar(500) DEFAULT NULL,
-  `img2` varchar(500) DEFAULT NULL,
-  `img3` varchar(500) DEFAULT NULL,
-  `num` varchar(20) DEFAULT NULL,
-  `content` varchar(1024) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tbl_story
--- ----------------------------
-INSERT INTO `tbl_story` VALUES ('1', '后进生的奋斗史', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01fe4ce2f51047f96c.jpg', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01588c850cf16d3c9c.jpg', 'http://i-1.binzz.com/2018/10/27/W3dtOjEucG5nLHI6MTMsYjoxM10oNjAweCk=/6f307a6a-1c72-47a0-a04c-0dc2120e51a4.png', '75', '时光飞逝，一年时光就这样悄悄从指尖溜走,\r\n        或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。\r\n        因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，\r\n        没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，\r\n        一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
-INSERT INTO `tbl_story` VALUES ('2', '从现在开始努力', 'https://p0.ssl.qhimgs1.com/sdr/400__/t0168f2443cee7a5bbe.jpg', 'http://uploads.5068.com/allimg/1805/147-1P51Q03208.png', 'http://uzzf.com/up/2016-6/14652010952310087.png', '152', '时光飞逝，一年时光就这样悄悄从指尖溜走,\r\n        或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。\r\n        因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，\r\n        没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，\r\n        一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
-INSERT INTO `tbl_story` VALUES ('3', '做一个崭新的自己', 'https://p0.ssl.qhimgs1.com/sdr/400__/t019fc63acd104c5490.jpg', 'http://upload.mnw.cn/2017/0606/1496708899187.jpg', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01bf7eeaf33fce2032.jpg', '222', '时光飞逝，一年时光就这样悄悄从指尖溜走,\r\n        或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。\r\n        因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，\r\n        没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，\r\n        一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
-INSERT INTO `tbl_story` VALUES ('4', '过去的都是浮云', 'https://p1.ssl.qhimgs1.com/sdr/400__/t01989576057c377587.jpg', 'http://img.smzy.com/Soft/UploadPic/2016-3/201631214351846179.jpg', 'https://p0.ssl.qhimgs1.com/sdr/400__/t01221d3ed68502af20.jpg', '60', '时光飞逝，一年时光就这样悄悄从指尖溜走,\r\n        或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。\r\n        因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，\r\n        没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，\r\n        一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');

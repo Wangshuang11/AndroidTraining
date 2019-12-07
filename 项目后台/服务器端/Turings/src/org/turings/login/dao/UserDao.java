@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.turings.login.DbUtil;
+import org.turings.DbUtil;
 
 
 public class UserDao {
@@ -14,8 +14,8 @@ public class UserDao {
 		// TODO Auto-generated constructor stub
 	}
 
-	public boolean queryUser(String sql) {
-		boolean result=false;
+	public String queryUser(String sql) {
+		String result="false";
 		DbUtil dbUtil = DbUtil.getInstance();
 		Connection conn;
 		try {
@@ -23,7 +23,7 @@ public class UserDao {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			if(rs.next()) {
-				result=true;
+				result=rs.getInt("uId")+"";
 			} 
 			
 			dbUtil.closeConnection();

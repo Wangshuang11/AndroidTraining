@@ -1,6 +1,5 @@
 package org.turings.turings.login;
 
-import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -11,8 +10,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -23,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.turings.turings.Fragment.MyselfFragment;
 import org.turings.turings.MainActivity;
 import org.turings.turings.R;
 
@@ -53,7 +51,8 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tvRememberPwd_ws;//记住密码文字控件
     private TextView tvForgetPwd_ws;//忘记密码文字控件
     private String result="";//服务器验证结果
-    private int code;//随机4位验证码
+    private String code;//后台生成的随机4位验证码也是用户短信验证码
+    private String uTel;//用户输入的登录手机号
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -65,13 +64,14 @@ public class LoginActivity extends AppCompatActivity {
                         recovery(layout_nameAndPwd_ws,etName_ws,etPassWord_ws);
                     }else{
                         Toast.makeText(getApplicationContext(),"信息有误！",Toast.LENGTH_SHORT).show();
+                        tvGetCode_ws.setVisibility(View.VISIBLE);
                         recovery(layout_phoneAndCode_ws,etPhone_ws,etCode_ws);
                    }
                     break;
                 case 101:
-                    /*Toast.makeText(getApplicationContext(),"验证成功，转跳",Toast.LENGTH_SHORT).show();*/
-                    //应该是是转跳到我的页面，这是暂时是首页
+                    //转跳到我的页面
                     Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    intent.setAction("loginBackMyself");
                     startActivity(intent);
                     break;
             }
@@ -92,12 +92,11 @@ public class LoginActivity extends AppCompatActivity {
         //点击手机验证码登陆，切换登录方式
         changeLoginMethod();
 
-        //下次登录是否记住密码
+        //下次登录是否自动登录
         nextLoginRememberNameAndPwd();
 
-        //发送验证码短信
+        //点击获得验证码短信
         getAPhoneCodeMessage();
-        //sendSmsByJPush();
 
         //注册新用户页面跳转
         registerNewUser();
@@ -113,14 +112,15 @@ public class LoginActivity extends AppCompatActivity {
     private void backMyFragment() {
         ivBackMyFragment_ws.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {//实现效果其实是返回首页，待改
+            public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+                intent.setAction("loginBackMyself");
                 startActivity(intent);
             }
         });
     }
 
-    //下次登录是否记住密码
+    //下次登录是否自动登录
     private void nextLoginRememberNameAndPwd() {
         if(cbRememberPwd_ws.isChecked()){
             SharedPreferences sharedPreferences=getSharedPreferences("userInfo",MODE_PRIVATE);
@@ -178,13 +178,17 @@ public class LoginActivity extends AppCompatActivity {
                 // 1、计算出控件的高与宽：
                 mWidth = tvLogin_ws.getMeasuredWidth();
                 mHeight = tvLogin_ws.getMeasuredHeight();
-                // 2、隐藏输入框
-                etName_ws.setVisibility(View.INVISIBLE);
-                etPassWord_ws.setVisibility(View.INVISIBLE);
-                //3、开始动画
+
                 if(tvPhoneCodeLogin_ws.getText().toString().equals("手机验证码登录")){
+                    // 2、隐藏输入框
+                    etName_ws.setVisibility(View.INVISIBLE);
+                    etPassWord_ws.setVisibility(View.INVISIBLE);
+                    //3、开始动画
                     inputAnimator(layout_nameAndPwd_ws, mWidth, mHeight);
                 }else{
+                    etCode_ws.setVisibility(View.INVISIBLE);
+                    etPhone_ws.setVisibility(View.INVISIBLE);
+                    tvGetCode_ws.setVisibility(View.INVISIBLE);
                     inputAnimator(layout_phoneAndCode_ws, mWidth, mHeight);
                 }
                 //4、判断用户输入信息是否匹配。若不匹配，结束动画，加载登录样式；若匹配，登录跳转
@@ -192,7 +196,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            Thread.sleep(3000);
+                            Thread.sleep(2000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -200,28 +204,30 @@ public class LoginActivity extends AppCompatActivity {
                         String uPwd=etPassWord_ws.getText().toString();
                         String uTel=etPhone_ws.getText().toString();
                         String uCode=etCode_ws.getText().toString();
+                        //若登录验证成功，返回用户在用户表的id，即uId
                         if (tvPhoneCodeLogin_ws.getText().toString().equals("手机验证码登录")){
                             //账号密码验证登录
                             result=userLoginCheck("uName",uName,"http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/UserLoginCheckByUserPwd","uPwd",uPwd);
+
+                            Log.i("lww", "run: id是"+result);
                         }else{
                             //手机验证码验证登录:
                             //1、验证手机号存不存在
                             result=userLoginCheck("uTel",uTel,"http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/UserLoginCheckByPhone","uCode",uCode);
-                            if(result.equals("true")){//2、验证用户输入的验证码对不对
-                                if(uCode.equals(code+"")){
-                                    result="true";
-                                }else{
+                            if(!result.equals("false")){//2、验证用户输入的验证码对不对
+                                if(!uCode.equals(code)){
                                     result="false";
                                 }
                             }
                         }
                         Message message=new Message();
-                        if(result.equals("true")){//匹配
+                        if(!result.equals("false")){//匹配
                             SharedPreferences sharedPreferences=getSharedPreferences("userInfo",MODE_PRIVATE);
                             SharedPreferences.Editor editor=sharedPreferences.edit();
                             editor.putString("name",uName);
                             editor.putString("password",uPwd);
                             editor.putString("phone",uTel);
+                            editor.putString("uId",result);
                             editor.commit();
                             message.what=101;
                         }else{//不匹配
@@ -277,17 +283,29 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    //点击获得验证码，随机生成一个验证码，并向手机发送一条短信
+    //点击获得验证码短信
     private void getAPhoneCodeMessage() {
         tvGetCode_ws.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //随机4位验证码，存入后台，用于验证
-                code= (int) (Math.random()*10000);
-                //向用户手机号发送一条短信
-                String phone=etPhone_ws.getText().toString();
-                ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.SEND_SMS, Manifest.permission.READ_PHONE_STATE, Manifest.permission.RECEIVE_SMS}, 1);
-                MsmUtils.sendMsm(LoginActivity.this,phone,"您的验证码是"+code+",请勿泄露，谨防被盗。");
+                uTel=etPhone_ws.getText().toString();
+                new Thread(){
+                    @Override
+                    public void run() {
+                        OkHttpClient okHttpClient=new OkHttpClient();
+                        //post-FormBody传输，在一定程度上保证用户信息的安全
+                        FormBody formBody=new FormBody.Builder()
+                                .add("uTel",uTel)
+                                .build();
+                        Request request=new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/SendCodeSmsToUser").post(formBody).build();
+                        Call call = okHttpClient.newCall(request);
+                        try {
+                            code=call.execute().body().string();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
             }
         });
     }
