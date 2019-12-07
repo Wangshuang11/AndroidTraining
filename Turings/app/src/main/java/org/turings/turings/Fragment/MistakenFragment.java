@@ -15,11 +15,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -61,6 +64,7 @@ public class MistakenFragment extends Fragment {
     private Uri imageUri;
     //裁剪图片保存的地址
     private String pathCropPhoto;
+    private PopupWindow popupWindow;//弹出框选择相机或相册
     private ImageView wsIvCamera;////拍照上传
     private TextView tvLizhi_ws;//底部励志的话
     private List<String> lists;//励志名言集合
@@ -140,8 +144,7 @@ public class MistakenFragment extends Fragment {
         wsIvCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //调用手机照相机
-                takePhoto();
+                showPopupWindow();
 
             }
         });
@@ -249,6 +252,58 @@ public class MistakenFragment extends Fragment {
         }.start();
     }
 
+    //弹出Popupwindow
+    private void showPopupWindow(){
+        popupWindow = new PopupWindow(getContext());
+        //设置popupwindow显示的宽度（填充整个屏幕）
+        popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+        //加载自定义布局文件
+        LayoutInflater layoutInflater = getLayoutInflater();//activity中方法
+        View view = layoutInflater.inflate(R.layout.select_popup_layout_ylx,null);
+
+        //获取弹出窗布局当中某个控件的引用
+        Button button = view.findViewById(R.id.btn_cancel);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //关闭弹出窗口
+                popupWindow.dismiss();
+            }
+        });
+
+        //用相机拍照
+        Button button1 = view.findViewById(R.id.btn_takephoto);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //用相机拍照
+                takePhoto();
+            }
+        });
+        //从相册中选取
+        Button button2 = view.findViewById(R.id.btn_gallery);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                choosePhoto();
+            }
+        });
+        //设置弹出窗口显示内容的视图
+        popupWindow.setContentView(view);
+        //弹出窗口父视图对象
+        LinearLayout parent = getActivity().findViewById(R.id.parent);
+        //显示弹出窗口
+        popupWindow.showAtLocation(parent, Gravity.CENTER,0,0);
+    }
+
+    //从相册中选择
+    public void choosePhoto() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_PICK);//打开图库
+        //REQUEST_PICTURE_CHOOSE表示请求参数，是个常量
+        startActivityForResult(intent, GALLERY_REQUEST_CODE);
+    }
     private void takePhoto(){
         // 跳转到系统的拍照界面
         Intent intentToTakePhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -290,6 +345,10 @@ public class MistakenFragment extends Fragment {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    break;
+                case GALLERY_REQUEST_CODE://打开相册
+                    imageUri = data.getData();
+                    startCrop();
                     break;
                 case UCrop.REQUEST_CROP:
                     // 传送照片
