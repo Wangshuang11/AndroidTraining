@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 
+import org.turings.turings.R;
 import org.turings.turings.index.CommonActivity;
 import org.turings.turings.index.entity.Story;
 
@@ -45,9 +46,9 @@ public class ListStoryAdapter extends BaseAdapter implements TextToSpeech.OnInit
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             String string=(String)msg.obj;
-            if(string.startsWith("one")){
+            if(string.startsWith("lph_one")){
                 Toast.makeText(context,"收藏成功",Toast.LENGTH_SHORT).show();
-            }else if(string.startsWith("two")){
+            }else if(string.startsWith("lph_two")){
                 Toast.makeText(context,"取消收藏",Toast.LENGTH_SHORT).show();
             }
         }
@@ -138,7 +139,7 @@ public class ListStoryAdapter extends BaseAdapter implements TextToSpeech.OnInit
             public void onClick(View view) {
                 final PopupWindow popupWindow=new PopupWindow(context);
                 LayoutInflater layoutInflater=LayoutInflater.from(context);
-                View view_pop=layoutInflater.inflate(R.layout.popupwindow_layout,null);
+                View view_pop=layoutInflater.inflate(R.layout.lph_popupwindow_layout,null);
                 TextView text_pop= view_pop.findViewById(R.id.text_pop);
                 text_pop.setText(stories.get(i).getContent());
                 ImageView btn_ok=view_pop.findViewById(R.id.btn_ok);

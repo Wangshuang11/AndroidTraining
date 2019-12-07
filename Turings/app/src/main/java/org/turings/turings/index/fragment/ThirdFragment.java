@@ -53,7 +53,7 @@ public class ThirdFragment extends Fragment{
                     String pre=(String)msg.obj;
                     PreJson preJson=gson.fromJson(pre, PreJson.class);
                     pres=preJson.getList();
-                    RecyclerListAdapter recyclerListAdapter =new RecyclerListAdapter(getContext(),pres,R.layout.listview_item,parent);
+                    RecyclerListAdapter recyclerListAdapter =new RecyclerListAdapter(getContext(),pres,R.layout.lph_listview_item,parent);
                     LinearLayoutManager manager2=new LinearLayoutManager(getContext(),1,false);
                     manager2.setOrientation(LinearLayoutManager.VERTICAL);
                     listView.setLayoutManager(manager2);
@@ -67,7 +67,7 @@ public class ThirdFragment extends Fragment{
                     GridLayoutManager manager = new GridLayoutManager(getContext(), 1);
                     manager.setOrientation(GridLayoutManager.HORIZONTAL);
                     recyclerView_985.setLayoutManager(manager);
-                    RecyclerAdapter adapter_985 = new RecyclerAdapter(getContext(),R.layout.gridview_item, schools);
+                    RecyclerAdapter adapter_985 = new RecyclerAdapter(getContext(),R.layout.lph_gridview_item, schools);
                     recyclerView_985.setAdapter(adapter_985);
                     recyclerView_985.setItemAnimator(new DefaultItemAnimator());
                     recyclerView_985.addItemDecoration(new SpacesItemDecoration(1));
@@ -79,7 +79,7 @@ public class ThirdFragment extends Fragment{
                     GridLayoutManager manager1= new GridLayoutManager(getContext(), 1);
                     manager1.setOrientation(GridLayoutManager.HORIZONTAL);
                     recyclerView_211.setLayoutManager(manager1);
-                    RecyclerAdapter adapter_211 = new RecyclerAdapter(getContext(),R.layout.gridview_item, schools_211);
+                    RecyclerAdapter adapter_211 = new RecyclerAdapter(getContext(),R.layout.lph_gridview_item, schools_211);
                     recyclerView_211.setAdapter(adapter_211);
                     recyclerView_211.setItemAnimator(new DefaultItemAnimator());
                     recyclerView_211.addItemDecoration(new SpacesItemDecoration(1));

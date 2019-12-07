@@ -18,6 +18,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 
 
+import org.turings.turings.R;
 import org.turings.turings.index.adapter.RecyclerCommentAdapter;
 import org.turings.turings.index.entity.Comment2;
 import org.turings.turings.index.entity.Story;
@@ -45,7 +46,7 @@ public class CommonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_common);
+        setContentView(R.layout.lph_activity_common);
         getViews();
         Intent intent=getIntent();
         String storyStr=intent.getStringExtra("story");
@@ -121,7 +122,7 @@ public class CommonActivity extends AppCompatActivity {
         tv_click=findViewById(R.id.tv_click);
         data=new ArrayList<>();
         innitDatas(data);
-        commentAdapter2=new RecyclerCommentAdapter(this,R.layout.activity_text_item,data,comment_content,comment_send);
+        commentAdapter2=new RecyclerCommentAdapter(this,R.layout.lph_activity_text_item,data,comment_content,comment_send);
     }
     private void innitDatas(List<Comment2> list){
         Comment2 c1=new Comment2("boilt","会飞的猪","打Call!!!","2019-12-04 19:07:13");

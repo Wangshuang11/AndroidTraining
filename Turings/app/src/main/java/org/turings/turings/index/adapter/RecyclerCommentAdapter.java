@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import org.turings.turings.R;
 import org.turings.turings.index.entity.Comment2;
 
 import java.text.SimpleDateFormat;

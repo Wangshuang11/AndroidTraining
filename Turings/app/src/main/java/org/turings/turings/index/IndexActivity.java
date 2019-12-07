@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import org.turings.turings.MainActivity;
+import org.turings.turings.R;
 import org.turings.turings.index.adapter.ViewPagerAdapter;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class IndexActivity extends AppCompatActivity implements ViewPager.OnPage
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_index2);
+        setContentView(R.layout.lph_activity_index);
         initViews();
         innitDots();
     }
@@ -34,8 +35,8 @@ public class IndexActivity extends AppCompatActivity implements ViewPager.OnPage
         LayoutInflater inflater= LayoutInflater.from(this);
         views=new ArrayList<>();
         views.add(inflater.inflate(R.layout.lph_one,null));
-        views.add(inflater.inflate(R.layout.two,null));
-        views.add(inflater.inflate(R.layout.three,null));
+        views.add(inflater.inflate(R.layout.lph_two,null));
+        views.add(inflater.inflate(R.layout.lph_three,null));
         vpAdapter=new ViewPagerAdapter(views,this);
         vp=findViewById(R.id.viewpager);
         vp.setAdapter(vpAdapter);
@@ -44,6 +45,7 @@ public class IndexActivity extends AppCompatActivity implements ViewPager.OnPage
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent();
+	intent.setAction("�����");
                 intent.setClass(IndexActivity.this,MainActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.in, R.anim.out);

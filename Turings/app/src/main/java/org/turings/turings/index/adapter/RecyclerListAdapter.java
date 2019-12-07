@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 
+import org.turings.turings.R;
 import org.turings.turings.index.entity.Pre;
 import org.turings.turings.index.util.KeyWordUtil;
 
@@ -65,7 +66,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             public void onClick(View v) {
                 final PopupWindow popupWindow=new PopupWindow(context);
                 LayoutInflater layoutInflater=LayoutInflater.from(context);
-                View view_pop=layoutInflater.inflate(R.layout.popupwindow_layout,null);
+                View view_pop=layoutInflater.inflate(R.layout.lph_popupwindow_layout,null);
                 TextView text_pop= view_pop.findViewById(R.id.text_pop);
                 SpannableString sbs= KeyWordUtil.setSpannableString(Color.RED,pres.get(position).getContent(),array);
                 text_pop.setText(sbs);
