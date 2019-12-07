@@ -26,11 +26,7 @@ public class IndexActivity extends AppCompatActivity implements ViewPager.OnPage
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
         setContentView(R.layout.lph_activity_index);
-=======
-        setContentView(R.layout.activity_index);
->>>>>>> 011157a852bdf6234d570e006a03bd44257fda5b
         initViews();
         innitDots();
     }
@@ -38,15 +34,9 @@ public class IndexActivity extends AppCompatActivity implements ViewPager.OnPage
     private void initViews() {
         LayoutInflater inflater= LayoutInflater.from(this);
         views=new ArrayList<>();
-<<<<<<< HEAD
         views.add(inflater.inflate(R.layout.lph_one,null));
         views.add(inflater.inflate(R.layout.lph_two,null));
         views.add(inflater.inflate(R.layout.lph_three,null));
-=======
-        views.add(inflater.inflate(R.layout.one,null));
-        views.add(inflater.inflate(R.layout.two,null));
-        views.add(inflater.inflate(R.layout.three,null));
->>>>>>> 011157a852bdf6234d570e006a03bd44257fda5b
         vpAdapter=new ViewPagerAdapter(views,this);
         vp=findViewById(R.id.viewpager);
         vp.setAdapter(vpAdapter);
@@ -55,11 +45,7 @@ public class IndexActivity extends AppCompatActivity implements ViewPager.OnPage
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent();
-<<<<<<< HEAD
-	intent.setAction("ï¿½ï¿½ï¿½ï¿½ï¿½");
-=======
-	intent.setAction("Ìø¹ã¸æ");
->>>>>>> 011157a852bdf6234d570e006a03bd44257fda5b
+	            intent.setAction("è·³å¹¿å‘Š");
                 intent.setClass(IndexActivity.this,MainActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.in, R.anim.out);
