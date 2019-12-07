@@ -1,4 +1,4 @@
-package org.turings.turings.index;
+﻿package org.turings.turings.index;
 
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
@@ -12,31 +12,8 @@ import android.widget.ImageView;
 import org.turings.turings.MainActivity;
 import org.turings.turings.index.adapter.ViewPagerAdapter;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
-=======
-public class IndexActivity extends AppCompatActivity {
-    private Button button;
-    private boolean flag=false;
-    private ImageView img;
-    private Handler handler=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            String info=(String)msg.obj;
-            if(msg.what==100){
-                if("success".equals(info)){
-                    Intent intent=new Intent();
-                    intent.setClass(IndexActivity.this, MainActivity.class);
-                    intent.setAction("跳广告");
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.in, R.anim.out);
-                    IndexActivity.this.finish();
-                }
-            }else{
-                button.setText(info+" | 点击跳过");
-            }
->>>>>>> c7bd281828a9da59fc3e210c495963092f5f132c
 
 public class IndexActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener{
     private ViewPager vp;
