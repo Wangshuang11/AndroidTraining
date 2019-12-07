@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<<<<<<< HEAD
     <string-array name="array_text">
         <item>大学</item>
         <item>普通高等学校</item>
@@ -11,7 +10,7 @@
         <item>一流大学</item>
         <item>985大学</item>
         <item>211大学</item>
-=======
+    </string-array>
     <string-array name="spinner">
         <item>集合</item>
         <item>映射</item>
@@ -40,6 +39,5 @@
         <item>诗歌鉴赏</item>
         <item>名句名篇</item>
         <item>文字表达</item>
->>>>>>> c7bd281828a9da59fc3e210c495963092f5f132c
     </string-array>
 </resources>

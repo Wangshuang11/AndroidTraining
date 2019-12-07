@@ -5,50 +5,22 @@
     <option name="myDefaultNotNull" value="android.support.annotation.NonNull" />
     <option name="myNullables">
       <value>
-<<<<<<< HEAD
         <list size="5">
-=======
-        <list size="12">
->>>>>>> c7bd281828a9da59fc3e210c495963092f5f132c
           <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.Nullable" />
           <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nullable" />
           <item index="2" class="java.lang.String" itemvalue="javax.annotation.CheckForNull" />
           <item index="3" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.Nullable" />
           <item index="4" class="java.lang.String" itemvalue="android.support.annotation.Nullable" />
-<<<<<<< HEAD
-=======
-          <item index="5" class="java.lang.String" itemvalue="androidx.annotation.Nullable" />
-          <item index="6" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNullable" />
-          <item index="7" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.Nullable" />
-          <item index="8" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableDecl" />
-          <item index="9" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NullableType" />
-          <item index="10" class="java.lang.String" itemvalue="android.annotation.Nullable" />
-          <item index="11" class="java.lang.String" itemvalue="com.android.annotations.Nullable" />
->>>>>>> c7bd281828a9da59fc3e210c495963092f5f132c
         </list>
       </value>
     </option>
     <option name="myNotNulls">
       <value>
-<<<<<<< HEAD
         <list size="4">
-=======
-        <list size="11">
->>>>>>> c7bd281828a9da59fc3e210c495963092f5f132c
           <item index="0" class="java.lang.String" itemvalue="org.jetbrains.annotations.NotNull" />
           <item index="1" class="java.lang.String" itemvalue="javax.annotation.Nonnull" />
           <item index="2" class="java.lang.String" itemvalue="edu.umd.cs.findbugs.annotations.NonNull" />
           <item index="3" class="java.lang.String" itemvalue="android.support.annotation.NonNull" />
-<<<<<<< HEAD
-=======
-          <item index="4" class="java.lang.String" itemvalue="androidx.annotation.NonNull" />
-          <item index="5" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNonNull" />
-          <item index="6" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.NonNull" />
-          <item index="7" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullDecl" />
-          <item index="8" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.compatqual.NonNullType" />
-          <item index="9" class="java.lang.String" itemvalue="android.annotation.NonNull" />
-          <item index="10" class="java.lang.String" itemvalue="com.android.annotations.NonNull" />
->>>>>>> c7bd281828a9da59fc3e210c495963092f5f132c
         </list>
       </value>
     </option>

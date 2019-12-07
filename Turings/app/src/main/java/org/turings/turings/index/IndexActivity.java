@@ -1,9 +1,9 @@
-﻿package org.turings.turings.index;
+package org.turings.turings.index;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -25,7 +25,7 @@ public class IndexActivity extends AppCompatActivity implements ViewPager.OnPage
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_index);
+        setContentView(R.layout.activity_index2);
         initViews();
         innitDots();
     }
@@ -33,7 +33,7 @@ public class IndexActivity extends AppCompatActivity implements ViewPager.OnPage
     private void initViews() {
         LayoutInflater inflater= LayoutInflater.from(this);
         views=new ArrayList<>();
-        views.add(inflater.inflate(R.layout.one,null));
+        views.add(inflater.inflate(R.layout.lph_one,null));
         views.add(inflater.inflate(R.layout.two,null));
         views.add(inflater.inflate(R.layout.three,null));
         vpAdapter=new ViewPagerAdapter(views,this);
@@ -45,7 +45,6 @@ public class IndexActivity extends AppCompatActivity implements ViewPager.OnPage
             public void onClick(View v) {
                 Intent intent=new Intent();
                 intent.setClass(IndexActivity.this,MainActivity.class);
-                intent.setAction("跳广告");
                 startActivity(intent);
                 overridePendingTransition(R.anim.in, R.anim.out);
                 IndexActivity.this.finish();
