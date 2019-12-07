@@ -1,56 +1,48 @@
 package org.turings.turings.index;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-
 import org.turings.turings.MainActivity;
-import org.turings.turings.R;
+import org.turings.turings.index.adapter.ViewPagerAdapter;
 
-public class IndexActivity extends AppCompatActivity {
-    private Button button;
-    private boolean flag=false;
-    private ImageView img;
-    private Handler handler=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            String info=(String)msg.obj;
-            if(msg.what==100){
-                if("success".equals(info)){
-                    Intent intent=new Intent();
-                    intent.setClass(IndexActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.in, R.anim.out);
-                    IndexActivity.this.finish();
-                }
-            }else{
-                button.setText(info+" | 点击跳过");
-            }
+import java.util.ArrayList;
+import java.util.List;
 
-        }
-    };
+public class IndexActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener{
+    private ViewPager vp;
+    private ViewPagerAdapter vpAdapter;
+    private List<View> views;
+    private ImageView[]dots;
+    private Button btn_start;
+    private int[]ids={R.id.iv1,R.id.iv2,R.id.iv3};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
-        button=findViewById(R.id.btn);
-        img=findViewById(R.id.img_lph);
+        initViews();
+        innitDots();
+    }
 
-        //无缝填充三秒跳广告图片的背景图
-        setImgBackground();
-
-        button.setOnClickListener(new View.OnClickListener() {
+    private void initViews() {
+        LayoutInflater inflater= LayoutInflater.from(this);
+        views=new ArrayList<>();
+        views.add(inflater.inflate(R.layout.one,null));
+        views.add(inflater.inflate(R.layout.two,null));
+        views.add(inflater.inflate(R.layout.three,null));
+        vpAdapter=new ViewPagerAdapter(views,this);
+        vp=findViewById(R.id.viewpager);
+        vp.setAdapter(vpAdapter);
+        btn_start=views.get(2).findViewById(R.id.btn_start);
+        btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                flag=true;
                 Intent intent=new Intent();
                 intent.setClass(IndexActivity.this,MainActivity.class);
                 startActivity(intent);
@@ -58,36 +50,34 @@ public class IndexActivity extends AppCompatActivity {
                 IndexActivity.this.finish();
             }
         });
-        new Thread(){
-            @Override
-            public void run() {
-                for(int i=10;i>0;i--){
-                    try {
-                        Message message=Message.obtain();
-                        message.what=200;
-                        message.obj=i+"";
-                        handler.sendMessage(message);
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                if(!flag){
-                    Message message=Message.obtain();
-                    message.what=100;
-                    message.obj="success";
-                    handler.sendMessage(message);
-                }
-            }
-        }.start();
+        vp.addOnPageChangeListener(this);
     }
 
-    //无缝填充三秒跳广告图片的背景图
-    private void setImgBackground() {
-        RequestOptions requestOptions=new RequestOptions();
-        requestOptions.centerCrop();
-        Glide.with(this).load(R.mipmap.advertisement).apply(requestOptions).into(img);
+    private void innitDots(){
+        dots=new ImageView[views.size()];
+        for(int i=0;i<dots.length;i++){
+            dots[i]=findViewById(ids[i]);
+        }
+    }
+
+    @Override
+    public void onPageScrolled(int i, float v, int i1) {
+
+    }
+
+    @Override
+    public void onPageSelected(int i) {
+        for(int j=0;j<ids.length;j++){
+            if(j==i){
+                dots[j].setImageResource(R.drawable.selected_point);
+            }else{
+                dots[j].setImageResource(R.drawable.point);
+            }
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int i) {
+
     }
 }
-

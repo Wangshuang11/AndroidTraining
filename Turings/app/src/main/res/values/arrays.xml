@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_text">
+        <item>大学</item>
+        <item>普通高等学校</item>
+        <item>高等学府</item>
+        <item>大学文化</item>
+        <item>中国现代大学</item>
+        <item>大学使命</item>
+        <item>一流大学</item>
+        <item>985大学</item>
+        <item>211大学</item>
+    </string-array>
+</resources>
