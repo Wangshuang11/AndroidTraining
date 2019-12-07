@@ -195,7 +195,7 @@ public class FirstFragment extends Fragment{
                     @Override
                     public void run() {
                         OkHttpClient client = new OkHttpClient();
-                        Request request = new Request.Builder().url("http://"+getResources().getString(R.string.hostGuo)+":8080/Turings/IndexCourseServlet?key=change").build();
+                        Request request = new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/IndexCourseServlet?key=change").build();
                         Call call = client.newCall(request);
                         call.enqueue(new Callback() {
                             @Override
@@ -282,7 +282,7 @@ public class FirstFragment extends Fragment{
             @Override
             public void run() {
                 OkHttpClient client = new OkHttpClient();
-                Request request = new Request.Builder().url("http://"+getResources().getString(R.string.hostGuo)+":8080/Turings/IndexCourseServlet?key=popular").build();
+                Request request = new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/IndexCourseServlet?key=popular").build();
                 Call call = client.newCall(request);
                 call.enqueue(new Callback() {
                     @Override

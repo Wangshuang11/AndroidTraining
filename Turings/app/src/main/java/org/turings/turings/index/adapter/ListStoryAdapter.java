@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.ContactsContract;
 import android.speech.tts.TextToSpeech;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
+
 
 import org.turings.turings.R;
 import org.turings.turings.index.CommonActivity;
@@ -48,7 +50,7 @@ public class ListStoryAdapter extends BaseAdapter implements TextToSpeech.OnInit
             String string=(String)msg.obj;
             if(string.startsWith("lph_one")){
                 Toast.makeText(context,"收藏成功",Toast.LENGTH_SHORT).show();
-            }else if(string.startsWith("lph_two")){
+            }else if(string.startsWith("two")){
                 Toast.makeText(context,"取消收藏",Toast.LENGTH_SHORT).show();
             }
         }
@@ -194,7 +196,7 @@ public class ListStoryAdapter extends BaseAdapter implements TextToSpeech.OnInit
             @Override
             public void run() {
                 try {
-                    String string = "http://"+context.getResources().getString(R.string.ip)+":8080/Turings/update?title="+title+"&flag="+flag;
+                    String string = "http://"+context.getResources().getString(R.string.ipConfig)+":8080/Turings/update?title="+title+"&flag="+flag;
                     URL url = new URL(string);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();

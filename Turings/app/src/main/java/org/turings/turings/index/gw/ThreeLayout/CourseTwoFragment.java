@@ -67,7 +67,7 @@ public class CourseTwoFragment extends Fragment {
             @Override
             public void run() {
                 OkHttpClient client = new OkHttpClient();
-                Request request = new Request.Builder().url("http://"+getResources().getString(R.string.hostGuo)+":8080/Turings/IndexCourseServlet?parentId="+a).build();
+                Request request = new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/IndexCourseServlet?parentId="+a).build();
                 Call call = client.newCall(request);
                 call.enqueue(new Callback() {
                     @Override

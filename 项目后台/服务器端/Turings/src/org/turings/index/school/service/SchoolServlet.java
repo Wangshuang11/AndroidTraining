@@ -37,7 +37,6 @@ public class SchoolServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		List<School> list = new SchoolController().findSchool(request.getParameter("flag"));
-//		List<School> list = new SchoolController().findSchool("985");
 		String jsonArray = new SchoolController().toJsonArray(list);
 		response.getWriter().print(jsonArray);
 //		}

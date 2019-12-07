@@ -96,7 +96,7 @@ public class ThirdFragment extends Fragment{
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://"+getResources().getString(R.string.ip)+":8080/Turings/SearchServlet");
+                    URL url = new URL("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/SearchServlet");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
@@ -147,7 +147,7 @@ public class ThirdFragment extends Fragment{
         parent=view.findViewById(R.id.parent);
     }
     private String schoolFun(String flag) throws IOException {
-        URL url = new URL("http://"+getResources().getString(R.string.ip)+":8080/Turings/SchoolServlet?flag="+flag);
+        URL url = new URL("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/SchoolServlet?flag="+flag);
         URLConnection conn = url.openConnection();
         InputStream in = conn.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

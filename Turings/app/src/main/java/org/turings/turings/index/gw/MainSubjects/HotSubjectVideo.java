@@ -78,7 +78,7 @@ public class HotSubjectVideo extends AppCompatActivity {
                         listTitle.clear();
                         listUrl.clear();
                         OkHttpClient client = new OkHttpClient();
-                        Request request = new Request.Builder().url("http://"+getResources().getString(R.string.hostGuo)+":8080/Turings/SearchServlet?search="+search).build();
+                        Request request = new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/SearchServlet2?search="+search).build();
                         Call call = client.newCall(request);
                         call.enqueue(new Callback() {
                             @Override
@@ -144,7 +144,7 @@ public class HotSubjectVideo extends AppCompatActivity {
             @Override
             public void run() {
                 OkHttpClient client = new OkHttpClient();
-                Request request = new Request.Builder().url("http://"+getResources().getString(R.string.hostGuo)+":8080/Turings/VideoServlet?begin=3").build();
+                Request request = new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/VideoServlet?begin=3").build();
                 Call call = client.newCall(request);
                 call.enqueue(new Callback() {
                     @Override
@@ -181,7 +181,7 @@ public class HotSubjectVideo extends AppCompatActivity {
             @Override
             public void run() {
                 OkHttpClient client = new OkHttpClient();
-                Request request = new Request.Builder().url("http://"+getResources().getString(R.string.hostGuo)+":8080/Turings/VideoServlet?begin=0").build();
+                Request request = new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/VideoServlet?begin=0").build();
                 Call call = client.newCall(request);
                 call.enqueue(new Callback() {
                     @Override

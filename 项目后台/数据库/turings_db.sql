@@ -1,4 +1,4 @@
-﻿/*
+/*
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
@@ -10,10 +10,55 @@ Target Server Type    : MYSQL
 Target Server Version : 50506
 File Encoding         : 65001
 
-Date: 2019-12-06 10:13:13
+Date: 2019-12-07 16:51:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `tbl_childvideo`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_childvideo`;
+CREATE TABLE `tbl_childvideo` (
+  `childid` varchar(11) NOT NULL,
+  `childurl` varchar(200) DEFAULT NULL,
+  `childbelong` varchar(11) DEFAULT NULL,
+  `childtitle` varchar(20) DEFAULT NULL,
+  `childrank` int(11) DEFAULT NULL,
+  PRIMARY KEY (`childid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_childvideo
+-- ----------------------------
+INSERT INTO `tbl_childvideo` VALUES ('c1', 'http://vfx.mtime.cn/Video/2019/02/04/mp4/190204084208765161.mp4', 'guo1', '我是第一个的测试子视频', '1');
+INSERT INTO `tbl_childvideo` VALUES ('c2', 'http://vfx.mtime.cn/Video/2019/02/04/mp4/190204084208765161.mp4', 'guo1', '我是第一个的第二个测试', '2');
+
+-- ----------------------------
+-- Table structure for `tbl_coursevideo`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_coursevideo`;
+CREATE TABLE `tbl_coursevideo` (
+  `id` int(11) NOT NULL DEFAULT '0',
+  `course` varchar(20) DEFAULT NULL,
+  `branch` varchar(20) DEFAULT NULL,
+  `viewcounts` int(11) DEFAULT NULL,
+  `videourl` varchar(200) DEFAULT NULL,
+  `storedcounts` int(11) DEFAULT NULL,
+  `sharedcounts` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_coursevideo
+-- ----------------------------
+INSERT INTO `tbl_coursevideo` VALUES ('1', 'chinese', '文言文阅读', '10', 'http://vd2.bdstatic.com/mda-jiu6b112k593b2if/hd/mda-jiu6b112k593b2if.mp4', '8', '9');
+INSERT INTO `tbl_coursevideo` VALUES ('2', 'chinese', '诗词鉴赏', '10', 'http://vd4.bdstatic.com/mda-jjfxt303f7b679z0/sc/mda-jjfxt303f7b679z0.mp4', '88', '99');
+INSERT INTO `tbl_coursevideo` VALUES ('3', 'chinese', '如何写作文', '88', 'http://vd3.bdstatic.com/mda-ji7h290adghhms8p/mda-ji7h290adghhms8p.mp4', '89', '6');
+INSERT INTO `tbl_coursevideo` VALUES ('4', 'chinese', '起个名真难', '99', 'http://vd4.bdstatic.com/mda-jk1jjj496b1je5ud/sc/mda-jk1jjj496b1je5ud.mp4', '88', '44');
+INSERT INTO `tbl_coursevideo` VALUES ('5', 'chinese', '成语大会', '85', 'http://vfx.mtime.cn/Video/2019/03/09/mp4/190309153658147087.mp4', '525', '252');
+INSERT INTO `tbl_coursevideo` VALUES ('6', 'chinese', '三字经', '258', 'http://vfx.mtime.cn/Video/2019/03/09/mp4/190309153658147087.mp4', '65', '49');
+INSERT INTO `tbl_coursevideo` VALUES ('7', 'chinese', '朗读者', '59', 'http://vfx.mtime.cn/Video/2019/03/09/mp4/190309153658147087.mp4', '82', '28');
 
 -- ----------------------------
 -- Table structure for `tbl_indexcollege`
@@ -79,6 +124,36 @@ INSERT INTO `tbl_indexcontent` VALUES ('16', '11', '世界一流大学和一流�
 INSERT INTO `tbl_indexcontent` VALUES ('17', '12', '有利于提升中国高等教育综合实力和国际竞争力，为实现“两个一百年”奋斗目标和中华民族伟大复兴的中国梦提供有力支撑。', '4', '1');
 INSERT INTO `tbl_indexcontent` VALUES ('18', '21', '2017年9月21日，教育部、财政部、国家发展改革委印发《关于公布世界一流大学和一流学科建设高校及建设学科名单的通', '4', '2');
 INSERT INTO `tbl_indexcontent` VALUES ('19', '22', '知》，公布42所世界一流大学和95所一流学科建设高校及建设学科名单。', '4', '2');
+
+-- ----------------------------
+-- Table structure for `tbl_indexcourse`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_indexcourse`;
+CREATE TABLE `tbl_indexcourse` (
+  `parentid` varchar(11) NOT NULL DEFAULT '0',
+  `courseimage` varchar(200) DEFAULT NULL,
+  `coursetitle` varchar(20) DEFAULT NULL,
+  `courseperson` varchar(20) DEFAULT NULL,
+  `coursedata` varchar(20) DEFAULT NULL,
+  `courseViews` int(11) DEFAULT NULL,
+  PRIMARY KEY (`parentid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_indexcourse
+-- ----------------------------
+INSERT INTO `tbl_indexcourse` VALUES ('10', 'https://tse3-mm.cn.bing.net/th?id=OIP.Vrytnh4rS_EIJwsSSqNRbwHaEi&w=295&h=180&c=7&o=5&dpr=1.25&pid=1.7', '恭喜你答对了一加一等于二', '45253人已加入', '直播时间9:02', '11');
+INSERT INTO `tbl_indexcourse` VALUES ('11', 'https://tse4-mm.cn.bing.net/th?id=OIP.fXl2YUxSYQTxhJlGeIPYxAHaE5&w=237&h=161&c=7&o=5&dpr=1.25&pid=1.7', '一加一等于二请问对吗', '4252人已加入', '直播时间9:03', '10');
+INSERT INTO `tbl_indexcourse` VALUES ('12', 'https://tse4-mm.cn.bing.net/th?id=OIP.P8BlzbWGSZTlYEzVxasncgHaD_&w=237&h=160&c=7&o=5&dpr=1.25&pid=1.7', '大家好才是真的好', '888人已加入', '直播时间10:04', '9');
+INSERT INTO `tbl_indexcourse` VALUES ('2', 'https://tse1-mm.cn.bing.net/th?id=OIP.RiFOFk_duvfV9EeJ6TdB4gHaE9&w=296&h=197&c=7&o=5&dpr=1.25&pid=1.7', '真正的好课', '889人已加入', '直播时间6:05', '7');
+INSERT INTO `tbl_indexcourse` VALUES ('3', 'https://tse4-mm.cn.bing.net/th?id=OIP.1f6Anm9ADiAMS-YznEenNgHaFP&w=260&h=184&c=7&o=5&dpr=1.25&pid=1.7', 'turings名师精选', '898人已加入', '直播时间9:06', '6');
+INSERT INTO `tbl_indexcourse` VALUES ('4', 'https://tse4-mm.cn.bing.net/th?id=OIP.YtQ-g79IrwioagmUGVUQUAHaE8&w=294&h=192&c=7&o=5&dpr=1.25&pid=1.7', '学霸笔记分享给你请享用', '225人已加入', '直播时间17:07', '5');
+INSERT INTO `tbl_indexcourse` VALUES ('5', 'https://tse4-mm.cn.bing.net/th?id=OIP.j67FmjbZkQG94KuHZ-Wm1wHaEJ&w=300&h=168&c=7&o=5&dpr=1.25&pid=1.7', '请给我看完这个视频谢谢', '252人已加入', '直播时间12:08', '4');
+INSERT INTO `tbl_indexcourse` VALUES ('6', 'https://tse2-mm.cn.bing.net/th?id=OIP.ceetIOyHv1iKMUpBdNPp2AHaFj&w=274&h=196&c=7&o=5&dpr=1.25&pid=1.7', '起个名字真的是太难了', '528人已加入', '直播时间8:09', '3');
+INSERT INTO `tbl_indexcourse` VALUES ('7', 'https://tse3-mm.cn.bing.net/th?id=OIP.nF08gZFf4lNjOwxjTgO5uQHaDM&w=300&h=129&c=7&o=5&dpr=1.25&pid=1.7', '我也不知道这个是个啥名字', '787人已加入', '直播时间7:10', '2');
+INSERT INTO `tbl_indexcourse` VALUES ('8', 'https://tse3-mm.cn.bing.net/th?id=OIP.tVSeyoF2MlrZMzlBdG1e-QHaFD&w=213&h=160&c=7&o=5&dpr=1.25&pid=1.7', '我是一个测试用的标题', '4524人已加入', '直播时间9:11', '1');
+INSERT INTO `tbl_indexcourse` VALUES ('9', 'https://tse1-mm.cn.bing.net/th?id=OIP.0rzA4sN0_GoaqZ1qy99IKQHaEK&w=300&h=168&c=7&o=5&dpr=1.25&pid=1.7', '请问一加一等于几', '245人已加入', '直播时间10:12', '0');
+INSERT INTO `tbl_indexcourse` VALUES ('guo1', 'https://tse4-mm.cn.bing.net/th?id=OIP.P8BlzbWGSZTlYEzVxasncgHaD_&w=237&h=160&c=7&o=5&dpr=1.25&pid=1.7', '三天作文速成攻略', '99999人已加入', '直播时间9:01', '12');
 
 -- ----------------------------
 -- Table structure for `tbl_indexname`
@@ -314,3 +389,26 @@ INSERT INTO `tbl_share` VALUES ('1', '我们的小组成立了', '2019年11月�
 INSERT INTO `tbl_share` VALUES ('2', '开始写代码了', '又报错了，无奈……', 'img');
 INSERT INTO `tbl_share` VALUES ('3', '今天在写数据库', '代码写不出，先写点假数据吧', 'img');
 INSERT INTO `tbl_share` VALUES ('3', '分享一个高中数学的模块', 'https://wenku.baidu.com/view/4cf90f12591b6bd97f192279168884868762b87e.html', 'img');
+
+-- ----------------------------
+-- Table structure for `tbl_story`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_story`;
+CREATE TABLE `tbl_story` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) DEFAULT NULL,
+  `img1` varchar(500) DEFAULT NULL,
+  `img2` varchar(500) DEFAULT NULL,
+  `img3` varchar(500) DEFAULT NULL,
+  `num` varchar(20) DEFAULT NULL,
+  `content` varchar(1024) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_story
+-- ----------------------------
+INSERT INTO `tbl_story` VALUES ('1', '后进生的奋斗史', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01fe4ce2f51047f96c.jpg', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01588c850cf16d3c9c.jpg', 'http://i-1.binzz.com/2018/10/27/W3dtOjEucG5nLHI6MTMsYjoxM10oNjAweCk=/6f307a6a-1c72-47a0-a04c-0dc2120e51a4.png', '88', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才， 没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
+INSERT INTO `tbl_story` VALUES ('2', '从现在开始努力', 'https://p0.ssl.qhimgs1.com/sdr/400__/t0168f2443cee7a5bbe.jpg', 'http://uploads.5068.com/allimg/1805/147-1P51Q03208.png', 'http://uzzf.com/up/2016-6/14652010952310087.png', '156', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着， 一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
+INSERT INTO `tbl_story` VALUES ('3', '做一个崭新的自己', 'https://p0.ssl.qhimgs1.com/sdr/400__/t019fc63acd104c5490.jpg', 'http://upload.mnw.cn/2017/0606/1496708899187.jpg', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01bf7eeaf33fce2032.jpg', '224', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
+INSERT INTO `tbl_story` VALUES ('4', '过去的都是浮云', 'https://p1.ssl.qhimgs1.com/sdr/400__/t01989576057c377587.jpg', 'http://img.smzy.com/Soft/UploadPic/2016-3/201631214351846179.jpg', 'https://p0.ssl.qhimgs1.com/sdr/400__/t01221d3ed68502af20.jpg', '61', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着， 一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
