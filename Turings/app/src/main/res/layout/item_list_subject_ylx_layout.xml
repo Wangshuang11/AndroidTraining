@@ -10,9 +10,10 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
         <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:src="@mipmap/timeylx"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/time2ylx"/>
         <TextView
             android:id="@+id/time_ylx"
             android:layout_width="wrap_content"
@@ -47,8 +48,8 @@
         android:layout_marginRight="20dp"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@mipmap/bluetagsubkectylx" />
 
         <ImageView
@@ -58,5 +59,4 @@
             android:scaleType="centerCrop"
             android:layout_weight="1"/>
     </LinearLayout>
-
 </LinearLayout>

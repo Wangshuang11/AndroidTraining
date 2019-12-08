@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,8 +18,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -144,8 +147,9 @@ public class MistakenFragment extends Fragment {
         wsIvCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopupWindow();
+//                showPopupWindow();
 
+                showPopwindow();
             }
         });
 
@@ -252,50 +256,67 @@ public class MistakenFragment extends Fragment {
         }.start();
     }
 
-    //弹出Popupwindow
-    private void showPopupWindow(){
-        popupWindow = new PopupWindow(getContext());
-        //设置popupwindow显示的宽度（填充整个屏幕）
-        popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
-        //加载自定义布局文件
-        LayoutInflater layoutInflater = getLayoutInflater();//activity中方法
-        View view = layoutInflater.inflate(R.layout.select_popup_layout_ylx,null);
-
+    private void showPopwindow() {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.select_popup_layout_ylx, null, false);
+        popupWindow = new PopupWindow(view,ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setTouchable(true);
+        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+                // 这里如果返回true的话，touch事件将被拦截
+                // 拦截后 PopupWindow的onTouchEvent不被调用，这样点击外部区域无法dismiss
+            }
+        });
         //获取弹出窗布局当中某个控件的引用
         Button button = view.findViewById(R.id.btn_cancel);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //关闭弹出窗口
-                popupWindow.dismiss();
-            }
-        });
-
         //用相机拍照
         Button button1 = view.findViewById(R.id.btn_takephoto);
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //用相机拍照
-                takePhoto();
-            }
-        });
         //从相册中选取
         Button button2 = view.findViewById(R.id.btn_gallery);
-        button2.setOnClickListener(new View.OnClickListener() {
+        addBackground();
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));    //要为popWindow设置一个背景才有效
+        //设置popupWindow显示的位置，参数依次是参照View，x轴的偏移量，y轴的偏移量
+        popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+        //设置popupWindow里的按钮的事件
+        View.OnClickListener listener = new View.OnClickListener() {
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.btn_takephoto:
+                        //用相机拍照
+                        takePhoto();
+                        break;
+                    case R.id.btn_gallery:
+                        choosePhoto();
+                        break;
+                    case R.id.btn_cancel:
+                        //关闭弹出窗口
+                        popupWindow.dismiss();
+                        break;
+                }
+            }
+        };
+        button.setOnClickListener(listener);
+        button1.setOnClickListener(listener);
+        button2.setOnClickListener(listener);
+    }
+    //给popupwindow添加透明背景
+    private void addBackground(){
+        //设置背景颜色变暗
+        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+        //调节透明度
+        lp.alpha=0.5f;
+        getActivity().getWindow().setAttributes(lp);
+        //dismiss恢复原样
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
-            public void onClick(View view) {
-                choosePhoto();
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+                lp.alpha=1f;
+                getActivity().getWindow().setAttributes(lp);
             }
         });
-        //设置弹出窗口显示内容的视图
-        popupWindow.setContentView(view);
-        //弹出窗口父视图对象
-        LinearLayout parent = getActivity().findViewById(R.id.parent);
-        //显示弹出窗口
-        popupWindow.showAtLocation(parent, Gravity.CENTER,0,0);
     }
-
     //从相册中选择
     public void choosePhoto() {
         Intent intent = new Intent();
