@@ -11,9 +11,13 @@ public class MistakenService {
 	public int uploadWrongQuestionsService(SubjectMsg subjectMsg) {
 		return new MisTakenDao().uploadWrongQuestionsDao(subjectMsg);
 	}
-	//按照学科(数学、语文、英语)查找题目
+	//按照学科(数学、语文、英语)和tag查找题目
 	public List<SubjectMsg> searchSubjectMsgBySubjectAndTagService(String subject,int uId, String tag){
 		return new MisTakenDao().searchSubjectMsgBySubjectAndTagDao(subject,uId,tag);
+	}
+	//按照学科查找题目
+	public List<SubjectMsg> searchSubjectMsgBySubjectAndTagService(String subject,int uId){
+		return new MisTakenDao().searchSubjectMsgBySubjectAndTagDao(subject,uId);
 	}
 	//查询上一题
 	public SubjectMsg searchPreSubjectService(int id,String subject,String tag,int uId) {

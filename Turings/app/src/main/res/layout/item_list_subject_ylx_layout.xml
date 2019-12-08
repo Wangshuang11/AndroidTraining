@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="2019/11/26"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:gravity="left"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"/>
@@ -33,7 +33,7 @@
             android:id="@+id/tag_ylx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="选择题"
             android:layout_weight="1"
             android:layout_gravity="center"/>
