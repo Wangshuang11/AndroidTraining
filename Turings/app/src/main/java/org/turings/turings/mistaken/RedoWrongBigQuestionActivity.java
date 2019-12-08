@@ -69,6 +69,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
     private String subjectChange;//学科(存更改的学科)
     private AlertDialog alertDialog;
     private Spinner spinner;
+    private RelativeLayout rParent;//布局根目录
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -125,6 +126,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                         msgs = null;
                         subjectImg_ylx.setVisibility(View.INVISIBLE);
                         answer_show_ylx.setVisibility(View.INVISIBLE);
+                        rParent.setVisibility(View.INVISIBLE);
                         Toast.makeText(getApplicationContext(),"最后一道题被删除了呢，请重新筛选题目吧",Toast.LENGTH_SHORT).show();
                         //没有符合您筛选条件的题目了，请重新上传
                         showAlertDialog();
@@ -205,6 +207,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
         pre_question_ylx = findViewById(R.id.pre_question_ylx);
         next_question_ylx = findViewById(R.id.next_question_ylx);
         subjectImg_ylx = findViewById(R.id.subjectImg_ylx);
+        rParent = findViewById(R.id.parent_ylx);
     }
     class CustomOnclickListener implements View.OnClickListener{
 
