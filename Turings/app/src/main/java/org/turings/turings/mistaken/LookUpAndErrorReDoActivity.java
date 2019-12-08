@@ -133,7 +133,7 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
     private void InitData() {
         list = new ArrayList<>();
         subject = "数学";
-        tag = "null";
+        tag = "";
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -244,7 +244,7 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
         leaf_three_text_ylx.setText("完型");
         //去数据库中搜索符合条件的题目展示在listView当中
         subject = "英语";
-        tag = "null";
+        tag = "";
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -264,7 +264,7 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
         leaf_three_text_ylx.setText("作文");
         //去数据库中搜索符合条件的题目展示在listView当中
         subject = "语文";
-        tag = "null";
+        tag = "";
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -283,7 +283,7 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
         leaf_three_text_ylx.setText("函数");
         //去数据库中搜索符合条件的题目展示在listView当中
         subject = "数学";
-        tag = "null";
+        tag = "";
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -419,7 +419,6 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
                 .add("uId", uId)
                 .build();
         String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/SearchSubjectMsgBySubjectServlet";
-//        String url = "http://192.168.2.142:8080/Turings/SearchSubjectMsgBySubjectServlet";
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
         new Thread(new Runnable() {

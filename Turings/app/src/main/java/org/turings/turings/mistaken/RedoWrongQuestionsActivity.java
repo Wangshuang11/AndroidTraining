@@ -16,11 +16,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,6 +40,8 @@ import org.turings.turings.R;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -73,7 +77,9 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
     private String tagChange;//标签（存更改的标签）
     private String subjectChange;//学科(存更改的学科)
     private AlertDialog alertDialog;//弹出框
+    private Spinner spinner;
     private int uId;//用户的id
+    private RelativeLayout rParent;//布局根目录
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -130,6 +136,7 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                         msgs = null;
                         subjectImg_ylx.setVisibility(View.INVISIBLE);
                         answer_show_ylx.setVisibility(View.INVISIBLE);
+                        rParent.setVisibility(View.INVISIBLE);
                         Toast.makeText(getApplicationContext(),"最后一道题被删除了呢，请重新筛选题目吧",Toast.LENGTH_SHORT).show();
                         //没有符合您筛选条件的题目了，请重新筛选或者立即上传新的题目
                         showAlertDialog();
@@ -229,6 +236,7 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
         c_choose_text_ylx = findViewById(R.id.c_choose_text_ylx);
         d_choose_text_ylx = findViewById(R.id.d_choose_text_ylx);
         subjectImg_ylx = findViewById(R.id.subjectImg_ylx);
+        rParent = findViewById(R.id.parent_ylx);
     }
     class CustomOnclickListener implements View.OnClickListener{
 
@@ -322,6 +330,15 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.popup_window_choose_layout_ylx,null,false);
         popupWindow = new PopupWindow(view, ActionBar.LayoutParams.MATCH_PARENT,ActionBar.LayoutParams.WRAP_CONTENT);
+        popupWindow.setTouchable(true);
+        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+                // 这里如果返回true的话，touch事件将被拦截
+                // 拦截后 PopupWindow的onTouchEvent不被调用，这样点击外部区域无法dismiss
+            }
+        });
         //获取弹出窗布局当中取消按钮
         Button button = view.findViewById(R.id.btn_cancel);
         button.setOnClickListener(new View.OnClickListener() {
@@ -378,7 +395,6 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
         popupWindow.setContentView(view);
         //设置背景透明
         addBackground();
-        subjectChange = "数学";
         //语文
         final Button btnChinese = view.findViewById(R.id.btn_chinese_ylx);
         //数学
@@ -387,6 +403,20 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
         final Button btnEnglish = view.findViewById(R.id.btn_english_ylx);
         //确认按钮
         final Button btnOk = view.findViewById(R.id.btn_ok);
+        if(msgs.getSubject().equals("数学")){
+            btnMath.setBackground(getResources().getDrawable(R.drawable.subject_choose_btn_background));
+            btnChinese.setBackground(getResources().getDrawable(R.drawable.subject_btn_background));
+            btnEnglish.setBackground(getResources().getDrawable(R.drawable.subject_btn_background));
+        }else if(msgs.getSubject().equals("语文")){
+            btnChinese.setBackground(getResources().getDrawable(R.drawable.subject_choose_btn_background));
+            btnMath.setBackground(getResources().getDrawable(R.drawable.subject_btn_background));
+            btnEnglish.setBackground(getResources().getDrawable(R.drawable.subject_btn_background));
+        }else {
+            btnEnglish.setBackground(getResources().getDrawable(R.drawable.subject_choose_btn_background));
+            btnChinese.setBackground(getResources().getDrawable(R.drawable.subject_btn_background));
+            btnMath.setBackground(getResources().getDrawable(R.drawable.subject_btn_background));
+        }
+        subjectChange = "数学";
         //点击选中语文
         btnChinese.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -445,7 +475,17 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
         addBackground();
         //获取弹出框布局中的确定按钮，点击关闭此弹出框，回到最初弹出框
         final Button btnOk = view.findViewById(R.id.btn_ok);
-        final Spinner spinner = view.findViewById(R.id.spinner_ylx);
+        spinner = view.findViewById(R.id.spinner_ylx);
+        if(msgs.getSubject().equals("数学")){
+            String[] tags = getResources().getStringArray(R.array.spinner);
+            showTags(tags);
+        }else if (msgs.getSubject().equals("语文")){
+            String[] tags = getResources().getStringArray(R.array.spinnerChinese);
+            showTags(tags);
+        }else {
+            String[] tags = getResources().getStringArray(R.array.spinnerEnglish);
+            showTags(tags);
+        }
         tagChange = msgs.getTag();
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -472,6 +512,23 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
         //显示弹出窗口
         popupWindow.showAtLocation(parent, Gravity.BOTTOM,0,0);
     }
+
+    private void showTags(String[] tags) {
+        int n = 0;
+        int position = 0;
+        List<String> list = new ArrayList<>();
+        for(String str:tags){
+            if(msgs.getTag().equals(str)){
+                position = n;
+            }
+            n++;
+            list.add(str);
+        }
+        ArrayAdapter tagAdapter = new ArrayAdapter<String>(this, R.layout.spinner_layout_ylx,list);
+        spinner.setAdapter(tagAdapter);
+        spinner.setSelection(position);
+    }
+
     //数据库中更改标签
     private void changeTagOfSubject() {
         okHttpClient = new OkHttpClient();

@@ -48,24 +48,52 @@
                 android:layout_height="150dp"
                 android:scaleType="fitXY"
                 android:src="@mipmap/chooseylx"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp" >
+                    <ImageView
+                        android:id="@+id/ivLeftOneIcon_ws"
+                        android:layout_width="3dp"
+                        android:layout_height="21dp"
+                        android:background="@color/colorBlue"
+                        android:layout_marginLeft="22dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_centerVertical="true" />
+                    <TextView
+                        android:id="@+id/tvLizhi_ws"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="答案选择区"
+                        android:textSize="15sp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/ivLeftOneIcon_ws"/>
+                </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="325dp"
+                android:layout_height="243dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:orientation="vertical">
-
                 <LinearLayout
                     android:id="@+id/a_choose_ylx"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:background="@drawable/frame_to_answer_edit"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/a_choose_btn_ylx"
                         android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_height="60dp"
                         android:background="#FFF"
                         android:text="A"
                         android:textColor="#1AA8D7"
@@ -91,14 +119,14 @@
                 <LinearLayout
                     android:id="@+id/b_choose_ylx"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:background="@drawable/frame_to_answer_edit"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/b_choose_btn_ylx"
                         android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_height="60dp"
                         android:background="#FFF"
                         android:text="B"
                         android:textColor="#1AA8D7"
@@ -124,14 +152,14 @@
                 <LinearLayout
                     android:id="@+id/c_choose_ylx"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:background="@drawable/frame_to_answer_edit"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/c_choose_btn_ylx"
                         android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_height="60dp"
                         android:background="#FFF"
                         android:text="C"
                         android:textColor="#1AA8D7"
@@ -157,14 +185,14 @@
                 <LinearLayout
                     android:id="@+id/d_choose_ylx"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:background="@drawable/frame_to_answer_edit"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/d_choose_btn_ylx"
                         android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_height="60dp"
                         android:background="#FFF"
                         android:text="D"
                         android:textColor="#1AA8D7"
@@ -186,18 +214,48 @@
                         android:textAlignment="center"
                         android:textSize="26sp" />
                 </LinearLayout>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0.01dp"
-                    android:background="#000"/>
+                    android:background="#000" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp" >
+                    <ImageView
+                        android:id="@+id/imgs_ylx"
+                        android:layout_width="3dp"
+                        android:layout_height="21dp"
+                        android:background="@color/colorBlue"
+                        android:layout_marginLeft="22dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_centerVertical="true" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="答案校对"
+                        android:textSize="15sp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/imgs_ylx"/>
+                </RelativeLayout>
             </LinearLayout>
             <TextView
                 android:id="@+id/answer_show_ylx"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="100dp"
                 android:background="#808080"
-                android:text="刮刮乐查看答案"
-                android:textSize="36sp"
+                android:text="点我查看答案"
+                android:textSize="30sp"
                 android:gravity="center"
                 android:textColor="#1AA8D7"/>
         </LinearLayout>

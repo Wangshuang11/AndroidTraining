@@ -1,45 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:alpha="1"
-    >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#f5f5f5">
     <LinearLayout
-        android:layout_alignParentBottom="true"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:gravity="bottom">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <Button
-                android:id="@+id/btn_takephoto"
+                <Button
+                    android:id="@+id/btn_takephoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:text="拍照"/>
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/frame_photo_layout_ylx"
-                android:textColor="@color/themeColor"
-                android:text="拍照"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#DCDCDC"/>
-            <Button
-                android:id="@+id/btn_gallery"
-                android:textColor="@color/themeColor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/frame_photo_two_layout_ylx"
-                android:text="从相册中选"/>
+                android:background="#f5f5f5"
+                app:cardElevation="10dp">
+                <Button
+                    android:id="@+id/btn_gallery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:text="从相册中选择图片"/>
+            </android.support.v7.widget.CardView>
         </LinearLayout>
-        <Button
-            android:id="@+id/btn_cancel"
-            android:textColor="@color/themeColor"
+
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/frame_photo_three_layout_ylx"
-            android:layout_marginTop="15dp"
-            android:text="取消"/>
+            android:background="#f5f5f5"
+            app:cardElevation="10dp">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:text="取消" />
+        </android.support.v7.widget.CardView>
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
