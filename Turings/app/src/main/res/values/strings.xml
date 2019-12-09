@@ -3,8 +3,8 @@
     <string name="indent">\t\t\t\t</string>
     <string name="newline">\n</string>
 <!--    <string name="ip">192.168.43.92</string>-->
-    <string name="connUrl">http://10.7.85.161:8080/Turings</string>
-    <string name="ipConfig">10.7.85.161</string><!--登录模块的：-->
+    <string name="connUrl">http://10.7.89.174/Turings</string>
+    <string name="ipConfig">10.7.89.174</string><!--登录模块的：-->
 <!--    <string name="hostGuo">192.168.43.92</string>&lt;!&ndash;    guo  首页使用&ndash;&gt;-->
     <string-array name="tag">
         <item>集合</item>

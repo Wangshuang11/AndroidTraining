@@ -39,6 +39,7 @@ public class NearFragment extends Fragment {
             jumpToLogin();
             return view;
         }
+
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
