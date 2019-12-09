@@ -4,6 +4,7 @@ package org.turings.turings.index.fragment;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -55,6 +57,7 @@ import okhttp3.Response;
 
 public class FirstFragment extends Fragment{
     private   boolean isRun = true;
+    private Thread thread;
     //主要的八个学科
     private List<Subject> subjects = new ArrayList<>();
     private RecyclerView lvStus;
@@ -62,27 +65,28 @@ public class FirstFragment extends Fragment{
 
 
     private  ImageView gaokao;
-    //倒计时
-    //倒计时
-    private TextView day,hour,second,minute;
-    private long mDay = 00;
-    private long mHour = 10;
-    private long mMin = 30;
-    private long mSecond = 9;// 天 ,小时,分钟,秒
+    //    //倒计时
+//    //倒计时
+    private static TextView day,hour,second,minute;
+    private static long mDay = 00;
+    private static long mHour = 10;
+    private static long mMin = 30;
+    private static long mSecond = 9;// 天 ,小时,分钟,秒
+    private static MyAsyncTask myAsyncTask;
 
-    private Handler timeHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what==1) {
-                computeTime();
-                day.setText(mDay+"");
-                hour.setText(mHour+"");
-                minute.setText(mMin+"");
-                second.setText(mSecond+"");
-            }
-        }
-    };
+//    private Handler timeHandler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            if (msg.what==1) {
+//                computeTime();
+//                day.setText(mDay+"");
+//                hour.setText(mHour+"");
+//                minute.setText(mMin+"");
+//                second.setText(mSecond+"");
+//            }
+//        }
+//    };
 
     //精品课程
     private List<HotCourse> hotCourses = new ArrayList<>();
@@ -111,6 +115,23 @@ public class FirstFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.activity_first_fragment, container, false);
+//        thread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                // TODO Auto-generated method stub
+//                while (isRun) {
+//                    try {
+//                        Thread.sleep(1000); // sleep 1000ms
+//                        Message message = Message.obtain();
+//                        message.what = 1;
+//                        timeHandler.sendMessage(message);
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
+        //getActivity().onBackPressed();
 //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         //仿魅族轮播图
         Fragment fragment = MZModeNotCoverFragment.newInstance();
@@ -124,6 +145,37 @@ public class FirstFragment extends Fragment{
         subjectAdapter = new SubjectAdapter(subjects);
         lvStus.setAdapter(subjectAdapter);
 
+
+//        //倒计时
+        day = view.findViewById(R.id.day);
+        minute = view.findViewById(R.id.minute);
+        hour = view.findViewById(R.id.hour);
+        second = view.findViewById(R.id.second);
+
+
+
+        SimpleDateFormat s1=new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat s2=new SimpleDateFormat("yyyy年MM月dd日aHH:mm");
+        Date d = new Date();
+
+        try {
+            Date d2=s1.parse("2020-06-07-08-00");
+            long second = (d2.getTime()-d.getTime())/1000;
+            mDay = (long) Math.floor(second/(3600*24));
+            mHour = (long) (Math.floor(second/3600)-mDay*24);
+            mMin = (long) (Math.floor(second/60)-mDay*24*60-mHour*60);
+            mSecond= (long) (Math.floor(second)-mDay*24*60*60-mHour*60*60-mMin*60);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+//        startRun();
+//        if (myAsyncTask != null){
+//            myAsyncTask.cancel(true);
+//        }
+        if (myAsyncTask == null) {
+            myAsyncTask = new MyAsyncTask();
+            myAsyncTask.execute();
+        }
 
         gaokao = view.findViewById(R.id.gaokaoImg);
         final  int mode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
@@ -142,29 +194,12 @@ public class FirstFragment extends Fragment{
                 }
                 getActivity().getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
                 getActivity().recreate();
+                //startActivity(new Intent(getContext(),CourseDetail.class));
+//                myAsyncTask.cancel();
+//                MyAsyncTask myAsyncTask = new MyAsyncTask();
+//                myAsyncTask.execute();
             }
         });
-
-        //倒计时
-        day = view.findViewById(R.id.day);
-        minute = view.findViewById(R.id.minute);
-        hour = view.findViewById(R.id.hour);
-        second = view.findViewById(R.id.second);
-        SimpleDateFormat s1=new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat s2=new SimpleDateFormat("yyyy年MM月dd日aHH:mm");
-        Date d = new Date();
-
-        try {
-            Date d2=s1.parse("2020-06-07-08-00");
-            long second = (d2.getTime()-d.getTime())/1000;
-            mDay = (long) Math.floor(second/(3600*24));
-            mHour = (long) (Math.floor(second/3600)-mDay*24);
-            mMin = (long) (Math.floor(second/60)-mDay*24*60-mHour*60);
-            mSecond= (long) (Math.floor(second)-mDay*24*60*60-mHour*60*60-mMin*60);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        startRun();
         //精品课
         final ImageView huan = view.findViewById(R.id.huanyipi);
         courseListview = view.findViewById(R.id.courseList);
@@ -325,28 +360,16 @@ public class FirstFragment extends Fragment{
         }
     }
 
-    //倒计时
-    //倒计时
+    //    //倒计时
+//    //倒计时
     private void startRun() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // TODO Auto-generated method stub
-                while (isRun) {
-                    try {
-                        Thread.sleep(1000); // sleep 1000ms
-                        Message message = Message.obtain();
-                        message.what = 1;
-                        timeHandler.sendMessage(message);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+        if (!thread.isInterrupted()) {
+            thread.interrupt();
+        }
+        thread.start();
     }
     //倒计时计算
-    private void computeTime() {
+    private static void computeTime() {
         mSecond--;
         if (mSecond < 0) {
             mMin--;
@@ -362,4 +385,59 @@ public class FirstFragment extends Fragment{
             }
         }
     }
+
+    public static class MyAsyncTask extends AsyncTask<String, Long, String>
+    {
+        /**
+         * 异步任务：AsyncTask<Params, Progress, Result>
+         * 1.Params:UI线程传过来的参数。
+         * 2.Progress:发布进度的类型。
+         * 3.Result:返回结果的类型。耗时操作doInBackground的返回结果传给执行之后的参数类型。
+         *
+         * 执行流程：
+         * 1.onPreExecute()
+         * 2.doInBackground()-->onProgressUpdate()
+         * 3.onPostExecute()
+         */
+        @Override
+        protected void onProgressUpdate(Long...longs)//执行操作中，发布进度后
+        {
+            day.setText(longs[0]+"");
+            hour.setText(longs[1]+"");
+            minute.setText(longs[2]+"");
+            second.setText(longs[3]+"");
+
+
+        }
+        @Override
+        protected void onPreExecute()//执行耗时操作之前处理UI线程事件
+        {
+            //Toast.makeText(getContext(),"1",Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected String doInBackground(String...  params)//执行耗时操作
+        {
+            //在此方法执行耗时操作,耗时操作中发布进度，更新进度条
+            while (true) {
+                try {
+                    Thread.sleep(1000); // sleep 1000ms
+                    computeTime();
+                    publishProgress(mDay,mHour,mMin,mSecond);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+//        @Override
+//        protected void onPostExecute(String result)//执行耗时操作之后处理UI线程事件
+//        {
+//            //在此方法执行main线程操作
+//            progressBar.setVisibility(View.GONE);//下载完成后，隐藏进度条
+//            textView.setText(result);
+//        }
+
+    }
+
 }
