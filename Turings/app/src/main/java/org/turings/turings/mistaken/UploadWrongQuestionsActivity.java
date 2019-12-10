@@ -137,11 +137,13 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         spinner_ylx.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                subjectMsg.setTag(tags[position]);
+                String tag = (String) spinner_ylx.getSelectedItem();
+                subjectMsg.setTag(tag);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                String tag = (String) spinner_ylx.getSelectedItem();
+                subjectMsg.setTag(tag);
             }
         });
 
@@ -154,6 +156,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
             list.add(str);
         }
         tagAdapter.notifyDataSetChanged();
+        spinner_ylx.setAdapter(tagAdapter);
     }
     private void initData() {
         subjectMsg = new org.turings.turings.mistaken.SubjectMsg(1,"数学","集合","填空题",new Date(),"files","","","","","",Integer.parseInt(uId));
