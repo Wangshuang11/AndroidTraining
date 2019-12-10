@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.MapView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -27,6 +29,8 @@ public class NearFragment extends Fragment {
     private TextView tvJumpLogin_ws;//未登录界面的登录按钮
     private ImageView ivUnLogin_ws;//未登录界面的上方图片
     private TextView tvJumpRegister_ws;//未登录界面的注册按钮
+
+    private MapView mMapView;
 
 
 
@@ -43,8 +47,10 @@ public class NearFragment extends Fragment {
             return view;
         }
 
-
-        return super.onCreateView(inflater, container, savedInstanceState);
+        SDKInitializer.initialize(getContext().getApplicationContext());
+        view = inflater.inflate(R.layout.near, container,false);
+        mMapView=view.findViewById(R.id.mapView);
+        return view;
     }
 
     //加载上方图片
