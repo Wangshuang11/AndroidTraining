@@ -112,6 +112,12 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTabHost.setCurrentTab(0);
                     imageViewMap.get("tag1").setImageResource(R.mipmap.indexblue);
                     textViewHashMap.get("tag1").setTextColor(Color.argb(100,26,168,215));
+                    break;
+                case "backTonear":
+                    fragmentTabHost.setCurrentTab(2);
+                    imageViewMap.get("tag3").setImageResource(R.mipmap.nearblue);
+                    textViewHashMap.get("tag3").setTextColor(Color.argb(100,26,168,215));
+                    break;
             }
         }else{
             fragmentTabHost.setCurrentTab(0);

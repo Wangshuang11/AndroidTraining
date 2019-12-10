@@ -68,5 +68,7 @@ dependencies {
         exclude group: 'com.android.support'
     }
     /*附近的人用包*/
-    implementation files('libs\\BaiduLBS_Android.jar')
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
+    implementation project(':lvlibrary')
+    implementation files('libs/BaiduLBS_Android.jar')
 }

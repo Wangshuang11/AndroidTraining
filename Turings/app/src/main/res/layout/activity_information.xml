@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".near.Location.Information1Activity">
+    tools:context=".near.Location.InformationActivity">
 
     <ImageView
         android:id="@+id/ivJazai"
@@ -44,7 +44,7 @@
         android:paddingRight="20dp"
         android:paddingBottom="8dp"
         android:background="@drawable/b4">
-        <org.turings.near.entity.DivergeView
+        <org.turings.turings.near.entity.DivergeView
             android:id="@+id/divergeView"
             android:layout_width="60dp"
             android:layout_height="150dp"
@@ -67,7 +67,7 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:text="+ 关 注"/>
-        <org.turings.near.entity.RoundImageView
+        <org.turings.turings.near.entity.RoundImageView
             android:id="@+id/ivPortrait_lyh"
             android:layout_width="70dp"
             android:layout_height="87dp"

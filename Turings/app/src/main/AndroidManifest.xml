@@ -20,10 +20,15 @@
 
     <!--百度地图权限-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+
 
     <application
         android:allowBackup="true"
@@ -35,6 +40,10 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="NYvzKjZkLR7MYEDSnDZo3NjGLVNDMgeB" />
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
         <activity android:name=".mistaken.RedoWrongBigQuestionActivity"></activity>
         <activity android:name=".index.IndexActivity">
             <intent-filter>
@@ -94,6 +103,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+        <activity android:name=".near.Location.InformationActivity"/>
+        <activity android:name=".near.Location.SharedThingsActivity"/>
+        <activity android:name=".near.Location.ShareTitleActivity"/>
+        <activity android:name=".near.Location.WriteActivity"/>
+        <activity android:name=".near.Location.WriteThingsActivity"/>
 
     </application>
 

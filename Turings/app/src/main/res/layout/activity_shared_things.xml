@@ -38,7 +38,7 @@
         android:background="@drawable/bj4"
         android:padding="20dp"
         android:alpha="0.6">
-        <com.rance.library.SectorMenuButton
+        <com.rance.lvlibrary.SectorMenuButton
             android:id="@+id/top_sector_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:textColor="@android:color/black"
             android:layout_below="@id/tvShareTitle"
             android:text="啦啦啦啦"/>
