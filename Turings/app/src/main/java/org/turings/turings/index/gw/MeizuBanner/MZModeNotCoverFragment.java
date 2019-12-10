@@ -18,7 +18,6 @@ import com.zhouwei.mzbanner.holder.MZHolderCreator;
 import com.zhouwei.mzbanner.holder.MZViewHolder;
 
 import org.turings.turings.R;
-import org.turings.turings.UrlActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,30 +45,28 @@ public class MZModeNotCoverFragment extends Fragment {
             public void onPageClick(View view, int position) {
                 switch (position){
                     case 0:
-//                        Uri uri = Uri.parse("https://www.pku.edu.cn/");    //设置跳转的网站
-//                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                        Intent intent = new Intent(getContext(), UrlActivity.class);
-                        intent.putExtra("urlStr","https://www.pku.edu.cn/");
+                        Uri uri = Uri.parse("https://www.pku.edu.cn/");    //设置跳转的网站
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                         break;
                     case 1:
-                        Intent intent1 = new Intent(getContext(),UrlActivity.class);
-                        intent1.putExtra("urlStr","https://www.tsinghua.edu.cn/publish/thu2018/index.html");
+                        Uri uri1 = Uri.parse("https://www.tsinghua.edu.cn/publish/thu2018/index.html");    //设置跳转的网站
+                        Intent intent1 = new Intent(Intent.ACTION_VIEW, uri1);
                         startActivity(intent1);
                         break;
                     case 2:
-                        Intent intent2 = new Intent(getContext(),UrlActivity.class);
-                        intent2.putExtra("urlStr","http://www.ox.ac.uk/");
+                        Uri uri2 = Uri.parse("http://www.ox.ac.uk/");    //设置跳转的网站
+                        Intent intent2 = new Intent(Intent.ACTION_VIEW, uri2);
                         startActivity(intent2);
                         break;
                     case 3:
-                        Intent intent3 = new Intent(getContext(),UrlActivity.class);
-                        intent3.putExtra("urlStr","https://www.cam.ac.uk/");
+                        Uri uri3 = Uri.parse("https://www.cam.ac.uk/");    //设置跳转的网站
+                        Intent intent3 = new Intent(Intent.ACTION_VIEW, uri3);
                         startActivity(intent3);
                         break;
                     case 4:
-                        Intent intent4 = new Intent(getContext(),UrlActivity.class);
-                        intent4.putExtra("urlStr","http://www.zju.edu.cn/");
+                        Uri uri4 = Uri.parse("http://www.zju.edu.cn/");    //设置跳转的网站
+                        Intent intent4 = new Intent(Intent.ACTION_VIEW, uri4);
                         startActivity(intent4);
                         break;
                 }

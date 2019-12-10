@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -27,6 +28,8 @@ public class NearFragment extends Fragment {
     private ImageView ivUnLogin_ws;//未登录界面的上方图片
     private TextView tvJumpRegister_ws;//未登录界面的注册按钮
 
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class NearFragment extends Fragment {
             jumpToLogin();
             return view;
         }
+
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }
@@ -81,4 +85,5 @@ public class NearFragment extends Fragment {
             return true;
         }
     }
+
 }

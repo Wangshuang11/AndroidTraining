@@ -25,7 +25,6 @@
         <pair source="c" header="h" fileNamingConvention="NONE" />
       </extensions>
     </Objective-C-extensions>
-<<<<<<< HEAD
     <codeStyleSettings language="XML">
       <arrangement>
         <rules>
@@ -135,7 +134,5 @@
         </rules>
       </arrangement>
     </codeStyleSettings>
-=======
->>>>>>> b9afd2bd1bce30baab1f542f0e64994607ce997c
   </code_scheme>
 </component>

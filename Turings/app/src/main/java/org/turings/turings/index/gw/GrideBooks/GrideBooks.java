@@ -73,39 +73,24 @@ public class GrideBooks extends AppCompatActivity {
     }
 
     private void loadMoreBooks() {
-        GrideBook beauty1;
-        GrideBook beauty2;
-        GrideBook beauty3;
-        GrideBook beauty4;
-        for (int i = 0; i < 2; i++) {
-            beauty1 = new GrideBook("羊脂球","https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3808118474,463269679&fm=26&gp=0.jpg");
-            beauty2 = new GrideBook("羊脂球","https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2781711160,2537312162&fm=26&gp=0.jpg");
-            beauty3 = new GrideBook("鬼谷子","https://tse3-mm.cn.bing.net/th?id=OIP.GS3ycUZFCONM5R49k8fSNwAAAA&w=179&h=193&c=7&o=5&dpr=1.25&pid=1.7");
-            beauty4 = new GrideBook("巴黎圣母院","https://tse1-mm.cn.bing.net/th?id=OIP.2nTlLVoT_8cTM_3-JhCz-AAAAA&w=143&h=190&c=7&o=5&dpr=1.25&pid=1.7");
-            data.add(beauty1);
-            data.add(beauty2);
-            data.add(beauty3);
-            data.add(beauty4);
+        GrideBook beauty;
+        for (int i = 0; i < 8; i++) {
+//            beauty = new Book("老人与海", "https://tse1-mm.cn.bing.net/th?id=OIP.DgnAyxjjaxlKiWZXD5wZjAHaHa&w=221&h=207&c=7&o=5&dpr=1.25&pid=1.7");
+//            data.add(beauty);
+            beauty = new GrideBook("你的孤独 虽败犹荣","https://tse4-mm.cn.bing.net/th?id=OIP.pQMszCMxsSx4frCb8BHwYAAAAA&w=161&h=214&c=7&o=5&dpr=1.25&pid=1.7");
+            data.add(beauty);
         }
         beautyAdapter.notifyDataSetChanged();
     }
 
     private void refreshBooks() {
-        data.clear();
-        GrideBook beauty1;
-        GrideBook beauty2;
-        GrideBook beauty3;
-        GrideBook beauty4;
         GrideBook beauty;
-        for (int i = 0; i < 2; i++) {
-            beauty1 = new GrideBook("浮生六记", "http://img5.imgtn.bdimg.com/it/u=2271333855,1088329262&fm=26&gp=0.jpg");
-            beauty2 = new GrideBook("巴黎圣母院", "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2647296849,1766062156&fm=26&gp=0.jpg");
-            beauty3 = new GrideBook("人间词话", "https://tse2-mm.cn.bing.net/th?id=OIP.oNNTN0y5Nggx8_6_HyPvRwAAAA&w=203&h=203&c=7&o=5&dpr=1.25&pid=1.7");
-            beauty4 = new GrideBook("辞海", "https://tse3-mm.cn.bing.net/th?id=OIP.NriYLrrzC-wgnnhhyuGSSQAAAA&w=187&h=194&c=7&o=5&dpr=1.25&pid=1.7");
-            data.add(beauty1);
-            data.add(beauty2);
-            data.add(beauty3);
-            data.add(beauty4);
+        data.clear();
+        for (int i = 0; i <8; i++) {
+            beauty = new GrideBook("老人与海", "https://tse1-mm.cn.bing.net/th?id=OIP.DgnAyxjjaxlKiWZXD5wZjAHaHa&w=221&h=207&c=7&o=5&dpr=1.25&pid=1.7");
+            data.add(beauty);
+//            beauty = new Book("你的孤独 虽败犹荣","https://tse4-mm.cn.bing.net/th?id=OIP.pQMszCMxsSx4frCb8BHwYAAAAA&w=161&h=214&c=7&o=5&dpr=1.25&pid=1.7");
+//            data.add(beauty);
         }
         beautyAdapter.notifyDataSetChanged();
     }
@@ -114,20 +99,14 @@ public class GrideBooks extends AppCompatActivity {
      * 生成一些数据添加到集合中
      */
     private void initData() {
-        GrideBook beauty1;
-        GrideBook beauty2;
-        GrideBook beauty3;
-        GrideBook beauty4;
         GrideBook beauty;
-        for (int i = 0; i < 2; i++) {
-            beauty1 = new GrideBook("人间词话", "https://tse2-mm.cn.bing.net/th?id=OIP.oNNTN0y5Nggx8_6_HyPvRwAAAA&w=203&h=203&c=7&o=5&dpr=1.25&pid=1.7");
-            beauty2 = new GrideBook("辞海", "https://tse3-mm.cn.bing.net/th?id=OIP.NriYLrrzC-wgnnhhyuGSSQAAAA&w=187&h=194&c=7&o=5&dpr=1.25&pid=1.7");
-            beauty3 = new GrideBook("浮生六记", "http://img5.imgtn.bdimg.com/it/u=2271333855,1088329262&fm=26&gp=0.jpg");
-            beauty4 = new GrideBook("巴黎圣母院", "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2647296849,1766062156&fm=26&gp=0.jpg");
-            data.add(beauty1);
-            data.add(beauty2);
-            data.add(beauty3);
-            data.add(beauty4);
+        for (int i = 0; i < 8; i++) {
+            beauty = new GrideBook("人间词话", "https://tse2-mm.cn.bing.net/th?id=OIP.oNNTN0y5Nggx8_6_HyPvRwAAAA&w=203&h=203&c=7&o=5&dpr=1.25&pid=1.7");
+            data.add(beauty);
+//            beauty = new Book("老人与海", "https://tse1-mm.cn.bing.net/th?id=OIP.DgnAyxjjaxlKiWZXD5wZjAHaHa&w=221&h=207&c=7&o=5&dpr=1.25&pid=1.7");
+//            data.add(beauty);
+//            beauty = new Book("你的孤独 虽败犹荣","https://tse4-mm.cn.bing.net/th?id=OIP.pQMszCMxsSx4frCb8BHwYAAAAA&w=161&h=214&c=7&o=5&dpr=1.25&pid=1.7");
+//            data.add(beauty);
         }
     }
 }

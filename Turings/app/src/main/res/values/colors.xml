@@ -23,4 +23,7 @@
     <color name="colorMistakenTwo">#fed000</color>
     <color name="colorMistakenThree">#f7f4f8</color>
     <color name="colorMistakenFour">#ff7657</color>
+    <color name="colorPink">#ff4081</color>
+    <color name="colorGray">#e5e5e5</color>
+    <color name="colorOreange">#f4faac</color>
 </resources>
