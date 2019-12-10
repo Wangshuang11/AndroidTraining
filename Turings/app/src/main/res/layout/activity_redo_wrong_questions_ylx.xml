@@ -34,7 +34,9 @@
             android:src="@mipmap/pointylx"/>
     </LinearLayout>
     <ScrollView
+        android:id="@+id/scroll_view_ylx"
         android:layout_below="@+id/title_ylx"
+        android:background="#fff"
         android:layout_above="@+id/btn_choose_ylx"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -245,6 +247,42 @@
                         android:textSize="15sp"
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@id/imgs_ylx"/>
+                    <!-- 更多和箭头 -->
+                    <RelativeLayout
+                        android:id="@+id/show_more"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="3dip"
+                        >
+                        <TextView
+                            android:id="@+id/text_show_ylx"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:textSize="13sp"
+                            android:textColor="#999"
+                            android:layout_toLeftOf="@+id/spread"
+                            android:layout_marginRight="10dp"
+                            android:text="展示答案" />
+                        <ImageView
+                            android:id="@+id/spread"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="20dp"
+                            android:background="@mipmap/topmoreylx" />
+                        <ImageView
+                            android:id="@+id/shrink_up"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:background="@mipmap/morebottomylx"
+                            android:layout_marginRight="20dp"
+                            android:visibility="invisible" />
+                    </RelativeLayout>
                 </RelativeLayout>
             </LinearLayout>
             <TextView
@@ -252,8 +290,10 @@
                 android:layout_width="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
+                android:minHeight="120dp"
                 android:background="#808080"
+                android:visibility="gone"
                 android:text="点我查看答案"
                 android:textSize="30sp"
                 android:gravity="center"

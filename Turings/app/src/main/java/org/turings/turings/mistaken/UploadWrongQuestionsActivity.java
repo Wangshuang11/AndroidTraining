@@ -191,6 +191,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
                             photo =BitmapFactory.decodeStream(getContentResolver().openInputStream(croppedUri));
                             path = saveImgToFile(photo);
                             subjectMsg.setTitleImg(path);
+                            question_img_ylx.setPadding(25,25,25,25);
                             question_img_ylx.setScaleType(ImageView.ScaleType.FIT_XY);
                             question_img_ylx.setImageBitmap(photo);
                             delete_ylx.setVisibility(View.VISIBLE);
@@ -250,6 +251,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
                 question_img_ylx.setImageResource(R.mipmap.mistakencamera_2);
                 question_img_ylx.setVisibility(View.VISIBLE);
                 question_img_ylx.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                question_img_ylx.setPadding(50,80,50,50);
                 delete_ylx.setVisibility(View.INVISIBLE);
                 question_content_ylx.setVisibility(View.INVISIBLE);
                 //删除刚刚保存的图片

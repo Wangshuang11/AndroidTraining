@@ -1,63 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="180dp"
-    >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#f5f5f5">
     <LinearLayout
-        android:layout_alignParentBottom="true"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
         android:orientation="vertical"
-        android:alpha="1"
-        >
-        <TextView
-            android:id="@+id/tv_edt_ylx"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="30sp"
-
-            android:text="修改科目"/>
+        android:gravity="bottom">
         <LinearLayout
+            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp">
+            android:background="#fff"
+            android:orientation="vertical"
+            android:alpha="1"
+            >
+            <TextView
+                android:id="@+id/tv_edt_ylx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="30sp"
+
+                android:text="修改科目"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+                <Button
+                    android:id="@+id/btn_chinese_ylx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/subject_btn_background"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="10dp"
+                    android:text="语文"/>
+                <Button
+                    android:id="@+id/btn_math_ylx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/subject_choose_btn_background"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:text="数学"/>
+                <Button
+                    android:id="@+id/btn_english_ylx"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="40dp"
+                    android:background="@drawable/subject_btn_background"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="25dp"
+                    android:text="英语"/>
+            </LinearLayout>
             <Button
-                android:id="@+id/btn_chinese_ylx"
-                android:layout_width="wrap_content"
+                android:id="@+id/btn_ok"
+                android:layout_width="100dp"
                 android:layout_height="40dp"
-                android:layout_weight="1"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/subject_btn_background"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="10dp"
-                android:text="语文"/>
-            <Button
-                android:id="@+id/btn_math_ylx"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:background="@drawable/subject_choose_btn_background"
-                android:layout_marginLeft="15dp"
-                android:layout_weight="1"
-                android:layout_marginRight="10dp"
-                android:text="数学"/>
-            <Button
-                android:id="@+id/btn_english_ylx"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:layout_height="40dp"
-                android:background="@drawable/subject_btn_background"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="25dp"
-                android:text="英语"/>
+                android:layout_gravity="center"
+                android:text="确定"/>
         </LinearLayout>
-        <Button
-            android:id="@+id/btn_ok"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/subject_btn_background"
-            android:layout_gravity="center"
-            android:text="确定"/>
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
@@ -20,10 +21,14 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.turings.turings.MainActivity;
 import org.turings.turings.R;
@@ -62,6 +67,9 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
     private ListView subject_list_ylx;//题目listView
     private CustomClickListener listener;//点击事件监听器
     private List<SubjectMsg> list;//列表要展示的题目资源
+    private SmartRefreshLayout srl;//刷新
+    private ImageView nullYlx;//如果没有题目显示
+    private LinearLayout lyYlx;//空空如也外框
     private Menu menu;
     private String subject ="数学";//选中的学科
     private String tag = "集合";
@@ -80,8 +88,22 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
                     list.add(subjectMsg);
                     customAdapterYLX.notifyDataSetChanged();
                 }
+                if(list.size() == 0 || list == null){
+                    nullYlx.setVisibility(View.VISIBLE);
+                    lyYlx.setVisibility(View.VISIBLE);
+                }else {
+                    nullYlx.setVisibility(View.GONE);
+                    lyYlx.setVisibility(View.GONE);
+                }
             }else {
                 list.clear();
+                if(list.size() == 0 || list == null){
+                    nullYlx.setVisibility(View.VISIBLE);
+                    lyYlx.setVisibility(View.VISIBLE);
+                }else {
+                    nullYlx.setVisibility(View.GONE);
+                    lyYlx.setVisibility(View.GONE);
+                }
                 customAdapterYLX.notifyDataSetChanged();
             }
         }
@@ -97,6 +119,11 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
         getViews();
         //初始化数据（数据应该从数据库中获取）
         InitData();
+        if (list.size() == 0 || list == null){
+            nullYlx.setVisibility(View.VISIBLE);
+        }else {
+            nullYlx.setVisibility(View.GONE);
+        }
         //创建适配器
         customAdapterYLX = new CustomAdapterYLX(list,getApplicationContext(),R.layout.item_list_subject_ylx_layout);
         //绑定适配器
@@ -112,6 +139,26 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
             }
         });
         customAdapterYLX.notifyDataSetChanged();
+        srl.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                refreshData();
+                srl.finishRefresh();
+                Toast.makeText(getApplicationContext(),
+                        "刷新完成",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //刷新数据
+    private void refreshData() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                searchSubjectMsgBySubjectAndTag(subject,tag);
+            }
+        }).start();
     }
 
     //进入错题重做页
@@ -173,6 +220,9 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
         leaf_three_text_ylx=findViewById(R.id.left_three_text_ylx);
         drop_more_menu_ylx=findViewById(R.id.drop_more_menu_ylx);
         subject_list_ylx=findViewById(R.id.subject_list_ylx);
+        srl = findViewById(R.id.srl);
+        nullYlx = findViewById(R.id.nullYlx);
+        lyYlx = findViewById(R.id.lyylx);
     }
     //事件监听器类
     class CustomClickListener implements View.OnClickListener{

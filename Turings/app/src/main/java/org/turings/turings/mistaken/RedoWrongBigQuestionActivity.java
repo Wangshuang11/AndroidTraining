@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
@@ -19,8 +20,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,6 +32,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +63,14 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
     private ImageView subjectImg_ylx;//题目图片
     private EditText write_ylx;//答案书写区
     private TextView answer_show_ylx;//答案展示
+    private RelativeLayout show_more;//展开答案
+    private TextView text_show_ylx;//状态文字描述
+    private ImageView spread;//展开
+    private ImageView shrink_up;//收起
+    private static final int SHRINK_STATUS = 1;//收起状态
+    private static final int SPREAD_STATUS = 2;//展示状态
+    private static int statusYlx = SHRINK_STATUS;//默认状态收起
+    private ScrollView scroll_view_ylx;//控件
     private Button pre_question_ylx;//上一题
     private Button next_question_ylx;//下一题
     private CustomOnclickListener listener;//监听器
@@ -85,10 +98,12 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                     }else {
                         msgs = gson.fromJson(ms,SubjectMsg.class);
                         if(msgs.getType().equals("选择题")){
+                            scroll_view_ylx.setVisibility(View.GONE);
                             Intent intent = new Intent();
                             intent.setClass(getApplicationContext(), RedoWrongQuestionsActivity.class);
                             intent.putExtra("subject", msgs);
                             startActivity(intent);
+                            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                             finish();
                         }
                         //获取图片id,从data的files目录下取出来
@@ -99,6 +114,20 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                         answer_show_ylx.setBackgroundColor(getResources().getColor(R.color.answerColor));
                         answer_show_ylx.setText("刮刮乐查看答案");
                         answer_show_ylx.setTextColor(getResources().getColor(R.color.themeColor));
+                        //初始状态
+                        text_show_ylx.setText("展开答案");
+                        spread.setVisibility(View.VISIBLE);
+                        shrink_up.setVisibility(View.INVISIBLE);
+                        answer_show_ylx.setVisibility(View.GONE);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Message msg = Message.obtain();
+                                msg.what=600;
+                                handler.sendMessage(msg);
+                            }
+                        }).start();
+                        statusYlx = SHRINK_STATUS;
                     }
                     break;
                 case 200:
@@ -140,6 +169,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                             intent.setClass(getApplicationContext(), RedoWrongQuestionsActivity.class);
                             intent.putExtra("subject", msgs);
                             startActivity(intent);
+                            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                             finish();
                         }
                         //获取图片id,从data的files目录下取出来
@@ -150,7 +180,27 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                         answer_show_ylx.setBackgroundColor(getResources().getColor(R.color.answerColor));
                         answer_show_ylx.setText("刮刮乐查看答案");
                         answer_show_ylx.setTextColor(getResources().getColor(R.color.themeColor));
+                        //初始状态
+                        text_show_ylx.setText("展开答案");
+                        spread.setVisibility(View.VISIBLE);
+                        shrink_up.setVisibility(View.INVISIBLE);
+                        answer_show_ylx.setVisibility(View.GONE);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Message msg = Message.obtain();
+                                msg.what=600;
+                                handler.sendMessage(msg);
+                            }
+                        }).start();
+                        statusYlx = SHRINK_STATUS;
                     }
+                    break;
+                case 500://滑动到底部
+                    scroll_view_ylx.fullScroll(ScrollView.FOCUS_DOWN);
+                    break;
+                case 600://滑动到顶部
+                    scroll_view_ylx.fullScroll(ScrollView.FOCUS_UP);
                     break;
             }
         }
@@ -196,6 +246,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
         answer_show_ylx.setOnClickListener(listener);
         pre_question_ylx.setOnClickListener(listener);
         next_question_ylx.setOnClickListener(listener);
+        show_more.setOnClickListener(listener);
     }
 
     //获取控件
@@ -208,6 +259,11 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
         next_question_ylx = findViewById(R.id.next_question_ylx);
         subjectImg_ylx = findViewById(R.id.subjectImg_ylx);
         rParent = findViewById(R.id.parent_ylx);
+        show_more = findViewById(R.id.show_more);
+        text_show_ylx = findViewById(R.id.text_show_ylx);
+        spread = findViewById(R.id.spread);
+        shrink_up = findViewById(R.id.shrink_up);
+        scroll_view_ylx = findViewById(R.id.scroll_view_ylx);
     }
     class CustomOnclickListener implements View.OnClickListener{
 
@@ -222,12 +278,6 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                 case R.id.choose_ylx://点击弹出选项（编辑错题，删除错题，修改科目，取消）
                     showPopupWindow();
                     break;
-                case R.id.answer_show_ylx://点击刮刮乐查看答案
-                    answer_show_ylx.setMovementMethod(ScrollingMovementMethod.getInstance());
-                    answer_show_ylx.setBackgroundColor(Color.WHITE);
-                    answer_show_ylx.setTextColor(Color.RED);
-                    answer_show_ylx.setText(msgs.getAnswer());
-                    break;
                 case R.id.next_question_ylx://下一题
                     //从数据库中查询下一题并显示
                     searchNextSubject();
@@ -235,6 +285,40 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                 case R.id.pre_question_ylx://上一题
                     //从数据库中查询上一题并显示
                     searchPreSubject();
+                    break;
+                case R.id.show_more://点击展示和收起答案
+                    if(statusYlx == SHRINK_STATUS){//收起状态变成展示状态
+                        text_show_ylx.setText("收起答案");
+                        spread.setVisibility(View.INVISIBLE);
+                        shrink_up.setVisibility(View.VISIBLE);
+                        answer_show_ylx.setVisibility(View.VISIBLE);
+                        answer_show_ylx.setBackgroundColor(Color.WHITE);
+                        answer_show_ylx.setTextColor(Color.RED);
+                        answer_show_ylx.setText(msgs.getAnswer());
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Message msg = Message.obtain();
+                                msg.what=500;
+                                handler.sendMessage(msg);
+                            }
+                        }).start();
+                        statusYlx = SPREAD_STATUS;
+                    }else {
+                        text_show_ylx.setText("展开答案");
+                        spread.setVisibility(View.VISIBLE);
+                        shrink_up.setVisibility(View.INVISIBLE);
+                        answer_show_ylx.setVisibility(View.GONE);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Message msg = Message.obtain();
+                                msg.what=600;
+                                handler.sendMessage(msg);
+                            }
+                        }).start();
+                        statusYlx = SHRINK_STATUS;
+                    }
                     break;
             }
         }
@@ -291,14 +375,12 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
     private void showPopupWindow(){
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.popup_window_choose_layout_ylx,null,false);
-        popupWindow = new PopupWindow(view, ActionBar.LayoutParams.MATCH_PARENT,ActionBar.LayoutParams.WRAP_CONTENT);
+        popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setTouchable(true);
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return false;
-                // 这里如果返回true的话，touch事件将被拦截
-                // 拦截后 PopupWindow的onTouchEvent不被调用，这样点击外部区域无法dismiss
             }
         });
         //获取弹出窗布局当中取消按钮
@@ -338,10 +420,11 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                 showFixTagPopupWindow();
             }
         });
-        //设置弹出窗口显示内容的视图
-        popupWindow.setContentView(view);
         //设置背景透明
         addBackground();
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));    //要为popWindow设置一个背景才有效
+        //设置弹出窗口显示内容的视图
+        popupWindow.setContentView(view);
         popupWindow.setAnimationStyle(R.style.PopupWindowAnimation);
         //弹出窗口父视图对象
         RelativeLayout parent = findViewById(R.id.parent_ylx);
@@ -355,11 +438,21 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
     private void  showSubjectFixPopupWindow(){
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.popup_window_subject_fix_layout_ylx,null,false);
-        popupWindow = new PopupWindow(view, ActionBar.LayoutParams.MATCH_PARENT,ActionBar.LayoutParams.WRAP_CONTENT);
+        popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setTouchable(true);
+        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                showPopupWindow();
+                return false;
+            }
+        });
         //设置弹出窗口显示内容的视图
         popupWindow.setContentView(view);
         //设置背景透明
         addBackground();
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));    //要为popWindow设置一个背景才有效
         //语文
         final Button btnChinese = view.findViewById(R.id.btn_chinese_ylx);
         //数学
@@ -435,11 +528,21 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
     private void showFixTagPopupWindow(){
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.popup_window_edit_subject_tag_layout_ylx,null,false);
-        popupWindow = new PopupWindow(view, ActionBar.LayoutParams.MATCH_PARENT,ActionBar.LayoutParams.WRAP_CONTENT);
+        popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setTouchable(true);
+        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                showPopupWindow();
+                return false;
+            }
+        });
         //设置弹出窗口显示内容的视图
         popupWindow.setContentView(view);
         //设置背景透明
         addBackground();
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));    //要为popWindow设置一个背景才有效
         //获取弹出框布局中的确定按钮，点击关闭此弹出框，回到最初弹出框
         final Button btnOk = view.findViewById(R.id.btn_ok);
         spinner = view.findViewById(R.id.spinner_ylx);
