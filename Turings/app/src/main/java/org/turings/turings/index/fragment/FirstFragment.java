@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -94,7 +95,7 @@ public class FirstFragment extends Fragment{
     private List<HotCourse> hotCourses = new ArrayList<>();
     private ListView courseListview;
     private HotCourseAdapter hotCourseAdapter;
-    private TextView changeCourse;
+    private LinearLayout changeCourse;
     private Handler courseHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
