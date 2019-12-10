@@ -64,7 +64,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     /*错题集用的包*/
     implementation 'com.yalantis:ucrop:1.4.1'
-    implementation('com.github.good-good-study:Chart:1.0.0.0') {
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.18'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
+    implementation ('com.github.good-good-study:Chart:1.0.0.0'){
         exclude group: 'com.android.support'
     }
     /*附近的人用包*/

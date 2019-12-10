@@ -77,7 +77,7 @@
                     android:text="选择学科"
                     android:textColor="#1AA8D7"
                     android:gravity="left|center"
-                    android:textSize="25sp"/>
+                    android:textSize="20sp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
@@ -123,7 +123,7 @@
                     android:text="选择标签"
                     android:textColor="#1AA8D7"
                     android:gravity="left|center"
-                    android:textSize="25sp"/>
+                    android:textSize="20sp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -148,7 +148,7 @@
                     android:text="选择题型"
                     android:textColor="#1AA8D7"
                     android:gravity="left|center"
-                    android:textSize="25sp"/>
+                    android:textSize="20sp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
@@ -188,7 +188,7 @@
                 android:text="输入答案"
                 android:textColor="#1AA8D7"
                 android:gravity="left|center"
-                android:textSize="25sp"/>
+                android:textSize="20sp"/>
 
             <LinearLayout
                 android:id="@+id/answer_ylx"
@@ -211,7 +211,7 @@
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:src="@mipmap/aylx" />
+                            android:src="@mipmap/anewylx" />
 
                         <EditText
                             android:id="@+id/answer_A_edt_ylx"
@@ -229,7 +229,7 @@
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:src="@mipmap/bylx" />
+                            android:src="@mipmap/bnewylx" />
 
                         <EditText
                             android:id="@+id/answer_B_edt_ylx"
@@ -247,7 +247,7 @@
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:src="@mipmap/cylx" />
+                            android:src="@mipmap/cnewylx" />
 
                         <EditText
                             android:id="@+id/answer_C_edt_ylx"
@@ -255,18 +255,15 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1" />
                     </LinearLayout>
-
                     <LinearLayout
                         android:id="@+id/answer_D_ylx"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:orientation="horizontal">
-
                         <ImageView
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:src="@mipmap/dylx" />
-
+                            android:src="@mipmap/dnewylx" />
                         <EditText
                             android:id="@+id/answer_D_edt_ylx"
                             android:layout_width="wrap_content"
@@ -284,7 +281,7 @@
             <LinearLayout
                 android:id="@+id/answer_big_ylx"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -295,11 +292,12 @@
                     android:id="@+id/anwser_edt_ylx"
                     android:background="@null"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="left"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:hint="请输入答案内容在这里"
+                    android:minLines="11"
                     android:singleLine="false"
                     android:scrollHorizontally="false"/>
             </LinearLayout>

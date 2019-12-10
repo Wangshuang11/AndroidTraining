@@ -16,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -147,8 +148,6 @@ public class MistakenFragment extends Fragment {
         wsIvCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                showPopupWindow();
-
                 showPopwindow();
             }
         });
@@ -167,7 +166,7 @@ public class MistakenFragment extends Fragment {
                 OkHttpClient okHttpClient=new OkHttpClient();
                 //post-FormBody传输，在一定程度上保证用户信息的安全
                 FormBody formBody=new FormBody.Builder()
-                        .add("uId",uId+"")
+                        .add("uId", String.valueOf(uId))
                         .build();
                 Request request=new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/CountAllWrongQuestionsServlet").post(formBody).build();
                 Call call = okHttpClient.newCall(request);
@@ -264,8 +263,6 @@ public class MistakenFragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return false;
-                // 这里如果返回true的话，touch事件将被拦截
-                // 拦截后 PopupWindow的onTouchEvent不被调用，这样点击外部区域无法dismiss
             }
         });
         //获取弹出窗布局当中某个控件的引用
@@ -385,6 +382,7 @@ public class MistakenFragment extends Fragment {
                             //删除裁剪保存的图片
                             deletePathFromFile(pathCropPhoto);
                             intent.putExtra("photo", datas);
+                            popupWindow.dismiss();
                             startActivity(intent);
                         }
                     } catch (Exception e) {

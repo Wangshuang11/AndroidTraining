@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +70,14 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
     private TextView c_choose_text_ylx;//c选项内容
     private TextView d_choose_text_ylx;//d选项内容
     private TextView answer_show_ylx;//答案展示
+    private RelativeLayout show_more;//展开答案
+    private TextView text_show_ylx;//状态文字描述
+    private ImageView spread;//展开
+    private ImageView shrink_up;//收起
+    private static final int SHRINK_STATUS = 1;//收起状态
+    private static final int SPREAD_STATUS = 2;//展示状态
+    private static int statusYlx = SHRINK_STATUS;//默认状态收起
+    private ScrollView scroll_view_ylx;//控件
     private Button pre_question_ylx;//上一题
     private Button next_question_ylx;//下一题
     private CustomOnclickListener listener;//监听器
@@ -95,10 +105,12 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                     }else {
                         msgs = gson.fromJson(ms,SubjectMsg.class);
                         if(!msgs.getType().equals("选择题")){
+                            scroll_view_ylx.setVisibility(View.GONE);
                             Intent intent = new Intent();
                             intent.setClass(getApplicationContext(), RedoWrongBigQuestionActivity.class);
                             intent.putExtra("subject", msgs);
                             startActivity(intent);
+                            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                             finish();
                         }
                         //获取图片id,从data的files目录下取出来
@@ -106,9 +118,30 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                         Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
                         //添加题目图片
                         subjectImg_ylx.setImageBitmap(bitmap);
+                        //初始化样式
+                        chooseInitoption();
+                        //添加选项
+                        a_choose_text_ylx.setText(msgs.getOptionA());
+                        b_choose_text_ylx.setText(msgs.getOptionB());
+                        c_choose_text_ylx.setText(msgs.getOptionC());
+                        d_choose_text_ylx.setText(msgs.getOptionD());
                         answer_show_ylx.setBackgroundColor(getResources().getColor(R.color.answerColor));
                         answer_show_ylx.setText("刮刮乐查看答案");
                         answer_show_ylx.setTextColor(getResources().getColor(R.color.themeColor));
+                        //初始状态
+                        text_show_ylx.setText("展开答案");
+                        spread.setVisibility(View.VISIBLE);
+                        shrink_up.setVisibility(View.INVISIBLE);
+                        answer_show_ylx.setVisibility(View.GONE);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Message msg = Message.obtain();
+                                msg.what=600;
+                                handler.sendMessage(msg);
+                            }
+                        }).start();
+                        statusYlx = SHRINK_STATUS;
                     }
                     break;
                 case 200:
@@ -146,6 +179,7 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                         deletePathFromFile(getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg());
                         msgs = gson.fromJson(ms,SubjectMsg.class);
                         if(!msgs.getType().equals("选择题")){
+                            scroll_view_ylx.setVisibility(View.GONE);
                             Intent intent = new Intent();
                             intent.setClass(getApplicationContext(), RedoWrongBigQuestionActivity.class);
                             intent.putExtra("subject", msgs);
@@ -157,11 +191,34 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                         Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
                         //添加题目图片
                         subjectImg_ylx.setImageBitmap(bitmap);
+                        //初始化样式
+                        chooseInitoption();
+                        //添加选项
                         a_choose_text_ylx.setText(msgs.getOptionA());
                         b_choose_text_ylx.setText(msgs.getOptionB());
                         c_choose_text_ylx.setText(msgs.getOptionC());
                         d_choose_text_ylx.setText(msgs.getOptionD());
+                        //初始状态
+                        text_show_ylx.setText("展开答案");
+                        spread.setVisibility(View.VISIBLE);
+                        shrink_up.setVisibility(View.INVISIBLE);
+                        answer_show_ylx.setVisibility(View.GONE);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Message msg = Message.obtain();
+                                msg.what=600;
+                                handler.sendMessage(msg);
+                            }
+                        }).start();
+                        statusYlx = SHRINK_STATUS;
                     }
+                    break;
+                case 500://滑动到底部
+                    scroll_view_ylx.fullScroll(ScrollView.FOCUS_DOWN);
+                    break;
+                case 600://滑动到顶部
+                    scroll_view_ylx.fullScroll(ScrollView.FOCUS_UP);
                     break;
             }
         }
@@ -213,7 +270,7 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
         answer_show_ylx.setOnClickListener(listener);
         pre_question_ylx.setOnClickListener(listener);
         next_question_ylx.setOnClickListener(listener);
-
+        show_more.setOnClickListener(listener);
     }
 
     //获取控件
@@ -237,6 +294,11 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
         d_choose_text_ylx = findViewById(R.id.d_choose_text_ylx);
         subjectImg_ylx = findViewById(R.id.subjectImg_ylx);
         rParent = findViewById(R.id.parent_ylx);
+        show_more = findViewById(R.id.show_more);
+        text_show_ylx = findViewById(R.id.text_show_ylx);
+        spread = findViewById(R.id.spread);
+        shrink_up = findViewById(R.id.shrink_up);
+        scroll_view_ylx = findViewById(R.id.scroll_view_ylx);
     }
     class CustomOnclickListener implements View.OnClickListener{
 
@@ -249,11 +311,6 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                     break;
                 case R.id.choose_ylx://点击弹出选项（编辑错题，删除错题，修改科目，取消）
                     showPopupWindow();
-                    break;
-                case R.id.answer_show_ylx://点击刮刮乐查看答案
-                    answer_show_ylx.setBackgroundColor(Color.WHITE);
-                    answer_show_ylx.setTextColor(Color.RED);
-                    answer_show_ylx.setText(msgs.getAnswer());
                     break;
                 case R.id.a_choose_ylx:
                     chooseAoption();
@@ -274,6 +331,40 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                 case R.id.pre_question_ylx://上一题
                     //从数据库中搜索上一题并显示
                     searchPreSubject();
+                    break;
+                case R.id.show_more://点击展示和收起答案
+                    if(statusYlx == SHRINK_STATUS){//收起状态变成展示状态
+                        text_show_ylx.setText("收起答案");
+                        spread.setVisibility(View.INVISIBLE);
+                        shrink_up.setVisibility(View.VISIBLE);
+                        answer_show_ylx.setVisibility(View.VISIBLE);
+                        answer_show_ylx.setBackgroundColor(Color.WHITE);
+                        answer_show_ylx.setTextColor(Color.RED);
+                        answer_show_ylx.setText(msgs.getAnswer());
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Message msg = Message.obtain();
+                                msg.what=500;
+                                handler.sendMessage(msg);
+                            }
+                        }).start();
+                        statusYlx = SPREAD_STATUS;
+                    }else {
+                        text_show_ylx.setText("展开答案");
+                        spread.setVisibility(View.VISIBLE);
+                        shrink_up.setVisibility(View.INVISIBLE);
+                        answer_show_ylx.setVisibility(View.GONE);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Message msg = Message.obtain();
+                                msg.what=600;
+                                handler.sendMessage(msg);
+                            }
+                        }).start();
+                        statusYlx = SHRINK_STATUS;
+                    }
                     break;
             }
         }
@@ -578,6 +669,21 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                 getWindow().setAttributes(lp);
             }
         });
+    }
+    //未选择时个选项最初样式
+    private  void  chooseInitoption(){
+        a_choose_ylx.setBackground(getResources().getDrawable(R.drawable.frame_to_answer_edit));
+        a_choose_btn_ylx.setBackgroundColor(Color.WHITE);
+        a_choose_btn_ylx.setTextColor(getResources().getColor(R.color.themeColor));
+        b_choose_ylx.setBackground(getResources().getDrawable(R.drawable.frame_to_answer_edit));
+        b_choose_btn_ylx.setBackgroundColor(Color.WHITE);
+        b_choose_btn_ylx.setTextColor(getResources().getColor(R.color.themeColor));
+        c_choose_ylx.setBackground(getResources().getDrawable(R.drawable.frame_to_answer_edit));
+        c_choose_btn_ylx.setBackgroundColor(Color.WHITE);
+        c_choose_btn_ylx.setTextColor(getResources().getColor(R.color.themeColor));
+        d_choose_ylx.setBackground(getResources().getDrawable(R.drawable.frame_to_answer_edit));
+        d_choose_btn_ylx.setBackgroundColor(Color.WHITE);
+        d_choose_btn_ylx.setTextColor(getResources().getColor(R.color.themeColor));
     }
     //选中A
     private void chooseAoption() {

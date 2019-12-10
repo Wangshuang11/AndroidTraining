@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@mipmap/time2ylx"/>
+            android:src="@mipmap/timeylx"/>
         <TextView
             android:id="@+id/time_ylx"
             android:layout_width="wrap_content"
@@ -46,12 +46,12 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="10dp">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/bluetagsubkectylx" />
-
         <ImageView
             android:id="@+id/subject_ylx"
             android:layout_width="wrap_content"

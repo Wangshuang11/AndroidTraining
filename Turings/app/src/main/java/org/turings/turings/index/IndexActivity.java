@@ -1,6 +1,8 @@
 package org.turings.turings.index;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +29,10 @@ public class IndexActivity extends AppCompatActivity implements ViewPager.OnPage
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lph_activity_index);
+        SharedPreferences sharedPreferences =getSharedPreferences("flag", Context.MODE_PRIVATE);
+        SharedPreferences.Editor  editor=sharedPreferences.edit();
+        editor.putString("flag","false");
+        editor.commit();
         initViews();
         innitDots();
     }

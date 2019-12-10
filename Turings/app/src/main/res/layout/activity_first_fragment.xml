@@ -30,8 +30,8 @@
             <ImageView
                 android:id="@+id/gaokaoImg"
                 android:src="@drawable/thenight"
-                android:layout_width="40dp"
-                android:layout_height="40dp"/>
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
             <TextView
                 android:layout_gravity="center_vertical"
                 android:text="距高考还有"
@@ -96,6 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="260dp"/>
         <LinearLayout
+            android:id="@+id/changeCourse"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="5dp"
             android:gravity="center"
@@ -108,7 +109,7 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"/>
             <TextView
-                android:id="@+id/changeCourse"
+
                 android:text="换一批"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

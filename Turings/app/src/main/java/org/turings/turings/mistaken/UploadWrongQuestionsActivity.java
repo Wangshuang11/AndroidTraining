@@ -137,11 +137,13 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         spinner_ylx.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                subjectMsg.setTag(tags[position]);
+                String tag = (String) spinner_ylx.getSelectedItem();
+                subjectMsg.setTag(tag);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                String tag = (String) spinner_ylx.getSelectedItem();
+                subjectMsg.setTag(tag);
             }
         });
 
@@ -154,6 +156,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
             list.add(str);
         }
         tagAdapter.notifyDataSetChanged();
+        spinner_ylx.setAdapter(tagAdapter);
     }
     private void initData() {
         subjectMsg = new org.turings.turings.mistaken.SubjectMsg(1,"数学","集合","填空题",new Date(),"files","","","","","",Integer.parseInt(uId));
@@ -191,6 +194,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
                             photo =BitmapFactory.decodeStream(getContentResolver().openInputStream(croppedUri));
                             path = saveImgToFile(photo);
                             subjectMsg.setTitleImg(path);
+                            question_img_ylx.setPadding(25,25,25,25);
                             question_img_ylx.setScaleType(ImageView.ScaleType.FIT_XY);
                             question_img_ylx.setImageBitmap(photo);
                             delete_ylx.setVisibility(View.VISIBLE);
@@ -250,6 +254,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
                 question_img_ylx.setImageResource(R.mipmap.mistakencamera_2);
                 question_img_ylx.setVisibility(View.VISIBLE);
                 question_img_ylx.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                question_img_ylx.setPadding(50,80,50,50);
                 delete_ylx.setVisibility(View.INVISIBLE);
                 question_content_ylx.setVisibility(View.INVISIBLE);
                 //删除刚刚保存的图片
