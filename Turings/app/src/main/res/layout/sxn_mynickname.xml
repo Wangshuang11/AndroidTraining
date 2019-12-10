@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/sxn_bg_white"
+    android:alpha="0.9"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,23 +23,33 @@
             android:textSize="22dp"
             android:layout_marginLeft="20dp"
             android:layout_gravity="center"
-            android:text="昵称"
+            android:text="我的昵称"
             android:textColor="@color/sxn_un_normal"></TextView>
     </LinearLayout>
-    <EditText
-        android:id="@+id/sxn_fixedNickname_edit"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-
-        android:layout_height="50dp"></EditText>
-    <Button
-        android:id="@+id/sxn_fixedNickname_btn"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="确认修改"
-        android:textSize="20dp"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/sxn_un_normal"
-        android:background="@drawable/sxn_btn"
-        android:alpha="0.5"></Button>
+    <LinearLayout
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/sxn_fixedNickname_edit"
+            android:layout_width="250dp"
+            android:padding="10dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/sxn_edit1"
+            android:layout_height="50dp"
+            android:alpha="0.7"></EditText>
+        <Button
+            android:id="@+id/sxn_fixedNickname_btn"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:text="确认修改"
+            android:textSize="16dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/sxn_un_normal"
+            android:background="@drawable/sxn_change_btn"
+            android:alpha="0.6"></Button>
+    </LinearLayout>
 </LinearLayout>

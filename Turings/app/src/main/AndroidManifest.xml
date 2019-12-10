@@ -28,7 +28,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
-
+    <!--我的模块-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:allowBackup="true"
@@ -62,15 +63,6 @@
         <!--        guo设置的没有actionBar的详情页-->
         <activity android:name=".index.gw.MainSubjects.HotSubjectVideo" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".myself.sxn.MyAchieveActivity" />
-        <activity android:name=".myself.sxn.MyAvatarActivity" />
-        <activity android:name=".myself.sxn.MyConcernActivity" />
-        <activity android:name=".myself.sxn.MyFansActivity" />
-        <activity android:name=".myself.sxn.MyMottoActivity" />
-        <activity android:name=".myself.sxn.MyNicknameActivity" />
-        <activity android:name=".myself.sxn.MySchoolActivity" />
-        <activity android:name=".myself.sxn.MyShareActivity" />
-        <activity android:name=".myself.sxn.PersonalDataActivity" />
         <activity android:name=".UrlActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -108,6 +100,14 @@
         <activity android:name=".near.Location.ShareTitleActivity"/>
         <activity android:name=".near.Location.WriteActivity"/>
         <activity android:name=".near.Location.WriteThingsActivity"/>
+
+        <activity android:name=".myself.sxn.MyAchieveActivity"/>
+        <activity android:name=".myself.sxn.MyConcernActivity"/>
+        <activity android:name=".myself.sxn.MyCourseActivity"/>
+        <activity android:name=".myself.sxn.MyFansActivity"/>
+        <activity android:name=".myself.sxn.MyMottoActivity"/>
+        <activity android:name=".myself.sxn.MyNicknameActivity"/>
+        <activity android:name=".myself.sxn.MySchoolActivity"/>
 
     </application>
 

@@ -8,7 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.turings.turings.MainActivity;
 import org.turings.turings.R;
+import org.turings.turings.myself.tools.MyUrl;
 
 
 public class MyNicknameActivity extends AppCompatActivity {
@@ -18,31 +20,36 @@ public class MyNicknameActivity extends AppCompatActivity {
     private Button back;
     private Intent intent;
     private Bundle bundle;
+    private MyUrl myUrl;
+    public static int id=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (getSupportActionBar() != null) { getSupportActionBar().hide(); }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sxn_mynickname);
         getViews();
         intent=getIntent();
+        myUrl=new MyUrl(this);
+
         bundle=intent.getExtras();
         editText.setText(bundle.getString("beforeName"), TextView.BufferType.NORMAL);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name=editText.getText().toString();
-                bundle.putString("afterName",name);
-                intent.putExtras(bundle);
-                intent.setClass(MyNicknameActivity.this,PersonalDataActivity.class);
-                startActivityForResult(intent,0);
-                //将修改后的数据传到数据库，并通过toast提示或直接跳到前一个界面
+                myUrl.sendToServerChange(getResources().getString(R.string.connUrl)+"/EditUname?uid="+id+"&uname="+name,R.layout.sxn_mynickname);
+                intent.setClass(MyNicknameActivity.this, MainActivity.class);
+                intent.putExtra("fragment",3);
+                startActivityForResult(intent,13);
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent=new Intent();
-                intent.setClass(MyNicknameActivity.this, PersonalDataActivity.class);
-                startActivity(intent);
+                intent.setClass(MyNicknameActivity.this, MainActivity.class);
+                intent.setAction("loginBackMyself");
+                startActivityForResult(intent,0);
             }
         });
     }

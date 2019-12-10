@@ -40,4 +40,18 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="slide_anim">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
+    </style>
+    <style name="avatar_circle">
+        <item name="android:windowEnterAnimation">@drawable/sxn_circle</item>
+    </style>
+    <style name="sxn_big_circle">
+        <item name="android:windowEnterAnimation">@drawable/sxn_big_circle</item>
+    </style>
+    <style name="popwindow_anim_style">
+        <item name="android:windowEnterAnimation">@anim/popup_show</item>
+        <item name="android:windowExitAnimation">@anim/popup_gone</item>
+    </style>
 </resources>

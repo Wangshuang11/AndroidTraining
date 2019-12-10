@@ -2,26 +2,39 @@ package org.turings.turings.myself.entity;
 
 public class Fan {
     private int id;
-    private String img;
+    private String avatar;
     private String name;
     private String motto;
+    private int time;
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    private int count;
 
     public Fan() {
         super();
     }
-    public Fan(int id,String img, String name, String motto) {
+    public Fan(int id,String avatar, String name, String motto,int count,int time) {
         this.id=id;
-        this.img = img;
+        this.avatar = avatar;
         this.name = name;
         this.motto = motto;
+        this.count=count;
+        this.time=time;
     }
 
-    public String getImg() {
-        return img;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getName() {
@@ -46,5 +59,13 @@ public class Fan {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
     }
 }

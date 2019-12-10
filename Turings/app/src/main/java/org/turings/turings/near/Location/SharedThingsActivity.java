@@ -105,7 +105,7 @@ public class SharedThingsActivity extends AppCompatActivity {
 
             @Override
             public void onCollapse() {
-                showToast("onCollapse");
+                showToast("收藏成功");
             }
         });
     }

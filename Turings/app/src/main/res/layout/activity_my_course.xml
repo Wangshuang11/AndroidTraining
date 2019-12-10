@@ -8,7 +8,7 @@
         android:layout_height="50dp"
         android:background="@color/sxn_background">
         <Button
-            android:id="@+id/sxn_achieve_back"
+            android:id="@+id/sxn_course_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
@@ -21,14 +21,12 @@
             android:textSize="22dp"
             android:layout_marginLeft="20dp"
             android:layout_gravity="center"
-            android:text="我的成就"
+            android:text="我的课程"
             android:textColor="@color/sxn_un_normal"></TextView>
     </LinearLayout>
-    <GridView
-        android:id="@+id/sxn_achieve_gv"
+    <ListView
+        android:id="@+id/sxn_course_lv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="auto_fit"
-        android:columnWidth="204dp"
-        android:stretchMode="columnWidth"></GridView>
+        android:layout_height="match_parent">
+    </ListView>
 </LinearLayout>

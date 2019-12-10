@@ -7,14 +7,16 @@
         android:layout_height="90dp">
         <ImageView
             android:id="@+id/sxn_fans_img"
-            android:layout_width="70dp"
+            android:layout_width="match_parent"
+            android:layout_weight="8"
             android:layout_height="70dp"
             android:layout_marginLeft="20dp"
             android:layout_gravity="center">
         </ImageView>
 
         <LinearLayout
-            android:layout_width="207dp"
+            android:layout_width="match_parent"
+            android:layout_weight="4"
             android:layout_height="91dp"
             android:layout_gravity="center"
             android:layout_margin="20dp"
@@ -38,12 +40,13 @@
                 android:textColor="@color/sxn_normal"
                 android:textSize="18dp"></TextView>
         </LinearLayout>
-        <Button
+        <ImageView
             android:id="@+id/sxn_fans_details"
-            android:layout_width="25dp"
+            android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:layout_marginLeft="20dp"
+            android:layout_weight="9"
+            android:layout_margin="10dp"
             android:layout_gravity="center"
-            android:background="@mipmap/sxn_enter"></Button>
+            android:background="@mipmap/sxn_enter"/>
     </LinearLayout>
 </LinearLayout>

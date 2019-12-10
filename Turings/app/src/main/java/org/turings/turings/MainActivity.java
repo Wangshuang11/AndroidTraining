@@ -1,11 +1,13 @@
 package org.turings.turings;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,6 +25,8 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private Map<String,ImageView> imageViewMap=new HashMap<>();
     private Map<String, TextView> textViewHashMap=new HashMap<>();
+    private MyselfFragment myselfFragment;
+    private FragmentTabHost fragmentTabHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
-        FragmentTabHost fragmentTabHost=findViewById(android.R.id.tabhost);
+        fragmentTabHost=findViewById(android.R.id.tabhost);
         fragmentTabHost.setup(this,getSupportFragmentManager(),android.R.id.tabcontent);
         TabHost.TabSpec tabSpec1=fragmentTabHost.newTabSpec("tag1")
                 .setIndicator(getTabSpecView("tag1",R.mipmap.indexgray,"首页"));
@@ -92,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
                         textViewHashMap.get("tag3").setTextColor(getResources().getColor(android.R.color.darker_gray));
                         break;
                 }
+                returnAvatar();
+                getMyMotto();
             }
         });
 
@@ -144,5 +150,37 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(title);
         textViewHashMap.put(tagId,textView);
         return  view;
+    }
+    private void returnAvatar(){
+        int id=9;
+        Intent intent=getIntent();
+        while (id==intent.getIntExtra("id",9) && intent!=null){
+            id--;
+            Bitmap bitmap=intent.getParcelableExtra("photo");
+            // 转换为BitmapDrawable对象
+            if(bitmap!=null){
+                myselfFragment=new MyselfFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("bitmap",bitmap);
+                myselfFragment.setArguments(bundle);
+
+            }else {
+                Log.e("6","aaaaaaaaa");
+            }
+
+
+        }
+    }
+    private void getMyMotto(){
+        Intent intent=getIntent();
+        if (intent.getStringExtra("motto")!=null){
+            String motto=intent.getStringExtra("motto");
+            //使用bundle传递参数
+            myselfFragment=new MyselfFragment();
+            Bundle bundle = new Bundle();
+            Log.e("MOTTO",motto);
+            bundle.putString("MOTTO",motto);
+            myselfFragment.setArguments(bundle);
+        }
     }
 }
