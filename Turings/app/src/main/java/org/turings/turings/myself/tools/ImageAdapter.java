@@ -1,4 +1,4 @@
-package org.turings.turings.myself.tools;
+package org.turings.myself.tools;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,11 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
-
-import org.turings.turings.R;
-import org.turings.turings.myself.entity.School;
+import org.turings.myself.R;
+import org.turings.myself.entity.School;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,8 +60,7 @@ public class ImageAdapter extends BaseAdapter {
         }
         vh = (ViewHolder) view.getTag();
         if (urls != null && urls.size() > 0) {
-            RequestOptions requestOptions=new RequestOptions().centerCrop();
-            Glide.with(context).load(urls.get(i).getSrc()).apply(requestOptions).into(vh.imageView);
+            Glide.with(context).load(urls.get(i).getSrc()).centerCrop().into(vh.imageView);
             vh.title.setText(urls.get(i).getName());
             vh.flag.setText(urls.get(i).getFlag());
         }

@@ -1,4 +1,4 @@
-package org.turings.turings.myself.tools;
+package org.turings.myself.tools;
 
 import android.graphics.Bitmap;
 

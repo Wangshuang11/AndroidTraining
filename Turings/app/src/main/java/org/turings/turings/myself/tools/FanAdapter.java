@@ -1,4 +1,4 @@
-package org.turings.turings.myself.tools;
+package org.turings.myself.tools;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,10 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
-import org.turings.turings.myself.entity.Fan;
-
+import org.turings.myself.entity.Fan;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,8 +65,7 @@ public class FanAdapter extends BaseAdapter {
         }
         vh = (ViewHolder) view.getTag();
         if (urls != null && urls.size() > 0) {
-            RequestOptions requestOptions=new RequestOptions().circleCrop();
-            Glide.with(context).load(urls.get(i).getAvatar()).apply(requestOptions).into(vh.imageView);
+            Glide.with(context).load(urls.get(i).getAvatar()).centerCrop().into(vh.imageView);
             vh.title.setText(urls.get(i).getName());
             vh.flag.setText(urls.get(i).getMotto());
         }
