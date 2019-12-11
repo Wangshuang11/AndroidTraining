@@ -92,6 +92,7 @@ public class MyselfFragment extends Fragment {
     private TextView tvJumpRegister_ws;//未登录界面的注册按钮
     private View view;
 
+    private int id;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -122,9 +123,8 @@ public class MyselfFragment extends Fragment {
 
         //退出登录
         unLogin();
-
         //显示我的头像，我的昵称，关注数量，粉丝数量
-        myUrl.sendToServerMyMessage(getResources().getString(R.string.connUrl)+"/ReFreshMyInfomation?uid=1",
+        myUrl.sendToServerMyMessage(getResources().getString(R.string.connUrl)+"/ReFreshMyInfomation?uid="+id+"",
                 R.layout.sxn_activity_logged,
                 fanCount, conCount, achCount, nameT, mottoT, avatarI);
         if (photo!=null){
@@ -212,6 +212,7 @@ public class MyselfFragment extends Fragment {
         if (uName.equals("") && uTel.equals("")){//用户名或者密码两个都为空，就是用户没登录
             return false;
         }else{//只要用户名或者密码有一个不为空，就是用户登录了
+            id= Integer.parseInt(getContext().getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
             return true;
         }
     }
