@@ -40,7 +40,14 @@ public class UserService {
 		String uPwd=user.getuPwd();
 		String uTel=user.getuTel();
 		String sql="insert into tbl_self_user(uTel,uName,uPwd) values('"+uTel+"','"+uName+"','"+uPwd+"')";
-		return new UserDao().modifyUser(sql);
+		
+		/*向position表里增加一个用户*/
+		String sqlPosition="insert into tbl_position(username) values('"+uName+"')";
+		if(new UserDao().modifyUser(sqlPosition)) {
+			/*向user表里增加一个用户*/
+			return new UserDao().modifyUser(sql);
+		}
+		return false;
 	}
 
 }
