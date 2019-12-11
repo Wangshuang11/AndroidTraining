@@ -21,7 +21,7 @@ public class MyNicknameActivity extends AppCompatActivity {
     private Intent intent;
     private Bundle bundle;
     private MyUrl myUrl;
-    public static int id=1;
+    public int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (getSupportActionBar() != null) { getSupportActionBar().hide(); }
@@ -30,7 +30,7 @@ public class MyNicknameActivity extends AppCompatActivity {
         getViews();
         intent=getIntent();
         myUrl=new MyUrl(this);
-
+        id=Integer.parseInt(getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
         bundle=intent.getExtras();
         editText.setText(bundle.getString("beforeName"), TextView.BufferType.NORMAL);
         button.setOnClickListener(new View.OnClickListener() {

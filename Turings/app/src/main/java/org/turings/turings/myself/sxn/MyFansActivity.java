@@ -18,6 +18,7 @@ public class MyFansActivity extends AppCompatActivity {
     private Intent intent;
     private MyUrl myUrl;
 
+    private int uId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (getSupportActionBar() != null) { getSupportActionBar().hide(); }
@@ -25,6 +26,7 @@ public class MyFansActivity extends AppCompatActivity {
         setContentView(R.layout.sxn_activity_fans);
         myUrl=new MyUrl(this);
         getViews();
+        uId= Integer.parseInt(getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,7 +36,7 @@ public class MyFansActivity extends AppCompatActivity {
                 startActivityForResult(intent,0);
             }
         });
-        myUrl.sendToServerListview(getResources().getString(R.string.connUrl)+"/FansList?uid=1",
+        myUrl.sendToServerListview(getResources().getString(R.string.connUrl)+"/FansList?uid="+uId+"",
                 R.layout.sxn_item_fans,fansList);
     }
     private void getViews(){

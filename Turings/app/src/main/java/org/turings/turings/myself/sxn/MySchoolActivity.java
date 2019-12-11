@@ -30,6 +30,7 @@ public class MySchoolActivity extends AppCompatActivity {
     private Intent intent;
     private List<School> schools;
     private ImageAdapter imageAdapter;
+    public int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (getSupportActionBar() != null) { getSupportActionBar().hide(); }
@@ -37,8 +38,9 @@ public class MySchoolActivity extends AppCompatActivity {
         setContentView(R.layout.sxn_activity_school);
         lvSch=(ListView) findViewById(R.id.sxn_school_lv);
         back=findViewById(R.id.sxn_school_back);
+        id=Integer.parseInt(getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
         myUrl=new MyUrl(this );
-        myUrl.sendToServerListview(getResources().getString(R.string.connUrl)+"/GetSchoolsList?uid="+1,
+        myUrl.sendToServerListview(getResources().getString(R.string.connUrl)+"/GetSchoolsList?uid="+id,
                 R.layout.sxn_item_school,lvSch);
 
         lvSch.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -18,6 +18,7 @@ public class MyCourseActivity extends AppCompatActivity {
     private Button back;
     private Intent intent;
     private MyUrl myUrl;
+    private int uId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (getSupportActionBar() != null) { getSupportActionBar().hide(); }
@@ -25,6 +26,7 @@ public class MyCourseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_course);
         myUrl=new MyUrl(this);
         getViews();
+        uId= Integer.parseInt(getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,7 +36,7 @@ public class MyCourseActivity extends AppCompatActivity {
                 startActivityForResult(intent,0);
             }
         });
-        myUrl.sendToServerListview(getResources().getString(R.string.connUrl)+"/GetCoursesList?uid=1",
+        myUrl.sendToServerListview(getResources().getString(R.string.connUrl)+"/GetCoursesList?uid="+uId+"",
                 R.layout.sxn_item_course,fansList);
     }
     private void getViews(){

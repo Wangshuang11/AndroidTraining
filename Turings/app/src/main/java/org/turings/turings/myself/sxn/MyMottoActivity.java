@@ -50,7 +50,7 @@ public class MyMottoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sxn_mymotto);
         //姑且先令id=1
-        id=1;
+        id=Integer.parseInt(getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
         getViews();
         myUrl=new MyUrl(this);
         intent=getIntent();
