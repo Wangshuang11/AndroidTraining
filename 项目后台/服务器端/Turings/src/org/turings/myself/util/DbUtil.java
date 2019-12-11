@@ -21,7 +21,7 @@ public class DbUtil {
 		}
 		return dbUtil;
 	}
-	//获取数据库连�?
+	//获取数据库连接
 	public Connection getConnection() throws ClassNotFoundException, SQLException {
 		if(null == conn || conn.isClosed()) {
 			Class.forName(DRIVER_STR);

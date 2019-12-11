@@ -14,7 +14,7 @@ public class UserInformationDao {
 		
 		Myself user =null ;
 		DbUtil dbUtil = DbUtil.getInstance();
-		System.out.println("金鑫�?-getFansList"+"打开数据�?");
+		System.out.println("金鑫媛-getFansList"+"打开数据库");
 		
 		try {
 			conn = dbUtil.getConnection();
@@ -33,10 +33,10 @@ public class UserInformationDao {
 			
 			
 		} catch (ClassNotFoundException e) {
-			System.out.println("ERROR : from FansDao.getAttentionsList : 打开数据库失�?");
+			System.out.println("ERROR : from FansDao.getAttentionsList : 打开数据库失败");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("ERROR : from FansDao.getAttentionsList : 数据库查询失�?");
+			System.out.println("ERROR : from FansDao.getAttentionsList : 数据库查询失败");
 			e.printStackTrace();
 		} finally{
 			

@@ -12,12 +12,12 @@ import org.turings.myself.util.DbUtil;
 
 /**
  * 
- * use: 数据库查询粉丝相关信息列�?
+ * use: 数据库查询粉丝相关信息列表
  * @method  getFansList 获取粉丝列表list
  * @method  getAttentionList 获取关注列表list
  * 
  * 
- * @author 大媛�?
+ * @author 大媛媛
  *  
  */
 public class FansDao {
@@ -28,7 +28,7 @@ public class FansDao {
 	 * use: 通过用户id获取粉丝列表
 	 * @param id 
 	 * @return List
-	 * @author 大媛�?
+	 * @author 大媛媛
 	 * 
 	 * 
 	 */
@@ -39,7 +39,7 @@ public class FansDao {
 		
 		
 		DbUtil dbUtil = DbUtil.getInstance();
-		System.out.println("金鑫�?-getFansList"+"打开数据�?");
+		System.out.println("金鑫媛-getFansList"+"打开数据库");
 		
 		try {
 			conn = dbUtil.getConnection();
@@ -61,18 +61,18 @@ public class FansDao {
 			
 			
 		} catch (ClassNotFoundException e) {
-			System.out.println("ERROR : from FansDao.getAttentionsList : 打开数据库失�?");
+			System.out.println("ERROR : from FansDao.getAttentionsList : 打开数据库失败");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("ERROR : from FansDao.getAttentionsList : 数据库查询失�?");
+			System.out.println("ERROR : from FansDao.getAttentionsList : 数据库查询失败");
 			e.printStackTrace();
 		} finally{
 			
 //			try {
 //				dbUtil.closeConnection();
-//				System.out.println("金鑫�?-getList"+"关闭数据�?");
+//				System.out.println("金鑫媛-getList"+"关闭数据库");
 //			} catch (SQLException e) {
-//				System.out.println("金鑫�?-getList"+"数据库关闭异�?");
+//				System.out.println("金鑫媛-getList"+"数据库关闭异常");
 //			}
 		}
 		
@@ -87,7 +87,7 @@ public class FansDao {
 	 * use: 通过用户id获取关注列表
 	 * @param id 
 	 * @return List
-	 * @author 大媛�?
+	 * @author 大媛媛
 	 * 
 	 * 
 	 */
@@ -98,7 +98,7 @@ public class FansDao {
 		
 //		DbUtil dbUtil = new DbUtil();
 		DbUtil dbUtil = DbUtil.getInstance();
-		System.out.println("金鑫�?-getAttentionList"+"打开数据�?");
+		System.out.println("金鑫媛-getAttentionList"+"打开数据库");
 		
 		try {
 			conn = dbUtil.getConnection();
@@ -113,7 +113,7 @@ public class FansDao {
 			while(rs.next()) {
 				
 				// 在这里把查到的关注名字加入list
-				System.out.println(rs.getInt(1)+" �? "+rs.getString(2)+" �? "+rs.getString(3)+" �? "+rs.getInt(4));
+				System.out.println(rs.getInt(1)+" ： "+rs.getString(2)+" ： "+rs.getString(3)+" ： "+rs.getInt(4));
 				
 				user = new UserInfo(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5));
 				list.add(user);
@@ -121,18 +121,18 @@ public class FansDao {
 			
 			
 		} catch (ClassNotFoundException e) {
-			System.out.println("ERROR : from FansDao.getFansList : 打开数据库失�?");
+			System.out.println("ERROR : from FansDao.getFansList : 打开数据库失败");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("ERROR : from FansDao.getFansList : 数据库查询失�?");
+			System.out.println("ERROR : from FansDao.getFansList : 数据库查询失败");
 			e.printStackTrace();
 		} finally{
 			
 //			try {
 //				dbUtil.closeConnection();
-//				System.out.println("金鑫�?-getList"+"关闭数据�?");
+//				System.out.println("金鑫媛-getList"+"关闭数据库");
 //			} catch (SQLException e) {
-//				System.out.println("金鑫�?-getList"+"数据库关闭异�?");
+//				System.out.println("金鑫媛-getList"+"数据库关闭异常");
 //			}
 			
 		}

@@ -10,14 +10,14 @@ public class Myself {
 	private int time;
 	private int score;
 	private int fancount;
-	private int concount;
-	private int achcount;
+	private int attentioncount;
+	private int achievecount;
 	
 	public Myself() {
 		super();
 	}
 	public Myself(int id, String tel, String name, String pwd, String motto, String avatar, int time, int score,
-			int fancount, int concount, int achcount) {
+			int fancount, int attentioncount, int achievecount) {
 		super();
 		this.id = id;
 		this.tel = tel;
@@ -28,8 +28,8 @@ public class Myself {
 		this.time = time;
 		this.score = score;
 		this.fancount = fancount;
-		this.concount = concount;
-		this.achcount = achcount;
+		this.attentioncount = attentioncount;
+		this.achievecount = achievecount;
 	}
 	public int getId() {
 		return id;
@@ -79,23 +79,23 @@ public class Myself {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	public int getFancount() {
+	public int getFanscount() {
 		return fancount;
 	}
-	public void setFancount(int fancount) {
+	public void setFanscount(int fancount) {
 		this.fancount = fancount;
 	}
-	public int getConcount() {
-		return concount;
+	public int getAttentioncount() {
+		return attentioncount;
 	}
-	public void setConcount(int concount) {
-		this.concount = concount;
+	public void setAttentioncount(int attentioncount) {
+		this.attentioncount = attentioncount;
 	}
-	public int getAchcount() {
-		return achcount;
+	public int getAchievecount() {
+		return achievecount;
 	}
-	public void setAchcount(int achcount) {
-		this.achcount = achcount;
+	public void setAchievecount(int achievecount) {
+		this.achievecount = achievecount;
 	}
 	
 	

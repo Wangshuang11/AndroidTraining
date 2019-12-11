@@ -43,7 +43,7 @@ public class ReFreshMyInfomation extends HttpServlet {
 		String list = new UserInfomationService().getUserInformation(uid);
 		
 		PrintWriter out = response.getWriter();  
-		out.write("["+list+"]");
+		out.write(list);
 	}
 
 	/**

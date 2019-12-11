@@ -12,7 +12,7 @@ public class EditUserInfoService {
 		
 		result = new EditUserInfoDao().editName(uid,uname);
 		
-		//TODO 将数据转改成json�?
+		//TODO 将数据转改成json串
 		
 		
 		
@@ -26,7 +26,7 @@ public class EditUserInfoService {
 				
 				result = new EditUserInfoDao().editMotto(uid,umotto);
 				
-				//TODO 将数据转改成json�?
+				//TODO 将数据转改成json串
 				
 				
 				

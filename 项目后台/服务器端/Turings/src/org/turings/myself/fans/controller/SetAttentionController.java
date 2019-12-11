@@ -27,9 +27,9 @@ public class SetAttentionController extends HttpServlet {
     }
 
 	/**
-	 * @author 大媛�?
+	 * @author 大媛媛
 	 * @format "http://##/Turings/SetAt?aid=关注id&fid=用户id"  
-	 * @use 通过用户id 返回�?有关注的信息列表json
+	 * @use 通过用户id 返回所有关注的信息列表json
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 *
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

@@ -6,18 +6,18 @@ import com.google.gson.Gson;
 
 
 /**
- * use：粉丝和被关注的人的 dao调用 �?  list转json
+ * use：粉丝和被关注的人的 dao调用 和  list转json
  * 
- * @method getFansList 查粉�?
- * @method getAttentionsList 查关�?
+ * @method getFansList 查粉丝
+ * @method getAttentionsList 查关注
  * 
- * @author 大媛�?
+ * @author 大媛媛
  *
  */
 public class UserInfomationService {
 	
 	/**
-	 * use�? 根据id 获取 用户自己的信�?
+	 * use： 根据id 获取 用户自己的信息
 	 * @param id
 	 * @return String
 	 */

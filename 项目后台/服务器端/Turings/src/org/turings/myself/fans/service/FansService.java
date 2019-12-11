@@ -14,18 +14,18 @@ import net.sf.json.JSONArray;
 
 
 /**
- * use：粉丝和被关注的人的 dao调用 �?  list转json
+ * use：粉丝和被关注的人的 dao调用 和  list转json
  * 
- * @method getFansList 查粉�?
- * @method getAttentionsList 查关�?
+ * @method getFansList 查粉丝
+ * @method getAttentionsList 查关注
  * 
- * @author 大媛�?
+ * @author 大媛媛
  *
  */
 public class FansService {
 	
 	/**
-	 * use�? 根据id 获取 粉丝列表json
+	 * use： 根据id 获取 粉丝列表json
 	 * @param id
 	 * @return String
 	 */
@@ -60,7 +60,7 @@ public class FansService {
 	
 	
 	/**
-	 * use�? 根据id 获取 关注列表json
+	 * use： 根据id 获取 关注列表json
 	 * @param id
 	 * @return String
 	 */

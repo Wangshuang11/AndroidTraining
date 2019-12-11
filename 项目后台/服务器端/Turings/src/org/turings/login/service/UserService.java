@@ -9,14 +9,14 @@ public class UserService {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String loginCheckByUserPwd(User user) {
+	public boolean loginCheckByUserPwd(User user) {
 		String uName=user.getuName();
 		String uPwd=user.getuPwd();
 		String sql="select * from tbl_self_user where uName='"+uName+"' and uPwd='"+uPwd+"'";
 		return new UserDao().queryUser(sql);
 	}
 	
-	public String loginCheckByPhone(User user) {
+	public boolean loginCheckByPhone(User user) {
 		String uTel=user.getuTel();
 		String sql="select * from tbl_self_user where uTel='"+uTel+"'";
 		return new UserDao().queryUser(sql);
@@ -29,7 +29,7 @@ public class UserService {
 		return new UserDao().modifyUser(sql);
 	}
 
-	public String loginCheckByName(User user) {
+	public boolean loginCheckByName(User user) {
 		String uName=user.getuName();
 		String sql="select * from tbl_self_user where uName='"+uName+"'";
 		return new UserDao().queryUser(sql);
@@ -40,14 +40,7 @@ public class UserService {
 		String uPwd=user.getuPwd();
 		String uTel=user.getuTel();
 		String sql="insert into tbl_self_user(uTel,uName,uPwd) values('"+uTel+"','"+uName+"','"+uPwd+"')";
-		
-		/*向position表里增加一个用户*/
-		String sqlPosition="insert into tbl_position(username) values('"+uName+"')";
-		if(new UserDao().modifyUser(sqlPosition)) {
-			/*向user表里增加一个用户*/
-			return new UserDao().modifyUser(sql);
-		}
-		return false;
+		return new UserDao().modifyUser(sql);
 	}
 
 }

@@ -14,8 +14,8 @@ public class UserDao {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String queryUser(String sql) {
-		String result="false";
+	public boolean queryUser(String sql) {
+		boolean result=false;
 		DbUtil dbUtil = DbUtil.getInstance();
 		Connection conn;
 		try {
@@ -23,7 +23,7 @@ public class UserDao {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			if(rs.next()) {
-				result=rs.getInt("uId")+"";
+				result=true;
 			} 
 			
 			dbUtil.closeConnection();

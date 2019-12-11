@@ -1,11 +1,11 @@
 package org.turings.myself.entity;
 
 /**
- * use: 没有password的user实体�?
+ * use: 没有password的user实体类
  * Attributes: id,name,motto,time
  * 
  * 
- * @author 大媛�?
+ * @author 大媛媛
  *
  */
 public class UserInfo {

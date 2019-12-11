@@ -24,10 +24,11 @@ public class AttentionsListController extends HttpServlet {
     public AttentionsListController() {
         super();
     }
+
 	/**
-	 * @author 大媛�?
+	 * @author 大媛媛
 	 * @format "http://##/Turings/AtList?uid=用户id"  
-	 * @use 通过用户id 返回�?有关注的信息列表json
+	 * @use 通过用户id 返回所有关注的信息列表json
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

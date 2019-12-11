@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.turings.myself.fans.service.FansService;
 
 /**
- * editor=金鑫�?
+ * editor=金鑫媛
  * Servlet implementation class FansServlet
  */
 @WebServlet("/FansList")
@@ -26,9 +26,9 @@ public class FansListController extends HttpServlet {
     }
 
 	/**
-	 * @author 大媛�?
+	 * @author 大媛媛
 	 * @format "http://##/Turings/FansList?uid=用户id"  
-	 * @use 通过用户id 返回�?有粉丝的信息列表json
+	 * @use 通过用户id 返回所有粉丝的信息列表json
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
