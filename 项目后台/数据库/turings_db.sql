@@ -2,15 +2,19 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
-Source Server Version : 50506
+Source Server Version : 50701
 Source Host           : localhost:3306
 Source Database       : turings_db
 
 Target Server Type    : MYSQL
-Target Server Version : 50506
+Target Server Version : 50701
 File Encoding         : 65001
 
+<<<<<<< HEAD
 Date: 2019-12-11 09:02:13
+=======
+Date: 2019-12-11 10:17:44
+>>>>>>> 7845f83d33348b3b80b60b85c97a3e4b1b81522d
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,6 +37,34 @@ CREATE TABLE `tbl_childvideo` (
 -- ----------------------------
 INSERT INTO `tbl_childvideo` VALUES ('c1', 'http://vfx.mtime.cn/Video/2019/02/04/mp4/190204084208765161.mp4', 'guo1', '我是第一个的测试子视频', '1');
 INSERT INTO `tbl_childvideo` VALUES ('c2', 'http://vfx.mtime.cn/Video/2019/02/04/mp4/190204084208765161.mp4', 'guo1', '我是第一个的第二个测试', '2');
+
+-- ----------------------------
+-- Table structure for `tbl_courses`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_courses`;
+CREATE TABLE `tbl_courses` (
+  `cInfo` varchar(255) DEFAULT NULL,
+  `cId` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_courses
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tbl_courses_my`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_courses_my`;
+CREATE TABLE `tbl_courses_my` (
+  `cId` int(11) NOT NULL DEFAULT '0',
+  `uId` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cId`,`uId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_courses_my
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `tbl_coursevideo`
@@ -59,6 +91,20 @@ INSERT INTO `tbl_coursevideo` VALUES ('4', 'chinese', '起个名真难', '99', '
 INSERT INTO `tbl_coursevideo` VALUES ('5', 'chinese', '成语大会', '85', 'http://vfx.mtime.cn/Video/2019/03/09/mp4/190309153658147087.mp4', '525', '252');
 INSERT INTO `tbl_coursevideo` VALUES ('6', 'chinese', '三字经', '258', 'http://vfx.mtime.cn/Video/2019/03/09/mp4/190309153658147087.mp4', '65', '49');
 INSERT INTO `tbl_coursevideo` VALUES ('7', 'chinese', '朗读者', '59', 'http://vfx.mtime.cn/Video/2019/03/09/mp4/190309153658147087.mp4', '82', '28');
+
+-- ----------------------------
+-- Table structure for `tbl_fans`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_fans`;
+CREATE TABLE `tbl_fans` (
+  `fId` int(11) NOT NULL DEFAULT '0',
+  `uId` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`uId`,`fId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_fans
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `tbl_indexcollege`
@@ -231,6 +277,26 @@ INSERT INTO `tbl_mistaken` VALUES ('6', '数学', '集合', '填空题', '2019-1
 INSERT INTO `tbl_mistaken` VALUES ('7', '数学', '集合', '填空题', '2019-12-10', '1575960060606.jpg', '', '', '', '', '', '4');
 
 -- ----------------------------
+-- Table structure for `tbl_myself_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_myself_user`;
+CREATE TABLE `tbl_myself_user` (
+  `uPwd` varchar(20) DEFAULT NULL,
+  `uTel` char(11) DEFAULT NULL,
+  `uAvatar` varchar(100) DEFAULT NULL,
+  `uMotto` varchar(60) DEFAULT NULL,
+  `uId` int(11) NOT NULL DEFAULT '0',
+  `uScore` int(11) DEFAULT NULL,
+  `uTime` int(11) DEFAULT NULL,
+  `uName` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`uId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_myself_user
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `tbl_position`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_position`;
@@ -255,6 +321,35 @@ INSERT INTO `tbl_position` VALUES ('5', '吕小浩', 'a3', '38.103', '114.53', '
 INSERT INTO `tbl_position` VALUES ('6', '郭小伟', 'a3', '39.2', '114.7', '0');
 INSERT INTO `tbl_position` VALUES ('7', '刘小辉', 'a3', '39.56', '114.93', '0');
 INSERT INTO `tbl_position` VALUES ('9', 'www', null, null, null, null);
+
+-- ----------------------------
+-- Table structure for `tbl_schools`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_schools`;
+CREATE TABLE `tbl_schools` (
+  `sWebaddress` varchar(100) DEFAULT NULL,
+  `sInfo` varchar(255) DEFAULT NULL,
+  `sId` int(11) NOT NULL,
+  PRIMARY KEY (`sId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_schools
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tbl_schools_favorite`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_schools_favorite`;
+CREATE TABLE `tbl_schools_favorite` (
+  `sId` int(11) NOT NULL,
+  `uId` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`sId`,`uId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_schools_favorite
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `tbl_self_courses`
@@ -283,6 +378,8 @@ CREATE TABLE `tbl_self_courses_my` (
 -- ----------------------------
 -- Records of tbl_self_courses_my
 -- ----------------------------
+INSERT INTO `tbl_self_courses_my` VALUES ('2', '1');
+INSERT INTO `tbl_self_courses_my` VALUES ('5', '3');
 
 -- ----------------------------
 -- Table structure for `tbl_self_fans`
