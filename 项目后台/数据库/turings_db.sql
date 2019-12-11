@@ -2,19 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
-Source Server Version : 50701
+Source Server Version : 50506
 Source Host           : localhost:3306
 Source Database       : turings_db
 
 Target Server Type    : MYSQL
-Target Server Version : 50701
+Target Server Version : 50506
 File Encoding         : 65001
 
-<<<<<<< HEAD
-Date: 2019-12-11 09:02:13
-=======
-Date: 2019-12-11 10:17:44
->>>>>>> 7845f83d33348b3b80b60b85c97a3e4b1b81522d
+Date: 2019-12-11 15:20:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -308,19 +304,31 @@ CREATE TABLE `tbl_position` (
   `lng` double DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_position
 -- ----------------------------
-INSERT INTO `tbl_position` VALUES ('1', '王大爽', 'a3', '37.9976', '114.5222', '0');
+INSERT INTO `tbl_position` VALUES ('1', '王大爽', 'a3', '38.75', '114.5222', '0');
 INSERT INTO `tbl_position` VALUES ('2', '单小楠', 'a3', '37.99', '114.5228', '0');
-INSERT INTO `tbl_position` VALUES ('3', '金小媛', 'a3', '37.9', '114.523', '1');
+INSERT INTO `tbl_position` VALUES ('3', '金小媛', 'a3', '46.192', '124.141', '1');
 INSERT INTO `tbl_position` VALUES ('4', '杨晓鑫', 'a3', '38.001', '114.5238', '0');
-INSERT INTO `tbl_position` VALUES ('5', '吕小浩', 'a3', '38.103', '114.53', '1');
+INSERT INTO `tbl_position` VALUES ('5', '吕小浩', 'a3', '30.926', '95.883', '1');
 INSERT INTO `tbl_position` VALUES ('6', '郭小伟', 'a3', '39.2', '114.7', '0');
 INSERT INTO `tbl_position` VALUES ('7', '刘小辉', 'a3', '39.56', '114.93', '0');
-INSERT INTO `tbl_position` VALUES ('9', 'www', null, null, null, null);
+INSERT INTO `tbl_position` VALUES ('8', '西瓜', 'a3', '34.533', '94.853', null);
+INSERT INTO `tbl_position` VALUES ('9', '芒果', 'a3', '30.127', '101.107', null);
+INSERT INTO `tbl_position` VALUES ('10', '草莓', 'a3', '26.48', '106.546', null);
+INSERT INTO `tbl_position` VALUES ('11', '西红柿', 'a3', '30.764', '107.436', null);
+INSERT INTO `tbl_position` VALUES ('12', '香蕉', 'a3', '34.01', '117.443', null);
+INSERT INTO `tbl_position` VALUES ('13', '丑橘', 'a3', '37.017', '105.375', null);
+INSERT INTO `tbl_position` VALUES ('14', '山竹', 'a3', '37.84', '115.972', null);
+INSERT INTO `tbl_position` VALUES ('15', '火龙果', 'a3', '26.745', '113.028', null);
+INSERT INTO `tbl_position` VALUES ('16', '猕猴桃', 'a3', '41.257', '107.141', null);
+INSERT INTO `tbl_position` VALUES ('17', '哈密瓜', 'a3', '34.0528', '114.058', null);
+INSERT INTO `tbl_position` VALUES ('18', '荔枝', 'a3', '39.683', '100.223', null);
+INSERT INTO `tbl_position` VALUES ('19', '葡萄', 'a3', '34.985', '106.699', null);
+INSERT INTO `tbl_position` VALUES ('20', '蛋挞', 'a3', '30.382', '107.141', null);
 
 -- ----------------------------
 -- Table structure for `tbl_schools`
@@ -451,26 +459,39 @@ CREATE TABLE `tbl_self_user` (
   `uName` varchar(20) DEFAULT NULL,
   `uPwd` varchar(20) DEFAULT NULL,
   `uMotto` varchar(60) DEFAULT NULL,
-  `uAvatar` varchar(100) DEFAULT NULL,
+  `uAvatar` varchar(255) DEFAULT NULL,
   `uTime` int(11) DEFAULT NULL,
   `uScore` int(11) DEFAULT NULL,
   `uFanscount` int(11) DEFAULT '0',
   `uAttentioncount` int(11) DEFAULT '0',
   `uAchievecount` int(11) DEFAULT '0',
   PRIMARY KEY (`uId`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_self_user
 -- ----------------------------
-INSERT INTO `tbl_self_user` VALUES ('0', '13010001000', '第一个用户', '000000', '这是第一条座右铭', '', '0', '0', '0', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('1', '15227859968', '王大爽', 'wangshuang', '王大爽的', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '0', '0', '6', '4', '0');
-INSERT INTO `tbl_self_user` VALUES ('2', '13000001002', '单小楠', 'shanxinnan', '单鑫楠的座右铭', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '0', '0', '3', '3', '0');
-INSERT INTO `tbl_self_user` VALUES ('3', '13000001003', '金哈哈', 'jinxinyuan', '金哈哈', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '0', '0', '5', '4', '0');
-INSERT INTO `tbl_self_user` VALUES ('4', '13000001004', '杨小鑫', 'yangliuxin', '杨小鑫的座右铭', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '0', '0', '3', '2', '0');
-INSERT INTO `tbl_self_user` VALUES ('5', '13000001005', '吕小浩', 'lvyihao', '吕小浩的座右铭', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '0', '0', '3', '3', '0');
-INSERT INTO `tbl_self_user` VALUES ('6', '13000001006', '郭小伟', 'guowei', '郭小伟的座右铭', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '0', '0', '2', '5', '0');
-INSERT INTO `tbl_self_user` VALUES ('7', '13000001007', '刘小辉', 'liupenghui', '刘小辉的座右铭', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '0', '0', '3', '3', '0');
+INSERT INTO `tbl_self_user` VALUES ('0', '13010001000', '第一个用户', '000000', '用心血铸就辉煌的明天', '', '1682', '65', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('1', '15227859968', '王大爽', 'wangshuang', '自信，我是命运的主宰者', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1586', '36', '6', '4', '0');
+INSERT INTO `tbl_self_user` VALUES ('2', '13000001002', '单小楠', 'shanxinnan', '丰富地过每一天，快乐地看每一天', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1256', '86', '3', '3', '0');
+INSERT INTO `tbl_self_user` VALUES ('3', '13000001003', '金小媛', 'jinxinyuan', '人类因梦想而变的伟大', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1259', '52', '5', '4', '0');
+INSERT INTO `tbl_self_user` VALUES ('4', '13000001004', '杨小鑫', 'yangliuxin', '人生如茶，粗品是苦的，细品是香的', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1842', '86', '3', '2', '0');
+INSERT INTO `tbl_self_user` VALUES ('5', '13000001005', '吕小浩', 'lvyihao', '失败的是事，绝不应是人', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1263', '75', '3', '3', '0');
+INSERT INTO `tbl_self_user` VALUES ('6', '13000001006', '郭小伟', 'guowei', '从来不让认识我的朋友后悔', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1862', '86', '2', '5', '0');
+INSERT INTO `tbl_self_user` VALUES ('7', '13000001007', '刘小辉', 'liupenghui', '努力改变，不为别人，只为脱胎换骨', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1230', '95', '3', '3', '0');
+INSERT INTO `tbl_self_user` VALUES ('8', '13256899853', '西瓜', '111111', '态度决定高度，习惯主宰人生', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '56', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('9', '15987532685', '芒果', '111111', '人生就是距离，距离就是人生', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('10', '12355852626', '草莓', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('11', '13265894258', '西红柿', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('12', '15687953159', '香蕉', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('13', '15631648623', '丑橘', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('14', '15326489532', '山竹', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('15', '19852346286', '火龙果', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('16', '12346286428', '猕猴桃', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('17', '15987531688', '哈密瓜', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('18', '16879425634', '荔枝', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('19', '18531264866', '葡萄', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('20', '15326448952', '蛋挞', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `tbl_share`
@@ -479,20 +500,35 @@ DROP TABLE IF EXISTS `tbl_share`;
 CREATE TABLE `tbl_share` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `sharetitle` varchar(11) CHARACTER SET utf8 NOT NULL,
-  `sharecontent` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `sharetitle` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `sharecontent` varchar(2550) CHARACTER SET utf8 DEFAULT NULL,
   `background` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`,`sharetitle`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_share
 -- ----------------------------
-INSERT INTO `tbl_share` VALUES ('1', '王大爽', '周四开会', '我们要在周四老地方开会，没事的话就都来吧', 'bj1');
-INSERT INTO `tbl_share` VALUES ('2', '单小楠', '我们的小组成立了', '2019年11月我们的小组正式成立。祝我们的工程成功', 'bj1');
-INSERT INTO `tbl_share` VALUES ('3', '金小媛', '开始写代码了', '又报错了，无奈……', 'bj1');
-INSERT INTO `tbl_share` VALUES ('4', '杨小鑫', '今天在写数据库', '代码写不出，先写点假数据吧', 'bj1');
-INSERT INTO `tbl_share` VALUES ('5', '吕小浩', '分享一个高中数学的模块', 'https://wenku.baidu.com/view/4cf90f12591b6bd97f192279168884868762b87e.html', 'bj1');
+INSERT INTO `tbl_share` VALUES ('1', '王大爽', '心流状态', '当你打开游戏界面，你根本不需要调整状态，几乎可以一秒进入心流，很快注意力就高度集中了，甚至在玩的过程中，别人叫你，都听不到，抗干扰能力超强。而且，当你打的正带劲的时候，根本不会想着吃饭时间到啦，要吃饭啦；太累了太耗费脑力啦，要休息啦。要是谁有事叫你，你还特烦。当你在学习或者工作的时候呢？可能要磨蹭半天才开始干活儿，面对复杂的问题，好久都没办法进入状态。稍微有点动静，就受干扰了。有个信息来，你就不自觉玩手机去了...\n\n', 'bj1');
+INSERT INTO `tbl_share` VALUES ('2', '单小楠', '特别注意', '不要妄想能兼顾，在各科之间保持平衡\r\n\r\n保持平衡是很难的，别人能做到你不一定能做到\r\n\r\n很多人会有误区，觉得每一科的时间必须平均分配，不然就难受\r\n\r\n这就没有坚持两点论和重点论的统一\r\n\r\n你各科时间平均分配，搞不好一科都学不好', 'bj1');
+INSERT INTO `tbl_share` VALUES ('3', '金小媛', '敲黑板啦', '少玩手机。\r\n\r\n少刷朋友圈。\r\n\r\n少玩知乎。\r\n\r\n少混圈子。\r\n\r\n不要看小说，玩王者。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('4', '杨小鑫', '敲黑板啦2', '高一开始跟着学高三会轻松一点，也只是一点，但是你的心态会很稳。\r\n\r\n老师好，跟着老师学。\r\n\r\n老师不好，自己搞。\r\n\r\n时间很长，慢慢打基础，学到高三你就懂了。\r\n\r\n不要想着，还有很长，就三天打鱼两天晒网，这样相当于没学。\r\n\r\n抱着考985的心，考成什么样与你无关，你只要坚持就完事了。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('5', '吕小浩', '敲黑板啦3', '人脑并不发达，记忆和理解力都具有滞后性。同样是两小时学习两小时游戏，如果每五分钟转换一次，最终很可能没有任何成果；如果连续两小时学习然后再两小时游戏，效果就会好很多。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('6', '郭小伟', '敲黑板啦4', '高中，可能是人生中最后的连续专心学习的机会。努力抓住这个机会，培养自己深度学习的能力，就会受益一生。否则到了我这个岁数突然发现手机打乱了我一切学习机会，哭都找不到调门。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('7', '刘小辉', '敲黑板啦5', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('8', '西瓜', '心灵鸡汤', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('9', '芒果', '心灵鸡汤1', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('10', '草莓', '心灵鸡汤2', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('11', '西红柿', '心灵鸡汤3', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('12', '香蕉', '心灵鸡汤4', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('13', '丑橘', '心灵鸡汤5', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('14', '山竹', '心灵鸡汤6', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('15', '火龙果', '心灵鸡汤7', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('16', '猕猴桃', '心灵鸡汤8', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('17', '哈密瓜', '心灵鸡汤9', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('18', '荔枝', '心灵鸡汤10', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('19', '葡萄', '心灵鸡汤11', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('20', '蛋挞', '心灵鸡汤12', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
 
 -- ----------------------------
 -- Table structure for `tbl_story`
