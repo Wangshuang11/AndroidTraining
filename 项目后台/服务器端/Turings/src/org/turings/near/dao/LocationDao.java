@@ -1,0 +1,192 @@
+package org.turings.near.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.turings.DbUtil;
+import org.turings.near.entity.Information;
+import org.turings.near.entity.Position;
+import org.turings.near.entity.Share;
+
+public class LocationDao {
+	public List browseLoc(String userName) {
+		List<Position> posList = new ArrayList<>();
+		DbUtil dbUtil = DbUtil.getInstance();
+		Connection con=null;
+		try {
+			con=dbUtil.getConnection();
+			PreparedStatement pstm = con.prepareStatement("select * from tbl_position ");
+			ResultSet rs = pstm.executeQuery();
+			while(rs.next()) {
+				if (rs.getString(2)!=userName) {
+					Position pos = new Position();
+					pos.setId(rs.getInt(1));
+					pos.setUserName(rs.getString(2));
+					pos.setPortrait(rs.getString(3));
+					pos.setLat(rs.getDouble(4));
+					pos.setLng(rs.getDouble(5));
+					pos.setType(rs.getInt(6));
+					posList.add(pos);
+				}
+			}
+			return posList;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				dbUtil.closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public Information browseInfo(double lat,double lng) {
+		DbUtil dbUtil = DbUtil.getInstance();
+		Connection con=null;
+		Information info = null;
+		PreparedStatement pstm = null;
+		try {
+			con=dbUtil.getConnection();
+			String sql1="";
+			sql1 = "select * from tbl_position where lat=? and lng=? ";
+			pstm = con.prepareStatement(sql1);
+			pstm.setDouble(1, lat);
+			pstm.setDouble(2, lng);
+			ResultSet rs = pstm.executeQuery();
+			while(rs.next()) {
+				String sql2="";
+				sql2 = "select * from tbl_information where username=? ";
+				pstm = con.prepareStatement(sql2);
+				pstm.setString(1, rs.getString(2));
+				ResultSet rs1 = pstm.executeQuery();
+				while(rs1.next()) {
+					info = new Information();
+					info.setId(rs1.getInt(1));
+					info.setUserName(rs1.getString(2));
+					info.setPortrait(rs1.getString(3));
+					info.setTotalTime(rs1.getDouble(4));
+					info.setCurrentTime(rs1.getDouble(5));
+					info.setUniversity(rs1.getString(6));
+					info.setMotto(rs1.getString(7));
+				}
+			}
+			return info;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				dbUtil.closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public List browseShareTitle(String userName) {
+		System.out.println("browseShareTitle()" + userName);
+		DbUtil dbUtil = DbUtil.getInstance();
+		Connection con=null;
+		List<Share> shareList = new ArrayList<>();
+		try {
+			con=dbUtil.getConnection();
+			String sql = "select * from tbl_share where username=? ";
+			PreparedStatement pstm = con.prepareStatement(sql);
+			pstm.setString(1, userName);
+			ResultSet rs = pstm.executeQuery();
+			while(rs.next()) {
+				Share share = new Share();
+				share.setUserName(userName);
+				share.setShareTitle(rs.getString(3));
+				share.setShareContent(rs.getString(4));
+				share.setBackground(rs.getString(5));
+				System.out.println(userName+rs.getString(3)+rs.getString(4)+rs.getString(5));
+				shareList.add(share);
+			}
+			return shareList;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return shareList;
+		}finally {
+			try {
+				dbUtil.closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private char[] getString(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Share browseShareContext(String title) {
+		DbUtil dbUtil = DbUtil.getInstance();
+		Connection con=null;
+		Share share = new Share();
+		try {
+			con=dbUtil.getConnection();
+			PreparedStatement pstm = con.prepareStatement("select * from tbl_share where sharetitle=? ");
+			pstm.setString(1, title);
+			ResultSet rs = pstm.executeQuery();
+			while(rs.next()) {
+				share.setId(rs.getInt(1));
+				share.setUserName(rs.getString(2));
+				share.setShareTitle(rs.getString(3));
+				share.setShareContent(rs.getString(4));
+				share.setBackground(rs.getString(5));
+			}
+			return share;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				dbUtil.closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public int insertShare(String userName,String title,String content,String background) {
+		DbUtil dbUtil = DbUtil.getInstance();
+		Connection con=null;
+		Share share = new Share();
+		try {
+			con=dbUtil.getConnection();
+			PreparedStatement pstm = con.prepareStatement("insert into tbl_share (username,sharetitle,sharecontent,background) values (?,?,?,?) ");
+			pstm.setString(1, userName);
+			pstm.setString(2, title);
+			pstm.setString(3, content);
+			pstm.setString(4, background);
+			int rs = pstm.executeUpdate();
+			if (rs>0) {
+				return 1;
+			}else {
+				return 0;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+//			try {
+////				dbUtil.closeConnection();
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+		}
+		return 0;
+	}
+}

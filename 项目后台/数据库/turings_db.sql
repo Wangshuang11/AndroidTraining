@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50506
 File Encoding         : 65001
 
-Date: 2019-12-07 16:51:59
+Date: 2019-12-10 16:59:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -183,6 +183,7 @@ DROP TABLE IF EXISTS `tbl_information`;
 CREATE TABLE `tbl_information` (
   `id` int(11) NOT NULL,
   `username` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `portrait` varchar(255) DEFAULT NULL,
   `totaltime` double DEFAULT NULL,
   `currenttime` double DEFAULT NULL,
   `university` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
@@ -193,10 +194,10 @@ CREATE TABLE `tbl_information` (
 -- ----------------------------
 -- Records of tbl_information
 -- ----------------------------
-INSERT INTO `tbl_information` VALUES ('1', '王小爽', '2056', '125', '清华大学', '韦编屡绝铁砚穿，口诵手钞那计年');
-INSERT INTO `tbl_information` VALUES ('2', '单小楠', '1893', '150', '天津工业大学', '啦啦啦啦');
-INSERT INTO `tbl_information` VALUES ('3', '金小媛', '1775', '58', '燕山大学', '哈哈哈哈哈');
-INSERT INTO `tbl_information` VALUES ('5', '吕小浩', '1682', '68', '河北师范大学', '嘿嘿嘿嘿嘿');
+INSERT INTO `tbl_information` VALUES ('1', '王小爽', 'a3', '2056', '125', '清华大学', '韦编屡绝铁砚穿，口诵手钞那计年');
+INSERT INTO `tbl_information` VALUES ('2', '单小楠', 'a3', '1893', '150', '天津工业大学', '啦啦啦啦');
+INSERT INTO `tbl_information` VALUES ('3', '金小媛', 'a3', '1775', '58', '燕山大学', '哈哈哈哈哈');
+INSERT INTO `tbl_information` VALUES ('5', '吕小浩', 'a3', '1682', '68', '河北师范大学', '嘿嘿嘿嘿嘿');
 
 -- ----------------------------
 -- Table structure for `tbl_mistaken`
@@ -216,14 +217,18 @@ CREATE TABLE `tbl_mistaken` (
   `answer` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_mistaken
 -- ----------------------------
 INSERT INTO `tbl_mistaken` VALUES ('1', '已知向量a，b满足|a|=1，a·b=-1，则a·（2a-b）=？', '数学', '选择', '20191126', 'img', '4', '3', '2', '0', 'D', '1');
 INSERT INTO `tbl_mistaken` VALUES ('2', '曲线y=2ln(x+1)在点（0,0）处的切线方程为', '数学', '填空', '20191126', 'img', null, null, null, null, 'y=2x', null);
-INSERT INTO `tbl_mistaken` VALUES ('4', '数学', '映射', '选择题', '2019-12-04', '1575420821774.jpg', '1', '2', '3', '4', '', '1');
+INSERT INTO `tbl_mistaken` VALUES ('3', '数学', '集合', '填空题', '2019-12-09', '1575893457455.jpg', '', '', '', '', '', '1');
+INSERT INTO `tbl_mistaken` VALUES ('4', '数学', '集合', '填空题', '2019-12-10', '1575936251811.jpg', '', '', '', '', '哈哈哈', '4');
+INSERT INTO `tbl_mistaken` VALUES ('5', '数学', '集合', '填空题', '2019-12-10', '1575937052405.jpg', '', '', '', '', '斤斤计较', '4');
+INSERT INTO `tbl_mistaken` VALUES ('6', '数学', '集合', '填空题', '2019-12-10', '1575937471020.jpg', '', '', '', '', '', '4');
+INSERT INTO `tbl_mistaken` VALUES ('7', '数学', '集合', '填空题', '2019-12-10', '1575960060606.jpg', '', '', '', '', '', '4');
 
 -- ----------------------------
 -- Table structure for `tbl_position`
@@ -242,13 +247,13 @@ CREATE TABLE `tbl_position` (
 -- ----------------------------
 -- Records of tbl_position
 -- ----------------------------
-INSERT INTO `tbl_position` VALUES ('1', '王大爽', 'tx1.png', '37.9976', '114.5222', '0');
-INSERT INTO `tbl_position` VALUES ('2', '单小楠', 'tx2.png', '37.99', '114.5228', '0');
-INSERT INTO `tbl_position` VALUES ('3', '金小媛', 'tx3.png', '37.9', '114.523', '1');
-INSERT INTO `tbl_position` VALUES ('4', '杨晓鑫', 'tx4.png', '38.001', '114.5238', '0');
-INSERT INTO `tbl_position` VALUES ('5', '吕小浩', 'tx5.png', '38.103', '114.53', '1');
-INSERT INTO `tbl_position` VALUES ('6', '郭小伟', 'tx6.png', '39.2', '114.7', '0');
-INSERT INTO `tbl_position` VALUES ('7', '刘小辉', 'tx7.png', '39.56', '114.93', '0');
+INSERT INTO `tbl_position` VALUES ('1', '王大爽', 'a3', '37.9976', '114.5222', '0');
+INSERT INTO `tbl_position` VALUES ('2', '单小楠', 'a3', '37.99', '114.5228', '0');
+INSERT INTO `tbl_position` VALUES ('3', '金小媛', 'a3', '37.9', '114.523', '1');
+INSERT INTO `tbl_position` VALUES ('4', '杨晓鑫', 'a3', '38.001', '114.5238', '0');
+INSERT INTO `tbl_position` VALUES ('5', '吕小浩', 'a3', '38.103', '114.53', '1');
+INSERT INTO `tbl_position` VALUES ('6', '郭小伟', 'a3', '39.2', '114.7', '0');
+INSERT INTO `tbl_position` VALUES ('7', '刘小辉', 'a3', '39.56', '114.93', '0');
 
 -- ----------------------------
 -- Table structure for `tbl_self_courses`
@@ -361,7 +366,7 @@ CREATE TABLE `tbl_self_user` (
 -- Records of tbl_self_user
 -- ----------------------------
 INSERT INTO `tbl_self_user` VALUES ('0', '13010001000', '第一个用户', '000000', '这是第一条座右铭', 'img', '0', '0', '0', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('1', '13010001001', '王大爽', 'wangshuang', '王大爽的座右铭', 'img', '0', '0', '6', '5', '0');
+INSERT INTO `tbl_self_user` VALUES ('1', '15227859968', '王大爽', 'wangshuang', '王大爽的座右铭', 'img', '0', '0', '6', '5', '0');
 INSERT INTO `tbl_self_user` VALUES ('2', '13000001002', '单小楠', 'shanxinnan', '单鑫楠的座右铭', 'img', '0', '0', '3', '3', '0');
 INSERT INTO `tbl_self_user` VALUES ('3', '13000001003', '金哈哈', 'jinxinyuan', '金哈哈', 'img', '0', '0', '5', '4', '0');
 INSERT INTO `tbl_self_user` VALUES ('4', '13000001004', '杨小鑫', 'yangliuxin', '杨小鑫的座右铭', 'img', '0', '0', '3', '2', '0');
@@ -374,21 +379,22 @@ INSERT INTO `tbl_self_user` VALUES ('7', '13000001007', '刘小辉', 'liupenghui
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_share`;
 CREATE TABLE `tbl_share` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `sharetitle` varchar(11) CHARACTER SET utf8 NOT NULL,
   `sharecontent` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `background` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`,`sharetitle`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_share
 -- ----------------------------
-INSERT INTO `tbl_share` VALUES ('1', '周四开会', '我们要在周四老地方开会，没事的话就都来吧', 'img');
-INSERT INTO `tbl_share` VALUES ('1', '我们的小组成立了', '2019年11月我们的小组正式成立。祝我们的工程成功', 'img');
-INSERT INTO `tbl_share` VALUES ('2', '开始写代码了', '又报错了，无奈……', 'img');
-INSERT INTO `tbl_share` VALUES ('3', '今天在写数据库', '代码写不出，先写点假数据吧', 'img');
-INSERT INTO `tbl_share` VALUES ('3', '分享一个高中数学的模块', 'https://wenku.baidu.com/view/4cf90f12591b6bd97f192279168884868762b87e.html', 'img');
+INSERT INTO `tbl_share` VALUES ('1', '王大爽', '周四开会', '我们要在周四老地方开会，没事的话就都来吧', 'bj1');
+INSERT INTO `tbl_share` VALUES ('2', '单小楠', '我们的小组成立了', '2019年11月我们的小组正式成立。祝我们的工程成功', 'bj1');
+INSERT INTO `tbl_share` VALUES ('3', '金小媛', '开始写代码了', '又报错了，无奈……', 'bj1');
+INSERT INTO `tbl_share` VALUES ('4', '杨小鑫', '今天在写数据库', '代码写不出，先写点假数据吧', 'bj1');
+INSERT INTO `tbl_share` VALUES ('5', '吕小浩', '分享一个高中数学的模块', 'https://wenku.baidu.com/view/4cf90f12591b6bd97f192279168884868762b87e.html', 'bj1');
 
 -- ----------------------------
 -- Table structure for `tbl_story`
@@ -409,6 +415,6 @@ CREATE TABLE `tbl_story` (
 -- Records of tbl_story
 -- ----------------------------
 INSERT INTO `tbl_story` VALUES ('1', '后进生的奋斗史', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01fe4ce2f51047f96c.jpg', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01588c850cf16d3c9c.jpg', 'http://i-1.binzz.com/2018/10/27/W3dtOjEucG5nLHI6MTMsYjoxM10oNjAweCk=/6f307a6a-1c72-47a0-a04c-0dc2120e51a4.png', '88', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才， 没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
-INSERT INTO `tbl_story` VALUES ('2', '从现在开始努力', 'https://p0.ssl.qhimgs1.com/sdr/400__/t0168f2443cee7a5bbe.jpg', 'http://uploads.5068.com/allimg/1805/147-1P51Q03208.png', 'http://uzzf.com/up/2016-6/14652010952310087.png', '156', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着， 一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
+INSERT INTO `tbl_story` VALUES ('2', '从现在开始努力', 'https://p0.ssl.qhimgs1.com/sdr/400__/t0168f2443cee7a5bbe.jpg', 'http://uploads.5068.com/allimg/1805/147-1P51Q03208.png', 'http://uzzf.com/up/2016-6/14652010952310087.png', '157', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着， 一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
 INSERT INTO `tbl_story` VALUES ('3', '做一个崭新的自己', 'https://p0.ssl.qhimgs1.com/sdr/400__/t019fc63acd104c5490.jpg', 'http://upload.mnw.cn/2017/0606/1496708899187.jpg', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01bf7eeaf33fce2032.jpg', '224', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
 INSERT INTO `tbl_story` VALUES ('4', '过去的都是浮云', 'https://p1.ssl.qhimgs1.com/sdr/400__/t01989576057c377587.jpg', 'http://img.smzy.com/Soft/UploadPic/2016-3/201631214351846179.jpg', 'https://p0.ssl.qhimgs1.com/sdr/400__/t01221d3ed68502af20.jpg', '61', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着， 一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
