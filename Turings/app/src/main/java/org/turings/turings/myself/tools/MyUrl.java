@@ -1,4 +1,4 @@
-package org.turings.turings.myself.tools;
+package org.turings.myself.tools;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,18 +13,18 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-
-import org.turings.turings.R;
-import org.turings.turings.myself.entity.Course;
-import org.turings.turings.myself.entity.Fan;
-import org.turings.turings.myself.entity.School;
-import org.turings.turings.myself.entity.User;
+import org.turings.myself.R;
+import org.turings.myself.entity.Course;
+import org.turings.myself.entity.Fan;
+import org.turings.myself.entity.School;
+import org.turings.myself.entity.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,7 +39,7 @@ import java.util.List;
 public class MyUrl {
     private List<Fan> fans;
     private List<School> schools;
-    private List<User> users;
+    private User user;
     private List<Course> courses;
     private Gson gson;
     private Context mc;
@@ -56,7 +56,7 @@ public class MyUrl {
     private CourseAdapter courseAdapter;
     private Handler handler = new Handler(){
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NonNull Message msg) {
             switch (msg.what){
                 case R.layout.sxn_item_course:
                     //获取我的课程的数据
@@ -119,16 +119,16 @@ public class MyUrl {
                 case R.layout.sxn_activity_logged:
                     info= (String) msg.obj;
                     Log.e("数量", info);
-                    users=gson.fromJson(info, new TypeToken<List<User>>(){}.getType());
-                    Log.e("nnn",users.get(0).getName());
-                    name.setText(users.get(0).getName());
+                    user=gson.fromJson(info, new TypeToken<User>(){}.getType());
+                    Log.e("nnn",user.getName());
+                    name.setText(user.getName());
                     RequestOptions requestOptions=new RequestOptions().circleCrop();
-                    Log.e(users.get(0).getName(),users.get(0).getMotto()+"ggggggggggggggggggg");
-                    motto.setText(users.get(0).getMotto());
-                    Glide.with(mc).load(users.get(0).getAvatar()).apply(requestOptions).into(avatar);
-                    fanC.setText(String.valueOf(users.get(0).getFancount()));
-                    concernC.setText(String.valueOf(users.get(0).getConcount()));
-                    achieveC.setText(String.valueOf(users.get(0).getAchcount()));
+                    Log.e(user.getName(),user.getMotto()+"ggggggggggggggggggg");
+                    motto.setText(user.getMotto());
+                    Glide.with(mc).load(user.getAvatar()).centerCrop().circleCrop().into(avatar);
+                    fanC.setText(String.valueOf(user.getFancount()));
+                    concernC.setText(String.valueOf(user.getConcount()));
+                    achieveC.setText(String.valueOf(user.getAchcount()));
                     break;
             }
         }
