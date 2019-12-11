@@ -44,6 +44,7 @@ import org.turings.turings.myself.sxn.MySchoolActivity;
 import org.turings.turings.myself.tools.MyUrl;
 import org.turings.turings.myself.tools.PhotoPopupWindow;
 import org.turings.turings.near.Location.ShareTitleActivity;
+import org.turings.turings.near.Location.WriteActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -58,6 +59,7 @@ public class MyselfFragment extends Fragment {
     private LinearLayout myfans;
     private LinearLayout myattention;
     private LinearLayout myachieve;
+    private RelativeLayout myshare;
     private LinearLayout nameL;
     private LinearLayout mottoL;
     private RelativeLayout mycourse;
@@ -220,6 +222,7 @@ public class MyselfFragment extends Fragment {
         myachieve.setOnClickListener(myListener);
         myattention.setOnClickListener(myListener);
         myfans.setOnClickListener(myListener);
+        myshare.setOnClickListener(myListener);
         school.setOnClickListener(myListener);
         mycourse.setOnClickListener(myListener);
         track.setOnClickListener(myListener);
@@ -244,6 +247,8 @@ public class MyselfFragment extends Fragment {
         myattention=view.findViewById(R.id.sxn_myattention_linear);
         myfans=view.findViewById(R.id.sxn_myfans_linear);
         mycourse=view.findViewById(R.id.sxn_course_linear);
+        myshare=view.findViewById(R.id.sxn_share_linear);
+
         school=view.findViewById(R.id.sxn_school_linear);
         ivUnLogOfMyself_ws=view.findViewById(R.id.ivUnLogOfMyself_ws);
         parent_ws=view.findViewById(R.id.parent_ws);
@@ -327,7 +332,7 @@ public class MyselfFragment extends Fragment {
 
                     break;
                 case R.id.sxn_share_linear:
-                    intent.setClass(getContext(), ShareTitleActivity.class);
+                    intent.setClass(getContext(), WriteActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.sxn_nickname_linear:

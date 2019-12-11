@@ -244,36 +244,40 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/sxn_share_linear"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp">
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
             <ImageView
                 android:id="@+id/ivShareLeft_ws"
-                android:src="@mipmap/myselfshare"
-                android:layout_margin="10dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"></ImageView>
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:src="@mipmap/myselfshare"></ImageView>
+
             <TextView
-                android:layout_toRightOf="@id/ivShareLeft_ws"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/sxn_normal"
-                android:text="我的分享"
-                android:textSize="20dp"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:layout_centerVertical="true"/>
+                android:layout_toRightOf="@id/ivShareLeft_ws"
+                android:text="我的分享"
+                android:textColor="@color/sxn_normal"
+                android:textSize="20dp" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/myselfright"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:src="@mipmap/myselfright" />
         </RelativeLayout>
 
         <RelativeLayout

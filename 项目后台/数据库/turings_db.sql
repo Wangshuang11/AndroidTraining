@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50506
 File Encoding         : 65001
 
-Date: 2019-12-10 16:59:55
+Date: 2019-12-11 09:02:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -235,14 +235,14 @@ INSERT INTO `tbl_mistaken` VALUES ('7', '数学', '集合', '填空题', '2019-1
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_position`;
 CREATE TABLE `tbl_position` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) CHARACTER SET utf8 NOT NULL,
-  `portrait` varchar(20) NOT NULL,
-  `lat` double NOT NULL,
-  `lng` double NOT NULL,
-  `type` int(11) NOT NULL,
+  `portrait` varchar(20) DEFAULT NULL,
+  `lat` double DEFAULT NULL,
+  `lng` double DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_position
@@ -254,6 +254,7 @@ INSERT INTO `tbl_position` VALUES ('4', '杨晓鑫', 'a3', '38.001', '114.5238',
 INSERT INTO `tbl_position` VALUES ('5', '吕小浩', 'a3', '38.103', '114.53', '1');
 INSERT INTO `tbl_position` VALUES ('6', '郭小伟', 'a3', '39.2', '114.7', '0');
 INSERT INTO `tbl_position` VALUES ('7', '刘小辉', 'a3', '39.56', '114.93', '0');
+INSERT INTO `tbl_position` VALUES ('9', 'www', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `tbl_self_courses`
@@ -348,7 +349,7 @@ INSERT INTO `tbl_self_schools_favorite` VALUES ('7', '3');
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_self_user`;
 CREATE TABLE `tbl_self_user` (
-  `uId` int(11) NOT NULL DEFAULT '0',
+  `uId` int(11) NOT NULL AUTO_INCREMENT,
   `uTel` char(11) DEFAULT NULL,
   `uName` varchar(20) DEFAULT NULL,
   `uPwd` varchar(20) DEFAULT NULL,
@@ -360,19 +361,19 @@ CREATE TABLE `tbl_self_user` (
   `uAttentioncount` int(11) DEFAULT '0',
   `uAchievecount` int(11) DEFAULT '0',
   PRIMARY KEY (`uId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_self_user
 -- ----------------------------
-INSERT INTO `tbl_self_user` VALUES ('0', '13010001000', '第一个用户', '000000', '这是第一条座右铭', 'img', '0', '0', '0', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('1', '15227859968', '王大爽', 'wangshuang', '王大爽的座右铭', 'img', '0', '0', '6', '5', '0');
-INSERT INTO `tbl_self_user` VALUES ('2', '13000001002', '单小楠', 'shanxinnan', '单鑫楠的座右铭', 'img', '0', '0', '3', '3', '0');
-INSERT INTO `tbl_self_user` VALUES ('3', '13000001003', '金哈哈', 'jinxinyuan', '金哈哈', 'img', '0', '0', '5', '4', '0');
-INSERT INTO `tbl_self_user` VALUES ('4', '13000001004', '杨小鑫', 'yangliuxin', '杨小鑫的座右铭', 'img', '0', '0', '3', '2', '0');
-INSERT INTO `tbl_self_user` VALUES ('5', '13000001005', '吕小浩', 'lvyihao', '吕小浩的座右铭', 'img', '0', '0', '3', '3', '0');
-INSERT INTO `tbl_self_user` VALUES ('6', '13000001006', '郭小伟', 'guowei', '郭小伟的座右铭', 'img', '0', '0', '2', '5', '0');
-INSERT INTO `tbl_self_user` VALUES ('7', '13000001007', '刘小辉', 'liupenghui', '刘小辉的座右铭', 'img', '0', '0', '3', '3', '0');
+INSERT INTO `tbl_self_user` VALUES ('0', '13010001000', '第一个用户', '000000', '这是第一条座右铭', '', '0', '0', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('1', '15227859968', '王大爽', 'wangshuang', '王大爽的', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '0', '0', '6', '4', '0');
+INSERT INTO `tbl_self_user` VALUES ('2', '13000001002', '单小楠', 'shanxinnan', '单鑫楠的座右铭', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '0', '0', '3', '3', '0');
+INSERT INTO `tbl_self_user` VALUES ('3', '13000001003', '金哈哈', 'jinxinyuan', '金哈哈', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '0', '0', '5', '4', '0');
+INSERT INTO `tbl_self_user` VALUES ('4', '13000001004', '杨小鑫', 'yangliuxin', '杨小鑫的座右铭', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '0', '0', '3', '2', '0');
+INSERT INTO `tbl_self_user` VALUES ('5', '13000001005', '吕小浩', 'lvyihao', '吕小浩的座右铭', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '0', '0', '3', '3', '0');
+INSERT INTO `tbl_self_user` VALUES ('6', '13000001006', '郭小伟', 'guowei', '郭小伟的座右铭', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '0', '0', '2', '5', '0');
+INSERT INTO `tbl_self_user` VALUES ('7', '13000001007', '刘小辉', 'liupenghui', '刘小辉的座右铭', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '0', '0', '3', '3', '0');
 
 -- ----------------------------
 -- Table structure for `tbl_share`
@@ -385,7 +386,7 @@ CREATE TABLE `tbl_share` (
   `sharecontent` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `background` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`,`sharetitle`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_share

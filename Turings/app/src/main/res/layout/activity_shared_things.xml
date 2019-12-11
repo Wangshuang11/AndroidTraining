@@ -35,14 +35,16 @@
         android:id="@+id/rlContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bj4"
+        android:background="@drawable/bj1"
         android:padding="20dp"
         android:alpha="0.6">
+
         <com.rance.lvlibrary.SectorMenuButton
             android:id="@+id/top_sector_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="17dp"
             app:aebAnimDurationMillis="175"
             app:aebBlurBackground="true"
             app:aebBlurRadius="10"
@@ -63,16 +65,18 @@
             android:textSize="30sp"
             android:layout_marginTop="40dp"
             android:layout_centerHorizontal="true"
-            android:text="lalalalalalala"/>
+            android:textColor="@android:color/black"
+            android:text=""/>
         <TextView
             android:id="@+id/tvShareContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
+            android:layout_marginLeft="55dp"
             android:textSize="25sp"
             android:textColor="@android:color/black"
             android:layout_below="@id/tvShareTitle"
-            android:text="啦啦啦啦"/>
+            android:text=""/>
     </RelativeLayout>
 
 </LinearLayout>

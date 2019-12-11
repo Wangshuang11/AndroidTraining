@@ -4,8 +4,8 @@ public class Information {
     private int id;
     private String userName;
     private String portrait;
-    private double totalTime;
-    private double currentTime;
+    private int totalTime;
+    private int currentTime;
     private String university;
     private String motto;
 
@@ -13,7 +13,7 @@ public class Information {
 
     }
 
-    public Information(int id, String userName,String portrait, double totalTime, double currentTime, String university, String motto) {
+    public Information(int id, String userName,String portrait, int totalTime, int currentTime, String university, String motto) {
         super();
         this.id = id;
         this.userName = userName;
@@ -36,16 +36,16 @@ public class Information {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    public double getTotalTime() {
+    public int getTotalTime() {
         return totalTime;
     }
-    public void setTotalTime(double totalTime) {
+    public void setTotalTime(int totalTime) {
         this.totalTime = totalTime;
     }
-    public double getCurrentTime() {
+    public int getCurrentTime() {
         return currentTime;
     }
-    public void setCurrentTime(double currentTime) {
+    public void setCurrentTime(int currentTime) {
         this.currentTime = currentTime;
     }
     public String getUniversity() {

@@ -19,12 +19,23 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.bumptech.glide.Glide;
 
 
 import org.turings.turings.R;
 import org.turings.turings.near.entity.Position;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class ShowPortrait {
     private List<Position> list;
@@ -48,9 +59,8 @@ public class ShowPortrait {
             //1.创建标注覆盖物显示位置的latlng对象
             latLng = new LatLng(list.get(i).getLat(),list.get(i).getLng());
             //2.创建标注覆盖物对象
-//            int id = resources.getIdentifier(list.get(i).getPortrait(),"mipmap", context.getPackageName());
-//            Bitmap icon = BitmapFactory.decodeResource(resources,id);
-            Bitmap icon =BitmapFactory.decodeResource(resources, R.mipmap.a3);
+            int id = resources.getIdentifier(list.get(i).getPortrait(),"mipmap", context.getPackageName());
+            Bitmap icon = BitmapFactory.decodeResource(resources,id);
             Bitmap bitmap = Bitmap.createBitmap(100,100,Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bitmap);
             Matrix matrix = new Matrix();
