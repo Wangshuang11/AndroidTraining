@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import org.turings.turings.MainActivity;
@@ -90,8 +91,9 @@ public class InformationActivity extends AppCompatActivity {
                 information = gson.fromJson(json, Information.class);
                 otherName = information.getUserName();
                 tvFollowName_lyh.setText(information.getUserName());
-                int id = resources.getIdentifier(information.getPortrait(),"mipmap", InformationActivity.this.getPackageName());
-                ivPortrait_lyh.setImageResource(id);
+                /*int id = resources.getIdentifier(information.getPortrait(),"mipmap", InformationActivity.this.getPackageName());
+                ivPortrait_lyh.setImageResource(id);*/
+                Glide.with(getApplicationContext()).load(information.getPortrait()).into(ivPortrait_lyh);
                 tvTime_lyh.setText(String.valueOf(information.getTotalTime()));
                 tvCurrentTime_lyh.setText(String.valueOf(information.getCurrentTime()));
                 tvUniversity_lyh.setText(information.getUniversity());

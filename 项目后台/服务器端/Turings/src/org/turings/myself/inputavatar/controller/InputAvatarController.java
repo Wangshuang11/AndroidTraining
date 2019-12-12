@@ -53,35 +53,35 @@ public class InputAvatarController extends HttpServlet {
 //################################################################################################
 		InputStream in = request.getInputStream();
 		
-		// Endpoint以杭州为例，其它Region请按实际情况填写。
+		// Endpoint浠ユ澀宸炰负渚嬶紝鍏跺畠Region璇锋寜瀹為檯鎯呭喌濉啓銆�
 		String endpoint = "http://oss-cn-beijing.aliyuncs.com";
 		
-		// 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。
+		// 闃块噷浜戜富璐﹀彿AccessKey鎷ユ湁鎵�鏈堿PI鐨勮闂潈闄愶紝椋庨櫓寰堥珮銆傚己鐑堝缓璁偍鍒涘缓骞朵娇鐢≧AM璐﹀彿杩涜API璁块棶鎴栨棩甯歌繍缁达紝璇风櫥褰� https://ram.console.aliyun.com 鍒涘缓RAM璐﹀彿銆�
 		String accessKeyId = "LTAI4FoQ82rmSV5EzaE1KtPU";
 		String accessKeySecret = "W8bsEiECRQfgYJJbD4rbPIdSWPaqTH";
 		String bucketName = "jxy2019";
-		String objectName = "avatars/"+System.currentTimeMillis()+".png";
+		String objectName = "avatars/i"+id+"t"+System.currentTimeMillis()+".png";
 		
-		// 创建OSSClient实例。
+		// 鍒涘缓OSSClient瀹炰緥銆�
 		OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
 
-		// 创建PutObjectRequest对象。
+		// 鍒涘缓PutObjectRequest瀵硅薄銆�
 		PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, objectName, in);
 
-		// 如果需要上传时设置存储类型与访问权限，请参考以下示例代码。
+		// 濡傛灉闇�瑕佷笂浼犳椂璁剧疆瀛樺偍绫诲瀷涓庤闂潈闄愶紝璇峰弬鑰冧互涓嬬ず渚嬩唬鐮併��
 //		 ObjectMetadata metadata = new ObjectMetadata();
 //		 metadata.setHeader(OSSHeaders.OSS_STORAGE_CLASS, StorageClass.Standard.toString());
 //		 metadata.setObjectAcl(CannedAccessControlList.Private);
 //		 putObjectRequest.setMetadata(metadata);
 
-		// 上传文件。
+		// 涓婁紶鏂囦欢銆�
 		ossClient.putObject(putObjectRequest);
 
-		// 关闭OSSClient。
+		// 鍏抽棴OSSClient銆�
 		ossClient.shutdown();           
 		in.close();
 		
-		//读取文件url
+		//璇诲彇鏂囦欢url
 		Date expiration = new Date(new Date().getTime() + 3600l * 1000 * 24 * 365 * 10);
 		String url = ossClient.generatePresignedUrl(bucketName, objectName, expiration).toString();
 		System.out.println(url);		

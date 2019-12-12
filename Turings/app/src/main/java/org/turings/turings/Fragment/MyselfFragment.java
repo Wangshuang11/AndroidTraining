@@ -43,6 +43,7 @@ import org.turings.turings.myself.sxn.MyNicknameActivity;
 import org.turings.turings.myself.sxn.MySchoolActivity;
 import org.turings.turings.myself.tools.MyUrl;
 import org.turings.turings.myself.tools.PhotoPopupWindow;
+import org.turings.turings.myself.tools.UpLoadFileTask;
 import org.turings.turings.near.Location.ShareTitleActivity;
 import org.turings.turings.near.Location.WriteActivity;
 
@@ -76,6 +77,7 @@ public class MyselfFragment extends Fragment {
     private PopupWindow popWindow;
     private MyUrl myUrl;
     private Bitmap photo;
+    private RequestOptions requestOptions;
     private PhotoPopupWindow mPhotoPopupWindow;
 
     private static final int REQUEST_IMAGE_GET = 0;
@@ -127,6 +129,7 @@ public class MyselfFragment extends Fragment {
         myUrl.sendToServerMyMessage(getResources().getString(R.string.connUrl)+"/ReFreshMyInfomation?uid="+id+"",
                 R.layout.sxn_activity_logged,
                 fanCount, conCount, achCount, nameT, mottoT, avatarI);
+        Log.e("myurl",getResources().getString(R.string.connUrl)+"/ReFreshMyInfomation?uid="+id+"");
         if (photo!=null){
             circleCropCoverPhoto();
         }
@@ -180,7 +183,7 @@ public class MyselfFragment extends Fragment {
     //加载上方图片
     private void loadTopImg() {
         ivUnLogin_ws=view.findViewById(R.id.ivUnLogin_ws);
-        RequestOptions requestOptions=new RequestOptions().circleCrop();
+        requestOptions=new RequestOptions().circleCrop();
         Glide.with(getContext()).asGif().load(R.mipmap.myselfthinkingtwo).apply(requestOptions).into(ivUnLogin_ws);
     }
 
@@ -236,12 +239,13 @@ public class MyselfFragment extends Fragment {
 
     //无缝填充头像上方的封面
     private void centerCropCoverPhoto() {
-        RequestOptions requestOptions=new RequestOptions().centerCrop();
+        requestOptions=new RequestOptions().centerCrop();
         Glide.with(view).load(R.mipmap.myselfbackground).apply(requestOptions).into(ivBackground_ws);
     }
 
     //初始化控件
     private void initController() {
+        ivUnLogOfMyself_ws=view.findViewById(R.id.ivUnLogOfMyself_ws);
         ivBackground_ws=view.findViewById(R.id.ivBackground_ws);
         logged=view.findViewById(R.id.sxn_log_linear);
         myachieve=view.findViewById(R.id.sxn_myachieve_linear);
@@ -251,8 +255,6 @@ public class MyselfFragment extends Fragment {
         myshare=view.findViewById(R.id.sxn_share_linear);
 
         school=view.findViewById(R.id.sxn_school_linear);
-        ivUnLogOfMyself_ws=view.findViewById(R.id.ivUnLogOfMyself_ws);
-        parent_ws=view.findViewById(R.id.parent_ws);
         track=view.findViewById(R.id.sxn_track_linear);
         //本页面我的头像
         avatarI= view.findViewById(R.id.sxn_avatar_img);
@@ -266,6 +268,7 @@ public class MyselfFragment extends Fragment {
         fanCount= view.findViewById(R.id.sxn_fans_count);
         conCount=view.findViewById(R.id.sxn_concerns_count);
         achCount=view.findViewById(R.id.sxn_achieves_count);
+        parent_ws=view.findViewById(R.id.parent_ws);
     }
 
     class MyListener implements View.OnClickListener{
@@ -351,8 +354,9 @@ public class MyselfFragment extends Fragment {
 
     //讲头像显示为圆形
     private void circleCropCoverPhoto() {
-        RequestOptions requestOptions=new RequestOptions().circleCrop();
-        Glide.with(view).load(new BitmapDrawable(photo)).apply(requestOptions).into(avatarI);
+//        requestOptions=new RequestOptions().circleCrop();
+//        Glide.with(view).load(new BitmapDrawable(photo)).apply(requestOptions).into(avatarI);
+
     }
 
     private void showPopwindow(final int id) {
@@ -467,9 +471,11 @@ public class MyselfFragment extends Fragment {
         if (extras != null) {
             photo = extras.getParcelable("data"); // 直接获得内存中保存的 bitmap
             // 创建 smallIcon 文件夹
+            File dirFile=null;
+            String fileName=null;
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 String storage = Environment.getExternalStorageDirectory().getPath();
-                File dirFile = new File(storage + "/smallIcon");
+                dirFile = new File(getContext().getFilesDir().getAbsolutePath());
                 if (!dirFile.exists()) {
                     if (!dirFile.mkdirs()) {
                         Log.e("TAG", "文件夹创建失败");
@@ -477,8 +483,12 @@ public class MyselfFragment extends Fragment {
                         Log.e("TAG", "文件夹创建成功");
                     }
                 }
-                File file = new File(dirFile, System.currentTimeMillis() + ".jpg");
+//                Log.e("我要的路径", dirFile+"#####"+System.currentTimeMillis()+ ".jpg");
+                fileName = System.currentTimeMillis() + ".jpg";
+                File file = new File(getContext().getFilesDir().getAbsolutePath(), fileName);
                 // 保存图片
+
+
                 FileOutputStream outputStream = null;
                 try {
                     outputStream = new FileOutputStream(file);
@@ -490,7 +500,26 @@ public class MyselfFragment extends Fragment {
                 }
             }
             // 在视图中显示图片
+            Log.e("log",photo.toString());
             avatarI.setImageBitmap(photo);
+
+            String filePath =dirFile+"/"+fileName;
+
+            Log.e("路径2", dirFile+"/"+fileName);
+
+//            Log.e("路径1", getFilesDir().getAbsolutePath()+"/d8f9d72a6059252dfd030078349b033b5bb5b9b1.jpg");
+//                    getFilesDir().getAbsolutePath()+"/d8f9d72a6059252dfd030078349b033b5bb5b9b1.jpg";
+//            String filePath =getFilesDir().getAbsolutePath()+"/d8.jp  g";
+            UpLoadFileTask task = new UpLoadFileTask(
+                    getActivity(),
+                    filePath
+            );
+            //开始执行异步任务
+            task.execute(getResources().getString(R.string.connUrl)+"/InputAvatar?id=3");
+
+
+
+
 
         }
     }

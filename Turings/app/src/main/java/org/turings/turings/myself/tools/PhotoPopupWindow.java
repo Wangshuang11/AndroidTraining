@@ -1,5 +1,4 @@
-package org.turings.myself.tools;
-
+package org.turings.turings.myself.tools;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -10,7 +9,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.PopupWindow;
 
-import org.turings.myself.R;
+import org.turings.turings.R;
 
 public class PhotoPopupWindow extends PopupWindow {
 

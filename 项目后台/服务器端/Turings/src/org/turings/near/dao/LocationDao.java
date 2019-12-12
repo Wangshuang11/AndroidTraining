@@ -59,22 +59,28 @@ public class LocationDao {
 			pstm = con.prepareStatement(sql1);
 			pstm.setDouble(1, lat);
 			pstm.setDouble(2, lng);
-			ResultSet rs = pstm.executeQuery();
+			ResultSet rs = pstm.executeQuery(); 
 			while(rs.next()) {
 				String sql2="";
-				sql2 = "select * from tbl_information where username=? ";
+				sql2 = "select * from tbl_self_user where uName=? ";
 				pstm = con.prepareStatement(sql2);
 				pstm.setString(1, rs.getString(2));
 				ResultSet rs1 = pstm.executeQuery();
 				while(rs1.next()) {
-					info = new Information();
-					info.setId(rs1.getInt(1));
-					info.setUserName(rs1.getString(2));
-					info.setPortrait(rs1.getString(3));
-					info.setTotalTime(rs1.getDouble(4));
-					info.setCurrentTime(rs1.getDouble(5));
-					info.setUniversity(rs1.getString(6));
-					info.setMotto(rs1.getString(7));
+					String sql3 = "select * from tbl_indexcollege where id IN (select sId from tbl_self_schools_favorite where uId= ?) limit 1";
+					pstm = con.prepareStatement(sql3);
+					pstm.setInt(1,rs.getInt(1));
+					ResultSet rs2 = pstm.executeQuery();
+					if (rs2.next()) {
+						info = new Information();
+						info.setId(rs1.getInt(1));
+						info.setUserName(rs1.getString("uName"));
+						info.setPortrait(rs1.getString("uAvatar"));
+						info.setTotalTime(rs1.getInt("uTime"));
+						info.setCurrentTime(rs1.getInt("uScore"));
+						info.setUniversity(rs2.getString("name"));
+						info.setMotto(rs1.getString("uMotto"));
+					}
 				}
 			}
 			return info;

@@ -37,12 +37,10 @@ public class UserLoginCheckByUserPwd extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		String uName = request.getParameter("uName");
 		String uPwd = request.getParameter("uPwd");
-		/*System.out.println(uName);
-		System.out.println(uPwd);*/
 		User user=new User();
 		user.setuName(uName);
 		user.setuPwd(uPwd);
-		writer.write(new UserService().loginCheckByUserPwd(user)+"");
+		writer.write(new UserService().loginCheckByUserPwd(user));
 	}
 
 	/**

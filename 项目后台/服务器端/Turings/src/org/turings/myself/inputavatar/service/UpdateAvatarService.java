@@ -10,21 +10,21 @@ public class UpdateAvatarService {
 		
 
 		String res;
-		String res0;
+//		String res0;
 //		Map<String, String> map = new HashMap<String, String>();
 		UpdateAvatarDao dao = new  UpdateAvatarDao();
 		res = dao.uptoDate(id,url);
-		res0 = dao.uptoAnotherDate(id, url);
+//		res0 = dao.uptoAnotherDate(id, url);
 		
 		
-//		将数据转改成json串
+//		灏嗘暟鎹浆鏀规垚json涓�
 		
-		// 创建JSONObject的实例
+		// 鍒涘缓JSONObject鐨勫疄渚�
 		JSONObject jsonObject = new JSONObject();
-		// 调用put方法将user对象的数据
-		// 采用key/value的形式放入JSONObject对象中
+		// 璋冪敤put鏂规硶灏唘ser瀵硅薄鐨勬暟鎹�
+		// 閲囩敤key/value鐨勫舰寮忔斁鍏SONObject瀵硅薄涓�
 		jsonObject.put("result", res);
-		jsonObject.put("result0", res0);
+//		jsonObject.put("result0", res0);
 		jsonObject.put("url", url);
 		
 		String result ;

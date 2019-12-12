@@ -16,7 +16,7 @@ public class MyFansActivity extends AppCompatActivity {
     private ListView fansList;
     private Button back;
     private Intent intent;
-    private MyUrl myUrl;
+    private org.turings.turings.myself.tools.MyUrl myUrl;
 
     private int uId;
     @Override

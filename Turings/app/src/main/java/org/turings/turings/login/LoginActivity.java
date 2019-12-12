@@ -208,8 +208,6 @@ public class LoginActivity extends AppCompatActivity {
                         if (tvPhoneCodeLogin_ws.getText().toString().equals("手机验证码登录")){
                             //账号密码验证登录
                             result=userLoginCheck("uName",uName,"http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/UserLoginCheckByUserPwd","uPwd",uPwd);
-
-                            Log.i("lww", "run: id是"+result);
                         }else{
                             //手机验证码验证登录:
                             //1、验证手机号存不存在

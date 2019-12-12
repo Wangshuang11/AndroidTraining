@@ -12,8 +12,8 @@ import android.widget.ListView;
 import org.turings.turings.MainActivity;
 import org.turings.turings.R;
 import org.turings.turings.myself.entity.School;
-import org.turings.turings.myself.tools.ImageAdapter;
 import org.turings.turings.myself.tools.MyUrl;
+
 
 import java.util.List;
 
@@ -26,10 +26,10 @@ public class MySchoolActivity extends AppCompatActivity {
 
     private ListView lvSch;
     private Button back;
-    private MyUrl myUrl;
+    private org.turings.turings.myself.tools.MyUrl myUrl;
     private Intent intent;
     private List<School> schools;
-    private ImageAdapter imageAdapter;
+    private org.turings.turings.myself.tools.ImageAdapter imageAdapter;
     public int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

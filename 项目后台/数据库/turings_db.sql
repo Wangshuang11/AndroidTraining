@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50506
 File Encoding         : 65001
 
-Date: 2019-12-11 15:20:44
+Date: 2019-12-12 20:38:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -466,32 +466,32 @@ CREATE TABLE `tbl_self_user` (
   `uAttentioncount` int(11) DEFAULT '0',
   `uAchievecount` int(11) DEFAULT '0',
   PRIMARY KEY (`uId`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_self_user
 -- ----------------------------
-INSERT INTO `tbl_self_user` VALUES ('0', '13010001000', '第一个用户', '000000', '用心血铸就辉煌的明天', '', '1682', '65', '0', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('1', '15227859968', '王大爽', 'wangshuang', '自信，我是命运的主宰者', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1586', '36', '6', '4', '0');
+INSERT INTO `tbl_self_user` VALUES ('21', '13010001000', '第一个用户', '000000', '用心血铸就辉煌的明天', '', '1682', '65', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('1', '15227859968', '王大爽', 'wangshuang', '自信，我是命运的主宰者', 'http://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/i1t1576118560811.png?Expires=1891478561&OSSAccessKeyId=LTAI4FoQ82rmSV5EzaE1KtPU&Signature=YvC0ceYiUXcfAAi2bd7aZX2Buvo%3D', '1586', '36', '6', '4', '0');
 INSERT INTO `tbl_self_user` VALUES ('2', '13000001002', '单小楠', 'shanxinnan', '丰富地过每一天，快乐地看每一天', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1256', '86', '3', '3', '0');
-INSERT INTO `tbl_self_user` VALUES ('3', '13000001003', '金小媛', 'jinxinyuan', '人类因梦想而变的伟大', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1259', '52', '5', '4', '0');
+INSERT INTO `tbl_self_user` VALUES ('3', '13000001003', '金小媛', 'jinxinyuan', '人类因梦想而变的伟大', 'http://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/i3t1576119212075.png?Expires=1891479212&OSSAccessKeyId=LTAI4FoQ82rmSV5EzaE1KtPU&Signature=G0jxbEBkJe4aSyAVc21B2i8mA%2F8%3D', '1259', '52', '5', '4', '0');
 INSERT INTO `tbl_self_user` VALUES ('4', '13000001004', '杨小鑫', 'yangliuxin', '人生如茶，粗品是苦的，细品是香的', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1842', '86', '3', '2', '0');
 INSERT INTO `tbl_self_user` VALUES ('5', '13000001005', '吕小浩', 'lvyihao', '失败的是事，绝不应是人', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1263', '75', '3', '3', '0');
 INSERT INTO `tbl_self_user` VALUES ('6', '13000001006', '郭小伟', 'guowei', '从来不让认识我的朋友后悔', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1862', '86', '2', '5', '0');
 INSERT INTO `tbl_self_user` VALUES ('7', '13000001007', '刘小辉', 'liupenghui', '努力改变，不为别人，只为脱胎换骨', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1230', '95', '3', '3', '0');
-INSERT INTO `tbl_self_user` VALUES ('8', '13256899853', '西瓜', '111111', '态度决定高度，习惯主宰人生', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '56', '0', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('9', '15987532685', '芒果', '111111', '人生就是距离，距离就是人生', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('10', '12355852626', '草莓', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('11', '13265894258', '西红柿', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('12', '15687953159', '香蕉', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('13', '15631648623', '丑橘', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('14', '15326489532', '山竹', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('15', '19852346286', '火龙果', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('16', '12346286428', '猕猴桃', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('17', '15987531688', '哈密瓜', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('18', '16879425634', '荔枝', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('19', '18531264866', '葡萄', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
-INSERT INTO `tbl_self_user` VALUES ('20', '15326448952', '蛋挞', '111111', '天生我才必有用，千金散去还复来', 'beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('8', '13256899853', '西瓜', '111111', '态度决定高度，习惯主宰人生', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '56', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('9', '15987532685', '芒果', '111111', '人生就是距离，距离就是人生', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('10', '12355852626', '草莓', '111111', '天生我才必有用，千金散去还复来', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('11', '13265894258', '西红柿', '111111', '天生我才必有用，千金散去还复来', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('12', '15687953159', '香蕉', '111111', '天生我才必有用，千金散去还复来', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('13', '15631648623', '丑橘', '111111', '天生我才必有用，千金散去还复来', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('14', '15326489532', '山竹', '111111', '天生我才必有用，千金散去还复来', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('15', '19852346286', '火龙果', '111111', '天生我才必有用，千金散去还复来', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('16', '12346286428', '猕猴桃', '111111', '天生我才必有用，千金散去还复来', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('17', '15987531688', '哈密瓜', '111111', '天生我才必有用，千金散去还复来', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('18', '16879425634', '荔枝', '111111', '天生我才必有用，千金散去还复来', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('19', '18531264866', '葡萄', '111111', '天生我才必有用，千金散去还复来', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
+INSERT INTO `tbl_self_user` VALUES ('20', '15326448952', '蛋挞', '111111', '天生我才必有用，千金散去还复来', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `tbl_share`
@@ -504,7 +504,7 @@ CREATE TABLE `tbl_share` (
   `sharecontent` varchar(2550) CHARACTER SET utf8 DEFAULT NULL,
   `background` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`,`sharetitle`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_share
@@ -529,6 +529,7 @@ INSERT INTO `tbl_share` VALUES ('17', '哈密瓜', '心灵鸡汤9', '关于积�
 INSERT INTO `tbl_share` VALUES ('18', '荔枝', '心灵鸡汤10', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
 INSERT INTO `tbl_share` VALUES ('19', '葡萄', '心灵鸡汤11', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
 INSERT INTO `tbl_share` VALUES ('20', '蛋挞', '心灵鸡汤12', '关于积累我想说明一点，就是培养随手记录的习惯，更要学会记录适合自己风格和内容的句子。最好不要照搬某某地方看到的作文素材，还是自己记录的最好用。其次，要找好记的、好用的、朗朗上口的、角度多变的句子，方便使用。', 'bj1');
+INSERT INTO `tbl_share` VALUES ('21', '金小媛', '啊赛风', '防身从不', '2131230821');
 
 -- ----------------------------
 -- Table structure for `tbl_story`

@@ -37,9 +37,6 @@ public class UserRegister extends HttpServlet {
 		String uName = request.getParameter("uName");
 		String uPwd = request.getParameter("uPwd");
 		String uTel = request.getParameter("uTel");
-		/*System.out.println(uName);
-		System.out.println(uPwd);
-		System.out.println(uTel);*/
 		User user=new User();
 		user.setuName(uName);
 		user.setuPwd(uPwd);
