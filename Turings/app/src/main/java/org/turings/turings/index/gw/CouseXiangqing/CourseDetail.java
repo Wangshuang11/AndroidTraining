@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import org.turings.turings.R;
+import org.turings.turings.index.gw.CharRobort.CharRobort;
 import org.turings.turings.index.gw.ThreeLayout.CourseOneFragment;
 import org.turings.turings.index.gw.ThreeLayout.CourseThreeFragment;
 import org.turings.turings.index.gw.ThreeLayout.CourseTwoFragment;
@@ -73,19 +74,21 @@ public class CourseDetail extends AppCompatActivity {
         zixun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isQQClientAvailable(getApplication())) {
-                    // 跳转到客服的QQ
-                    String url = "mqqwpa://im/chat?chat_type=wpa&uin=3337258081";
-                    Intent intent2 = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    // 跳转前先判断Uri是否存在，如果打开一个不存在的Uri，App可能会崩溃
-                    if (isValidIntent(getApplication(),intent2)) {
-                        startActivity(intent2);
-                    }else {
-                        Toast.makeText(getApplication(),"客服QQ异常",Toast.LENGTH_SHORT).show();
-                    }
-                }else {
-                    Toast.makeText(getApplication(),"请先安装QQ客户端",Toast.LENGTH_SHORT).show();
-                }
+                Intent intent = new Intent(getApplication(), CharRobort.class);
+                startActivity(intent);
+//                if (isQQClientAvailable(getApplication())) {
+//                    // 跳转到客服的QQ
+//                    String url = "mqqwpa://im/chat?chat_type=wpa&uin=3337258081";
+//                    Intent intent2 = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//                    // 跳转前先判断Uri是否存在，如果打开一个不存在的Uri，App可能会崩溃
+//                    if (isValidIntent(getApplication(),intent2)) {
+//                        startActivity(intent2);
+//                    }else {
+//                        Toast.makeText(getApplication(),"客服QQ异常",Toast.LENGTH_SHORT).show();
+//                    }
+//                }else {
+//                    Toast.makeText(getApplication(),"请先安装QQ客户端",Toast.LENGTH_SHORT).show();
+//                }
             }
         });
 

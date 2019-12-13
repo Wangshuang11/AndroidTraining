@@ -7,28 +7,20 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <!--添加SD卡读写权限-->
-    <uses-permission android:name=
-        "android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name=
-        "android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 添加SD卡读写权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-
-    <!--百度地图权限-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 百度地图权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
-    <!--我的模块-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 我的模块 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
@@ -38,14 +30,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".index.gw.CharRobort.CharRobort" android:theme="@style/AppTheme2"></activity>
+
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="NYvzKjZkLR7MYEDSnDZo3NjGLVNDMgeB" />
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
-        <activity android:name=".mistaken.RedoWrongBigQuestionActivity"></activity>
+
+        <activity android:name=".mistaken.RedoWrongBigQuestionActivity" />
         <activity android:name=".index.IndexActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,39 +49,37 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".index.gw.EndVideo.EndCourse" android:screenOrientation="landscape"
-            android:configChanges="orientation|keyboardHidden|screenLayout|screenSize">
-
-        </activity>
+        <activity
+            android:name=".index.gw.EndVideo.EndCourse"
+            android:configChanges="orientation|keyboardHidden|screenLayout|screenSize"
+            android:screenOrientation="landscape"></activity>
         <activity android:name=".index.gw.GrideBooks.GrideBooks" />
-        <activity android:name=".index.gw.CouseXiangqing.CourseDetail"
-            android:theme="@style/AppTheme1"/>
-        <!--        guo设置的没有actionBar的详情页-->
+        <activity
+            android:name=".index.gw.CouseXiangqing.CourseDetail"
+            android:theme="@style/AppTheme1" /> <!-- guo设置的没有actionBar的详情页 -->
         <activity android:name=".index.gw.MainSubjects.HotSubjectVideo" />
         <activity android:name=".MainActivity" />
         <activity android:name=".UrlActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
-        </activity>
-        <!-- 登录注册的三个页面 -->
+        </activity> <!-- 登录注册的三个页面 -->
         <activity android:name=".login.ForgetPasswordActivity" />
         <activity android:name=".login.RegisterNewUserActivity" />
-        <activity android:name=".login.LoginActivity" />
-        <!-- 错题本的页面 -->
+        <activity android:name=".login.LoginActivity" /> <!-- 错题本的页面 -->
         <activity android:name=".mistaken.LookUpAndErrorReDoActivity" />
         <activity android:name=".mistaken.RedoWrongQuestionsActivity" />
-        <activity android:name=".mistaken.UploadWrongQuestionsActivity" />
-        <!--照片裁剪页面-->
+        <activity android:name=".mistaken.UploadWrongQuestionsActivity" /> <!-- 照片裁剪页面 -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".index.CommonActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -95,20 +89,19 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-        <activity android:name=".near.Location.InformationActivity"/>
-        <activity android:name=".near.Location.SharedThingsActivity"/>
-        <activity android:name=".near.Location.ShareTitleActivity"/>
-        <activity android:name=".near.Location.WriteActivity"/>
-        <activity android:name=".near.Location.WriteThingsActivity"/>
 
-        <activity android:name=".myself.sxn.MyAchieveActivity"/>
-        <activity android:name=".myself.sxn.MyConcernActivity"/>
-        <activity android:name=".myself.sxn.MyCourseActivity"/>
-        <activity android:name=".myself.sxn.MyFansActivity"/>
-        <activity android:name=".myself.sxn.MyMottoActivity"/>
-        <activity android:name=".myself.sxn.MyNicknameActivity"/>
-        <activity android:name=".myself.sxn.MySchoolActivity"/>
-
+        <activity android:name=".near.Location.InformationActivity" />
+        <activity android:name=".near.Location.SharedThingsActivity" />
+        <activity android:name=".near.Location.ShareTitleActivity" />
+        <activity android:name=".near.Location.WriteActivity" />
+        <activity android:name=".near.Location.WriteThingsActivity" />
+        <activity android:name=".myself.sxn.MyAchieveActivity" />
+        <activity android:name=".myself.sxn.MyConcernActivity" />
+        <activity android:name=".myself.sxn.MyCourseActivity" />
+        <activity android:name=".myself.sxn.MyFansActivity" />
+        <activity android:name=".myself.sxn.MyMottoActivity" />
+        <activity android:name=".myself.sxn.MyNicknameActivity" />
+        <activity android:name=".myself.sxn.MySchoolActivity" />
     </application>
 
 </manifest>
