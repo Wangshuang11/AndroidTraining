@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50506
 File Encoding         : 65001
 
-Date: 2019-12-16 15:40:43
+Date: 2019-12-16 17:06:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -219,29 +219,6 @@ INSERT INTO `tbl_indexname` VALUES ('3', '985和211大学', 'co', '2', 'http://w
 INSERT INTO `tbl_indexname` VALUES ('4', '世界一流大学和一流学科', 'co', '2', 'https://p1.ssl.qhimg.com/dr/270_500_/t01d5cace27d7e1f216.jpg?size=600x396');
 
 -- ----------------------------
--- Table structure for `tbl_information`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_information`;
-CREATE TABLE `tbl_information` (
-  `id` int(11) NOT NULL,
-  `username` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `portrait` varchar(255) DEFAULT NULL,
-  `totaltime` double DEFAULT NULL,
-  `currenttime` double DEFAULT NULL,
-  `university` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `motto` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- ----------------------------
--- Records of tbl_information
--- ----------------------------
-INSERT INTO `tbl_information` VALUES ('1', '王小爽', 'a3', '2056', '125', '清华大学', '韦编屡绝铁砚穿，口诵手钞那计年');
-INSERT INTO `tbl_information` VALUES ('2', '单小楠', 'a3', '1893', '150', '天津工业大学', '啦啦啦啦');
-INSERT INTO `tbl_information` VALUES ('3', '金小媛', 'a3', '1775', '58', '燕山大学', '哈哈哈哈哈');
-INSERT INTO `tbl_information` VALUES ('5', '吕小浩', 'a3', '1682', '68', '河北师范大学', '嘿嘿嘿嘿嘿');
-
--- ----------------------------
 -- Table structure for `tbl_mistaken`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_mistaken`;
@@ -309,55 +286,26 @@ CREATE TABLE `tbl_position` (
 -- ----------------------------
 -- Records of tbl_position
 -- ----------------------------
-INSERT INTO `tbl_position` VALUES ('1', '王大爽', 'a3', '38.75', '114.5222', '0');
-INSERT INTO `tbl_position` VALUES ('2', '单小楠', 'a3', '37.99', '114.5228', '0');
-INSERT INTO `tbl_position` VALUES ('3', '金小媛', 'a3', '46.192', '124.141', '1');
-INSERT INTO `tbl_position` VALUES ('4', '杨晓鑫', 'a3', '38.001', '114.5238', '0');
-INSERT INTO `tbl_position` VALUES ('5', '吕小浩', 'a3', '30.926', '95.883', '1');
-INSERT INTO `tbl_position` VALUES ('6', '郭小伟', 'a3', '39.2', '114.7', '0');
-INSERT INTO `tbl_position` VALUES ('7', '刘小辉', 'a3', '39.56', '114.93', '0');
-INSERT INTO `tbl_position` VALUES ('8', '西瓜', 'a3', '34.533', '94.853', null);
-INSERT INTO `tbl_position` VALUES ('9', '芒果', 'a3', '30.127', '101.107', null);
-INSERT INTO `tbl_position` VALUES ('10', '草莓', 'a3', '26.48', '106.546', null);
-INSERT INTO `tbl_position` VALUES ('11', '西红柿', 'a3', '30.764', '107.436', null);
-INSERT INTO `tbl_position` VALUES ('12', '香蕉', 'a3', '34.01', '117.443', null);
-INSERT INTO `tbl_position` VALUES ('13', '丑橘', 'a3', '37.017', '105.375', null);
-INSERT INTO `tbl_position` VALUES ('14', '山竹', 'a3', '37.84', '115.972', null);
-INSERT INTO `tbl_position` VALUES ('15', '火龙果', 'a3', '26.745', '113.028', null);
-INSERT INTO `tbl_position` VALUES ('16', '猕猴桃', 'a3', '41.257', '107.141', null);
-INSERT INTO `tbl_position` VALUES ('17', '哈密瓜', 'a3', '34.0528', '114.058', null);
-INSERT INTO `tbl_position` VALUES ('18', '荔枝', 'a3', '39.683', '100.223', null);
-INSERT INTO `tbl_position` VALUES ('19', '葡萄', 'a3', '34.985', '106.699', null);
-INSERT INTO `tbl_position` VALUES ('20', '蛋挞', 'a3', '30.382', '107.141', null);
-
--- ----------------------------
--- Table structure for `tbl_schools`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_schools`;
-CREATE TABLE `tbl_schools` (
-  `sWebaddress` varchar(100) DEFAULT NULL,
-  `sInfo` varchar(255) DEFAULT NULL,
-  `sId` int(11) NOT NULL,
-  PRIMARY KEY (`sId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tbl_schools
--- ----------------------------
-
--- ----------------------------
--- Table structure for `tbl_schools_favorite`
--- ----------------------------
-DROP TABLE IF EXISTS `tbl_schools_favorite`;
-CREATE TABLE `tbl_schools_favorite` (
-  `sId` int(11) NOT NULL,
-  `uId` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`sId`,`uId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tbl_schools_favorite
--- ----------------------------
+INSERT INTO `tbl_position` VALUES ('1', '王大爽', 'i1', '0', '0', '0');
+INSERT INTO `tbl_position` VALUES ('2', '单小楠', 'i2', '37.99', '114.5228', '0');
+INSERT INTO `tbl_position` VALUES ('3', '金小媛', 'i3', '46.192', '124.141', '1');
+INSERT INTO `tbl_position` VALUES ('4', '杨小鑫', 'i4', '38.001', '114.5238', '0');
+INSERT INTO `tbl_position` VALUES ('5', '吕小浩', 'i5', '30.926', '95.883', '1');
+INSERT INTO `tbl_position` VALUES ('6', '郭小伟', 'i6', '39.2', '114.7', '0');
+INSERT INTO `tbl_position` VALUES ('7', '刘小辉', 'i7', '39.56', '114.93', '0');
+INSERT INTO `tbl_position` VALUES ('8', '西瓜', 'i8', '34.533', '94.853', '1');
+INSERT INTO `tbl_position` VALUES ('9', '芒果', 'i9', '30.127', '101.107', '1');
+INSERT INTO `tbl_position` VALUES ('10', '草莓', 'i10', '26.48', '106.546', '1');
+INSERT INTO `tbl_position` VALUES ('11', '西红柿', 'i11', '30.764', '107.436', '1');
+INSERT INTO `tbl_position` VALUES ('12', '香蕉', 'i12', '34.01', '117.443', '1');
+INSERT INTO `tbl_position` VALUES ('13', '丑橘', 'i13', '37.017', '105.375', '1');
+INSERT INTO `tbl_position` VALUES ('14', '山竹', 'i14', '37.84', '115.972', '1');
+INSERT INTO `tbl_position` VALUES ('15', '火龙果', 'i15', '26.745', '113.028', '1');
+INSERT INTO `tbl_position` VALUES ('16', '猕猴桃', 'i16', '41.257', '107.141', '1');
+INSERT INTO `tbl_position` VALUES ('17', '哈密瓜', 'i17', '34.0528', '114.058', '1');
+INSERT INTO `tbl_position` VALUES ('18', '荔枝', 'i18', '39.683', '100.223', '1');
+INSERT INTO `tbl_position` VALUES ('19', '葡萄', 'i19', '34.985', '106.699', '1');
+INSERT INTO `tbl_position` VALUES ('20', '蛋挞', 'i20', '30.382', '107.141', '1');
 
 -- ----------------------------
 -- Table structure for `tbl_self_courses`
@@ -430,7 +378,7 @@ INSERT INTO `tbl_self_fans` VALUES ('7', '6');
 DROP TABLE IF EXISTS `tbl_self_schools_favorite`;
 CREATE TABLE `tbl_self_schools_favorite` (
   `sId` int(11) NOT NULL,
-  `uId` int(11) NOT NULL,
+  `uId` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`sId`,`uId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -438,16 +386,25 @@ CREATE TABLE `tbl_self_schools_favorite` (
 -- Records of tbl_self_schools_favorite
 -- ----------------------------
 INSERT INTO `tbl_self_schools_favorite` VALUES ('1', '1');
-INSERT INTO `tbl_self_schools_favorite` VALUES ('1', '2');
-INSERT INTO `tbl_self_schools_favorite` VALUES ('2', '8');
-INSERT INTO `tbl_self_schools_favorite` VALUES ('3', '7');
-INSERT INTO `tbl_self_schools_favorite` VALUES ('4', '0');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('1', '12');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('2', '2');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('2', '13');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('3', '3');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('3', '14');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('4', '4');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('4', '15');
 INSERT INTO `tbl_self_schools_favorite` VALUES ('5', '5');
-INSERT INTO `tbl_self_schools_favorite` VALUES ('6', '1');
-INSERT INTO `tbl_self_schools_favorite` VALUES ('6', '2');
-INSERT INTO `tbl_self_schools_favorite` VALUES ('7', '1');
-INSERT INTO `tbl_self_schools_favorite` VALUES ('7', '2');
-INSERT INTO `tbl_self_schools_favorite` VALUES ('7', '3');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('5', '16');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('6', '6');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('6', '17');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('7', '7');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('7', '18');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('8', '8');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('8', '20');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('9', '9');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('9', '19');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('10', '10');
+INSERT INTO `tbl_self_schools_favorite` VALUES ('11', '11');
 
 -- ----------------------------
 -- Table structure for `tbl_self_user`
@@ -471,13 +428,12 @@ CREATE TABLE `tbl_self_user` (
 -- ----------------------------
 -- Records of tbl_self_user
 -- ----------------------------
-INSERT INTO `tbl_self_user` VALUES ('21', '13010001000', '第一个用户', '000000', '用心血铸就辉煌的明天', '', '1682', '65', '0', '0', '0');
 INSERT INTO `tbl_self_user` VALUES ('1', '15227859968', '王大爽', 'wangshuang', '自信，我是命运的主宰者', 'http://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/i1t1576118560811.png?Expires=1891478561&OSSAccessKeyId=LTAI4FoQ82rmSV5EzaE1KtPU&Signature=YvC0ceYiUXcfAAi2bd7aZX2Buvo%3D', '1586', '36', '6', '4', '0');
 INSERT INTO `tbl_self_user` VALUES ('2', '13000001002', '单小楠', 'shanxinnan', '丰富地过每一天，快乐地看每一天', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1256', '86', '3', '3', '0');
 INSERT INTO `tbl_self_user` VALUES ('3', '13000001003', '金小媛', 'jinxinyuan', '人类因梦想而变的伟大', 'http://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/i3t1576119212075.png?Expires=1891479212&OSSAccessKeyId=LTAI4FoQ82rmSV5EzaE1KtPU&Signature=G0jxbEBkJe4aSyAVc21B2i8mA%2F8%3D', '1259', '52', '5', '4', '0');
 INSERT INTO `tbl_self_user` VALUES ('4', '13000001004', '杨小鑫', 'yangliuxin', '人生如茶，粗品是苦的，细品是香的', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1842', '86', '3', '2', '0');
 INSERT INTO `tbl_self_user` VALUES ('5', '13000001005', '吕小浩', 'lvyihao', '失败的是事，绝不应是人', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1263', '75', '3', '3', '0');
-INSERT INTO `tbl_self_user` VALUES ('6', '13000001006', '郭小伟', 'guowei', '从来不让认识我的朋友后悔', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1862', '86', '2', '5', '0');
+INSERT INTO `tbl_self_user` VALUES ('6', '13000001006', '郭小伟', 'guowei', '从来不让认识我的朋友后悔', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1862', '86', '2', '4', '0');
 INSERT INTO `tbl_self_user` VALUES ('7', '13000001007', '刘小辉', 'liupenghui', '努力改变，不为别人，只为脱胎换骨', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1230', '95', '3', '3', '0');
 INSERT INTO `tbl_self_user` VALUES ('8', '13256899853', '西瓜', '111111', '态度决定高度，习惯主宰人生', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '56', '0', '0', '0');
 INSERT INTO `tbl_self_user` VALUES ('9', '15987532685', '芒果', '111111', '人生就是距离，距离就是人生', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
@@ -549,7 +505,7 @@ CREATE TABLE `tbl_story` (
 -- ----------------------------
 -- Records of tbl_story
 -- ----------------------------
-INSERT INTO `tbl_story` VALUES ('1', '后进生的奋斗史', 'https://cn.bing.com/th?id=OIP.7Szh93R8TEBYjkZEYA1TfwHaFj&pid=Api&rs=1', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01588c850cf16d3c9c.jpg', 'http://i-1.binzz.com/2018/10/27/W3dtOjEucG5nLHI6MTMsYjoxM10oNjAweCk=/6f307a6a-1c72-47a0-a04c-0dc2120e51a4.png', '88', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才， 没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
-INSERT INTO `tbl_story` VALUES ('2', '从现在开始努力', 'https://p0.ssl.qhimgs1.com/sdr/400__/t0168f2443cee7a5bbe.jpg', 'https://tse2-mm.cn.bing.net/th/id/OIP.aV0KhTEM-hDbTCLXJbPr3AHaFj?w=284&h=213&c=7&o=5&dpr=1.25&pid=1.7', 'http://uzzf.com/up/2016-6/14652010952310087.png', '157', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着， 一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
+INSERT INTO `tbl_story` VALUES ('1', '后进生的奋斗史', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01fe4ce2f51047f96c.jpg', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01588c850cf16d3c9c.jpg', 'http://i-1.binzz.com/2018/10/27/W3dtOjEucG5nLHI6MTMsYjoxM10oNjAweCk=/6f307a6a-1c72-47a0-a04c-0dc2120e51a4.png', '88', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才， 没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
+INSERT INTO `tbl_story` VALUES ('2', '从现在开始努力', 'https://p0.ssl.qhimgs1.com/sdr/400__/t0168f2443cee7a5bbe.jpg', 'http://uploads.5068.com/allimg/1805/147-1P51Q03208.png', 'http://uzzf.com/up/2016-6/14652010952310087.png', '157', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着， 一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
 INSERT INTO `tbl_story` VALUES ('3', '做一个崭新的自己', 'https://p0.ssl.qhimgs1.com/sdr/400__/t019fc63acd104c5490.jpg', 'http://upload.mnw.cn/2017/0606/1496708899187.jpg', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01bf7eeaf33fce2032.jpg', '224', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
 INSERT INTO `tbl_story` VALUES ('4', '过去的都是浮云', 'https://p1.ssl.qhimgs1.com/sdr/400__/t01989576057c377587.jpg', 'http://img.smzy.com/Soft/UploadPic/2016-3/201631214351846179.jpg', 'https://p0.ssl.qhimgs1.com/sdr/400__/t01221d3ed68502af20.jpg', '61', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着， 一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
