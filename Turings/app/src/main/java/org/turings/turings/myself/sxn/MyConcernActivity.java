@@ -25,6 +25,7 @@ public class MyConcernActivity extends AppCompatActivity {
     private Context mc;
     private Button back;
     private Intent intent;
+    private int uId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (getSupportActionBar() != null) { getSupportActionBar().hide(); }
@@ -33,7 +34,8 @@ public class MyConcernActivity extends AppCompatActivity {
         getViews();
         mc=MyConcernActivity.this;
         myUrl=new MyUrl( mc );
-        myUrl.sendToServerListview(getResources().getString(R.string.connUrl)+"/AtList?fid=1",
+        uId= Integer.parseInt(getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
+        myUrl.sendToServerListview(getResources().getString(R.string.connUrl)+"/AtList?fid="+uId,
                 R.layout.sxn_item_concerns,
                 lvCon);
         //每一项点击事件

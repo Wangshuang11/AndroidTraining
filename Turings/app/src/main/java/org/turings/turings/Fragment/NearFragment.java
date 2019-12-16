@@ -67,6 +67,9 @@ public class NearFragment extends Fragment {
     private Gson gson;
     private List<Position> posList;
 
+    private double lat;
+    private double lng;
+
 
 
     @Nullable
@@ -120,7 +123,8 @@ public class NearFragment extends Fragment {
         Location location = new Location(mapView,baiduMap,context);
         location.locationOption();
         //设置图层覆盖物
-        sendToServer("王大爽");
+        SharedPreferences preferences = getContext().getSharedPreferences("userInfo",MODE_PRIVATE);
+        sendToServer(preferences.getString("name",""),lat,lng);
         return view;
     }
 
@@ -191,13 +195,14 @@ public class NearFragment extends Fragment {
         }
     }
 
-    public void sendToServer(final String userName) {
+    public void sendToServer(final String userName,final double lat,final double lng) {
 
         new Thread() {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/LocationServlet?userName="+userName);
+                    Log.i("lww",lat+""+lng);
+                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/LocationServlet?userName="+userName+"&lat="+lat+"&lng="+lng);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

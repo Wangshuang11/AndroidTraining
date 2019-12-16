@@ -63,7 +63,7 @@
                             android:layout_height="60dp">
                         <TextView
                             android:id="@+id/sxn_motto_text"
-                            android:layout_width="240dp"
+                            android:layout_width="230dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:textSize="18dp"/>
@@ -112,13 +112,13 @@
                         android:textSize="18dp"></TextView>
                 </LinearLayout>
 
-                <View
+               <!-- <View
                     android:layout_marginTop="25dp"
                     android:layout_marginLeft="31dp"
                     android:layout_width="5dp"
                     android:layout_height="60dp"
                     android:background="#09f">
-                </View>
+                </View>-->
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/sxn_myattention_linear"
@@ -150,13 +150,13 @@
                         android:textSize="18dp"></TextView>
                 </LinearLayout>
 
-                <View
+               <!-- <View
                     android:layout_marginTop="25dp"
                     android:layout_marginLeft="28dp"
                     android:layout_width="5dp"
                     android:layout_height="60dp"
                     android:background="#09f">
-                </View>
+                </View>-->
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/sxn_myachieve_linear"
@@ -285,7 +285,7 @@
             android:paddingLeft="10dp">
             <ImageView
                 android:id="@+id/ivTrackLeft_ws"
-                android:src="@mipmap/myselftrack"
+                android:src="@mipmap/myselfabout"
                 android:layout_margin="10dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -296,7 +296,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/sxn_normal"
-                android:text="我的足迹"
+                android:text="关于版本"
                 android:textSize="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_centerVertical="true"/>

@@ -25,7 +25,8 @@
     <color name="sxn_normal">#000</color>
     <color name="sxn_un_normal">#fff</color>
     <color name="sxn_big_background">#9f9</color>
-    <color name="sxn_background">#1aa8b7</color>
+    <!--<color name="sxn_background">#1aa8b7</color>-->
+    <color name="sxn_background">#1AA8D7</color>
     <color name="colorMainGreen">#40cab3</color>
     <color name="background_gray">#66000000</color>
 </resources>

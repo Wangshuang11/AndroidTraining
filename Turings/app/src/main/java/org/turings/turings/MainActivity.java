@@ -51,13 +51,13 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentTabHost.setCurrentTab(0);
         imageViewMap.get("tag1").setImageResource(R.mipmap.indexblue);
-        textViewHashMap.get("tag1").setTextColor(Color.argb(100,26,168,215));
+        textViewHashMap.get("tag1").setTextColor(Color.argb(100,18,150,219));
 
         //切换选项卡,图片变色
         fragmentTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
-                textViewHashMap.get(tabId).setTextColor(Color.argb(100,26,168,215));
+                textViewHashMap.get(tabId).setTextColor(Color.argb(100,18,150,219));
                 switch (tabId){
                     case "tag1":
                         imageViewMap.get("tag1").setImageResource(R.mipmap.indexblue);

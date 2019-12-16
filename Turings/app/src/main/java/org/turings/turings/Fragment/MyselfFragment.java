@@ -515,7 +515,7 @@ public class MyselfFragment extends Fragment {
                     filePath
             );
             //开始执行异步任务
-            task.execute(getResources().getString(R.string.connUrl)+"/InputAvatar?id=3");
+            task.execute(getResources().getString(R.string.connUrl)+"/InputAvatar?id="+id);
 
 
 
