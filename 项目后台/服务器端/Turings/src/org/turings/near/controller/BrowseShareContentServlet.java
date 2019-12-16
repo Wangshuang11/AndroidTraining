@@ -15,7 +15,10 @@ import org.turings.near.service.NearService;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
+/**
+ * ä¯ÀÀ·ÖÏíÎÄ±¾
+ * @author ÂÀâùºÆ
+ */
 /**
  * Servlet implementation class BrowseShareContentServlet
  */

@@ -16,6 +16,10 @@ import org.turings.near.service.NearService;
 import net.sf.json.JSONArray;
 
 /**
+ * ä¯ÀÀ·ÖÏíÁĞ±í
+ * @author ÂÀâùºÆ
+ */
+/**
  * Servlet implementation class BrowseShareServlet
  */
 @WebServlet("/BrowseShareServlet")

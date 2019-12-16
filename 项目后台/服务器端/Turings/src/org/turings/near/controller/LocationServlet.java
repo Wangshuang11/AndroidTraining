@@ -14,6 +14,10 @@ import org.turings.near.entity.Position;
 import org.turings.near.service.NearService;
 
 import net.sf.json.JSONArray;
+/**
+ * NearFragment显示
+ * @author 吕怡浩
+ */
 
 /**
  * Servlet implementation class LocationServlet
@@ -37,11 +41,17 @@ public class LocationServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		String userName = request.getParameter("userName");
+		String slat = request.getParameter("lat");
+		String slng = request.getParameter("lng");
+		double lat = Double.parseDouble(slat);
+		double lng = Double.parseDouble(slng);
 		System.out.println(userName);
+		System.out.println(lat);
+		System.out.println(lng);
 		System.out.println("查覆盖物");
 		
 		NearService nearService = new NearService();
-		List<Position> posList  = nearService.browseLoc(userName);
+		List<Position> posList  = nearService.browseLoc(userName,lat,lng);
 		
 		String json = JSONArray.fromObject(posList).toString();
 		System.out.println("查到覆盖物");

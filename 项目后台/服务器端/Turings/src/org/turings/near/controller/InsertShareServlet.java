@@ -15,7 +15,10 @@ import org.turings.near.service.NearService;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
+/**
+ * 增加一条分享
+ * @author 吕怡浩
+ */
 /**
  * Servlet implementation class InsertShareServlet
  */

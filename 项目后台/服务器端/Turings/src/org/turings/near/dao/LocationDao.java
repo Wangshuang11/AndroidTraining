@@ -12,14 +12,25 @@ import org.turings.near.entity.Information;
 import org.turings.near.entity.Position;
 import org.turings.near.entity.Share;
 
+/**
+ * 附近的人
+ * @author 吕怡浩
+ *
+ */
 public class LocationDao {
-	public List browseLoc(String userName) {
+	/**
+	 * 更新定位并显示其他用户定位
+	 * @author 吕怡浩
+	 *
+	 */
+	public List browseLoc(String userName,double lat,double lng) {
 		List<Position> posList = new ArrayList<>();
 		DbUtil dbUtil = DbUtil.getInstance();
 		Connection con=null;
+		PreparedStatement pstm = null;
 		try {
 			con=dbUtil.getConnection();
-			PreparedStatement pstm = con.prepareStatement("select * from tbl_position ");
+			pstm = con.prepareStatement("select * from tbl_position");
 			ResultSet rs = pstm.executeQuery();
 			while(rs.next()) {
 				if (rs.getString(2)!=userName) {
@@ -46,7 +57,12 @@ public class LocationDao {
 			}
 		}
 	}
-	
+	/**
+	 * 显示其他用户的信息页
+	 * @param lat
+	 * @param lng
+	 * @return
+	 */
 	public Information browseInfo(double lat,double lng) {
 		DbUtil dbUtil = DbUtil.getInstance();
 		Connection con=null;
@@ -96,7 +112,11 @@ public class LocationDao {
 			}
 		}
 	}
-	
+	/**
+	 * 查询分享列表（不包含内容）
+	 * @param userName
+	 * @return
+	 */
 	public List browseShareTitle(String userName) {
 		System.out.println("browseShareTitle()" + userName);
 		DbUtil dbUtil = DbUtil.getInstance();
@@ -136,6 +156,11 @@ public class LocationDao {
 		return null;
 	}
 
+	/**
+	 * 查询某一条分享内容
+	 * @param title
+	 * @return
+	 */
 	public Share browseShareContext(String title) {
 		DbUtil dbUtil = DbUtil.getInstance();
 		Connection con=null;
@@ -165,7 +190,14 @@ public class LocationDao {
 			}
 		}
 	}
-	
+	/**
+	 * 添加一条分享
+	 * @param userName
+	 * @param title
+	 * @param content
+	 * @param background
+	 * @return
+	 */
 	public int insertShare(String userName,String title,String content,String background) {
 		DbUtil dbUtil = DbUtil.getInstance();
 		Connection con=null;

@@ -18,7 +18,10 @@ import com.google.gson.Gson;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
+/**
+ * 查看用户详情页
+ * @author 吕怡浩
+ */
 /**
  * Servlet implementation class BrowseInformationServlet
  */
