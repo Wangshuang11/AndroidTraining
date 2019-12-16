@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50506
 File Encoding         : 65001
 
-Date: 2019-12-12 20:38:21
+Date: 2019-12-16 15:40:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -549,7 +549,7 @@ CREATE TABLE `tbl_story` (
 -- ----------------------------
 -- Records of tbl_story
 -- ----------------------------
-INSERT INTO `tbl_story` VALUES ('1', '后进生的奋斗史', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01fe4ce2f51047f96c.jpg', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01588c850cf16d3c9c.jpg', 'http://i-1.binzz.com/2018/10/27/W3dtOjEucG5nLHI6MTMsYjoxM10oNjAweCk=/6f307a6a-1c72-47a0-a04c-0dc2120e51a4.png', '88', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才， 没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
-INSERT INTO `tbl_story` VALUES ('2', '从现在开始努力', 'https://p0.ssl.qhimgs1.com/sdr/400__/t0168f2443cee7a5bbe.jpg', 'http://uploads.5068.com/allimg/1805/147-1P51Q03208.png', 'http://uzzf.com/up/2016-6/14652010952310087.png', '157', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着， 一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
+INSERT INTO `tbl_story` VALUES ('1', '后进生的奋斗史', 'https://cn.bing.com/th?id=OIP.7Szh93R8TEBYjkZEYA1TfwHaFj&pid=Api&rs=1', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01588c850cf16d3c9c.jpg', 'http://i-1.binzz.com/2018/10/27/W3dtOjEucG5nLHI6MTMsYjoxM10oNjAweCk=/6f307a6a-1c72-47a0-a04c-0dc2120e51a4.png', '88', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才， 没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
+INSERT INTO `tbl_story` VALUES ('2', '从现在开始努力', 'https://p0.ssl.qhimgs1.com/sdr/400__/t0168f2443cee7a5bbe.jpg', 'https://tse2-mm.cn.bing.net/th/id/OIP.aV0KhTEM-hDbTCLXJbPr3AHaFj?w=284&h=213&c=7&o=5&dpr=1.25&pid=1.7', 'http://uzzf.com/up/2016-6/14652010952310087.png', '157', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着， 一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
 INSERT INTO `tbl_story` VALUES ('3', '做一个崭新的自己', 'https://p0.ssl.qhimgs1.com/sdr/400__/t019fc63acd104c5490.jpg', 'http://upload.mnw.cn/2017/0606/1496708899187.jpg', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01bf7eeaf33fce2032.jpg', '224', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
 INSERT INTO `tbl_story` VALUES ('4', '过去的都是浮云', 'https://p1.ssl.qhimgs1.com/sdr/400__/t01989576057c377587.jpg', 'http://img.smzy.com/Soft/UploadPic/2016-3/201631214351846179.jpg', 'https://p0.ssl.qhimgs1.com/sdr/400__/t01221d3ed68502af20.jpg', '61', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着， 一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
