@@ -82,6 +82,35 @@ public class MisTakenDao {
 		}
 		return null;
 	}
+	//按照学科(数学，语文，英语，)在数据库中查找题目
+	public List<SubjectMsg> searchSubjectMsgBySubjectAndTagDao(String subject,int uId){
+		List<SubjectMsg> subjectMsgs = new ArrayList<SubjectMsg>();
+		DbUtil dbUtil = DbUtil.getInstance();
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		try {
+			conn = dbUtil.getConnection();
+			String sql = "select * from tbl_mistaken where subject = ? and uId = ?";
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1,subject);
+			pstm.setInt(2,uId);
+			rs = pstm.executeQuery();
+			while(rs.next()) {
+				SubjectMsg subjectMsg = new SubjectMsg(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate("time"),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getInt(12));
+				subjectMsgs.add(subjectMsg);
+			}
+			dbUtil.closeConnection();
+			return subjectMsgs;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	//查询上一题
 	public SubjectMsg searchPreSubjectDao(int id,String subject,String tag,int uId) {
 		DbUtil dbUtil = DbUtil.getInstance();

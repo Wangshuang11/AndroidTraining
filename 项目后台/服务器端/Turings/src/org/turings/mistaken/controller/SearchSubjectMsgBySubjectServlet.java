@@ -44,13 +44,16 @@ public class SearchSubjectMsgBySubjectServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		String subject = request.getParameter("subject");
 		String tag = request.getParameter("tag");
-		System.out.println(tag);
 		int uId = Integer.parseInt(request.getParameter("uId"));
-		List<SubjectMsg> subjectMsgs = new MistakenService().searchSubjectMsgBySubjectAndTagService(subject, uId,tag);
+		List<SubjectMsg> subjectMsgs = null;
+		if(tag.equals("") || tag == null) {//没有tag，默认搜索全部学科题目
+			subjectMsgs = new MistakenService().searchSubjectMsgBySubjectAndTagService(subject, uId);
+		}else {
+			subjectMsgs = new MistakenService().searchSubjectMsgBySubjectAndTagService(subject, uId,tag);
+		}
 		PrintWriter out = response.getWriter();
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		String subjectMsgList = gson.toJson(subjectMsgs);
-		System.out.print(subjectMsgList);
 		out.write(subjectMsgList);
 		out.close();
 	}

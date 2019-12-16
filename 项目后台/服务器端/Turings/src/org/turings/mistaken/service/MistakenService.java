@@ -15,6 +15,10 @@ public class MistakenService {
 	public List<SubjectMsg> searchSubjectMsgBySubjectAndTagService(String subject,int uId, String tag){
 		return new MisTakenDao().searchSubjectMsgBySubjectAndTagDao(subject,uId,tag);
 	}
+	//没有tag按照学科搜索题目
+	public List<SubjectMsg> searchSubjectMsgBySubjectAndTagService(String subject,int uId){
+		return new MisTakenDao().searchSubjectMsgBySubjectAndTagDao(subject,uId);
+	}
 	//查询上一题
 	public SubjectMsg searchPreSubjectService(int id,String subject,String tag,int uId) {
 		return new MisTakenDao().searchPreSubjectDao(id, subject, tag, uId);
@@ -42,6 +46,6 @@ public class MistakenService {
 	
 	//返回所有错题的数量
 	public int countAllWrongQuestions(int uId) {
-		return new MisTakenDao().countAllWrongQuestions("select * from tbl_mistaken where uId="+1+"");
+		return new MisTakenDao().countAllWrongQuestions("select * from tbl_mistaken where uId="+uId+"");
 	}
 }
