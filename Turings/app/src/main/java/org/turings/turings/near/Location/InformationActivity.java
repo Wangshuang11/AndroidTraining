@@ -69,10 +69,7 @@ public class InformationActivity extends AppCompatActivity {
 
         resources = getResources();
         Intent intent = getIntent();
-        String lat1 = intent.getStringExtra("lat");
-        String lng1 = intent.getStringExtra("lng");
-        lat = Double.parseDouble(lat1);
-        lng = Double.parseDouble(lng1);
+
         getViews();
         registeLinstener();
         AnimationDrawable amDrawable = (AnimationDrawable) ivGuanzhu.getDrawable();
@@ -91,8 +88,6 @@ public class InformationActivity extends AppCompatActivity {
                 information = gson.fromJson(json, Information.class);
                 otherName = information.getUserName();
                 tvFollowName_lyh.setText(information.getUserName());
-                /*int id = resources.getIdentifier(information.getPortrait(),"mipmap", InformationActivity.this.getPackageName());
-                ivPortrait_lyh.setImageResource(id);*/
                 Glide.with(getApplicationContext()).load(information.getPortrait()).into(ivPortrait_lyh);
                 tvTime_lyh.setText(String.valueOf(information.getTotalTime()));
                 tvCurrentTime_lyh.setText(String.valueOf(information.getCurrentTime()));
@@ -101,7 +96,16 @@ public class InformationActivity extends AppCompatActivity {
             }
         };
 
-        sendToServer(lat,lng);
+        if (intent.getAction().equals("sxnToInfo")){
+            Log.e("hhhhhhhhhhh",intent.getStringExtra("name"));
+            sendToServer1(intent.getStringExtra("name"));
+        }else{
+            String lat1 = intent.getStringExtra("lat");
+            String lng1 = intent.getStringExtra("lng");
+            lat = Double.parseDouble(lat1);
+            lng = Double.parseDouble(lng1);
+            sendToServer(lat,lng);
+        }
     }
 
     private void registeLinstener() {
@@ -192,6 +196,26 @@ public class InformationActivity extends AppCompatActivity {
             public void run() {
                 try {
                     URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/BrowseInformationServlet?lat=" + lat + "&lng=" + lng);
+                    URLConnection conn = url.openConnection();
+                    InputStream in = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
+                    String info = reader.readLine();
+                    wrapperMessage(info);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+    public void sendToServer1(final String name) {
+
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/BrowseInfoByServlet?name="+name);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

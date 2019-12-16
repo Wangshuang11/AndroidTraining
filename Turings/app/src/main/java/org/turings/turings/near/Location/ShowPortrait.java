@@ -77,10 +77,9 @@ public class ShowPortrait {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
                     Intent intent = new Intent(context, InformationActivity.class);
+                    intent.setAction("lyhToInfo");
                     intent.putExtra("lat",marker.getPosition().latitude+"");
                     intent.putExtra("lng",marker.getPosition().longitude+"");
-                    Log.i("kkkk",marker.getPosition().latitude+"");
-                    Log.i("kkkk",marker.getPosition().longitude+"");
                     context.startActivity(intent);
                     return false;  //不能改为true
                 }

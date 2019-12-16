@@ -22,6 +22,7 @@ import org.turings.turings.myself.entity.Course;
 import org.turings.turings.myself.entity.Fan;
 import org.turings.turings.myself.entity.School;
 import org.turings.turings.myself.entity.User;
+import org.turings.turings.near.Location.InformationActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -51,6 +52,7 @@ public class MyUrl {
     private ImageAdapter imageAdapter;
     private FanAdapter fanAdapter;
     private CourseAdapter courseAdapter;
+    private Intent intent;
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -95,6 +97,13 @@ public class MyUrl {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             //跳转粉丝个人你主页
+                            intent=new Intent();
+                            String name1=fans.get(position).getName();
+                            intent.setClass(mc.getApplicationContext(), InformationActivity.class);
+                            intent.setAction("sxnToInfo");
+                            intent.putExtra("name",name1);
+                            mc.startActivity(intent);
+
                         }
                     });
                     break;
@@ -110,6 +119,12 @@ public class MyUrl {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             //跳转粉丝个人你主页
+                            intent=new Intent();
+                            String name1=fans.get(position).getName();
+                            intent.setClass(mc.getApplicationContext(), InformationActivity.class);
+                            intent.setAction("sxnToInfo");
+                            intent.putExtra("name",name1);
+                            mc.startActivity(intent);
                         }
                     });
                     break;
