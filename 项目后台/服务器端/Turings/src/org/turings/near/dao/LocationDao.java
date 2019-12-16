@@ -112,6 +112,54 @@ public class LocationDao {
 			}
 		}
 	}
+	public Information browseInfoByName(String name) {
+		DbUtil dbUtil = DbUtil.getInstance();
+		Connection con=null;
+		Information info = null;
+		PreparedStatement pstm = null;
+		try {
+			con=dbUtil.getConnection();
+			String sql1="";
+			sql1 = "select * from tbl_position where username=? ";
+			pstm = con.prepareStatement(sql1);
+			pstm.setString(1, name);
+			ResultSet rs = pstm.executeQuery(); 
+			while(rs.next()) {
+				String sql2="";
+				sql2 = "select * from tbl_self_user where uName=? ";
+				pstm = con.prepareStatement(sql2);
+				pstm.setString(1, rs.getString(2));
+				ResultSet rs1 = pstm.executeQuery();
+				while(rs1.next()) {
+					String sql3 = "select * from tbl_indexcollege where id IN (select sId from tbl_self_schools_favorite where uId= ?) limit 1";
+					pstm = con.prepareStatement(sql3);
+					pstm.setInt(1,rs.getInt(1));
+					ResultSet rs2 = pstm.executeQuery();
+					if (rs2.next()) {
+						info = new Information();
+						info.setId(rs1.getInt(1));
+						info.setUserName(rs1.getString("uName"));
+						info.setPortrait(rs1.getString("uAvatar"));
+						info.setTotalTime(rs1.getInt("uTime"));
+						info.setCurrentTime(rs1.getInt("uScore"));
+						info.setUniversity(rs2.getString("name"));
+						info.setMotto(rs1.getString("uMotto"));
+					}
+				}
+			}
+			return info;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				dbUtil.closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 	/**
 	 * 查询分享列表（不包含内容）
 	 * @param userName

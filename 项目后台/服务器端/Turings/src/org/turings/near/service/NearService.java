@@ -26,6 +26,9 @@ public class NearService {
 	public Information browseInfo(double lat,double lng) {
 		return new LocationDao().browseInfo(lat,lng);
 	}
+	public Information browseInfoByName(String name) {
+		return new LocationDao().browseInfoByName(name);
+	}
 	/**
 	 * 查询分享列表
 	 * @param userName
