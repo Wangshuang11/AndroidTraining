@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
 import com.sxt.library.chart.ChartPie;
 import com.sxt.library.chart.bean.ChartPieBean;
 import com.yalantis.ucrop.UCrop;
@@ -40,6 +41,7 @@ import org.turings.turings.R;
 import org.turings.turings.login.LoginActivity;
 import org.turings.turings.login.RegisterNewUserActivity;
 import org.turings.turings.mistaken.LookUpAndErrorReDoActivity;
+import org.turings.turings.mistaken.StatisticsResult;
 import org.turings.turings.mistaken.UploadWrongQuestionsActivity;
 
 import java.io.ByteArrayOutputStream;
@@ -79,6 +81,8 @@ public class MistakenFragment extends Fragment {
     private View view;
     private TextView tvInfo_ws;//错题以及组卷信息控件
     private String num;//用户添加错题的数量
+    /*private StatisticsResult statisticsResult;//后台分类统计错题数量结果
+    private String statisticsResultStr;//后台分类统计错题数量结果字符串*/
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -89,6 +93,14 @@ public class MistakenFragment extends Fragment {
                 case 101:
                     tvInfo_ws.setText("已添加错题 "+num+" 道   已组 0 套试卷");
                     break;
+                /*case 102:
+                    Gson gson=new Gson();
+                    statisticsResult=gson.fromJson(statisticsResultStr,StatisticsResult.class);
+                    //饼图数据
+                    initData(statisticsResult.getBigQuestion(),statisticsResult.getChoiceQuestion(),statisticsResult.getFillBlankQuestion());
+                    //开始画饼图
+                    drawPie();
+                    break;*/
             }
         }
     };
@@ -155,8 +167,36 @@ public class MistakenFragment extends Fragment {
         //后台统计已添加错题的数量
         countMyMistaken();
 
+        /*//后台分类统已添加错题数量
+        statisticsWrongQuestionsResult();*/
+
         return view;
     }
+
+    /*//后台分类统已添加错题数量
+    private void statisticsWrongQuestionsResult() {
+        new Thread(){
+            @Override
+            public void run() {
+                OkHttpClient okHttpClient=new OkHttpClient();
+                //post-FormBody传输，在一定程度上保证用户信息的安全
+                FormBody formBody=new FormBody.Builder()
+                        .add("uId", String.valueOf(uId))
+                        .build();
+                Request request=new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/StatisticsResultServlet").post(formBody).build();
+                Call call = okHttpClient.newCall(request);
+                try {
+                    statisticsResultStr=call.execute().body().string();
+                    Message message=new Message();
+                    message.obj=statisticsResultStr;
+                    message.what=102;
+                    handler.sendMessage(message);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }*/
 
     //后台统计已添加错题的数量
     private void countMyMistaken() {
@@ -200,14 +240,25 @@ public class MistakenFragment extends Fragment {
         Glide.with(getContext()).load(R.mipmap.mistakenlizhi).apply(requestOptions).into(ivClimbMountain_ws);
     }
 
+//    //饼图数据
+//    private void initData(int bigQuestion,int choiceQuestion,int fillBlankQuestion) {
+//        Log.e("hhhhhhhhhhhhhhhhhhh",bigQuestion+","+choiceQuestion+","+fillBlankQuestion);
+//        pieBeanList = new ArrayList<>();
+//        int num=(bigQuestion+choiceQuestion+fillBlankQuestion)/78;
+//        pieBeanList.add(new ChartPieBean(bigQuestion*num, "选择", R.color.colorMistakenTwo));
+//        pieBeanList.add(new ChartPieBean(15, "综合", R.color.colorAccent));
+//        pieBeanList.add(new ChartPieBean(7, "判断", R.color.colorBlue));
+//        pieBeanList.add(new ChartPieBean(fillBlankQuestion*num, "填空", R.color.colorMistakenOne));
+//        pieBeanList.add(new ChartPieBean(bigQuestion*num, "简答",R.color.colorPrimary));
+//    }
     //饼图数据
     private void initData() {
         pieBeanList = new ArrayList<>();
-        pieBeanList.add(new ChartPieBean(20, "选择", R.color.colorMistakenTwo));
-        pieBeanList.add(new ChartPieBean(20, "综合", R.color.colorAccent));
-        pieBeanList.add(new ChartPieBean(10, "判断", R.color.colorBlue));
-        pieBeanList.add(new ChartPieBean(20, "简答", R.color.colorMistakenOne));
-        pieBeanList.add(new ChartPieBean(30, "填空",R.color.colorPrimary));
+        pieBeanList.add(new ChartPieBean(23, "选择", R.color.colorMistakenTwo));
+        pieBeanList.add(new ChartPieBean(15, "综合", R.color.colorAccent));
+        pieBeanList.add(new ChartPieBean(7, "判断", R.color.colorBlue));
+        pieBeanList.add(new ChartPieBean(32, "填空", R.color.colorMistakenOne));
+        pieBeanList.add(new ChartPieBean(23, "简答",R.color.colorPrimary));
     }
 
     //开始画饼图

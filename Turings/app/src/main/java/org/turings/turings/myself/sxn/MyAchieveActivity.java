@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
@@ -16,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import org.turings.turings.MainActivity;
 import org.turings.turings.R;
+import org.turings.turings.myself.tools.MyUrl;
 
 
 public class MyAchieveActivity extends AppCompatActivity {
@@ -23,6 +25,9 @@ public class MyAchieveActivity extends AppCompatActivity {
     private Button back;
     private ImageView avatar;
     private Bitmap bitmap;
+    private TextView name;
+    private MyUrl myUrl;
+    private int id;
 
 
     @Override
@@ -33,7 +38,15 @@ public class MyAchieveActivity extends AppCompatActivity {
 
         back=findViewById(R.id.sxn_achieve_back);
         avatar=findViewById(R.id.sxn_achieve_avatar);
+        name=findViewById(R.id.sxn_achieve_name);
         circleAvatar();
+        Intent intent1=getIntent();
+        myUrl=new MyUrl(this);
+        id= Integer.parseInt(getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
+        if(intent1!=null){
+            myUrl.sendToServerMyAch(getResources().getString(R.string.connUrl)+"/ReFreshMyInfomation?uid="+id,
+                    R.layout.activity_achieve,avatar,name);
+        }
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.turings.turings.R;
+import org.turings.turings.index.gw.CouseXiangqing.CourseDetail;
 import org.turings.turings.myself.entity.Course;
 import org.turings.turings.myself.entity.Fan;
 import org.turings.turings.myself.entity.School;
@@ -53,10 +54,19 @@ public class MyUrl {
     private FanAdapter fanAdapter;
     private CourseAdapter courseAdapter;
     private Intent intent;
+    private RequestOptions requestOptions;
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
+                case R.layout.activity_achieve:
+                    info= (String) msg.obj;
+                    user=gson.fromJson(info, new TypeToken<User>(){}.getType());
+                    Log.e("1234567",user.getName());
+                    name.setText(user.getName());
+                    requestOptions=new RequestOptions().circleCrop();
+                    Glide.with(mc).load(user.getAvatar()).apply(requestOptions).into(avatar);
+                    break;
                 case R.layout.sxn_item_course:
                     //获取我的课程的数据
                     info= (String) msg.obj;
@@ -67,6 +77,9 @@ public class MyUrl {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             //跳转到课程详情
+                            intent=new Intent();
+                            intent.setClass(mc, CourseDetail.class);
+                            mc.startActivity(intent);
                         }
                     });
 
@@ -134,7 +147,6 @@ public class MyUrl {
                     user=gson.fromJson(info, new TypeToken<User>(){}.getType());
                     Log.e("nnn",user.getName());
                     name.setText(user.getName());
-                    RequestOptions requestOptions=new RequestOptions().circleCrop();
                     Log.e(user.getName(),user.getMotto()+"ggggggggggggggggggg");
                     motto.setText(user.getMotto());
                     requestOptions=new RequestOptions().circleCrop();
@@ -231,6 +243,33 @@ public class MyUrl {
                     Message msg = Message.obtain();
                     msg.obj = info;
                     msg.what=layout;
+                    handler.sendMessage(msg);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        thread.start();
+    }
+    public void sendToServerMyAch(final String str, final int layout,final ImageView uAvatar,final TextView uName) {
+        gson=new Gson();
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(str);
+                    URLConnection conn = url.openConnection();
+                    Log.e("1",conn.toString());
+                    InputStream in = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
+                    String info = reader.readLine();
+                    Message msg = Message.obtain();
+                    msg.obj = info;
+                    msg.what=layout;
+                    name=uName;
+                    avatar=uAvatar;
                     handler.sendMessage(msg);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();

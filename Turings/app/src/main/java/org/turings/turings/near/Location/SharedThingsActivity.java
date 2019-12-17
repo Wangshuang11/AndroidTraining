@@ -100,7 +100,7 @@ public class SharedThingsActivity extends AppCompatActivity {
 
             @Override
             public void onExpand() {
-                showToast("onExpand");
+
             }
 
             @Override
