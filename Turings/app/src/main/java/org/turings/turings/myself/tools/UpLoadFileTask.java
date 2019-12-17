@@ -60,11 +60,11 @@ public class UpLoadFileTask extends AsyncTask<String, Void, String> {
 //        super.onPostExecute(s);
 
 
-        Log.e("返回数据地址", "s");
-        Toast.makeText(
-                context,
-                s,
-                Toast.LENGTH_SHORT
-        ).show();
+        Log.e("返回数据地址", s);
+//        Toast.makeText(
+////                context,
+////                s,
+////                Toast.LENGTH_SHORT
+////        ).show();
     }
 }

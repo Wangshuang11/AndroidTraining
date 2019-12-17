@@ -43,6 +43,7 @@ import org.turings.turings.myself.sxn.MyNicknameActivity;
 import org.turings.turings.myself.sxn.MySchoolActivity;
 import org.turings.turings.myself.tools.MyUrl;
 import org.turings.turings.myself.tools.PhotoPopupWindow;
+import org.turings.turings.myself.tools.SimplePopupWindow;
 import org.turings.turings.myself.tools.UpLoadFileTask;
 import org.turings.turings.near.Location.ShareTitleActivity;
 import org.turings.turings.near.Location.WriteActivity;
@@ -95,6 +96,8 @@ public class MyselfFragment extends Fragment {
     private View view;
 
     private int id;
+
+    private SimplePopupWindow mPopupWindow;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -142,7 +145,7 @@ public class MyselfFragment extends Fragment {
         ivUnLogOfMyself_ws.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //弹出PopupWindow  ：样式待改，和修改昵称的相同
+                /*//弹出PopupWindow  ：样式待改，和修改昵称的相同
                 final PopupWindow popupWindow=new PopupWindow(getContext());
                 popupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
                 LayoutInflater layoutInflater=getLayoutInflater();
@@ -174,7 +177,31 @@ public class MyselfFragment extends Fragment {
                     }
                 });
                 popupWindow.setContentView(popupView);
-                popupWindow.showAtLocation(parent_ws, Gravity.CENTER,0,0);
+                popupWindow.showAtLocation(parent_ws, Gravity.CENTER,0,0);*/
+
+                //展示popup
+                mPopupWindow = new SimplePopupWindow(getActivity(), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //清空个人登录信息
+                        SharedPreferences sharedPreferences=getContext().getSharedPreferences("userInfo",MODE_PRIVATE);
+                        SharedPreferences.Editor editor=sharedPreferences.edit();
+                        editor.putString("name","");
+                        editor.putString("password","");
+                        editor.putString("phone","");
+                        editor.putString("uId","");
+                        editor.commit();
+                        //跳回我的fragment
+                        mPopupWindow.dismiss();
+                        Intent intent=new Intent(getContext(), MainActivity.class);
+                        intent.setAction("loginBackMyself");
+                        startActivity(intent);
+                    }
+                },"退出当前账号");
+                View rootView1 = LayoutInflater.from(getContext()).inflate(R.layout.activity_main, null);
+                mPopupWindow.showAtLocation(rootView1,
+                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+
             }
 
         });
@@ -279,11 +306,23 @@ public class MyselfFragment extends Fragment {
                     intent.setClass(getContext(), MyCourseActivity.class);
                     startActivity(intent);
                     break;
-                case R.id.sxn_motto_linear:
-                    showPopwindow(R.id.sxn_motto_text);
-                    break;
+//                case R.id.sxn_motto_linear:
+//                    showPopwindow(R.id.sxn_motto_text);
+//                    break;
                 case R.id.sxn_motto_text:
-                    showPopwindow(R.id.sxn_motto_text);
+                    mPopupWindow = new SimplePopupWindow(getActivity(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // 进入相册选择
+                            mPopupWindow.dismiss();
+                            intent.putExtra("beforeMotto", mottoT.getText().toString());
+                            intent.setClass(getContext(), MyMottoActivity.class);
+                            startActivityForResult(intent, 0);
+                        }
+                    },"修改座右铭");
+                    View rootView0 = LayoutInflater.from(getContext()).inflate(R.layout.activity_main, null);
+                    mPopupWindow.showAtLocation(rootView0,
+                            Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                     break;
                 case R.id.sxn_myachieve_linear:
                     intent.setClass(getContext(), MyAchieveActivity.class);
@@ -339,13 +378,25 @@ public class MyselfFragment extends Fragment {
                     intent.setClass(getContext(), WriteActivity.class);
                     startActivity(intent);
                     break;
-                case R.id.sxn_nickname_linear:
-                    //展示popup
-                    showPopwindow(R.id.sxn_nickname_text);
-                    break;
+//                case R.id.sxn_nickname_linear:
+//                    //展示popup
+//                    showPopwindow(R.id.sxn_nickname_text);
+//                    break;
                 case R.id.sxn_nickname_text:
                     //展示popup
-                    showPopwindow(R.id.sxn_nickname_text);
+                    mPopupWindow = new SimplePopupWindow(getActivity(), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // 进入相册选择
+                            mPopupWindow.dismiss();
+                            intent.putExtra("beforeName", nameT.getText().toString());
+                            intent.setClass(getContext(), MyNicknameActivity.class);
+                            startActivityForResult(intent, 0);
+                        }
+                    },"修改昵称");
+                    View rootView1 = LayoutInflater.from(getContext()).inflate(R.layout.activity_main, null);
+                    mPopupWindow.showAtLocation(rootView1,
+                            Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                     break;
             }
         }
