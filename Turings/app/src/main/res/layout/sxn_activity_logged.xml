@@ -202,7 +202,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/sxn_normal"
-                android:text="心仪学校"
+                android:text="推荐大学"
                 android:textSize="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_centerVertical="true"/>

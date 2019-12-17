@@ -97,7 +97,6 @@ public class InformationActivity extends AppCompatActivity {
         };
 
         if (intent.getAction().equals("sxnToInfo")){
-            Log.e("hhhhhhhhhhh",intent.getStringExtra("name"));
             sendToServer1(intent.getStringExtra("name"));
         }else{
             String lat1 = intent.getStringExtra("lat");

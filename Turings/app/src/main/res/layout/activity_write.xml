@@ -12,20 +12,20 @@
         android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="@color/colorBlue"
             android:padding="10dp">
             <ImageView
                 android:id="@+id/btnBack_lyh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@mipmap/nearback"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="26sp"
+                android:textSize="22sp"
                 android:layout_centerInParent="true"
                 android:text="我的分享"
                 android:textColor="@android:color/white"/>
@@ -37,10 +37,16 @@
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
     </LinearLayout>
-    <ListView
-        android:id="@+id/lvMyShare"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="match_parent"
+        android:background="@drawable/list2">
+        <ListView
+            android:id="@+id/lvMyShare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
+    </LinearLayout>
 
 
 </LinearLayout>

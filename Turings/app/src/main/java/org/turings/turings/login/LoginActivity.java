@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     private String result="";//服务器验证结果
     private String code;//后台生成的随机4位验证码也是用户短信验证码
     private String uTel;//用户输入的登录手机号
+    private int time=60;//短信验证码失效时间
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -73,6 +74,14 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                     intent.setAction("loginBackMyself");
                     startActivity(intent);
+                    break;
+                case 103:
+                    tvGetCode_ws.setText(time+" 秒后重新获取");
+                    time--;
+                    if (time==0){
+                        tvGetCode_ws.setText("获得验证码");
+                        time=60;
+                    }
                     break;
             }
         }
@@ -286,6 +295,22 @@ public class LoginActivity extends AppCompatActivity {
         tvGetCode_ws.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //点击倒计时
+                new Thread(){
+                    @Override
+                    public void run() {
+                        for (int i=0;i<60;i++){
+                            try {
+                                Thread.sleep(1000);
+                                Message message=new Message();
+                                message.what=103;
+                                handler.sendMessage(message);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }.start();
                 uTel=etPhone_ws.getText().toString();
                 new Thread(){
                     @Override

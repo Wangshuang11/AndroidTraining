@@ -37,6 +37,7 @@ public class RegisterNewUserActivity extends AppCompatActivity {
     private String result="";//后台服务器验证结果
     private String code;//后台生成的随机4位验证码也是用户短信验证码
     private TextView tvRegister_ws;//注册新用户按钮
+    private int time=60;//短信验证码失效时间
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -45,6 +46,7 @@ public class RegisterNewUserActivity extends AppCompatActivity {
                     if (result.equals("true")){
                         Toast.makeText(getApplicationContext(),"注册成功！",Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
+                        intent.putExtra("uName",input_name_ws.getText().toString());
                         startActivity(intent);
                     }else{
                         Toast.makeText(getApplicationContext(),"注册失败！",Toast.LENGTH_LONG).show();
@@ -66,6 +68,15 @@ public class RegisterNewUserActivity extends AppCompatActivity {
                         ivCheckNewPhone_ws.setImageResource(R.mipmap.loginno);
                     }
                     break;
+                case 103:
+                    tvGetCode_ws.setText(time+" 秒后重新获取");
+                    time--;
+                    if (time==0){
+                        tvGetCode_ws.setText("获得验证码");
+                        time=60;
+                    }
+                    break;
+
             }
         }
     };
@@ -205,6 +216,22 @@ public class RegisterNewUserActivity extends AppCompatActivity {
         tvGetCode_ws.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //点击倒计时
+                new Thread(){
+                    @Override
+                    public void run() {
+                        for (int i=0;i<60;i++){
+                            try {
+                                Thread.sleep(1000);
+                                Message message=new Message();
+                                message.what=103;
+                                handler.sendMessage(message);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }.start();
                 //向用户手机号发送一条短信
                 uTel=input_phone_ws.getText().toString();
                 new Thread(){

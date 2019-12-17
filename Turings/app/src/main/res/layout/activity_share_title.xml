@@ -12,20 +12,20 @@
         android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="@color/colorBlue"
             android:padding="10dp">
             <ImageView
                 android:id="@+id/btnBack_lyh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@mipmap/nearback"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="26sp"
+                android:textSize="22sp"
                 android:layout_centerInParent="true"
                 android:text="TA的分享"
                 android:textColor="@android:color/white"/>
@@ -34,7 +34,7 @@
 
     <ListView
         android:id="@+id/lvShare_lyh"
-        android:background="@drawable/listbj"
+        android:background="@drawable/nearlist4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
 
