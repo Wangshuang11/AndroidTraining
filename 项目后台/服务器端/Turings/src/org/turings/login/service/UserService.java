@@ -39,13 +39,19 @@ public class UserService {
 		String uName=user.getuName();
 		String uPwd=user.getuPwd();
 		String uTel=user.getuTel();
-		String sql="insert into tbl_self_user(uTel,uName,uPwd) values('"+uTel+"','"+uName+"','"+uPwd+"')";
+		String uAvatar="https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/i1t1576111585139.png";//默认头像
+		String uMotto="天生我才必有用";//默认座右铭
+		String sql="insert into tbl_self_user(uTel,uName,uPwd,uMotto,uAvatar) values('"+uTel+"','"+uName+"','"+uPwd+"','"+uMotto+"','"+uAvatar+"')";
 		
-		/*向position表里增加一个用户*/
-		String sqlPosition="insert into tbl_position(username) values('"+uName+"')";
-		if(new UserDao().modifyUser(sqlPosition)) {
-			/*向user表里增加一个用户*/
-			return new UserDao().modifyUser(sql);
+		if(new UserDao().modifyUser(sql)) {/*向user表里增加一个用户*/
+			/*查询新增加用户的uId*/
+			int uId=Integer.parseInt(new UserDao().queryUser("select * from tbl_self_user where uName='"+uName+"'"));
+			String sqlPosition="insert into tbl_position(id,username,portrait,lat,lng) values("+uId+",'"+uName+"','i21','37.9977','114.52262')";
+			if (new UserDao().modifyUser(sqlPosition)) {/*向position表里增加一个用户:头像、坐标默认*/
+				/*向tbl_self_schools_favorite表里增加一个用户：默认目标大学：清华大学*/
+				return new UserDao().modifyUser("insert into tbl_self_schools_favorite(sId,uId) values(1,"+uId+")");
+			}
+			
 		}
 		return false;
 	}
