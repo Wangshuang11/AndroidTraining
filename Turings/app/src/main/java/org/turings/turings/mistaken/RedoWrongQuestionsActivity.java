@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
@@ -420,7 +421,7 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
     private void showPopupWindow(){
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.popup_window_choose_layout_ylx,null,false);
-        popupWindow = new PopupWindow(view, ActionBar.LayoutParams.MATCH_PARENT,ActionBar.LayoutParams.WRAP_CONTENT);
+        popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         popupWindow.setTouchable(true);
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
             @Override
@@ -471,6 +472,7 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
         popupWindow.setContentView(view);
         //设置背景透明
         addBackground();
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));    //要为popWindow设置一个背景才有效
         popupWindow.setAnimationStyle(R.style.PopupWindowAnimation);
         //弹出窗口父视图对象
         RelativeLayout parent = findViewById(R.id.parent_ylx);
@@ -481,11 +483,19 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
     private void  showSubjectFixPopupWindow(){
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.popup_window_subject_fix_layout_ylx,null,false);
-        popupWindow = new PopupWindow(view, ActionBar.LayoutParams.MATCH_PARENT,ActionBar.LayoutParams.WRAP_CONTENT);
+        popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setTouchable(true);
+        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+            }
+        });
         //设置弹出窗口显示内容的视图
         popupWindow.setContentView(view);
         //设置背景透明
         addBackground();
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));    //要为popWindow设置一个背景才有效
         //语文
         final Button btnChinese = view.findViewById(R.id.btn_chinese_ylx);
         //数学
@@ -559,11 +569,19 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
     private void showFixTagPopupWindow(){
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.popup_window_edit_subject_tag_layout_ylx,null,false);
-        popupWindow = new PopupWindow(view, ActionBar.LayoutParams.MATCH_PARENT,ActionBar.LayoutParams.WRAP_CONTENT);
+        popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setTouchable(true);
+        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+            }
+        });
         //设置弹出窗口显示内容的视图
         popupWindow.setContentView(view);
         //设置背景透明
         addBackground();
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));    //要为popWindow设置一个背景才有效
         //获取弹出框布局中的确定按钮，点击关闭此弹出框，回到最初弹出框
         final Button btnOk = view.findViewById(R.id.btn_ok);
         spinner = view.findViewById(R.id.spinner_ylx);

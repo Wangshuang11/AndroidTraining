@@ -443,8 +443,6 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                popupWindow.dismiss();
-                showPopupWindow();
                 return false;
             }
         });
@@ -533,8 +531,6 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
         popupWindow.setTouchInterceptor(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                popupWindow.dismiss();
-                showPopupWindow();
                 return false;
             }
         });
