@@ -389,9 +389,9 @@ public class LookUpAndErrorReDoActivity extends AppCompatActivity {
         //设置字体颜色为蓝色
         fixTextColor(R.id.item_one,"七选五",0,3);
         fixTextColor(R.id.item_two,"英语知识运用",0,6);
-        fixTextColor(R.id.item_three,"三角函数",0,4);
-        fixTextColor(R.id.item_four,"语法填空",0,4);
-        fixTextColor(R.id.item_five,"短文改错",0,4);
+        fixTextColor(R.id.item_three,"语法填空",0,4);
+        fixTextColor(R.id.item_four,"短文改错",0,4);
+        fixTextColor(R.id.item_five,"书面表达",0,4);
         // menu的item点击事件
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
