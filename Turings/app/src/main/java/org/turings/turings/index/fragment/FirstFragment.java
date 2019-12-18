@@ -313,7 +313,7 @@ public class FirstFragment extends Fragment{
             subjects.add(math);
             Subject chinese = new Subject("语文", R.drawable.subchinese);
             subjects.add(chinese);
-            Subject english = new Subject("英语", R.drawable.subenglish);
+            Subject english = new Subject("英语", R.drawable.english2);
             subjects.add(english);
             Subject history = new Subject("历史", R.drawable.subhistory);
             subjects.add(history);
