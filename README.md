@@ -11,10 +11,14 @@
 
 
 
-
+## 项目展示
 <div align="center">
-<img src="imagefolder/index.jpg" height="330" width="190" >
-<img src="imagefolder/index.jpg" height="330" width="190" >
-<img src="imagefolder/index.jpg" height="330" width="190" >
+<img src="imagefolder/index.jpg" height="350" width="190" >
+<img src="imagefolder/mistake.jpg" height="350" width="190" >
+<img src="imagefolder/near.jpg" height="350" width="190" >
+<img src="imagefolder/myself.jpg" height="350" width="190" >
  </div>
+ 
+ ## 项目成员
+ 杨柳鑫  单鑫楠   王爽  刘鹏辉  郭伟  吕怡浩   金鑫媛
 
