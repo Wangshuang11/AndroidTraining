@@ -19,7 +19,7 @@
 <img src="imagefolder/myself.jpg" height="350" width="190" >
  </div>
  
- ## 项目成员
+ ## TURINGS团队成员
   
  ##### 杨柳鑫  单鑫楠   王爽  刘鹏辉  郭伟  吕怡浩   金鑫媛
  用户反馈内容请加入Turings官方QQ群，留下您宝贵的意见~
