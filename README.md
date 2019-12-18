@@ -24,7 +24,7 @@
  ##### 杨柳鑫  单鑫楠   王爽  刘鹏辉  郭伟  吕怡浩   金鑫媛
  用户反馈内容请加入Turings官方QQ群，留下您宝贵的意见~
  <div align="center">
-<img src="imagefolder/turings.jpg" height="150" width="80" >
+<img src="imagefolder/turings.jpg" height="130" width="80" >
  </div>
   
 
