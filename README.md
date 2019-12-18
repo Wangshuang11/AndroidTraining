@@ -10,5 +10,5 @@
      中生可以将重要的错题进行拍照记录和查看相关的讲解视频，避免查而不会或查而不懂的问题。有鉴于此，我们的项目应运而生。
 
 # 主要功能
-![首页](https://github.com/Wangshuang11/AndroidTraining/blob/master/imagefolder/index.jpg)
+![首页](imagefolder/index.jpg)
 
