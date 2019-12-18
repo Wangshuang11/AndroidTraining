@@ -34,6 +34,7 @@ import org.turings.turings.MainActivity;
 import org.turings.turings.R;
 import org.turings.turings.login.LoginActivity;
 import org.turings.turings.login.RegisterNewUserActivity;
+import org.turings.turings.myself.sxn.AboutInfoActivity;
 import org.turings.turings.myself.sxn.MyAchieveActivity;
 import org.turings.turings.myself.sxn.MyConcernActivity;
 import org.turings.turings.myself.sxn.MyCourseActivity;
@@ -306,9 +307,6 @@ public class MyselfFragment extends Fragment {
                     intent.setClass(getContext(), MyCourseActivity.class);
                     startActivity(intent);
                     break;
-//                case R.id.sxn_motto_linear:
-//                    showPopwindow(R.id.sxn_motto_text);
-//                    break;
                 case R.id.sxn_motto_text:
                     mPopupWindow = new SimplePopupWindow(getActivity(), new View.OnClickListener() {
                         @Override
@@ -378,10 +376,6 @@ public class MyselfFragment extends Fragment {
                     intent.setClass(getContext(), WriteActivity.class);
                     startActivity(intent);
                     break;
-//                case R.id.sxn_nickname_linear:
-//                    //展示popup
-//                    showPopwindow(R.id.sxn_nickname_text);
-//                    break;
                 case R.id.sxn_nickname_text:
                     //展示popup
                     mPopupWindow = new SimplePopupWindow(getActivity(), new View.OnClickListener() {
@@ -397,6 +391,11 @@ public class MyselfFragment extends Fragment {
                     View rootView1 = LayoutInflater.from(getContext()).inflate(R.layout.activity_main, null);
                     mPopupWindow.showAtLocation(rootView1,
                             Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                    break;
+                case R.id.sxn_track_linear:
+                    Intent about = new Intent();
+                    about.setClass(getContext(), AboutInfoActivity.class);
+                    startActivity(about);
                     break;
             }
         }

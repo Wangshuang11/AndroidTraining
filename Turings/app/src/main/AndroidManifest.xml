@@ -102,6 +102,7 @@
         <activity android:name=".myself.sxn.MyMottoActivity" />
         <activity android:name=".myself.sxn.MyNicknameActivity" />
         <activity android:name=".myself.sxn.MySchoolActivity" />
+        <activity android:name=".myself.sxn.AboutInfoActivity"/>
     </application>
 
 </manifest>
