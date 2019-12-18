@@ -12,10 +12,9 @@
 
 
 
-
-
-![首页](imagefolder/index.jpg)
-![错题本](imagefolder/mistake.jpg)
-![附近](imagefolder/near.jpg)
-![我的](imagefolder/myself.jpg)
+<div align="center">
+<img src="imagefolder/index.jpg" height="330" width="190" >
+<img src="imagefolder/index.jpg" height="330" width="190" >
+<img src="imagefolder/index.jpg" height="330" width="190" >
+ </div>
 
