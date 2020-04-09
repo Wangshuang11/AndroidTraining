@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.turings.near.dao.InformationMapper">
+	<resultMap type="org.turings.near.entity.Information" id="InformationMap">
+		<id property="id" column="id"></id>
+		<result property="userName" column="username"/>
+		<result property="portrait" column="portrait"/>
+		<result property="totalTime" column="totaltime"/>
+		<result property="currentTime" column="currenttime"/>
+		<result property="university" column="university"/>
+		<result property="motto" column="motto"/>
+	</resultMap>
+	
+	<select id="browseInfo" resultMap="InformationMap">
+		select b.uId,b.uName,b.uAvatar,b.uTime,b.uScore,c.name,b.uMotto
+		from tbl_position a,tbl_self_user b,tbl_indexcollege c
+		where a.lat=#{lat} and a.lng=#{lng} and b.uName=a.username and c.id IN(select sId from tbl_self_schools_favorite where uId= a.id) limit 1
+	</select>
+	
+	<select id="browseInfoByName" resultMap="InformationMap">
+		select b.uId,b.uName,b.uAvatar,b.uTime,b.uScore,c.name,b.uMotto
+		from tbl_position a,tbl_self_user b,tbl_indexcollege c
+		where a.username='王大爽' and b.uName=a.username and c.id IN(select sId from tbl_self_schools_favorite where uId= a.id) limit 1
+	</select>
+</mapper>

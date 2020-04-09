@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.turings.near.dao.PositionMapper">
+	<resultMap type="org.turings.near.entity.Position" id="PositionMap">
+		<id property="id" column="id"></id>
+		<result property="userName" column="username"/>
+		<result property="portrait" column="portrait"/>
+		<result property="lat" column="lat"/>
+		<result property="lng" column="lng"/>
+		<result property="type" column="type"/>
+	</resultMap>
+	
+	<select id="browseLoc" resultType="PositionMap">
+		select * from tbl_position where username != #{userName}
+	</select>
+	
+	
+</mapper>
