@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:映射器接口的全名 -->
+<mapper namespace="org.turings.index.story.dao.StoryMapper">
+    <!-- 结果映射 -->
+    <resultMap type="org.turings.index.entity.Story" id="storyMapper">
+        <result column="title" property="title"/>
+        <result column="img1" property="img1"/>
+        <result column="img2" property="img2"/>
+        <result column="img3" property="img3"/>
+        <result column="num" property="num"/>
+        <result column="content" property="content"/>
+    </resultMap>
+    <select id="findStoryAll" resultMap="storyMapper">
+           select * from tbl_story
+    </select>
+   	<update id="updateStory">
+   	</update>
+</mapper>

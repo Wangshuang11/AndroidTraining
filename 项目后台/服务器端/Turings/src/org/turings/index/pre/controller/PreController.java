@@ -2,29 +2,25 @@ package org.turings.index.pre.controller;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.turings.index.entity.Pre;
-import org.turings.index.pre.dao.PreDao;
+import org.turings.index.pre.service.PreService;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
+@Controller
+@RequestMapping("/lph")
 public class PreController {
-	public List<Pre> findAll() {
-		return new PreDao().findAll();
-	}
-
-	public String toJsonArray(List<Pre> list) {
-		JSONArray array = new JSONArray();
-		for (int i = 0; i < list.size(); i++) {
-			JSONObject obj = new JSONObject();
-			obj.put("title", list.get(i).getTitle());
-			obj.put("img", list.get(i).getImg());
-			obj.put("content", list.get(i).getContent());
-			obj.put("src", list.get(i).getSrc());
-			array.add(obj);
-		}
-		JSONObject objt = new JSONObject();
-		objt.put("list", array);
-		return objt.toString();
+	@Resource
+	private PreService preService;
+	@ResponseBody
+	@RequestMapping(value="/findPreAll",produces="text/json;charset=utf-8")
+	public String findPreAll() {
+		List<Pre>pres=this.preService.findPreAll();
+		String string=this.preService.toJsonArray(pres);
+		System.out.println(string);
+		return string;
 	}
 }

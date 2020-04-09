@@ -1,36 +1,24 @@
 package org.turings.index.story.controller;
-
 import java.util.List;
 
+import javax.annotation.Resource;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.turings.index.entity.Story;
-import org.turings.index.story.dao.StoryDao;
+import org.turings.index.story.service.StoryService;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
+@Controller
+@RequestMapping("/lph")
 public class StoryController {
-	public List<Story> findStoryAll() {
-		return new StoryDao().findStoryAll();
-	}
-
-	public String toStringJson(List<Story> list) {
-		JSONArray array = new JSONArray();
-		for (int i = 0; i < list.size(); i++) {
-			JSONObject obj = new JSONObject();
-			obj.put("title", list.get(i).getTitle());
-			obj.put("img1", list.get(i).getImg1());
-			obj.put("img2", list.get(i).getImg2());
-			obj.put("img3", list.get(i).getImg3());
-			obj.put("num", list.get(i).getNum());
-			obj.put("content", list.get(i).getContent());
-			array.add(obj);
-		}
-		JSONObject objt = new JSONObject();
-		objt.put("list", array);
-		return objt.toString();
-	}
-
-	public String updateStory(String title, String flag) {
-		return new StoryDao().updateStory(title, flag);
+	@Resource
+	private StoryService storyService;
+	@ResponseBody
+	@RequestMapping(value="/findStoryAll",produces="text/json;charset=utf-8")
+	public String findStoryAll() {
+		
+		List<Story>list=this.storyService.findStoryAll();
+		System.out.println(this.storyService.toStringJson(list));
+		return this.storyService.toStringJson(list);
 	}
 }
