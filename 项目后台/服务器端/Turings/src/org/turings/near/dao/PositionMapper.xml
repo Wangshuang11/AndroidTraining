@@ -12,7 +12,7 @@
 		<result property="type" column="type"/>
 	</resultMap>
 	
-	<select id="browseLoc" resultType="PositionMap">
+	<select id="browseLoc" resultMap="PositionMap">
 		select * from tbl_position where username != #{userName}
 	</select>
 	

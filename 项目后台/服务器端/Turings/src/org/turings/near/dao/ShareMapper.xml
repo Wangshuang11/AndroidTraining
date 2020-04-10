@@ -11,11 +11,11 @@
 		<result property="background" column="background"/>
 	</resultMap>
 	
-	<select id="browseShareTitle" resultType="ShareMap">
+	<select id="browseShareTitle" resultMap="ShareMap">
 		select * from tbl_share where username=#{userName}
 	</select>
 	
-	<select id="browseShareContext" resultType="ShareMap">
+	<select id="browseShareContext" resultMap="ShareMap">
 		select * from tbl_share where sharetitle=#{title}
 	</select>
 	

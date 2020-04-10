@@ -8,5 +8,9 @@
 </head>
 <body>
 	<a href="/Turings/lph/findStoryAll">findAll</a>
+	
+	
+	
+	<a href="/Turings/lyh/findOne">location</a>
 </body>
 </html>
