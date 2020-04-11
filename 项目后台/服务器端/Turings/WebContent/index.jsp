@@ -7,7 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-哈哈哈
-
+	<a href="/Turings/lph/findStoryAll">findAll</a>
+	
+	
+	
+	<a href="/Turings/lyh/findOne">location</a>
 </body>
 </html>

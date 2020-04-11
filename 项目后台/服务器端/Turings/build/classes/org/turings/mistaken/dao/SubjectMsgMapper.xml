@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:映射器接口的全名 -->
+<mapper namespace="org.turings.mistaken.dao.SubjectMsgMapper">
+	<select id="findSubjectMsgByTag" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken
+		<where>
+			uId = #{uId} and subject = #{subject}
+	        <if test="tag != null and !tag.equals('')">
+	            and tag = #{tag}
+	        </if>
+    	</where>	
+	</select>
+	<!--查找上一题-->
+	<select id="findPreSubjectMsgById" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken where id = (select max(id) from tbl_mistaken where id &lt; #{id} and subject = #{subject} and tag = #{tag} and uId = #{uId})
+	</select>
+	<!--查找下一题-->
+	<select id="findNextSubjectMsgById" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken where id = (select min(id) from tbl_mistaken where id &gt; #{id} and subject = #{subject} and tag = #{tag} and uId = #{uId})
+	</select>
+	<!--改变题目标签  -->
+	<update id="changeTagById">
+		update tbl_mistaken set tag = #{tag} where id = #{id}
+	</update>
+	<!--更改题目学科  -->
+	<update id="changeSubjectById">
+		update tbl_mistaken set subject = #{subject} where id = #{id}
+	</update>
+	<!--表中查询头一条符合条件的题目  -->
+	<select id="findFirstSubjectMsgById" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken where uId = #{uId} and tag = #{tag} and subject = #{subject} and id != #{id} limit 1
+	</select>
+	<!--删除题目  -->
+	<delete id="deleteSubjectMsg">
+		delete from tbl_mistaken where id = #{id}
+	</delete>
+	<!--上传错题  -->
+	<insert id="saveSubjectMsg" parameterType="org.turings.mistaken.entity.SubjectMsg">
+		insert into tbl_mistaken(subject,tag,type,time,titleImg,optionA,optionB,optionC,optionD,answer,uId) 
+    	values(#{subject},#{tag},#{type},#{time},#{titleImg},#{optionA},#{optionB},#{optionC},#{optionD},#{answer},#{uId}) 
+	</insert>
+	<!--统计错题数量  -->
+	<select id="countForSubjectMsgById" resultType="int">
+		select count(*) from tbl_mistaken where uId= #{uId}
+	</select>
+</mapper>

@@ -2,58 +2,75 @@ package org.turings.near.service;
 
 import java.util.List;
 
-import org.turings.near.dao.LocationDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.turings.near.dao.InformationMapper;
+import org.turings.near.dao.PositionMapper;
+import org.turings.near.dao.ShareMapper;
 import org.turings.near.entity.Information;
 import org.turings.near.entity.Share;
 
+@Service
+@Transactional(readOnly=true)
 public class NearService {
+
+	@Autowired
+	private InformationMapper informationMapper;
+	@Autowired
+	private PositionMapper positionMapper;
+	@Autowired
+	private ShareMapper shareMapper;
+	
 	/**
-	 * ¸üĞÂ¶¨Î»£¬ÏÔÊ¾ÆäËûÓÃ»§
+	 * æ›´æ–°å®šä½ï¼Œæ˜¾ç¤ºå…¶ä»–ç”¨æˆ·
 	 * @param userName
 	 * @param lat
 	 * @param lng
 	 * @return
 	 */
 	public List browseLoc(String userName,double lat,double lng) {
-		return new LocationDao().browseLoc(userName,lat,lng);
+		return positionMapper.browseLoc(userName, lat, lng);
 	}
 	/**
-	 * »ñÈ¡Ä³Ò»ÓÃ»§ĞÅÏ¢
+	 * è·å–æŸä¸€ç”¨æˆ·ä¿¡æ¯
 	 * @param lat
 	 * @param lng
 	 * @return
 	 */
 	public Information browseInfo(double lat,double lng) {
-		return new LocationDao().browseInfo(lat,lng);
+		return informationMapper.browseInfo(lat,lng);
 	}
 	public Information browseInfoByName(String name) {
-		return new LocationDao().browseInfoByName(name);
+		return informationMapper.browseInfoByName(name);
 	}
 	/**
-	 * ²éÑ¯·ÖÏíÁĞ±í
+	 * æŸ¥è¯¢åˆ†äº«åˆ—è¡¨
 	 * @param userName
 	 * @return
 	 */
 	public List browseShare(String userName) {
-		return new LocationDao().browseShareTitle(userName);
+		return shareMapper.browseShareTitle(userName);
 	}
 	/**
-	 * ²éÑ¯·ÖÏíÎÄ±¾
+	 * æŸ¥è¯¢åˆ†äº«æ–‡æœ¬
 	 * @param title
 	 * @return
 	 */
 	public Share browseShareContent(String title) {
-		return new LocationDao().browseShareContext(title);
+		return shareMapper.browseShareContext(title);
 	}
 	/**
-	 * Ôö¼ÓÒ»Ìõ·ÖÏí
+	 * å¢åŠ ä¸€æ¡åˆ†äº«
 	 * @param userName
 	 * @param title
 	 * @param content
 	 * @param background
 	 * @return
 	 */
+	@Transactional(readOnly = false)
 	public int insertShare(String userName,String title,String content,String background) {
-		return new LocationDao().insertShare(userName, title, content, background);
+		return shareMapper.insertShare(userName, title, content, background);
 	}
+	
 }

@@ -1,5 +1,7 @@
 package org.turings.login.entity;
 
+import org.turings.login.util.CodeMyALi;
+
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
@@ -11,7 +13,8 @@ import com.aliyuncs.profile.DefaultProfile;
 
 public class SendSms {
     public static void sendSms(String uTel,int code) {
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4FrAGuiodb8JgCBNPxDQ", "puFDV1nJCw0ecT4Mb9JDBDKCd6M95K");
+    	CodeMyALi codeMyALi=new CodeMyALi();
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", codeMyALi.deCode(), codeMyALi.deCode2());
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();

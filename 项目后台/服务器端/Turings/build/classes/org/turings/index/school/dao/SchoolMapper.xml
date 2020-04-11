@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:映射器接口的全名 -->
+<mapper namespace="org.turings.index.school.dao.SchoolMapper">
+    <!-- 结果映射 -->
+    <resultMap type="org.turings.index.entity.School" id="schoolMapper">
+        <result column="name" property="name"/>
+        <result column="img" property="img"/>
+        <result column="url" property="url"/>
+        <result column="src" property="src"/>
+    </resultMap>
+    <select id="findSchoolByFlag" resultMap="schoolMapper">
+           select * from tbl_indexcollege where flag=#{flag}
+    </select>
+</mapper>

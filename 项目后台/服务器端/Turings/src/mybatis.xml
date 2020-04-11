@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+<configuration>
+	<!-- 属性相关配置 -->
+    <properties resource="db.properties"></properties>
+    <!-- 通用设置：延迟加载、缓存、日志显示方式 -->
+    <settings>
+         <!-- 输出SQL语句 -->
+         <setting name="logImpl" value="STDOUT_LOGGING"/>
+         <!--<setting name="lazyLoadingEnable" value="true"/> -->
+    </settings>
+  
+     <mappers>
+       <package name="org.turings"/>
+    </mappers>
+</configuration>

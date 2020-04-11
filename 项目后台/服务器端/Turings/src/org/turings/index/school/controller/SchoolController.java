@@ -2,30 +2,28 @@ package org.turings.index.school.controller;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.turings.index.entity.School;
-import org.turings.index.school.dao.SchoolDao;
+import org.turings.index.school.service.SchoolService;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
+@Controller
+@RequestMapping("/lph")
 public class SchoolController {
-	public List<School> findSchool(String flag) {
-		return new SchoolDao().findSchool(flag);
-	}
-
-	public String toJsonArray(List<School> list) {
-		JSONArray array = new JSONArray();
-		for (int i = 0; i < list.size(); i++) {
-			JSONObject obj = new JSONObject();
-			obj.put("name", list.get(i).getName());
-			obj.put("img", list.get(i).getImg());
-			obj.put("url", list.get(i).getUrl());
-			obj.put("src", list.get(i).getSrc());
-			array.add(obj);
+	@Resource
+	private SchoolService schoolService;
+	@ResponseBody
+	@RequestMapping(value="/school",produces="text/json;charset=utf-8")
+	public String findSchool(@RequestParam(value="flag") String flag) {
+		if(flag!=null) {
+			List<School>schools=this.schoolService.findSchoolByFlag(flag);
+			String jsonArray=this.schoolService.toJsonArray(schools);
+			return jsonArray;
 		}
-		JSONObject objt = new JSONObject();
-		objt.put("list", array);
-		return objt.toString();
+		return null;
 	}
-
 }
