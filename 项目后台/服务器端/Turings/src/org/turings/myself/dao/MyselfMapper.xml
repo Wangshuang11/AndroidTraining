@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:映射器接口的全名 -->
+<mapper namespace="org.turings.myself.dao.MyselfMapper">
+<!-- xml文件就按照这个来写 -->
+	<select id="findSubjectMsgByTag" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken
+		<where>
+			uId = #{uId} and subject = #{subject}
+	        <if test="tag != null and !tag.equals('')">
+	            and tag = #{tag}
+	        </if>
+    	</where>	
+	</select>
+</mapper>
