@@ -10,6 +10,7 @@ import org.turings.index.entity.School;
 import org.turings.login.entity.User;
 import org.turings.myself.dao.MyselfMapper;
 import org.turings.myself.entity.CourseInfo;
+import org.turings.myself.entity.Myself;
 import org.turings.myself.entity.UserInfo;
 
 @Service
@@ -45,6 +46,9 @@ public class MyselfService {
 	//显示学校
 	public List<School> listSchools(int uid) {
 		return this.myselfMapper.listSchools(uid);
+	}
+	public List<Myself> refreshUserInfo(int uid) {
+		return this.myselfMapper.refreshUserInfo(uid);
 	}
 	
 	

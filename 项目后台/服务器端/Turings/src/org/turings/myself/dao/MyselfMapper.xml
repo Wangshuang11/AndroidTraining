@@ -36,4 +36,8 @@
 	<select id="listSchools" resultType="org.turings.myself.entity.School">
 		select * from tbl_indexcollege where id IN (select sId from tbl_self_schools_favorite where uId= #{uid})
 	</select>
+	<!-- 显示用户信息 -->
+	<select id="refreshUserInfo" resultType="org.turings.myself.entity.Myself">
+		select * from tbl_self_user where uId = #{uid}
+	</select>
 </mapper>
