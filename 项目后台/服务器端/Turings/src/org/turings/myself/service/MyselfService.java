@@ -6,11 +6,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.turings.index.entity.School;
 import org.turings.login.entity.User;
 import org.turings.myself.dao.MyselfMapper;
 import org.turings.myself.entity.CourseInfo;
 import org.turings.myself.entity.Myself;
+import org.turings.myself.entity.SchoolInfo;
 import org.turings.myself.entity.UserInfo;
 
 @Service
@@ -44,7 +44,7 @@ public class MyselfService {
 		return this.myselfMapper.edituName(uid,uName);
 	}
 	//显示学校
-	public List<School> listSchools(int uid) {
+	public List<SchoolInfo> listSchools(int uid) {
 		return this.myselfMapper.listSchools(uid);
 	}
 	public List<Myself> refreshUserInfo(int uid) {

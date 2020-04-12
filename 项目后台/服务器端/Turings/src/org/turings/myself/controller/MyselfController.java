@@ -8,10 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.turings.index.entity.School;
 import org.turings.login.entity.SendSms;
 import org.turings.myself.entity.CourseInfo;
 import org.turings.myself.entity.Myself;
+import org.turings.myself.entity.SchoolInfo;
 import org.turings.myself.entity.UserInfo;
 import org.turings.myself.service.MyselfService;
 
@@ -57,7 +57,7 @@ public class MyselfController {
 	}
 	//显示学校
 	@RequestMapping(value="/InputAvatar",produces="text/json;charset=utf-8")
-	public List<School> showSchool(@RequestParam(value = "uid") int uid) {
+	public List<SchoolInfo> showSchool(@RequestParam(value = "uid") int uid) {
 		return this.myselfService.listSchools(uid);
 	}
 	//显示用户信息

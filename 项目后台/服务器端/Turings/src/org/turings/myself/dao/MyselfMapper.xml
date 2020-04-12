@@ -33,7 +33,7 @@
 		update tbl_self_user set uName=#{uname} where uId=#{uid}
 	</update>
 	<!-- 编辑学校 -->
-	<select id="listSchools" resultType="org.turings.myself.entity.School">
+	<select id="listSchools" resultType="org.turings.myself.entity.SchoolInfo">
 		select * from tbl_indexcollege where id IN (select sId from tbl_self_schools_favorite where uId= #{uid})
 	</select>
 	<!-- 显示用户信息 -->

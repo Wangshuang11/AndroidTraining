@@ -3,9 +3,9 @@ package org.turings.myself.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.turings.index.entity.School;
 import org.turings.myself.entity.CourseInfo;
 import org.turings.myself.entity.Myself;
+import org.turings.myself.entity.SchoolInfo;
 import org.turings.myself.entity.UserInfo;
 
 public interface MyselfMapper {
@@ -22,7 +22,7 @@ public interface MyselfMapper {
 	//编辑网名
 	public int edituName(@Param("uid")int uid,@Param("uname")int uname);
 	//显示学校
-	public List<School> listSchools(@Param("uid")int uid);
+	public List<SchoolInfo> listSchools(@Param("uid")int uid);
 	//显示用户信息
 	public List<Myself> refreshUserInfo(@Param("uid")int uid);
 }
