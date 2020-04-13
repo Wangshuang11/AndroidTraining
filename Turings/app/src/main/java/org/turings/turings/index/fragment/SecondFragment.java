@@ -91,7 +91,7 @@ public class SecondFragment extends Fragment{
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/story");
+                    URL url = new URL("http://"+getResources().getString(R.string.lphipConfig)+":8080/Turings/lph/findStoryAll");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

@@ -5,6 +5,7 @@
     <string name="newline">\n</string>
     <string name="connUrl">http://101.200.86.151:8080/Turings</string>
     <string name="ipConfig">101.200.86.151</string>
+    <string name="lphipConfig">192.168.2.170</string>
      <!--<string name="connUrl">http://10.7.89.174:8080/Turings</string>
     <string name="ipConfig">10.7.89.174</string>-->
     <string-array name="tag">

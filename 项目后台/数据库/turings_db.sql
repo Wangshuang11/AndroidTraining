@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50506
 File Encoding         : 65001
 
-Date: 2019-12-16 17:06:18
+Date: 2020-04-13 21:34:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -205,7 +205,7 @@ CREATE TABLE `tbl_indexname` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `img` varchar(20) DEFAULT NULL,
-  `paracount` int(11) DEFAULT NULL,
+  `content` text,
   `src` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
@@ -213,10 +213,10 @@ CREATE TABLE `tbl_indexname` (
 -- ----------------------------
 -- Records of tbl_indexname
 -- ----------------------------
-INSERT INTO `tbl_indexname` VALUES ('1', '大学起源', 'co', '2', 'https://p1.ssl.qhimg.com/dr/270_500_/t017ebafe9b1ab5620c.jpg?size=1000x666');
-INSERT INTO `tbl_indexname` VALUES ('2', '大学使命', 'co', '2', 'https://p1.ssl.qhimg.com/dr/270_500_/t017893e9d8d34cce14.jpg?size=268x384');
-INSERT INTO `tbl_indexname` VALUES ('3', '985和211大学', 'co', '2', 'http://www.sinaimg.cn/dy/slidenews/11_img/2011_16/18420_48427_311108.jpg');
-INSERT INTO `tbl_indexname` VALUES ('4', '世界一流大学和一流学科', 'co', '2', 'https://p1.ssl.qhimg.com/dr/270_500_/t01d5cace27d7e1f216.jpg?size=600x396');
+INSERT INTO `tbl_indexname` VALUES ('1', '大学起源', 'co', '      大学，学名为普通高等学校，是一种功能独特的文化机构，是与社会的经济和政治机构既相互关联又鼎足而立的传承、研究、融合和创新高深学术的高等学府。它不仅是人类文化发展到一定阶段的产物，它还在长期办学实践的基础上，经过历史的积淀、自身的努力和外部环境的影响，逐步形成了一种独特的大学文化 。\r\n      大学从它产生到现在已有上千年的历史，上溯到它的产生，它主要是从德国、英国等国家最早发展起来的。中国现代大学源起于西方，现代西方大学又是从欧洲中世纪大学、英国大学、德国大学而到美国大学这样逐渐演化过来的，无论哪一个时代的大学都是以前大学的创造性继承而不是否定 。	', 'https://p1.ssl.qhimg.com/dr/270_500_/t017ebafe9b1ab5620c.jpg?size=1000x666');
+INSERT INTO `tbl_indexname` VALUES ('2', '大学使命', 'co', '      在大学理念支配下的大学使命要求大学培养的学生首先是有高尚品格的，有教养的人，这是符合大学的本质。这个使命是指培养学生完整的人格、净化学生的心灵、修养学生的品行、锻炼学生对事物进行批判的能力，而不是仅仅对学生进行专业教育。\r\n      正如英国著名教育理论家纽曼所认识到的:\"从功利派的论点中看到了真正教育的死敌。新大学在功利派理论的指导下，更看重的是专业培训而不是文化要求，是考试及结果而不是心理过程，是对事实的被动获取而不是心智的一般活动。\"纽曼所指的\"新大学\"，是违背了大学的逻辑而按市场经济的逻辑和政治的逻辑来当作它的使命而运行的大学。', 'https://p1.ssl.qhimg.com/dr/270_500_/t017893e9d8d34cce14.jpg?size=268x384');
+INSERT INTO `tbl_indexname` VALUES ('3', '985和211大学', 'co', '       211大学：第一点是面向21世纪，第二点是一百所大学，第三点是国家重点建设大学,这就是211大学的具体含义分析。\r\n      985大学：名称主要来源于日期，1998年5月4日，也就是北大校庆100周年，江泽民主席提出建设世界一流大学，985大学共有39所。', 'http://www.sinaimg.cn/dy/slidenews/11_img/2011_16/18420_48427_311108.jpg');
+INSERT INTO `tbl_indexname` VALUES ('4', '世界一流大学和一流学科', 'co', '      世界一流大学和一流学科，简称“双一流”；建设世界一流大学和一流学科，是中国共产党中央、国务院作出的重大战略决策，有利于提升中国高等教育综合实力和国际竞争力，为实现“两个一百年”奋斗目标和中华民族伟大复兴的中国梦提供有力支撑。\r\n      2017年9月21日，教育部、财政部、国家发展改革委印发《关于公布世界一流大学和一流学科建设高校及建设学科名单的通知》，公布42所世界一流大学和95所一流学科建设高校及建设学科名单。', 'https://p1.ssl.qhimg.com/dr/270_500_/t01d5cace27d7e1f216.jpg?size=600x396');
 
 -- ----------------------------
 -- Table structure for `tbl_mistaken`
