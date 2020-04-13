@@ -29,8 +29,8 @@
 		update tbl_self_user set uName=#{uname} where uId=#{uid}
 	</update>
 	<!-- 编辑头像 -->
-	<update id="editAvatar">
-		update tbl_self_user set uName=#{uname} where uId=#{uid}
+	<update id="updateAvatar">
+		update tbl_self_user set uAvatar=#{url} where uId=#{uid}
 	</update>
 	<!-- 编辑学校 -->
 	<select id="listSchools" resultType="org.turings.myself.entity.SchoolInfo">

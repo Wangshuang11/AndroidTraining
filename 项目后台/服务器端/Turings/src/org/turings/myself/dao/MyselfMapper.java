@@ -21,8 +21,11 @@ public interface MyselfMapper {
 	public int editMotto(@Param("uid")int uid,@Param("umotto")int umotto);
 	//编辑网名
 	public int edituName(@Param("uid")int uid,@Param("uname")int uname);
+	//编辑头像
+	public String updateAvatar(@Param("uid")int id,@Param("url")String url);
 	//显示学校
 	public List<SchoolInfo> listSchools(@Param("uid")int uid);
 	//显示用户信息
 	public List<Myself> refreshUserInfo(@Param("uid")int uid);
+	
 }

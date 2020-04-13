@@ -1,5 +1,9 @@
 package org.turings.myself.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,6 +18,11 @@ import org.turings.myself.entity.Myself;
 import org.turings.myself.entity.SchoolInfo;
 import org.turings.myself.entity.UserInfo;
 import org.turings.myself.service.MyselfService;
+import org.turings.myself.service.UpdateAvatarService;
+
+import com.aliyun.oss.OSS;
+import com.aliyun.oss.OSSClientBuilder;
+import com.aliyun.oss.model.PutObjectRequest;
 
 @Controller
 public class MyselfController {
@@ -26,41 +35,83 @@ public class MyselfController {
 		return this.myselfService.listAllCourses(uid);
 	}
 	//显示全部粉丝
+	@ResponseBody
 	@RequestMapping(value="/FansList",produces="text/json;charset=utf-8")
 	public List<UserInfo> listFan(@RequestParam(value = "uid") int uid) {
 		return this.myselfService.listAllFans(uid);
 	}
 	//显示全部关注
+	@ResponseBody
 	@RequestMapping(value="/AtList",produces="text/json;charset=utf-8")
 	public List<UserInfo> listAttention(@RequestParam(value = "fid") int fid) {
 		return this.myselfService.listAllAttentions(fid);
 	}
 	//添加关注
+	@ResponseBody
 	@RequestMapping(value="/SetAt",produces="text/json;charset=utf-8")
 	public int addAttention(@RequestParam(value = "aid") int attentionId,@RequestParam(value = "fid") int fanId) {
 		return this.myselfService.addAttentions(attentionId,fanId);
 	}
 	//编辑座右铭
+	@ResponseBody
 	@RequestMapping(value="/EditMotto",produces="text/json;charset=utf-8")
 	public int editMotto(@RequestParam(value = "uid") int uid,@RequestParam(value = "umotto") int uMotto) {
 		return this.myselfService.editMotto(uid,uMotto);
 	}
 	//编辑网名
+	@ResponseBody
 	@RequestMapping(value="/EditUname",produces="text/json;charset=utf-8")
 	public int edituName(@RequestParam(value = "uid") int uid,@RequestParam(value = "uname") int uName) {
 		return this.myselfService.edituName(uid,uName);
 	}
 	//修改头像
+	@ResponseBody
 	@RequestMapping(value="/InputAvatar",produces="text/json;charset=utf-8")
-	public int editAvatar(@RequestParam(value = "uid") int uid,@RequestParam(value = "uname") int uName) {
-		return this.myselfService.edituName(uid,uName);
+	public String editAvatar(@RequestParam(value = "id") int uid) {
+		
+		// Endpoint以杭州为例，其它Region请按实际情况填写。
+		String endpoint = "http://oss-cn-beijing.aliyuncs.com";
+		// 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。
+		String accessKeyId = "LTAI4FoQ82rmSV5EzaE1KtPU";
+		String accessKeySecret = "W8bsEiECRQfgYJJbD4rbPIdSWPaqTH";
+		String bucketName = "jxy2019";
+		String objectName = "avatars/i"+uid+"t"+System.currentTimeMillis()+".png";
+		String url = "http://jxy2019.oss-cn-beijing.aliyuncs.com/"+objectName;
+		URL url1;
+		try {
+			url1 = new URL(url);
+			InputStream in =url1.openStream();
+			// 创建OSSClient实例。
+			OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+			// 创建PutObjectRequest对象。
+			PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, objectName, in);
+			// 上传文件。
+			ossClient.putObject(putObjectRequest);
+			// 关闭OSSClient。
+			ossClient.shutdown();           
+			in.close();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		UpdateAvatarService updateAvatarService = new UpdateAvatarService();
+		String result = updateAvatarService.getResule(uid,url);
+		return result;
 	}
 	//显示学校
-	@RequestMapping(value="/InputAvatar",produces="text/json;charset=utf-8")
+	@ResponseBody
+	@RequestMapping(value="/GetSchoolsList",produces="text/json;charset=utf-8")
 	public List<SchoolInfo> showSchool(@RequestParam(value = "uid") int uid) {
-		return this.myselfService.listSchools(uid);
+		int a=this.myselfService.listSchools(1).size();
+		return this.myselfService.listSchools(1);
 	}
 	//显示用户信息
+	@ResponseBody
 	@RequestMapping(value="/ReFreshMyInfomation",produces="text/json;charset=utf-8")
 	public List<Myself> UrefreshUserInformation(@RequestParam(value = "uid") int uid) {
 		return this.myselfService.refreshUserInfo(uid);
