@@ -43,13 +43,15 @@ public class MyselfService {
 	public int edituName(int uid, int uName) {
 		return this.myselfMapper.edituName(uid,uName);
 	}
-	//显示学校
+	
+	//金鑫媛2020/4/14注释
+/*	//显示学校
 	public List<SchoolInfo> listSchools(int uid) {
 		return this.myselfMapper.listSchools(uid);
 	}
 	public List<Myself> refreshUserInfo(int uid) {
 		return this.myselfMapper.refreshUserInfo(uid);
-	}
+	}*/
 	
 	
 }

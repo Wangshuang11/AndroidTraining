@@ -29,15 +29,15 @@
 		update tbl_self_user set uName=#{uname} where uId=#{uid}
 	</update>
 	<!-- 编辑头像 -->
-	<update id="updateAvatar">
+	<!-- <update id="updateAvatar">
 		update tbl_self_user set uAvatar=#{url} where uId=#{uid}
-	</update>
+	</update> -->
 	<!-- 编辑学校 -->
-	<select id="listSchools" resultType="org.turings.myself.entity.SchoolInfo">
+	<!-- <select id="listSchools" resultType="org.turings.myself.entity.SchoolInfo">
 		select * from tbl_indexcollege where id IN (select sId from tbl_self_schools_favorite where uId= #{uid})
-	</select>
+	</select> -->
 	<!-- 显示用户信息 -->
-	<select id="refreshUserInfo" resultType="org.turings.myself.entity.Myself">
+<!-- 	<select id="refreshUserInfo" resultType="org.turings.myself.entity.Myself">
 		select * from tbl_self_user where uId = #{uid}
-	</select>
+	</select> -->
 </mapper>

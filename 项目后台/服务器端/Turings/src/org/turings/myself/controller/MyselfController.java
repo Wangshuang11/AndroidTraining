@@ -64,7 +64,7 @@ public class MyselfController {
 	public int edituName(@RequestParam(value = "uid") int uid,@RequestParam(value = "uname") int uName) {
 		return this.myselfService.edituName(uid,uName);
 	}
-	//修改头像
+	/*//修改头像
 	@ResponseBody
 	@RequestMapping(value="/InputAvatar",produces="text/json;charset=utf-8")
 	public String editAvatar(@RequestParam(value = "id") int uid) {
@@ -115,6 +115,6 @@ public class MyselfController {
 	@RequestMapping(value="/ReFreshMyInfomation",produces="text/json;charset=utf-8")
 	public List<Myself> UrefreshUserInformation(@RequestParam(value = "uid") int uid) {
 		return this.myselfService.refreshUserInfo(uid);
-	}
+	}*/
 }
 
