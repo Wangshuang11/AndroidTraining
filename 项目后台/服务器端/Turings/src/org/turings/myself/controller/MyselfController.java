@@ -31,38 +31,59 @@ public class MyselfController {
 	@ResponseBody
 	//显示全部课程
 	@RequestMapping(value="/GetCoursesList",produces="text/json;charset=utf-8")
-	public List<CourseInfo> sendCourse(@RequestParam(value = "uid") int uid) {
-		return this.myselfService.listAllCourses(uid);
+	public  String sendCourse(@RequestParam(value = "uid") int uid) {
+		List<CourseInfo> courseInfos= this.myselfService.listAllCourses(uid);
+		String json = JSONArray.fromObject(courseInfos).toString();
+		return json;
 	}
 	//显示全部粉丝
 	@ResponseBody
 	@RequestMapping(value="/FansList",produces="text/json;charset=utf-8")
-	public List<UserInfo> listFan(@RequestParam(value = "uid") int uid) {
-		return this.myselfService.listAllFans(uid);
+	public String listFan(@RequestParam(value = "uid") int uid) {
+		List<UserInfo> userInfos= this.myselfService.listAllFans(uid);
+		String json = JSONArray.fromObject(userInfos).toString();
+		return json;
 	}
 	//显示全部关注
 	@ResponseBody
 	@RequestMapping(value="/AtList",produces="text/json;charset=utf-8")
-	public List<UserInfo> listAttention(@RequestParam(value = "fid") int fid) {
-		return this.myselfService.listAllAttentions(fid);
+	public String listAttention(@RequestParam(value = "fid") int fid) {
+		List<UserInfo> userInfos= this.myselfService.listAllAttentions(fid);
+		String json = JSONArray.fromObject(userInfos).toString();
+		return json;
 	}
 	//添加关注
 	@ResponseBody
 	@RequestMapping(value="/SetAt",produces="text/json;charset=utf-8")
-	public int addAttention(@RequestParam(value = "aid") int attentionId,@RequestParam(value = "fid") int fanId) {
-		return this.myselfService.addAttentions(attentionId,fanId);
+	public String addAttention(@RequestParam(value = "aid") int attentionId,@RequestParam(value = "fid") int fanId) {
+		int result= this.myselfService.addAttentions(attentionId,fanId);
+		if(result==1) {
+			return "true";
+		}else {
+			return "false";
+		}
 	}
 	//编辑座右铭
 	@ResponseBody
 	@RequestMapping(value="/EditMotto",produces="text/json;charset=utf-8")
-	public int editMotto(@RequestParam(value = "uid") int uid,@RequestParam(value = "umotto") int uMotto) {
-		return this.myselfService.editMotto(uid,uMotto);
+	public String editMotto(@RequestParam(value = "uid") int uid,@RequestParam(value = "umotto") int uMotto) {
+		int result= this.myselfService.editMotto(uid,uMotto);
+		if(result==1) {
+			return "true";
+		}else {
+			return "false";
+		}
 	}
 	//编辑网名
 	@ResponseBody
 	@RequestMapping(value="/EditUname",produces="text/json;charset=utf-8")
-	public int edituName(@RequestParam(value = "uid") int uid,@RequestParam(value = "uname") int uName) {
-		return this.myselfService.edituName(uid,uName);
+	public String edituName(@RequestParam(value = "uid") int uid,@RequestParam(value = "uname") int uName) {
+		int result= this.myselfService.edituName(uid,uName);
+		if(result==1) {
+			return "true";
+		}else {
+			return "false";
+		}
 	}
 	/*//修改头像
 	@ResponseBody
