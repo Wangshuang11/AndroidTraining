@@ -18,7 +18,7 @@ public interface MyselfMapper {
 	//添加关注
 	public int addAttention(@Param("uid")int uid,@Param("fid")int fid);
 	//取消关注
-	public int delAttention(@Param("aid")int attentionId, @Param("fid")int fanId);
+	public int delAttention(@Param("uid")int attentionId, @Param("fid")int fanId);
 	//编辑座右铭
 	public int editMotto(@Param("uid")int uid,@Param("umotto")int umotto);
 	//编辑网名
