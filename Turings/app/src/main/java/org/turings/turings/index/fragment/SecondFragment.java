@@ -48,7 +48,7 @@ public class SecondFragment extends Fragment{
             stories.clear();
             stories=getDatas(gson,story);
             listStoryAdapter = new ListStoryAdapter(getContext(),
-                    R.layout.lph_inspire_item, stories, parent);
+                    R.layout.lph_inspire_item2, stories, parent);
             listView.setAdapter(listStoryAdapter);
         }
     };

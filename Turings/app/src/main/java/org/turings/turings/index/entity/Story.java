@@ -1,23 +1,33 @@
 package org.turings.turings.index.entity;
 
 public class Story {
+    private int id;
     private String title;
-    private String img1;
-    private String img2;
-    private String img3;
-    private String num;
+    private String smallimg;
+    private String bigimg;
+    private String name;
+    private String starnum;
     private String content;
-    private boolean flag=false;
     public Story() {
     }
-    public Story(String title, String img1, String img2, String img3, String num, String content) {
+    public Story(int id, String title, String smallimg, String bigimg, String name, String starnum, String content) {
+        this.id = id;
         this.title = title;
-        this.img1 = img1;
-        this.img2 = img2;
-        this.img3 = img3;
-        this.num = num;
+        this.smallimg = smallimg;
+        this.bigimg = bigimg;
+        this.name = name;
+        this.starnum = starnum;
         this.content = content;
     }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
 
     public String getTitle() {
         return title;
@@ -27,36 +37,36 @@ public class Story {
         this.title = title;
     }
 
-    public String getImg1() {
-        return img1;
+    public String getSmallimg() {
+        return smallimg;
     }
 
-    public void setImg1(String img1) {
-        this.img1 = img1;
+    public void setSmallimg(String smallimg) {
+        this.smallimg = smallimg;
     }
 
-    public String getImg2() {
-        return img2;
+    public String getBigimg() {
+        return bigimg;
     }
 
-    public void setImg2(String img2) {
-        this.img2 = img2;
+    public void setBigimg(String bigimg) {
+        this.bigimg = bigimg;
     }
 
-    public String getImg3() {
-        return img3;
+    public String getName() {
+        return name;
     }
 
-    public void setImg3(String img3) {
-        this.img3 = img3;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNum() {
-        return num;
+    public String getStarnum() {
+        return starnum;
     }
 
-    public void setNum(String num) {
-        this.num = num;
+    public void setStarnum(String starnum) {
+        this.starnum = starnum;
     }
 
     public String getContent() {
@@ -65,13 +75,5 @@ public class Story {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public boolean isFlag() {
-        return flag;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
     }
 }
