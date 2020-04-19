@@ -181,8 +181,6 @@ public class NearFragment extends Fragment {
         baiduMap = mapView.getMap();
         uiSettings = baiduMap.getUiSettings();
 
-//        //设置地图类型
-//        baiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);//卫星地图
         //设置百度logo显示位置
         mapView.setLogoPosition(LogoPosition.logoPostionCenterBottom);
     }
@@ -202,7 +200,9 @@ public class NearFragment extends Fragment {
             public void run() {
                 try {
                     Log.i("lww",lat+""+lng);
-                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/LocationServlet?userName="+userName+"&lat="+lat+"&lng="+lng);
+//                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/LocationServlet?userName="+userName+"&lat="+lat+"&lng="+lng);
+                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/lyh/location?userName="+userName+"&lat="+lat+"&lng="+lng);
+                    Log.e("lyh",userName+lat+lng);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
