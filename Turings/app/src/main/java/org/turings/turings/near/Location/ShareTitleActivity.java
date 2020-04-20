@@ -114,8 +114,7 @@ public class ShareTitleActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-//                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/BrowseShareServlet?userName=" + userName);
-                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/lyh/browseShareList?userName=" + userName);
+                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/BrowseShareServlet?userName=" + userName);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

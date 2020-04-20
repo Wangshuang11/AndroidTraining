@@ -115,17 +115,29 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         builder.detectFileUriExposure();
+
+
         //获取用户的id
-        SharedPreferences sp = getSharedPreferences("userInfo",MODE_PRIVATE);
-        uId = sp.getString("uId",null);
+//        SharedPreferences sp = getSharedPreferences("userInfo",MODE_PRIVATE);
+//        uId = sp.getString("uId",null);
+        uId="1";
+
         //初始化数据（默认数据）
-        initData();
+//        initData();
+        //获得传过来的图片识别结果,构建subjectMag类
+        // (如果是选择题，就默认填充各个选项，答案手动输入；如果是填空题或是大题，答案手动输入)
+        initData2();
+
+
         //获取控件
         getViews();
         //绑定事件监听器
         registerListener();
+
         //展示拍照后的图片
-        showWrongQuestionPhoto();
+//        showWrongQuestionPhoto();
+        showWrongQuestionPhoto2();
+
         //给标签绑定adapter
         tags = getResources().getStringArray(R.array.spinner);
         list = new ArrayList<>();
@@ -162,6 +174,28 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         subjectMsg = new org.turings.turings.mistaken.SubjectMsg(1,"数学","集合","填空题",new Date(),"files","","","","","",Integer.parseInt(uId));
     }
 
+    //百度文字识别结果自动填充到选项上
+    private void initData2() {
+        Intent intent=getIntent();
+        subjectMsg=new org.turings.turings.mistaken.SubjectMsg();
+        subjectMsg.setId(1);
+        subjectMsg.setuId(Integer.parseInt(uId));
+        subjectMsg.setTime(new Date());
+        String optionA=intent.getStringExtra("A");
+        String optionB=intent.getStringExtra("B");
+        String optionC=intent.getStringExtra("C");
+        String optionD=intent.getStringExtra("D");
+        if(optionA!=null || optionB!=null || optionC!=null || optionD!=null){//选择题
+            subjectMsg.setOptionA(optionA);
+            subjectMsg.setOptionB(optionB);
+            subjectMsg.setOptionC(optionC);
+            subjectMsg.setOptionD(optionD);
+        }else{//填空题或者大题
+            //存题干：subjectMsg需要加一个属性
+        }
+//        subjectMsg = new org.turings.turings.mistaken.SubjectMsg(1,"数学","三角形","选择题",new Date(),"files","","","","","",Integer.parseInt(uId));
+    }
+
     //展示拍照后的图片
     private void showWrongQuestionPhoto() {
         Intent intent=getIntent();
@@ -169,6 +203,15 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
         path = saveImgToFile(bitmap);
         subjectMsg.setTitleImg(path);
+        question_img_ylx.setImageBitmap(bitmap);
+    }
+
+    //展示拍照后的图片：百度拍照识别，默认将剪裁后的图片(pic.jpg)放在files文件夹下
+    private void showWrongQuestionPhoto2() {
+        String picDir=getFilesDir().getAbsolutePath()+"/pic.jpg";
+        Bitmap bitmap = BitmapFactory.decodeFile(picDir);
+        path=picDir;
+        subjectMsg.setTitleImg(picDir);
         question_img_ylx.setImageBitmap(bitmap);
     }
 
@@ -397,6 +440,13 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
                     ap.height=1000;
                     answer_ylx.setLayoutParams(ap);
                     subjectMsg.setType("选择题");
+
+                    //自动填充ABCD选项
+                    answer_A_edt_ylx.setText(subjectMsg.getOptionA());
+                    answer_B_edt_ylx.setText(subjectMsg.getOptionB());
+                    answer_C_edt_ylx.setText(subjectMsg.getOptionC());
+                    answer_D_edt_ylx.setText(subjectMsg.getOptionD());
+
                     break;
                 case R.id.fill_ylx://填空题
                     choose_ylx.setBackgroundColor(Color.WHITE);

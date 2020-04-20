@@ -18,8 +18,12 @@
 	</select>
 	<!-- 添加关注 -->
 	<insert id="addAttention">
-		select * from tbl_self_fans where uId= #{uid} and fid=#{fid} ? 
+		select * from tbl_self_fans where uId= #{uid} and fid=#{fid}
 	</insert>
+	<!-- 取消关注 -->
+	<delete id="delAttention">
+		delete * from tbl_self_fans where uId= #{uid} and fid=#{fid}
+	</delete>
 	<!-- 编辑座右铭 -->
 	<update id="editMotto">
 		update tbl_self_user set uMotto=#{umotto} where uId=#{uid}
