@@ -2,6 +2,8 @@ package org.turings.near.controller;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,7 @@ import net.sf.json.JSONObject;
 @RequestMapping("/lyh")
 public class NearController {
 
-	@Autowired
+	@Resource
 	private NearService nearService;
 	
 	//LocationServlet
@@ -52,15 +54,7 @@ public class NearController {
 		String json = gson.toJson(info);
 		return json;
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/findOne",produces="text/json;charset=utf-8")
-	public String findOne() {
-		Information info = nearService.browseInfo(0,0);
-		Gson gson = new Gson();
-		String json = gson.toJson(info);
-		return json;
-	}
+
 	
 //	//browseShareContentServlet
 //	@ResponseBody

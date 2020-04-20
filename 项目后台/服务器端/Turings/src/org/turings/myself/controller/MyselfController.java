@@ -65,17 +65,17 @@ public class MyselfController {
 			return "false";
 		}
 	}
-	//取消关注
-	@ResponseBody
-	@RequestMapping(value="/DelAt",produces="text/json;charset=utf-8")
-	public String delAttention(@RequestParam(value = "aid") int attentionId,@RequestParam(value = "fid") int fanId) {
-		int result= this.myselfService.delAttentions(attentionId,fanId);
-		if(result==1) {
-			return "true";
-		}else {
-			return "false";
-		}
-	}
+//	//取消关注
+//	@ResponseBody
+//	@RequestMapping(value="/DelAt",produces="text/json;charset=utf-8")
+//	public String delAttention(@RequestParam(value = "aid") int attentionId,@RequestParam(value = "fid") int fanId) {
+//		int result= this.myselfService.delAttentions(attentionId,fanId);
+//		if(result==1) {
+//			return "true";
+//		}else {
+//			return "false";
+//		}
+//	}
 	//编辑座右铭
 	@ResponseBody
 	@RequestMapping(value="/EditMotto",produces="text/json;charset=utf-8")
