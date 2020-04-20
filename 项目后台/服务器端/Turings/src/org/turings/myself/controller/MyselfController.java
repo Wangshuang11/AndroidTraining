@@ -24,6 +24,8 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.PutObjectRequest;
 
+import net.sf.json.JSONArray;
+
 @Controller
 public class MyselfController {
 	@Resource
