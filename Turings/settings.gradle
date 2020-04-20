@@ -1,1 +1,1 @@
-include ':app', ':lvlibrary', ':ocr_ui', ':easeui'
+include ':app', ':lvlibrary', ':ocr_ui'

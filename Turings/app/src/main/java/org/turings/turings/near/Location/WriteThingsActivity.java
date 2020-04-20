@@ -187,7 +187,7 @@ public class WriteThingsActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/lyh/insertShare?userName="+userName+"&title="+title
+                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/InsertShareServlet?userName="+userName+"&title="+title
                     +"&content="+content+"&background="+background);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();

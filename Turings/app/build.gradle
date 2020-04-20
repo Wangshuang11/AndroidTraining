@@ -79,5 +79,4 @@ dependencies {
     implementation files('libs/BaiduLBS_Android.jar')
     implementation project(':ocr_ui')
     implementation files('libs/ocr-sdk.jar')
-    implementation project(path: ':easeui')
 }

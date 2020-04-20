@@ -202,7 +202,7 @@ public class NearFragment extends Fragment {
             public void run() {
                 try {
                     Log.i("lww",lat+""+lng);
-                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/lyh/location?userName="+userName+"&lat="+lat+"&lng="+lng);
+                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/LocationServlet?userName="+userName+"&lat="+lat+"&lng="+lng);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

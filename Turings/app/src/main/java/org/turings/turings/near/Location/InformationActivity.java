@@ -2,7 +2,6 @@ package org.turings.turings.near.Location;
 
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.PointF;
@@ -61,8 +60,6 @@ public class InformationActivity extends AppCompatActivity {
     private double lng;
     private String otherName;
     private Button btnGuanzhu_lyh;
-    private int aid;
-    private int fid;
     private int count = 0;
 
     @Override
@@ -90,7 +87,6 @@ public class InformationActivity extends AppCompatActivity {
                 //反序列化
                 information = gson.fromJson(json, Information.class);
                 otherName = information.getUserName();
-                fid=information.getId();
                 tvFollowName_lyh.setText(information.getUserName());
                 Glide.with(getApplicationContext()).load(information.getPortrait()).into(ivPortrait_lyh);
                 tvTime_lyh.setText(String.valueOf(information.getTotalTime()));
@@ -148,14 +144,10 @@ public class InformationActivity extends AppCompatActivity {
                     break;
                 case R.id.btnGuanzhu_lyh:
                     count++;
-                    SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("userInfo",MODE_PRIVATE);
-                    aid= Integer.parseInt(sharedPreferences.getString("uId",""));
                     if (count%2 == 0){
                         btnGuanzhu_lyh.setText("+ 关 注");
-                        sendToServer3(aid,fid);
                     }else {
                         btnGuanzhu_lyh.setText("已关注");
-                        sendToServer2(aid,fid);
                     }
                     break;
             }
@@ -202,7 +194,7 @@ public class InformationActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/lyh/findOne?lat=" + lat + "&lng=" + lng);
+                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/BrowseInformationServlet?lat=" + lat + "&lng=" + lng);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
@@ -222,49 +214,7 @@ public class InformationActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/lyh/findOneByName?name="+name);
-                    URLConnection conn = url.openConnection();
-                    InputStream in = conn.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
-                    String info = reader.readLine();
-                    wrapperMessage(info);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
-    }
-
-    public void sendToServer2(final int aid,final int fid) {
-
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/SetAt?aid="+aid+"&fid="+fid);
-                    URLConnection conn = url.openConnection();
-                    InputStream in = conn.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
-                    String info = reader.readLine();
-                    wrapperMessage(info);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
-    }
-
-    public void sendToServer3(final int aid,final int fid) {
-
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/DelAt?aid="+aid+"&fid="+fid);
+                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/BrowseInfoByServlet?name="+name);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
