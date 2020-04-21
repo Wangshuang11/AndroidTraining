@@ -6,16 +6,18 @@
 <mapper namespace="org.turings.index.story.dao.StoryMapper">
     <!-- 结果映射 -->
     <resultMap type="org.turings.index.entity.Story" id="storyMapper">
+    	<id column="id" property="id"/>
         <result column="title" property="title"/>
-        <result column="img1" property="img1"/>
-        <result column="img2" property="img2"/>
-        <result column="img3" property="img3"/>
-        <result column="num" property="num"/>
+        <result column="bigimg" property="bigimg"/>
+        <result column="smallimg" property="smallimg"/>
+        <result column="name" property="name"/>
+        <result column="starnum" property="starnum"/>
         <result column="content" property="content"/>
     </resultMap>
     <select id="findStoryAll" resultMap="storyMapper">
            select * from tbl_story
     </select>
    	<update id="updateStory">
+   		update tbl_story set starnum=#{arg0} where id=#{arg1}
    	</update>
 </mapper>

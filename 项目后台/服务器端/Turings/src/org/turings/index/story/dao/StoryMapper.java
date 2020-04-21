@@ -6,5 +6,5 @@ import org.turings.index.entity.Story;
 
 public interface StoryMapper {
 	public List<Story> findStoryAll();
-	public void updateStory(String title,String flag);
+	public int updateStory(String starnum,int id);
 }
