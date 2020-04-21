@@ -21,15 +21,19 @@ public class StoryService {
 	public List<Story> findStoryAll(){
 		return this.storyMapper.findStoryAll();
 	}
+	public int updateStory(String starnum,int id) {
+		return this.storyMapper.updateStory(starnum, id);
+	}
 	public String toStringJson(List<Story> list) {
 		JSONArray array = new JSONArray();
 		for (int i = 0; i < list.size(); i++) {
 			JSONObject obj = new JSONObject();
+			obj.put("id", list.get(i).getId());
 			obj.put("title", list.get(i).getTitle());
-			obj.put("img1", list.get(i).getImg1());
-			obj.put("img2", list.get(i).getImg2());
-			obj.put("img3", list.get(i).getImg3());
-			obj.put("num", list.get(i).getNum());
+			obj.put("smallimg", list.get(i).getSmallimg());
+			obj.put("bigimg", list.get(i).getBigimg());
+			obj.put("name", list.get(i).getName());
+			obj.put("starnum", list.get(i).getStarnum());
 			obj.put("content", list.get(i).getContent());
 			array.add(obj);
 		}

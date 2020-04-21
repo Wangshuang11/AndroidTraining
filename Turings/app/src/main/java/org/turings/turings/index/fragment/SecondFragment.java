@@ -48,7 +48,7 @@ public class SecondFragment extends Fragment{
             stories.clear();
             stories=getDatas(gson,story);
             listStoryAdapter = new ListStoryAdapter(getContext(),
-                    R.layout.lph_inspire_item, stories, parent);
+                    R.layout.lph_inspire_item2, stories, parent);
             listView.setAdapter(listStoryAdapter);
         }
     };
@@ -58,7 +58,7 @@ public class SecondFragment extends Fragment{
         View view=inflater.inflate(R.layout.activity_second_fragment, container, false);
         getViews(view);
         initDatas();
-        srl.setReboundDuration(1000);
+        srl.setReboundDuration(2000);
         srl.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {

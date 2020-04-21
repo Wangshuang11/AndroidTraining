@@ -354,13 +354,13 @@ public class FirstFragment extends Fragment{
                         Type type = new TypeToken<List<HotCourse>>() {}.getType();
                         String json = response.body().string();
                         Log.e("gw",json);
-                        List<HotCourse> courses = gson.fromJson(json, type);
-                        Log.e("gw",courses.get(1).getCourseId());
-                        for (int i = 0; i < courses.size(); i++) {
-                            Log.e("gw",courses.get(i).getCourseId());
-                            HotCourse course = new HotCourse(courses.get(i).getCourseId(),courses.get(i).getCourseImage(),courses.get(i).getCourseTitle(),courses.get(i).getCoursePerson(),courses.get(i).getCourserData());
-                            hotCourses.add(course);
-                        }
+//                        List<HotCourse> courses = gson.fromJson(json, type);
+//                        Log.e("gw",courses.get(1).getCourseId());
+//                        for (int i = 0; i < courses.size(); i++) {
+//                            Log.e("gw",courses.get(i).getCourseId());
+//                            HotCourse course = new HotCourse(courses.get(i).getCourseId(),courses.get(i).getCourseImage(),courses.get(i).getCourseTitle(),courses.get(i).getCoursePerson(),courses.get(i).getCourserData());
+//                            hotCourses.add(course);
+//                        }
                         Message message = Message.obtain();
                         message.what = 2;
                         courseHandler.sendMessage(message);
