@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
-Source Server Version : 50506
+Source Server Version : 50701
 Source Host           : localhost:3306
 Source Database       : turings_db
 
 Target Server Type    : MYSQL
-Target Server Version : 50506
+Target Server Version : 50701
 File Encoding         : 65001
 
-Date: 2020-04-21 10:27:15
+Date: 2020-04-24 12:03:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -101,6 +101,52 @@ CREATE TABLE `tbl_fans` (
 -- ----------------------------
 -- Records of tbl_fans
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tbl_farm_punish`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_farm_punish`;
+CREATE TABLE `tbl_farm_punish` (
+  `uid` int(11) NOT NULL AUTO_INCREMENT,
+  `not_come` int(11) DEFAULT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_farm_punish
+-- ----------------------------
+INSERT INTO `tbl_farm_punish` VALUES ('1', '3');
+INSERT INTO `tbl_farm_punish` VALUES ('2', '1');
+INSERT INTO `tbl_farm_punish` VALUES ('3', '10');
+INSERT INTO `tbl_farm_punish` VALUES ('4', '7');
+INSERT INTO `tbl_farm_punish` VALUES ('5', '6');
+INSERT INTO `tbl_farm_punish` VALUES ('6', '20');
+INSERT INTO `tbl_farm_punish` VALUES ('7', '23');
+INSERT INTO `tbl_farm_punish` VALUES ('8', '32');
+
+-- ----------------------------
+-- Table structure for `tbl_farm_score`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_farm_score`;
+CREATE TABLE `tbl_farm_score` (
+  `uid` int(11) NOT NULL DEFAULT '0',
+  `uwater` int(11) DEFAULT NULL,
+  `uprocess` int(11) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_farm_score
+-- ----------------------------
+INSERT INTO `tbl_farm_score` VALUES ('1', '13', '10', '0');
+INSERT INTO `tbl_farm_score` VALUES ('3', '5', '56', '0');
+INSERT INTO `tbl_farm_score` VALUES ('2', '2', '140', '1');
+INSERT INTO `tbl_farm_score` VALUES ('4', '11', '100', '0');
+INSERT INTO `tbl_farm_score` VALUES ('5', '7', '240', '1');
+INSERT INTO `tbl_farm_score` VALUES ('6', '6', '266', '0');
+INSERT INTO `tbl_farm_score` VALUES ('7', '15', '80', '2');
+INSERT INTO `tbl_farm_score` VALUES ('8', '5', '32', '0');
 
 -- ----------------------------
 -- Table structure for `tbl_indexcollege`
@@ -219,6 +265,29 @@ INSERT INTO `tbl_indexname` VALUES ('3', '985和211大学', 'co', '       211大
 INSERT INTO `tbl_indexname` VALUES ('4', '世界一流大学和一流学科', 'co', '      世界一流大学和一流学科，简称“双一流”；建设世界一流大学和一流学科，是中国共产党中央、国务院作出的重大战略决策，有利于提升中国高等教育综合实力和国际竞争力，为实现“两个一百年”奋斗目标和中华民族伟大复兴的中国梦提供有力支撑。\r\n      2017年9月21日，教育部、财政部、国家发展改革委印发《关于公布世界一流大学和一流学科建设高校及建设学科名单的通知》，公布42所世界一流大学和95所一流学科建设高校及建设学科名单。', 'https://p1.ssl.qhimg.com/dr/270_500_/t01d5cace27d7e1f216.jpg?size=600x396');
 
 -- ----------------------------
+-- Table structure for `tbl_information`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_information`;
+CREATE TABLE `tbl_information` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `portrait` varchar(255) DEFAULT NULL,
+  `totaltime` double DEFAULT NULL,
+  `currenttime` double DEFAULT NULL,
+  `university` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `motto` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of tbl_information
+-- ----------------------------
+INSERT INTO `tbl_information` VALUES ('1', '王小爽', 'a3', '2056', '125', '清华大学', '韦编屡绝铁砚穿，口诵手钞那计年');
+INSERT INTO `tbl_information` VALUES ('2', '单小楠', 'a3', '1893', '150', '天津工业大学', '啦啦啦啦');
+INSERT INTO `tbl_information` VALUES ('3', '金小媛', 'a3', '1775', '58', '燕山大学', '哈哈哈哈哈');
+INSERT INTO `tbl_information` VALUES ('5', '吕小浩', 'a3', '1682', '68', '河北师范大学', '嘿嘿嘿嘿嘿');
+
+-- ----------------------------
 -- Table structure for `tbl_mistaken`
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_mistaken`;
@@ -302,6 +371,35 @@ INSERT INTO `tbl_position` VALUES ('13', '丑橘', 'i13', '37.017', '105.375', '
 INSERT INTO `tbl_position` VALUES ('14', '山竹', 'i14', '37.84', '115.972', '1');
 INSERT INTO `tbl_position` VALUES ('15', '火龙果', 'i15', '26.745', '113.028', '1');
 INSERT INTO `tbl_position` VALUES ('16', '猕猴桃', 'i16', '41.257', '107.141', '1');
+
+-- ----------------------------
+-- Table structure for `tbl_schools`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_schools`;
+CREATE TABLE `tbl_schools` (
+  `sWebaddress` varchar(100) DEFAULT NULL,
+  `sInfo` varchar(255) DEFAULT NULL,
+  `sId` int(11) NOT NULL,
+  PRIMARY KEY (`sId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_schools
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tbl_schools_favorite`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_schools_favorite`;
+CREATE TABLE `tbl_schools_favorite` (
+  `sId` int(11) NOT NULL,
+  `uId` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`sId`,`uId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_schools_favorite
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `tbl_self_courses`
