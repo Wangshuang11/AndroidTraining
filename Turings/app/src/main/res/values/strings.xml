@@ -5,9 +5,9 @@
     <string name="newline">\n</string>
 <!--    <string name="connUrl">http://192.168.2.190:8080/Turings</string>-->
 <!--    <string name="ipConfig">192.168.2.190</string>-->
-    <string name="lphipConfig">192.168.2.170</string>
-    <string name="connUrl">192.168.2.170</string>
-    <string name="ipConfig">192.168.2.170</string>
+    <string name="lphipConfig">192.168.43.92</string>
+    <string name="connUrl">192.168.43.92</string>
+    <string name="ipConfig">192.168.43.92</string>
      <!--<string name="connUrl">http://10.7.89.174:8080/Turings</string>
     <string name="ipConfig">10.7.89.174</string>-->
     <string-array name="tag">
