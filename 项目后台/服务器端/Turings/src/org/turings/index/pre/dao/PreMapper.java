@@ -6,4 +6,5 @@ import org.turings.index.entity.Pre;
 
 public interface PreMapper {
 	public List<Pre> findPreAll();
+	public int updatePre(int id,String num);
 }

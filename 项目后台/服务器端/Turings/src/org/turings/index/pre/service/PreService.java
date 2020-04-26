@@ -20,14 +20,19 @@ public class PreService {
 	public List<Pre> findPreAll(){
 		return this.preMapper.findPreAll();
 	}
+	@Transactional(readOnly=false)
+	public int updatePre(int id,String num) {
+		return this.preMapper.updatePre(id, num);
+	}
 	public String toJsonArray(List<Pre> list) {
 		JSONArray array = new JSONArray();
 		for (int i = 0; i < list.size(); i++) {
 			JSONObject obj = new JSONObject();
+			obj.put("id", list.get(i).getId());
 			obj.put("title", list.get(i).getTitle());
-			obj.put("img", list.get(i).getImg());
+			obj.put("num", list.get(i).getNum());
 			obj.put("content", list.get(i).getContent());
-			obj.put("src", list.get(i).getSrc());
+			obj.put("author", list.get(i).getAuthor());
 			array.add(obj);
 		}
 		JSONObject objt = new JSONObject();

@@ -53,7 +53,7 @@ public class ThirdFragment extends Fragment{
                     String pre=(String)msg.obj;
                     PreJson preJson=gson.fromJson(pre, PreJson.class);
                     pres=preJson.getList();
-                    RecyclerListAdapter recyclerListAdapter =new RecyclerListAdapter(getContext(),pres,R.layout.lph_listview_item,parent);
+                    RecyclerListAdapter recyclerListAdapter =new RecyclerListAdapter(getContext(),pres,R.layout.lph_listview_item2,parent);
                     LinearLayoutManager manager2=new LinearLayoutManager(getContext(),1,false);
                     manager2.setOrientation(LinearLayoutManager.VERTICAL);
                     listView.setLayoutManager(manager2);
@@ -96,7 +96,7 @@ public class ThirdFragment extends Fragment{
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://"+getResources().getString(R.string.lphipConfig)+":8080/Turings/lph/findPreAll");
+                    URL url = new URL("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/lph/findPreAll");
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
@@ -147,7 +147,7 @@ public class ThirdFragment extends Fragment{
         parent=view.findViewById(R.id.parent);
     }
     private String schoolFun(String flag) throws IOException {
-        URL url = new URL("http://"+getResources().getString(R.string.lphipConfig)+":8080/Turings/lph/school?flag="+flag);
+        URL url = new URL("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/lph/school?flag="+flag);
         URLConnection conn = url.openConnection();
         InputStream in = conn.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));

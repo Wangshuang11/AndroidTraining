@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.turings.near.dao.ShareMapper">
+	<resultMap type="org.turings.near.entity.Share" id="ShareMap">
+		<id property="id" column="id"></id>
+		<result property="userName" column="username"/>
+		<result property="shareTitle" column="sharetitle"/>
+		<result property="shareContent" column="sharecontent"/>
+		<result property="background" column="background"/>
+	</resultMap>
+	
+	<select id="browseShareTitle" resultMap="ShareMap">
+		select * from tbl_share where username=#{userName}
+	</select>
+	
+	<select id="browseShareContext" resultMap="ShareMap">
+		select * from tbl_share where sharetitle=#{title}
+	</select>
+	
+	<insert id="insertShare" useGeneratedKeys="true" parameterType="org.turings.near.entity.Share">
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+		insert into tbl_share (username,sharetitle,sharecontent,background) 
+		values (#{userName},#{title},#{content},#{background})
+	</insert>
+	
+	
+</mapper>

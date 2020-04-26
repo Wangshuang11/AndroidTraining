@@ -1,10 +1,15 @@
 package org.turings.turings.index.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +28,12 @@ import org.turings.turings.R;
 import org.turings.turings.index.entity.Pre;
 import org.turings.turings.index.util.KeyWordUtil;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -33,6 +44,16 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private int itemlayout;
     private View view;
     private TextToSpeech tts;
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            String string=(String)msg.obj;
+            if(string.equals("ok")){
+                Toast.makeText(context,"阅读完成",Toast.LENGTH_LONG).show();
+            }
+        }
+    };
     public RecyclerListAdapter() {
     }
 
@@ -54,46 +75,17 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         final String[] array=context.getResources().getStringArray(R.array.array_text);
         ItemHolder holdert = (ItemHolder) holder;
-        RequestOptions ro=new RequestOptions().placeholder(R.drawable.loading);
-        Glide.with(context).load(pres.get(position).getSrc()).apply(ro).into(holdert.img);
-        holdert.title.setText(pres.get(position).getTitle());
-        holdert.text.setText(pres.get(position).getContent().substring(0,12)+"....");
-        holdert.btn.setOnClickListener(new View.OnClickListener() {
+        holdert.tv_title.setText(pres.get(position).getTitle());
+        holdert.tv_content.setText(pres.get(position).getContent());
+        holdert.tv_author.setText(pres.get(position).getAuthor());
+        holdert.tv_num.setText(pres.get(position).getNum());
+        holdert.btn_read.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                final PopupWindow popupWindow=new PopupWindow(context);
-                LayoutInflater layoutInflater=LayoutInflater.from(context);
-                View view_pop=layoutInflater.inflate(R.layout.lph_popupwindow_layout,null);
-                TextView text_pop= view_pop.findViewById(R.id.text_pop);
-                SpannableString sbs= KeyWordUtil.setSpannableString(Color.RED,pres.get(position).getContent(),array);
-                text_pop.setText(sbs);
-                ImageView btn_ok=view_pop.findViewById(R.id.btn_ok);
-                ImageView img_start=view_pop.findViewById(R.id.img_start);
-                ImageView img_end=view_pop.findViewById(R.id.img_end);
-
-                btn_ok.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        popupWindow.dismiss();
-                    }
-                });
-                img_start.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        tts.speak(pres.get(position).getContent(),TextToSpeech.QUEUE_FLUSH,null);
-                    }
-                });
-                img_end.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        tts.stop();
-                    }
-                });
-                popupWindow.setContentView(view_pop);
-                popupWindow.showAtLocation(view, Gravity.FILL_HORIZONTAL,0,0);
+            public void onClick(View view) {
+                showCustomMessageDialog(position,array,((ItemHolder) holder).tv_num);
             }
         });
     }
@@ -117,16 +109,18 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private class ItemHolder extends RecyclerView.ViewHolder {
-        private TextView title;
-        private TextView text;
-        private ImageView img;
-        private Button btn;
+        private TextView tv_title;
+        private TextView tv_content;
+        private TextView tv_author;
+        private TextView tv_num;
+        private Button btn_read;
         public ItemHolder(View v) {
             super(v);
-            title=v.findViewById(R.id.title);
-            text=v.findViewById(R.id.text);
-            img=v.findViewById(R.id.img);
-            btn=v.findViewById(R.id.btn);
+            tv_title=v.findViewById(R.id.tv_title);
+            tv_content=v.findViewById(R.id.tv_content);
+            tv_author=v.findViewById(R.id.tv_author);
+            tv_num=v.findViewById(R.id.tv_num);
+            btn_read=v.findViewById(R.id.btn_read);
         }
     }
     @Override
@@ -137,5 +131,64 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public long getItemId(int position) {
         return position;
+    }
+    public void showCustomMessageDialog(final int position,String[] array,final TextView tv_num){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(pres.get(position).getTitle());
+        //设置内容视图
+        View view = LayoutInflater.from(context).inflate(R.layout.lph_dialog,null);
+        //得到自定义视图中的控件对象
+        TextView textView = view.findViewById(R.id.tv_text);
+        SpannableString sbs= KeyWordUtil.setSpannableString(Color.BLACK,pres.get(position).getContent(),array);
+        textView.setText(sbs);
+        textView.setMovementMethod(ScrollingMovementMethod.getInstance());
+        ImageView img_start=view.findViewById(R.id.img_start);
+        ImageView img_end=view.findViewById(R.id.img_end);
+        img_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tts.speak(pres.get(position).getContent(),TextToSpeech.QUEUE_FLUSH,null);
+            }
+        });
+        img_end.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tts.stop();
+            }
+        });
+        builder.setView(view);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                tts.stop();
+                int num=Integer.valueOf(pres.get(position).getNum())+1;
+                pres.get(position).setNum(num+"");
+                tv_num.setText(num+"");
+                sendToServer(pres.get(position).getId(),num+"");
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+    public void sendToServer(final int id,final String num){
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("http://"+context.getResources().getString(R.string.lphipConfig)+":8080/Turings/lph/updatePre?id="+id+"&num="+num);
+                    URLConnection conn = url.openConnection();
+                    InputStream in = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
+                    String info = reader.readLine();
+                    Message message=Message.obtain();
+                    message.what=100;
+                    message.obj=info;
+                    handler.sendMessage(message);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 }
