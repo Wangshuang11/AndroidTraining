@@ -30,16 +30,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/icon1"
         android:supportsRtl="true"
-<<<<<<< HEAD
-        android:theme="@style/AppTheme">
-        <activity android:name=".mistaken.ShowPaperActivity"></activity>
-        <activity android:name=".mistaken.WrongBasketActivity" />
-        <activity android:name=".mistaken.AutoGeneratingPaperYLXActivity">
-        </activity>
-=======
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
->>>>>>> a1d7208c2ad935348788d3b6199d857c8e6ad2a7
         <activity android:name=".index.gw.CharRobort.CharRobort" android:theme="@style/AppTheme2"></activity>
 
         <meta-data
@@ -77,7 +69,11 @@
         <activity android:name=".login.ForgetPasswordActivity" />
         <activity android:name=".login.RegisterNewUserActivity" />
         <activity android:name=".login.LoginActivity" /> <!-- 错题本的页面 -->
-        <activity android:name=".mistaken.LookUpAndErrorReDoActivity" />
+        <activity android:name=".mistaken.ShowPaperActivity"></activity>
+        <activity android:name=".mistaken.WrongBasketActivity" />
+        <activity android:name=".mistaken.AutoGeneratingPaperYLXActivity"/>
+        <activity android:name=".mistaken.LookUpAndErrorReDoActivity" >
+        </activity>
         <activity android:name=".mistaken.RedoWrongQuestionsActivity" />
         <activity android:name=".mistaken.UploadWrongQuestionsActivity" /> <!-- 照片裁剪页面 -->
         <activity

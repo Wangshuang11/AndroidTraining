@@ -120,14 +120,10 @@ public class MistakenFragment extends Fragment {
     private TextView tvJumpLogin_ws;//未登录界面的登录按钮
     private ImageView ivUnLogin_ws;//未登录界面的上方图片
     private TextView tvJumpRegister_ws;//未登录界面的注册按钮
-<<<<<<< HEAD
     private ImageView autoPaper_ylx;//自主组卷图标
-=======
 
     private static final int REQUEST_CODE_ACCURATE_BASIC = 107;//百度云文字识别响应码
     private boolean hasGotToken = false;//百度云文字识别的ak,sk是否有效
-
->>>>>>> a1d7208c2ad935348788d3b6199d857c8e6ad2a7
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -1,20 +1,14 @@
 package org.turings.turings.mistaken;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -52,7 +46,7 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.turings.turings.mistaken.SubjectMsg;
+
 public class RedoWrongQuestionsActivity extends AppCompatActivity {
 
     private ImageView img_ylx;//返回键
@@ -89,7 +83,7 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
     private String subjectChange;//学科(存更改的学科)
     private AlertDialog alertDialog;//弹出框
     private Spinner spinner;
-    private int uId;//用户的id
+    private int uId=4;//用户的id
     private RelativeLayout rParent;//布局根目录
     private Handler handler = new Handler(){
         @Override
@@ -104,7 +98,7 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                     }else if(ms.equals("这已经是最后一道题了")){
                         Toast.makeText(getApplicationContext(),"这已经是最后一道题了",Toast.LENGTH_SHORT).show();
                     }else {
-                        msgs = gson.fromJson(ms,SubjectMsg.class);
+                        msgs = gson.fromJson(ms, SubjectMsg.class);
                         if(!msgs.getType().equals("选择题")){
                             scroll_view_ylx.setVisibility(View.GONE);
                             Intent intent = new Intent();
@@ -115,10 +109,10 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                             finish();
                         }
                         //获取图片id,从data的files目录下取出来
-                        String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
-                        Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
-                        //添加题目图片
-                        subjectImg_ylx.setImageBitmap(bitmap);
+//                        String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
+//                        Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
+//                        //添加题目图片
+//                        subjectImg_ylx.setImageBitmap(bitmap);
                         //初始化样式
                         chooseInitoption();
                         //添加选项
@@ -178,7 +172,7 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                     }else{
                         //删除file目录下上一道题
                         deletePathFromFile(getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg());
-                        msgs = gson.fromJson(ms,SubjectMsg.class);
+                        msgs = gson.fromJson(ms, SubjectMsg.class);
                         if(!msgs.getType().equals("选择题")){
                             scroll_view_ylx.setVisibility(View.GONE);
                             Intent intent = new Intent();
@@ -188,10 +182,10 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                             finish();
                         }
                         //获取图片id,从data的files目录下取出来
-                        String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
-                        Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
-                        //添加题目图片
-                        subjectImg_ylx.setImageBitmap(bitmap);
+//                        String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
+//                        Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
+//                        //添加题目图片
+//                        subjectImg_ylx.setImageBitmap(bitmap);
                         //初始化样式
                         chooseInitoption();
                         //添加选项
@@ -229,8 +223,8 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redo_wrong_questions_ylx);
         //获取用户的id
-        SharedPreferences sp = getSharedPreferences("userInfo",MODE_PRIVATE);
-        uId = Integer.parseInt(sp.getString("uId",null));
+//        SharedPreferences sp = getSharedPreferences("userInfo",MODE_PRIVATE);
+//        uId = Integer.parseInt(sp.getString("uId",null));
         //获取控件
         getViews();
         //获取从LookUpAndErrorReDoActivity传来的数据
@@ -243,10 +237,10 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
     private void initData() {
         Intent intent = getIntent();
         msgs = (SubjectMsg) intent.getSerializableExtra("subject");
-        String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
-        Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
-        //添加题目图片
-        subjectImg_ylx.setImageBitmap(bitmap);
+//        String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
+//        Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
+//        //添加题目图片
+//        subjectImg_ylx.setImageBitmap(bitmap);
         a_choose_text_ylx.setText(msgs.getOptionA());
         b_choose_text_ylx.setText(msgs.getOptionB());
         c_choose_text_ylx.setText(msgs.getOptionC());
@@ -307,7 +301,7 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.img_ylx://点击返回
-                    Intent intent = new Intent(getApplicationContext(),LookUpAndErrorReDoActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), LookUpAndErrorReDoActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.choose_ylx://点击弹出选项（编辑错题，删除错题，修改科目，取消）
@@ -373,12 +367,12 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
 
     //查询上一题
     private void searchPreSubject() {
-        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/SearchPreSubjectServlet";
+        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/subjectMsg/findPre";
         searchSubjectFromServlet(url);
     }
     //查询下一题
     private void searchNextSubject() {
-        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/SearchNextSubjectServlet";
+        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/subjectMsg/findNext";
         searchSubjectFromServlet(url);
     }
     //从数据库中查题
@@ -645,7 +639,7 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                 .add("id", String.valueOf(msgs.getId()))
                 .add("tag",tagChange)
                 .build();
-        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/ChangeTagOfSubjectServlet";
+        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/subjectMsg/changeTag";
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
         new Thread(new Runnable() {
@@ -770,7 +764,7 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                 .add("id", String.valueOf(msgs.getId()))
                 .add("subject",subjectChange)
                 .build();
-        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/ChangeSjtOfSubjectServlet";
+        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/subjectMsg/changeSubject";
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
         new Thread(new Runnable() {
@@ -805,7 +799,7 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
                 .add("tag",msgs.getTag())
                 .add("uId", String.valueOf(uId))
                 .build();
-        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/DeleteSubjectServlet";
+        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/subjectMsg/deleteSubjectMsg";
         final Request request = new Request.Builder().post(formBody).url(url).build();
         final Call call = okHttpClient.newCall(request);
         new Thread(new Runnable() {
