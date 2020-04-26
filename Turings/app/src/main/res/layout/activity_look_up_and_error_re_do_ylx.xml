@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LookUpAndErrorReDoActivity"
-    android:orientation="vertical"
-    android:background="#fff">
-
+    android:orientation="vertical">
     <LinearLayout
         android:id="@+id/title_ylx"
         android:orientation="horizontal"
@@ -38,205 +35,89 @@
             android:layout_marginRight="15dp"
             android:src="@mipmap/printerylx"/>
     </LinearLayout>
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="10dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:orientation="horizontal"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_gravity="center">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-                <TextView
-                    android:id="@+id/math_text_ylx"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="数学"
-                    android:textSize="20sp"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:background="@drawable/tab_subject_background"
-                    android:gravity="center" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-                <TextView
-                    android:id="@+id/chinese_text_ylx"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="语文"
-                    android:textSize="20sp"
-                    android:gravity="center"
-                    android:layout_gravity="center" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-                <TextView
-                    android:id="@+id/english_text_ylx"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:text="英语"
-                    android:textSize="20sp"
-                    android:gravity="center" />
-            </LinearLayout>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:splitMotionEvents="false">
-        <LinearLayout
-            android:id="@+id/choose_one_ylx"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:focusableInTouchMode="false"
-            android:clickable="false"
-            android:layout_weight="1">
-            <RelativeLayout
-                android:layout_width="90dp"
-                android:layout_height="60dp"
-                >
-                <ImageView
-                    android:id="@+id/leaf_one_ylx"
-                    android:layout_width="90dp"
-                    android:layout_height="60dp"
-                    android:src="@mipmap/leafylx"
-                    android:rotation="45"/>
-                <TextView
-                    android:id="@+id/left_one_text_ylx"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:textColor="#fff"
-                    android:text="集合"
-                    android:textSize="13sp"
-                    android:layout_alignLeft="@+id/leaf_one_ylx"
-                    android:layout_marginTop="23dp"
-                    android:layout_marginLeft="33dp"
-                    />
-            </RelativeLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/choose_two_ylx"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:focusableInTouchMode="false"
-            android:clickable="false"
-            android:layout_weight="1">
-            <RelativeLayout
-                android:layout_width="90dp"
-                android:layout_height="60dp"
-                >
-                <ImageView
-                    android:id="@+id/leaf_two_ylx"
-                    android:layout_width="90dp"
-                    android:layout_height="60dp"
-                    android:src="@mipmap/leafylx"
-                    android:rotation="45"/>
-                <TextView
-                    android:id="@+id/left_two_text_ylx"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#fff"
-                    android:text="映射"
-                    android:textSize="13sp"
-                    android:layout_alignLeft="@+id/leaf_two_ylx"
-                    android:layout_marginTop="23dp"
-                    android:layout_marginLeft="33dp"
-                    />
+        android:layout_height="50dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
-            </RelativeLayout>
-        </LinearLayout>
         <LinearLayout
-            android:id="@+id/choose_three_ylx"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:focusableInTouchMode="false"
-            android:clickable="false"
-            android:layout_weight="1">
-            <RelativeLayout
-                android:layout_width="90dp"
-                android:layout_height="60dp">
-                <ImageView
-                    android:id="@+id/leaf_three_ylx"
-                    android:layout_width="90dp"
-                    android:layout_height="60dp"
-                    android:src="@mipmap/leafylx"
-                    android:rotation="45"/>
-                <TextView
-                    android:id="@+id/left_three_text_ylx"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:text="函数"
-                    android:textSize="13sp"
-                    android:layout_alignLeft="@+id/leaf_three_ylx"
-                    android:layout_marginTop="23dp"
-                    android:layout_marginLeft="33dp"
-                    android:textColor="#fff"
-                    />
-            </RelativeLayout>
-        </LinearLayout>
-        <ImageView
-            android:id="@+id/drop_more_menu_ylx"
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:layout_height="50dp"
-            android:src="@mipmap/bottomheadylx"
-            android:layout_gravity="center" />
-    </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#DCDCDC"/>
-    <LinearLayout
-        android:id="@+id/lyylx"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:gravity="center">
-        <ImageView
-            android:id="@+id/nullYlx"
-            android:layout_width="300dp"
-            android:layout_height="380dp"
-            android:paddingBottom="50dp"
-            android:src="@mipmap/mistakennullylx" />
-    </LinearLayout>
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/srl"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <pl.droidsonroids.gif.GifImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/studyimgylx" />
-        <ListView
-            android:id="@+id/subject_list_ylx"
-            android:layout_width="match_parent"
+            android:id="@+id/layout_math"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"/>
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/math_text_ylx"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="数学"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_chinese"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/chinese_text_ylx"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="语文"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_english"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/english_text_ylx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="英语"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/cursor"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#1AA8D7"
+        android:contentDescription="@null" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1.0"
+        android:background="#EEE"
+        android:flipInterval="30"
+        android:persistentDrawingCache="animation"/>
 </LinearLayout>

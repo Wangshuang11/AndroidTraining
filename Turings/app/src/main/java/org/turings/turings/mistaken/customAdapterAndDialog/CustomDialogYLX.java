@@ -1,4 +1,4 @@
-package org.turings.turings.mistaken;
+package org.turings.turings.mistaken.customAdapterAndDialog;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,10 @@ import android.widget.Button;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.turings.turings.R;
+import org.turings.turings.mistaken.LookUpAndErrorReDoActivity;
+import org.turings.turings.mistaken.SubjectMsg;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -26,8 +30,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import org.turings.turings.R;
-import org.turings.turings.mistaken.SubjectMsg;
 
 public class CustomDialogYLX extends DialogFragment {
     private SubjectMsg subjectMsgDa;//需上传的数据
@@ -51,7 +53,7 @@ public class CustomDialogYLX extends DialogFragment {
                     }
                 }).start();
                 Intent intent = new Intent();
-                intent.setClass(getActivity(),LookUpAndErrorReDoActivity.class);
+                intent.setClass(getActivity(), LookUpAndErrorReDoActivity.class);
                 intent.setAction("mistake");
                 startActivity(intent);
                 getActivity().finish();//获得加载CustomDialog的activity

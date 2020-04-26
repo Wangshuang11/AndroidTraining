@@ -30,6 +30,10 @@
         android:roundIcon="@mipmap/icon1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".mistaken.ShowPaperActivity"></activity>
+        <activity android:name=".mistaken.WrongBasketActivity" />
+        <activity android:name=".mistaken.AutoGeneratingPaperYLXActivity">
+        </activity>
         <activity android:name=".index.gw.CharRobort.CharRobort" android:theme="@style/AppTheme2"></activity>
 
         <meta-data

@@ -34,6 +34,7 @@ import com.yalantis.ucrop.UCropActivity;
 
 import org.turings.turings.MainActivity;
 import org.turings.turings.R;
+import org.turings.turings.mistaken.customAdapterAndDialog.CustomDialogYLX;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

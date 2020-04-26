@@ -38,6 +38,15 @@
             android:text="选择题"
             android:layout_weight="1"
             android:layout_gravity="center"/>
+        <CheckBox
+            android:id="@+id/chb_select_way_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#1AA8D7"
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_gravity="center"
+            />
     </LinearLayout>
 
     <LinearLayout

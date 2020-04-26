@@ -40,6 +40,7 @@ import com.yalantis.ucrop.UCropActivity;
 import org.turings.turings.R;
 import org.turings.turings.login.LoginActivity;
 import org.turings.turings.login.RegisterNewUserActivity;
+import org.turings.turings.mistaken.AutoGeneratingPaperYLXActivity;
 import org.turings.turings.mistaken.LookUpAndErrorReDoActivity;
 import org.turings.turings.mistaken.StatisticsResult;
 import org.turings.turings.mistaken.UploadWrongQuestionsActivity;
@@ -108,7 +109,7 @@ public class MistakenFragment extends Fragment {
     private TextView tvJumpLogin_ws;//未登录界面的登录按钮
     private ImageView ivUnLogin_ws;//未登录界面的上方图片
     private TextView tvJumpRegister_ws;//未登录界面的注册按钮
-
+    private ImageView autoPaper_ylx;//自主组卷图标
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -169,7 +170,14 @@ public class MistakenFragment extends Fragment {
 
         /*//后台分类统已添加错题数量
         statisticsWrongQuestionsResult();*/
-
+        //跳转到自主组卷
+        autoPaper_ylx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), AutoGeneratingPaperYLXActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -225,13 +233,15 @@ public class MistakenFragment extends Fragment {
 
     //初始化控件
     private void initController() {
-        uId= Integer.parseInt(getContext().getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
+//        uId= Integer.parseInt(getContext().getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
+        uId=4;
         lineLayoutList = view.findViewById(R.id.line_layout_list);
         ivClimbMountain_ws=view.findViewById(R.id.ivClimbMountain_ws);
         tvLizhi_ws=view.findViewById(R.id.tvLizhi_ws);
         wsIvCamera=view.findViewById(R.id.ivCamera_ws);
         btnSeeAll=view.findViewById(R.id.btnSeeAll_ws);
         tvInfo_ws=view.findViewById(R.id.tvInfo_ws);
+        autoPaper_ylx=view.findViewById(R.id.autoPaper_ylx);
     }
 
     //无缝填充顶部图片
