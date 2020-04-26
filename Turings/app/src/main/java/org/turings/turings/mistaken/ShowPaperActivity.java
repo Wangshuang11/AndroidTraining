@@ -102,6 +102,7 @@ public class ShowPaperActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.imgBack_ylx://返回
+                finish();
                 break;
             case R.id.btnNow_ylx://在线做题
                 break;
