@@ -69,10 +69,10 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
     private Button fill_ylx;//填空题选择按钮
     private Button big_question_ylx;//大题选择按钮
     private LinearLayout answer_ylx;//选择题答案书写框架
-    private EditText answer_A_edt_ylx;//选择题A选项答案
-    private EditText answer_B_edt_ylx;//选择题B选项答案
-    private EditText answer_C_edt_ylx;//选择题C选项答案
-    private EditText answer_D_edt_ylx;//选择题D选项答案
+    //    private EditText answer_A_edt_ylx;//选择题A选项答案
+//    private EditText answer_B_edt_ylx;//选择题B选项答案
+//    private EditText answer_C_edt_ylx;//选择题C选项答案
+//    private EditText answer_D_edt_ylx;//选择题D选项答案
     private EditText option_anwser_ylx;//选择题答案书写
     private LinearLayout answer_big_ylx;//大题答案书写框架
     private EditText anwser_edt_ylx;//大题答题EditText
@@ -108,6 +108,9 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
             }
         }
     };
+
+    private TextView question_ws;//识别出的题目
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,17 +119,33 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         builder.detectFileUriExposure();
+
+
         //获取用户的id
-        SharedPreferences sp = getSharedPreferences("userInfo",MODE_PRIVATE);
-        uId = sp.getString("uId",null);
+//        SharedPreferences sp = getSharedPreferences("userInfo",MODE_PRIVATE);
+//        uId = sp.getString("uId",null);
+        uId="1";
+
         //初始化数据（默认数据）
-        initData();
+//        initData();
+        //获得传过来的图片识别结果,构建subjectMag类
+        // (如果是选择题，就默认填充各个选项，答案手动输入；如果是填空题或是大题，答案手动输入)
+//        initData2();
+
+
         //获取控件
         getViews();
+        initData2();
+
+
+
         //绑定事件监听器
         registerListener();
+
         //展示拍照后的图片
-        showWrongQuestionPhoto();
+//        showWrongQuestionPhoto();
+        showWrongQuestionPhoto2();
+
         //给标签绑定adapter
         tags = getResources().getStringArray(R.array.spinner);
         list = new ArrayList<>();
@@ -163,6 +182,32 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         subjectMsg = new org.turings.turings.mistaken.SubjectMsg(1,"数学","集合","填空题",new Date(),"files","","","","","",Integer.parseInt(uId));
     }
 
+    //百度文字识别结果自动填充到选项上
+    private void initData2() {
+        Intent intent=getIntent();
+        subjectMsg=new org.turings.turings.mistaken.SubjectMsg();
+        subjectMsg.setId(1);
+        subjectMsg.setuId(Integer.parseInt(uId));
+        subjectMsg.setTime(new Date());
+        String optionA=intent.getStringExtra("A");
+        String optionB=intent.getStringExtra("B");
+        String optionC=intent.getStringExtra("C");
+        String optionD=intent.getStringExtra("D");
+        String question=intent.getStringExtra("题干");
+        if(optionA!=null || optionB!=null || optionC!=null || optionD!=null){//选择题
+            subjectMsg.setOptionA(optionA);
+            subjectMsg.setOptionB(optionB);
+            subjectMsg.setOptionC(optionC);
+            subjectMsg.setOptionD(optionD);
+            question_ws.setText(question+"\n"+optionA+"\n"+optionB+"\n"+optionC+"\n"+optionD);
+        }else{//填空题或者大题
+            //存题干：subjectMsg需要加一个属性
+            question_ws.setText(question);
+        }
+
+//        subjectMsg = new org.turings.turings.mistaken.SubjectMsg(1,"数学","三角形","选择题",new Date(),"files","","","","","",Integer.parseInt(uId));
+    }
+
     //展示拍照后的图片
     private void showWrongQuestionPhoto() {
         Intent intent=getIntent();
@@ -171,6 +216,15 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         path = saveImgToFile(bitmap);
         subjectMsg.setTitleImg(path);
         question_img_ylx.setImageBitmap(bitmap);
+    }
+
+    //展示拍照后的图片：百度拍照识别，默认将剪裁后的图片(pic.jpg)放在files文件夹下
+    private void showWrongQuestionPhoto2() {
+        String picDir=getFilesDir().getAbsolutePath()+"/pic.jpg";
+        Bitmap bitmap = BitmapFactory.decodeFile(picDir);
+        path=picDir;
+        subjectMsg.setTitleImg(picDir);
+//        question_img_ylx.setImageBitmap(bitmap);
     }
 
     @Override
@@ -219,7 +273,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
     private void deletePathFromFile(String pathCropPhoto) {
         File file = new File(pathCropPhoto);
         if (file.exists()) {
-           file.delete();
+            file.delete();
         }
     }
 
@@ -312,14 +366,14 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         choose_ylx.setOnClickListener(listener);
         fill_ylx.setOnClickListener(listener);
         big_question_ylx.setOnClickListener(listener);
-        delete_ylx.setOnClickListener(listener);
+//        delete_ylx.setOnClickListener(listener);
         back_ylx.setOnClickListener(listener);
         add_wrong_questions_ylx.setOnClickListener(listener);
     }
     //获取控件
     private void getViews() {
-        delete_ylx = findViewById(R.id.delete_ylx);
-        question_img_ylx=findViewById(R.id.question_img_ylx);
+//        delete_ylx = findViewById(R.id.delete_ylx);
+//        question_img_ylx=findViewById(R.id.question_img_ylx);
         chinese_ylx=findViewById(R.id.chinese_ylx);
         math_ylx = findViewById(R.id.math_ylx);
         english_ylx = findViewById(R.id.english_ylx);
@@ -328,18 +382,20 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         fill_ylx = findViewById(R.id.fill_ylx);
         big_question_ylx = findViewById(R.id.big_question_ylx);
         answer_ylx = findViewById(R.id.answer_ylx);
-        answer_A_edt_ylx = findViewById(R.id.answer_A_edt_ylx);
-        answer_B_edt_ylx = findViewById(R.id.answer_B_edt_ylx);
-        answer_C_edt_ylx = findViewById(R.id.answer_C_edt_ylx);
-        answer_D_edt_ylx = findViewById(R.id.answer_D_edt_ylx);
+//        answer_A_edt_ylx = findViewById(R.id.answer_A_edt_ylx);
+//        answer_B_edt_ylx = findViewById(R.id.answer_B_edt_ylx);
+//        answer_C_edt_ylx = findViewById(R.id.answer_C_edt_ylx);
+//        answer_D_edt_ylx = findViewById(R.id.answer_D_edt_ylx);
         answer_big_ylx = findViewById(R.id.answer_big_ylx);
         anwser_edt_ylx = findViewById(R.id.anwser_edt_ylx);
         add_wrong_questions_ylx =findViewById(R.id.add_wrong_questions_ylx);
         ap = answer_ylx.getLayoutParams();
         lp = answer_big_ylx.getLayoutParams();
-        question_content_ylx = findViewById(R.id.question_content_ylx);
+//        question_content_ylx = findViewById(R.id.question_content_ylx);
         back_ylx = findViewById(R.id.img_ylx);
         option_anwser_ylx = findViewById(R.id.option_answer_ylx);
+
+        question_ws=findViewById(R.id.question_ws);
     }
     //点击事件
     public class CustomOnclickListener implements View.OnClickListener{
@@ -348,9 +404,9 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 //错题图片删除按钮
-                case R.id.delete_ylx:
-                    uploadWrongQuestionPhotoAgain();
-                    break;
+//                case R.id.delete_ylx:
+//                    uploadWrongQuestionPhotoAgain();
+//                    break;
                 case R.id.img_ylx://点击返回
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     intent.setAction("mistake");
@@ -398,6 +454,13 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
                     ap.height=1000;
                     answer_ylx.setLayoutParams(ap);
                     subjectMsg.setType("选择题");
+
+                    //自动填充ABCD选项
+//                    answer_A_edt_ylx.setText(subjectMsg.getOptionA());
+//                    answer_B_edt_ylx.setText(subjectMsg.getOptionB());
+//                    answer_C_edt_ylx.setText(subjectMsg.getOptionC());
+//                    answer_D_edt_ylx.setText(subjectMsg.getOptionD());
+
                     break;
                 case R.id.fill_ylx://填空题
                     choose_ylx.setBackgroundColor(Color.WHITE);
@@ -424,14 +487,14 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
                     //错题答案
                     if(subjectMsg.getType().equals("选择题")){
                         //四个选项的内容
-                        String optionA = answer_A_edt_ylx.getText().toString().trim();
-                        String optionB = answer_B_edt_ylx.getText().toString().trim();
-                        String optionC = answer_C_edt_ylx.getText().toString().trim();
-                        String optionD = answer_D_edt_ylx.getText().toString().trim();
-                        subjectMsg.setOptionA(optionA);
-                        subjectMsg.setOptionB(optionB);
-                        subjectMsg.setOptionC(optionC);
-                        subjectMsg.setOptionD(optionD);
+//                        String optionA = answer_A_edt_ylx.getText().toString().trim();
+//                        String optionB = answer_B_edt_ylx.getText().toString().trim();
+//                        String optionC = answer_C_edt_ylx.getText().toString().trim();
+//                        String optionD = answer_D_edt_ylx.getText().toString().trim();
+//                        subjectMsg.setOptionA(optionA);
+//                        subjectMsg.setOptionB(optionB);
+//                        subjectMsg.setOptionC(optionC);
+//                        subjectMsg.setOptionD(optionD);
                         subjectMsg.setAnswer(option_anwser_ylx.getText().toString().trim());
                     }else {
                         subjectMsg.setAnswer(anwser_edt_ylx.getText().toString().trim());
@@ -463,3 +526,4 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         transaction.commit();
     }
 }
+

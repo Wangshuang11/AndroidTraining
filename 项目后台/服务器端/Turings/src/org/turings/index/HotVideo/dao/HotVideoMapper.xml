@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:映射器接口的全名 -->
+<mapper namespace="org.turings.index.HotVideo.dao.HotVideoMapper">
+    <!-- 结果映射 -->
+    <resultMap type="org.turings.index.entity.HotVideo" id="hotVideoMapper">
+        <result column="videourl" property="videoUrl"/>
+        <result column="course" property="course"/>
+        <result column="branch" property="branch"/>
+        <result column="sharedcounts" property="sharedCounts"/>
+        <result column="storedcounts" property="storedCounts"/>
+        <result column="viewcounts" property="viewCounts"/>
+    </resultMap>
+    <select id="findVideoAll" resultMap="hotVideoMapper">
+           select * from tbl_coursevideo limit 0,3;
+    </select>
+    
+    <select id="findVideoMore" resultMap="hotVideoMapper">
+           select * from tbl_coursevideo limit #{begin},3;
+    </select>
+    
+      <select id="SearchVideo" resultMap="hotVideoMapper">
+           select * from tbl_coursevideo where branch like '%' #{search} '%'
+    </select>
+</mapper>

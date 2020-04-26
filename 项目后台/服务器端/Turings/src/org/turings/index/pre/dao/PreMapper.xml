@@ -8,11 +8,14 @@
     <resultMap type="org.turings.index.entity.Pre" id="preMapper">
     	<id column="id" property="id"/>
         <result column="name" property="title"/>
-        <result column="img" property="img"/>
+        <result column="num" property="num"/>
         <result column="content" property="content"/>
-        <result column="src" property="src"/>
+        <result column="author" property="author"/>
     </resultMap>
     <select id="findPreAll" resultMap="preMapper">
            select * from tbl_indexname
     </select>
+    <update id="updatePre">
+     	 update tbl_indexname set num=#{arg1} where id=#{arg0}
+    </update>
 </mapper>

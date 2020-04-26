@@ -1,5 +1,6 @@
 package org.turings.turings.Fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -28,7 +29,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.baidu.ocr.sdk.OCR;
+import com.baidu.ocr.sdk.OnResultListener;
+import com.baidu.ocr.sdk.exception.OCRError;
+import com.baidu.ocr.sdk.model.AccessToken;
+import com.baidu.ocr.ui.camera.CameraActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
@@ -44,6 +51,10 @@ import org.turings.turings.mistaken.AutoGeneratingPaperYLXActivity;
 import org.turings.turings.mistaken.LookUpAndErrorReDoActivity;
 import org.turings.turings.mistaken.StatisticsResult;
 import org.turings.turings.mistaken.UploadWrongQuestionsActivity;
+import org.turings.turings.mistaken.entity.IdentifyResultBean;
+import org.turings.turings.mistaken.entity.Words_result;
+import org.turings.turings.mistaken.util.FileUtil;
+import org.turings.turings.mistaken.util.RecognizeService;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -109,19 +120,26 @@ public class MistakenFragment extends Fragment {
     private TextView tvJumpLogin_ws;//未登录界面的登录按钮
     private ImageView ivUnLogin_ws;//未登录界面的上方图片
     private TextView tvJumpRegister_ws;//未登录界面的注册按钮
+<<<<<<< HEAD
     private ImageView autoPaper_ylx;//自主组卷图标
+=======
+
+    private static final int REQUEST_CODE_ACCURATE_BASIC = 107;//百度云文字识别响应码
+    private boolean hasGotToken = false;//百度云文字识别的ak,sk是否有效
+
+>>>>>>> a1d7208c2ad935348788d3b6199d857c8e6ad2a7
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //用户是否登录
-        if(!checkUserIsLogin()){//未登录
+        /*if(!checkUserIsLogin()){//未登录
             view = inflater.inflate(R.layout.sxn_activity_unlogged, container,false);
             //加载上方图片
             loadTopImg();
             //点击跳转按钮，跳到登录或注册界面
             jumpToLogin();
             return view;
-        }
+        }*/
 
         // android 7.0系统解决拍照的问题（防止API24以上手机报错）
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -158,12 +176,30 @@ public class MistakenFragment extends Fragment {
         });
 
         //点击中部相机按钮，调用手机照相机
+//        wsIvCamera.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showPopwindow();
+//            }
+//        });
+
+        //点击中部相机按钮，调用手机照相机:改进：百度云拍照识别
+        //(自带照片剪切，照片暂存files里，平方识别不了)
         wsIvCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopwindow();
+                if (!checkTokenStatus()) {
+                    return;
+                }
+                Intent intent = new Intent(getContext(), CameraActivity.class);
+                intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
+                        FileUtil.getSaveFile(getContext()).getAbsolutePath());
+                intent.putExtra(CameraActivity.KEY_CONTENT_TYPE,
+                        CameraActivity.CONTENT_TYPE_GENERAL);
+                startActivityForResult(intent, REQUEST_CODE_ACCURATE_BASIC);
             }
         });
+        initAccessTokenWithAkSk();
 
         //后台统计已添加错题的数量
         countMyMistaken();
@@ -414,8 +450,42 @@ public class MistakenFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        // 识别成功回调，通用文字识别（高精度版）:数学题不可以识别平方
+        //图片存储路径(files文件里)：/files/pic.jpg
+        //以为名字都为pic.jpg，拍多张会替换为一张
+        if (requestCode == REQUEST_CODE_ACCURATE_BASIC && resultCode == Activity.RESULT_OK) {
+            RecognizeService.recAccurateBasic(getContext(), FileUtil.getSaveFile(getContext()).getAbsolutePath(),
+                    new RecognizeService.ServiceListener() {
+                        @Override
+                        public void onResult(String result) {
+                            infoPopText(result);
+                            //将识别内容json串转换为java类
+                            //并将识别内容发送到错题上传详情页:UploadWrongQuestionsActivity
+                            Gson gson=new Gson();
+                            IdentifyResultBean identifyResultBean=gson.fromJson(result, IdentifyResultBean.class);
+                            Intent intent = new Intent(getContext(), UploadWrongQuestionsActivity.class);
+                            for (Words_result words_result:identifyResultBean.getWords_result()){
+                                Log.e("识别内容",words_result.getWords());
+                                if(words_result.getWords().startsWith("A")){
+                                    intent.putExtra("A",words_result.getWords());
+                                }else if(words_result.getWords().startsWith("B")){
+                                    intent.putExtra("B",words_result.getWords());
+                                }else if(words_result.getWords().startsWith("C")){
+                                    intent.putExtra("C",words_result.getWords());
+                                }else if(words_result.getWords().startsWith("D")){
+                                    intent.putExtra("D",words_result.getWords());
+                                }else{
+                                    intent.putExtra("题干",words_result.getWords());
+                                }
+                            }
+                            startActivity(intent);
+                        }
+                    });
+        }
+
         //获得用户拍照上传的照片（裁剪后的），发送到错题上传详情页:UploadWrongQuestionsActivity
-        if (resultCode == RESULT_OK) {
+        /*if (resultCode == RESULT_OK) {
             switch (requestCode) {// 选择请求码
                 case CAMERA_REQUEST_CODE:
                     try {
@@ -454,7 +524,7 @@ public class MistakenFragment extends Fragment {
                     final Throwable cropError = UCrop.getError(data);
                     break;
             }
-        }
+        }*/
     }
     //删除file目录下指定路径的图片
     private void deletePathFromFile(String pathCropPhoto) {
@@ -501,5 +571,63 @@ public class MistakenFragment extends Fragment {
         }else{//只要用户名或者密码有一个不为空，就是用户登录了
             return true;
         }
+    }
+
+    /**
+     * 检测ak，sk
+     */
+    private boolean checkTokenStatus() {
+        if (!hasGotToken) {
+            Toast.makeText(getContext(), "token还未成功获取", Toast.LENGTH_LONG).show();
+        }
+        return hasGotToken;
+    }
+
+    /**
+     * 用明文ak，sk初始化
+     */
+    private void initAccessTokenWithAkSk() {
+        OCR.getInstance(getContext()).initAccessTokenWithAkSk(new OnResultListener<AccessToken>() {
+            @Override
+            public void onResult(AccessToken result) {
+                String token = result.getAccessToken();
+                hasGotToken = true;
+            }
+
+            @Override
+            public void onError(OCRError error) {
+                error.printStackTrace();
+                alertText("AK，SK方式获取token失败", error.getMessage());
+            }
+        }, getContext(),  "xdytmNvSVub4BM9Ad5BCnQaM", "2DqHkKCKETgQVyZG70XsovMbc369ox3P");
+    }
+
+    /**
+     * 百度文字识别弹框
+     */
+    private void alertText(final String title, final String message) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getActivity().getApplicationContext(), "title"+title+";massage"+message, Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    /**
+     * 百度文字识别弹框
+     */
+    private void infoPopText(final String result) {
+        alertText("", result);
+    }
+
+    /**
+     * 百度识别释放内存资源
+     */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        OCR.getInstance(getContext()).release();
     }
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:映射器接口的全名 -->
+<mapper namespace="org.turings.myself.myinformation.dao.MyInformationMapper">
+   
+   <resultMap type="org.turings.myself.entity.Myself" id="myInformationMapper">
+    	<result column="uId" property="id"/>
+    	<result column="uTel" property="tel"/>
+        <result column="uName" property="name"/>
+        <result column="uPwd" property="pwd"/>
+        <result column="uMotto" property="motto"/>
+        <result column="uAvatar" property="avatar"/>
+        <result column="uTime" property="time"/>
+        <result column="uScore" property="score"/>
+        <result column="uFanscount" property="fancount"/>
+        <result column="uAttentioncount" property="concount"/>
+        <result column="uAchieve" property="achcount"/>
+        
+    </resultMap>
+    <select id="getMyInformation" resultMap="myInformationMapper">
+    	select * from tbl_self_user where uId = #{uid} 
+    </select>
+   <!-- update tbl_self_user set uAvatar=? where uId=? -->
+</mapper>

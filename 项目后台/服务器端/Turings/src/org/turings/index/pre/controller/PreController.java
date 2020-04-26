@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.turings.index.entity.Pre;
 import org.turings.index.pre.service.PreService;
@@ -22,5 +23,12 @@ public class PreController {
 		String string=this.preService.toJsonArray(pres);
 		System.out.println(string);
 		return string;
+	}
+	@ResponseBody
+	@RequestMapping("/updatePre")
+	public String updatePre(@RequestParam(value="id")int id,@RequestParam(value="num")String num) {
+		int n=this.preService.updatePre(id, num);
+		System.out.println(n+"*******");
+		return "ok";
 	}
 }

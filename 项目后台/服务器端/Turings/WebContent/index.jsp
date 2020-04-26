@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<a href="/Turings/lph/findStoryAll">findAll</a>
+	
 </body>
 </html>

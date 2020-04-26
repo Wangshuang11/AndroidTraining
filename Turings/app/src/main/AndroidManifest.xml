@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.turings.turings">
-    <!-- 授予发送短信的权限 -->
+    package="org.turings.turings"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 授予接收短信的权限 -->
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
@@ -29,11 +30,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/icon1"
         android:supportsRtl="true"
+<<<<<<< HEAD
         android:theme="@style/AppTheme">
         <activity android:name=".mistaken.ShowPaperActivity"></activity>
         <activity android:name=".mistaken.WrongBasketActivity" />
         <activity android:name=".mistaken.AutoGeneratingPaperYLXActivity">
         </activity>
+=======
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
+>>>>>>> a1d7208c2ad935348788d3b6199d857c8e6ad2a7
         <activity android:name=".index.gw.CharRobort.CharRobort" android:theme="@style/AppTheme2"></activity>
 
         <meta-data

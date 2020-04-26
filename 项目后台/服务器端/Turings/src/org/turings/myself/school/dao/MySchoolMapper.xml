@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:映射器接口的全名 -->
+<mapper namespace="org.turings.myself.school.dao.MySchoolMapper">
+    <!-- 结果映射 -->
+    <resultMap type="org.turings.myself.entity.SchoolInfo" id="myschoolMapper">
+    	<result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="img" property="img"/>
+        <result column="url" property="url"/>
+        <result column="src" property="src"/>
+        <result column="flag" property="flag"/>
+    </resultMap>
+    <select id="getSchoolsList" resultMap="myschoolMapper">
+    	select * from tbl_indexcollege where id IN (select sId from tbl_self_schools_favorite where uId=#{uid})
+    </select>
+</mapper>

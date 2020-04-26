@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.ContactsContract;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +21,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
+import com.sackcentury.shinebuttonlib.ShineButton;
 
 
 import org.turings.turings.R;
+//import org.turings.turings.index.CommonActivity;
 import org.turings.turings.index.CommonActivity;
 import org.turings.turings.index.entity.Story;
 
@@ -93,80 +96,96 @@ public class ListStoryAdapter extends BaseAdapter implements TextToSpeech.OnInit
         if(null==view){
             view= LayoutInflater.from(context).inflate(itemlayout,null);
             viewHolder=new ViewHolder();
-            viewHolder.text_title=view.findViewById(R.id.text_title);
-            viewHolder.img1=view.findViewById(R.id.img1);
-            viewHolder.img2=view.findViewById(R.id.img2);
-            viewHolder.img3=view.findViewById(R.id.img3);
+            viewHolder.tv_titlen=view.findViewById(R.id.tv_titlen);
+            viewHolder.tv_namen=view.findViewById(R.id.tv_namen);
+            viewHolder.tv_contentn=view.findViewById(R.id.tv_contentn);
+            viewHolder.iv_imgn=view.findViewById(R.id.iv_imgn);
+            viewHolder.iv_imgr=view.findViewById(R.id.iv_imgr);
             viewHolder.shoucang=view.findViewById(R.id.shoucang);
             viewHolder.btn_sc=view.findViewById(R.id.btn_sc);
-            viewHolder.pinglun=view.findViewById(R.id.pinglun);
+//            viewHolder.pinglun=view.findViewById(R.id.pinglun);
             viewHolder.btn_con=view.findViewById(R.id.btn_con);
             view.setTag(viewHolder);
         }else{
             viewHolder=(ViewHolder)view.getTag();
         }
-        viewHolder.text_title.setText(stories.get(i).getTitle());
+        viewHolder.tv_titlen.setText(stories.get(i).getTitle());
+        viewHolder.tv_namen.setText(stories.get(i).getName());
+        viewHolder.tv_contentn.setText(stories.get(i).getContent());
+        viewHolder.shoucang.setText(stories.get(i).getStarnum());
         RequestOptions  ro=new RequestOptions().placeholder(R.drawable.loading);
-        Glide.with(context).load(stories.get(i).getImg1()).apply(ro).into( viewHolder.img1);
-        Glide.with(context).load(stories.get(i).getImg2()).apply(ro).into( viewHolder.img2);
-        Glide.with(context).load(stories.get(i).getImg3()).apply(ro).into( viewHolder.img3);
-        viewHolder.shoucang.setText(stories.get(i).getNum());
+        int imgnId=context.getResources().getIdentifier(stories.get(i).getSmallimg(),"drawable",context.getPackageName());
+        Glide.with(context).load(imgnId).apply(ro).into( viewHolder.iv_imgn);
+        Glide.with(context).load(stories.get(i).getBigimg()).apply(ro).into( viewHolder.iv_imgr);
+        viewHolder.shoucang.setText(stories.get(i).getStarnum());
         final ViewHolder finalViewHolder = viewHolder;
-        viewHolder.btn_sc.setOnClickListener(new View.OnClickListener() {
+        viewHolder.btn_sc.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                if(!stories.get(i).isFlag()){
-                    finalViewHolder.btn_sc.setBackgroundResource(R.drawable.yellow_star);
-                    sendToServer(stories.get(i).getTitle(),1);
-                    stories.get(i).setFlag(true);
-                }else{
-                    finalViewHolder.btn_sc.setBackgroundResource(R.drawable.gray_star);
-                    sendToServer(stories.get(i).getTitle(),2);
-                    stories.get(i).setFlag(false);
+            public void onCheckedChanged(View view, boolean checked) {
+                if(checked==true){//+1
+                    int starnum=Integer.valueOf(stories.get(i).getStarnum());
+                    starnum=starnum+1;
+                    finalViewHolder.shoucang.setText(starnum+"");
+                    stories.get(i).setStarnum(starnum+"");
+                    sendToServer(stories.get(i).getStarnum(),stories.get(i).getId(),1);
+                }else if(checked==false){
+                    int starnum=Integer.valueOf(stories.get(i).getStarnum());
+                    starnum=starnum-1;
+                    if (starnum<0){
+                        starnum=0;
+                    }
+                    finalViewHolder.shoucang.setText(starnum+"");
+                    stories.get(i).setStarnum(starnum+"");
+                    sendToServer(stories.get(i).getStarnum(),stories.get(i).getId(),2);
                 }
 
             }
         });
-        viewHolder.pinglun.setOnClickListener(new View.OnClickListener() {
+//
+//        viewHolder.pinglun.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(context, CommonActivity.class);
+//                String string=new Gson().toJson(stories.get(i));
+//                intent.putExtra("story",string);
+//                context.startActivity(intent);
+//            }
+//        });
+        viewHolder.btn_con.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                final PopupWindow popupWindow=new PopupWindow(context);
+//                LayoutInflater layoutInflater=LayoutInflater.from(context);
+//                View view_pop=layoutInflater.inflate(R.layout.lph_popupwindow_layout,null);
+//                TextView text_pop= view_pop.findViewById(R.id.text_pop);
+//                text_pop.setText(stories.get(i).getContent());
+//                ImageView btn_ok=view_pop.findViewById(R.id.btn_ok);
+//                ImageView img_start=view_pop.findViewById(R.id.img_start);
+//                ImageView img_end=view_pop.findViewById(R.id.img_end);
+//                btn_ok.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        popupWindow.dismiss();
+//                    }
+//                });
+//                img_start.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        tts.speak(stories.get(i).getContent(),TextToSpeech.QUEUE_FLUSH,null);
+//                    }
+//                });
+//                img_end.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        tts.stop();
+//                    }
+//                });
+//                popupWindow.setContentView(view_pop);
+//                popupWindow.showAtLocation(viewp, Gravity.FILL_HORIZONTAL,0,0);
                 Intent intent=new Intent(context, CommonActivity.class);
                 String string=new Gson().toJson(stories.get(i));
                 intent.putExtra("story",string);
                 context.startActivity(intent);
-            }
-        });
-        viewHolder.btn_con.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final PopupWindow popupWindow=new PopupWindow(context);
-                LayoutInflater layoutInflater=LayoutInflater.from(context);
-                View view_pop=layoutInflater.inflate(R.layout.lph_popupwindow_layout,null);
-                TextView text_pop= view_pop.findViewById(R.id.text_pop);
-                text_pop.setText(stories.get(i).getContent());
-                ImageView btn_ok=view_pop.findViewById(R.id.btn_ok);
-                ImageView img_start=view_pop.findViewById(R.id.img_start);
-                ImageView img_end=view_pop.findViewById(R.id.img_end);
-                btn_ok.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        popupWindow.dismiss();
-                    }
-                });
-                img_start.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        tts.speak(stories.get(i).getContent(),TextToSpeech.QUEUE_FLUSH,null);
-                    }
-                });
-                img_end.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        tts.stop();
-                    }
-                });
-                popupWindow.setContentView(view_pop);
-                popupWindow.showAtLocation(viewp, Gravity.FILL_HORIZONTAL,0,0);
             }
         });
         return view;
@@ -182,21 +201,22 @@ public class ListStoryAdapter extends BaseAdapter implements TextToSpeech.OnInit
         }
     }
     static final class ViewHolder{
-        private TextView text_title;
-        private ImageView img1;
-        private ImageView img2;
-        private ImageView img3;
+        private TextView tv_titlen;
+        private ImageView iv_imgn;
+        private ImageView iv_imgr;
+        private TextView tv_namen;
+        private TextView tv_contentn;
         private TextView shoucang;
-        private Button btn_sc;
-        private Button pinglun;
+        private ShineButton btn_sc;
+        //        private Button pinglun;
         private Button btn_con;
     }
-    private void sendToServer(final String title, final int flag) {
+    private void sendToServer(final String starnum, final int id,final int flag) {
         new Thread() {
             @Override
             public void run() {
                 try {
-                    String string = "http://"+context.getResources().getString(R.string.ipConfig)+":8080/Turings/update?title="+title+"&flag="+flag;
+                    String string = "http://"+context.getResources().getString(R.string.lphipConfig)+":8080/Turings/lph/updateStory?starnum="+starnum+"&id="+id+"&flag="+flag;
                     URL url = new URL(string);
                     URLConnection conn = url.openConnection();
                     InputStream in = conn.getInputStream();

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:映射器接口的全名 -->
+<mapper namespace="org.turings.index.HotVideo.dao.HotCourseMapper">
+    <!-- 结果映射 -->
+    <resultMap type="org.turings.index.entity.HotCourse" id="hot">
+        <result column="parentid" property="courseId"/>
+        <result column="courseimage" property="courseImage"/>
+        <result column="coursetitle" property="courseTitle"/>
+        <result column="courseperson" property="coursePerson"/>
+        <result column="coursedata" property="courserData"/>
+    </resultMap>
+    <select id="findIndexCourse" resultMap="hot">
+           select * from tbl_indexcourse order by  courseviews desc limit 0,2
+    </select>
+        <select id="changeCourse" resultMap="hot">
+           select * from tbl_indexcourse order by courseViews  limit #{a},#{b};
+    </select>
+    
+    <select id="Detail" resultMap="hot">
+           select * from tbl_childvideo where childbelong = #{a} order by childrank
+    </select>
+</mapper>

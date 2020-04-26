@@ -6,11 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -27,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -186,7 +183,7 @@ public class FirstFragment extends Fragment{
         Date d = new Date();
 
         try {
-            Date d2=s1.parse("2020-06-07-08-00");
+            Date d2=s1.parse("2020-07-07-08-00");
             long second = (d2.getTime()-d.getTime())/1000;
             mDay = (long) Math.floor(second/(3600*24));
             mHour = (long) (Math.floor(second/3600)-mDay*24);
@@ -253,7 +250,7 @@ public class FirstFragment extends Fragment{
                     @Override
                     public void run() {
                         OkHttpClient client = new OkHttpClient();
-                        Request request = new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/IndexCourseServlet?key=change").build();
+                        Request request = new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/gw/changeCourse").build();
                         Call call = client.newCall(request);
                         call.enqueue(new Callback() {
                             @Override
@@ -340,7 +337,7 @@ public class FirstFragment extends Fragment{
             @Override
             public void run() {
                 OkHttpClient client = new OkHttpClient();
-                Request request = new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/IndexCourseServlet?key=popular").build();
+                Request request = new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/gw/indexcourse").build();
                 Call call = client.newCall(request);
                 call.enqueue(new Callback() {
                     @Override

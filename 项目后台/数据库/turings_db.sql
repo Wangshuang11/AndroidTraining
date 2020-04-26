@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50506
 File Encoding         : 65001
 
-Date: 2019-12-16 17:06:18
+Date: 2020-04-26 10:44:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -101,6 +101,52 @@ CREATE TABLE `tbl_fans` (
 -- ----------------------------
 -- Records of tbl_fans
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tbl_farm_punish`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_farm_punish`;
+CREATE TABLE `tbl_farm_punish` (
+  `uid` int(11) NOT NULL AUTO_INCREMENT,
+  `not_come` int(11) DEFAULT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_farm_punish
+-- ----------------------------
+INSERT INTO `tbl_farm_punish` VALUES ('1', '3');
+INSERT INTO `tbl_farm_punish` VALUES ('2', '1');
+INSERT INTO `tbl_farm_punish` VALUES ('3', '10');
+INSERT INTO `tbl_farm_punish` VALUES ('4', '7');
+INSERT INTO `tbl_farm_punish` VALUES ('5', '6');
+INSERT INTO `tbl_farm_punish` VALUES ('6', '20');
+INSERT INTO `tbl_farm_punish` VALUES ('7', '23');
+INSERT INTO `tbl_farm_punish` VALUES ('8', '32');
+
+-- ----------------------------
+-- Table structure for `tbl_farm_score`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_farm_score`;
+CREATE TABLE `tbl_farm_score` (
+  `uid` int(11) NOT NULL DEFAULT '0',
+  `uwater` int(11) DEFAULT NULL,
+  `uprocess` int(11) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_farm_score
+-- ----------------------------
+INSERT INTO `tbl_farm_score` VALUES ('1', '13', '10', '0');
+INSERT INTO `tbl_farm_score` VALUES ('3', '5', '56', '0');
+INSERT INTO `tbl_farm_score` VALUES ('2', '2', '140', '1');
+INSERT INTO `tbl_farm_score` VALUES ('4', '11', '100', '0');
+INSERT INTO `tbl_farm_score` VALUES ('5', '7', '240', '1');
+INSERT INTO `tbl_farm_score` VALUES ('6', '6', '266', '0');
+INSERT INTO `tbl_farm_score` VALUES ('7', '15', '80', '2');
+INSERT INTO `tbl_farm_score` VALUES ('8', '5', '32', '0');
 
 -- ----------------------------
 -- Table structure for `tbl_indexcollege`
@@ -205,18 +251,43 @@ CREATE TABLE `tbl_indexname` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `img` varchar(20) DEFAULT NULL,
-  `paracount` int(11) DEFAULT NULL,
+  `content` text,
   `src` varchar(200) DEFAULT NULL,
+  `num` varchar(20) DEFAULT NULL,
+  `author` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_indexname
 -- ----------------------------
-INSERT INTO `tbl_indexname` VALUES ('1', '大学起源', 'co', '2', 'https://p1.ssl.qhimg.com/dr/270_500_/t017ebafe9b1ab5620c.jpg?size=1000x666');
-INSERT INTO `tbl_indexname` VALUES ('2', '大学使命', 'co', '2', 'https://p1.ssl.qhimg.com/dr/270_500_/t017893e9d8d34cce14.jpg?size=268x384');
-INSERT INTO `tbl_indexname` VALUES ('3', '985和211大学', 'co', '2', 'http://www.sinaimg.cn/dy/slidenews/11_img/2011_16/18420_48427_311108.jpg');
-INSERT INTO `tbl_indexname` VALUES ('4', '世界一流大学和一流学科', 'co', '2', 'https://p1.ssl.qhimg.com/dr/270_500_/t01d5cace27d7e1f216.jpg?size=600x396');
+INSERT INTO `tbl_indexname` VALUES ('1', '近现代大学的起源', 'co', '     近现代大学直接起源于十二、十三世纪的欧洲中世纪大学，古代埃及、印度、中国等都是高等教育的发源地，古希腊、罗马、拜占廷及阿拉伯国家都建立了较完善和发达的高等教育体制。虽然许多教育史家把上述地方的高等学府也称之为大学，但严格地说，它们不是真正意义的大学。\r\n     1088年，意大利建立了第一所正规大学--博罗尼亚大学，它是欧洲最著名的罗马法研究中心(也被称为\\\"母大学\\\"，是一所学生大学)。\\r\\n      随后，欧洲各地相继出现了大学。巴黎大学是由巴黎圣母院的附属学校演变而来，1200年法国国王承认巴黎大学的学者具有合法的牧师资格，有司法豁免权(巴黎大学是第二所大学，是一所先生大学)。\r\n      现代大学开始于19世纪初，是指启蒙运动以后、经过理性主义改造、特别是指以德国洪堡创办的柏林大学为代表的新型大学，一般认为，1809年德国柏林大学的创立标志着现代意义上的大学的诞生\r\n     现代大学与中世纪大学的根本区别在于大学职能的转变。中世纪大学是传授已有知识的场所，将研究和发现知识排斥在大学之外，而现代大学则将科学研究作为自己的主要职能，将增扩人类的知识和培养科学工作者作为自己的主要任务，推崇\\\"学术自由\\\"和\\\"教学与研究的统一\\\"。柏林大学精神推动了德国的科学事业发达昌盛，19世纪初到20世纪初德国成为世界科学的中心。这一思想对世界高等教育也产生了深远影响，为近代大学形成奠定了基础。\r\n      而中国大学的起源是北洋大学堂，当年中国在甲午海战中惨败日本后，变法之声顿起，天津中西学堂改办为北洋大学堂，标志着中国近代第一所大学诞生。也有不少学者认为位于上海的由圣约翰书院变而来的圣约翰大学(诞生于1879年)是中国近代第一所大学。随着一些学者对中国近代高等教育史研究的不断深入，大家逐渐发现， 中国近代最早的教会大学是位于山东的由登州高等学堂演变而来的齐鲁大学(诞生于1864年)。\r\n    1898年戊戌变法，京师大学堂成立，这是中国近代第一所国立大学和综合大学。    大学，学名为普通高等学校，是一种功能独特的文化机构，是与社会的经济和政治机构既相互关联又鼎足而立的传承、研究、融合和创新高深学术的高等学府。它不仅是人类文化发展到一定阶段的产物，它还在长期办学实践的基础上，经过历史的积淀、自身的努力和外部环境的影响，逐步形成了一种独特的大学文化 。\r\n      大学从它产生到现在已有上千年的历史，上溯到它的产生，它主要是从德国、英国等国家最早发展起来的。中国现代大学源起于西方，现代西方大学又是从欧洲中世纪大学、英国大学、德国大学而到美国大学这样逐渐演化过来的，无论哪一个时代的大学都是以前大学的创造性继承而不是否定 。	', 'https://p1.ssl.qhimg.com/dr/270_500_/t017ebafe9b1ab5620c.jpg?size=1000x666', '3764', '启航狗');
+INSERT INTO `tbl_indexname` VALUES ('2', '近现代大学的使命', 'co', '      在大学理念支配下的大学使命要求大学培养的学生首先是有高尚品格的，有教养的人，这是符合大学的本质。这个使命是指培养学生完整的人格、净化学生的心灵、修养学生的品行、锻炼学生对事物进行批判的能力，而不是仅仅对学生进行专业教育。\r\n      正如英国著名教育理论家纽曼所认识到的:\"从功利派的论点中看到了真正教育的死敌。新大学在功利派理论的指导下，更看重的是专业培训而不是文化要求，是考试及结果而不是心理过程，是对事实的被动获取而不是心智的一般活动。\"纽曼所指的\"新大学\"，是违背了大学的逻辑而按市场经济的逻辑和政治的逻辑来当作它的使命而运行的大学。', 'https://p1.ssl.qhimg.com/dr/270_500_/t017893e9d8d34cce14.jpg?size=268x384', '2054', '龙猫');
+INSERT INTO `tbl_indexname` VALUES ('3', '985和211大学', 'co', '       211大学：第一点是面向21世纪，第二点是一百所大学，第三点是国家重点建设大学,这就是211大学的具体含义分析。\r\n      985大学：名称主要来源于日期，1998年5月4日，也就是北大校庆100周年，江泽民主席提出建设世界一流大学，985大学共有39所。', 'http://www.sinaimg.cn/dy/slidenews/11_img/2011_16/18420_48427_311108.jpg', '3685', '无名');
+INSERT INTO `tbl_indexname` VALUES ('4', '世界一流大学和一流学科', 'co', '      世界一流大学和一流学科，简称“双一流”；建设世界一流大学和一流学科，是中国共产党中央、国务院作出的重大战略决策，有利于提升中国高等教育综合实力和国际竞争力，为实现“两个一百年”奋斗目标和中华民族伟大复兴的中国梦提供有力支撑。\r\n      2017年9月21日，教育部、财政部、国家发展改革委印发《关于公布世界一流大学和一流学科建设高校及建设学科名单的通知》，公布42所世界一流大学和95所一流学科建设高校及建设学科名单。', 'https://p1.ssl.qhimg.com/dr/270_500_/t01d5cace27d7e1f216.jpg?size=600x396', '7741', '天真的我');
+
+-- ----------------------------
+-- Table structure for `tbl_information`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_information`;
+CREATE TABLE `tbl_information` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `portrait` varchar(255) DEFAULT NULL,
+  `totaltime` double DEFAULT NULL,
+  `currenttime` double DEFAULT NULL,
+  `university` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `motto` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of tbl_information
+-- ----------------------------
+INSERT INTO `tbl_information` VALUES ('1', '王小爽', 'a3', '2056', '125', '清华大学', '韦编屡绝铁砚穿，口诵手钞那计年');
+INSERT INTO `tbl_information` VALUES ('2', '单小楠', 'a3', '1893', '150', '天津工业大学', '啦啦啦啦');
+INSERT INTO `tbl_information` VALUES ('3', '金小媛', 'a3', '1775', '58', '燕山大学', '哈哈哈哈哈');
+INSERT INTO `tbl_information` VALUES ('5', '吕小浩', 'a3', '1682', '68', '河北师范大学', '嘿嘿嘿嘿嘿');
 
 -- ----------------------------
 -- Table structure for `tbl_mistaken`
@@ -302,10 +373,35 @@ INSERT INTO `tbl_position` VALUES ('13', '丑橘', 'i13', '37.017', '105.375', '
 INSERT INTO `tbl_position` VALUES ('14', '山竹', 'i14', '37.84', '115.972', '1');
 INSERT INTO `tbl_position` VALUES ('15', '火龙果', 'i15', '26.745', '113.028', '1');
 INSERT INTO `tbl_position` VALUES ('16', '猕猴桃', 'i16', '41.257', '107.141', '1');
-INSERT INTO `tbl_position` VALUES ('17', '哈密瓜', 'i17', '34.0528', '114.058', '1');
-INSERT INTO `tbl_position` VALUES ('18', '荔枝', 'i18', '39.683', '100.223', '1');
-INSERT INTO `tbl_position` VALUES ('19', '葡萄', 'i19', '34.985', '106.699', '1');
-INSERT INTO `tbl_position` VALUES ('20', '蛋挞', 'i20', '30.382', '107.141', '1');
+
+-- ----------------------------
+-- Table structure for `tbl_schools`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_schools`;
+CREATE TABLE `tbl_schools` (
+  `sWebaddress` varchar(100) DEFAULT NULL,
+  `sInfo` varchar(255) DEFAULT NULL,
+  `sId` int(11) NOT NULL,
+  PRIMARY KEY (`sId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_schools
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tbl_schools_favorite`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_schools_favorite`;
+CREATE TABLE `tbl_schools_favorite` (
+  `sId` int(11) NOT NULL,
+  `uId` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`sId`,`uId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_schools_favorite
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `tbl_self_courses`
@@ -494,18 +590,18 @@ DROP TABLE IF EXISTS `tbl_story`;
 CREATE TABLE `tbl_story` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) DEFAULT NULL,
-  `img1` varchar(500) DEFAULT NULL,
-  `img2` varchar(500) DEFAULT NULL,
-  `img3` varchar(500) DEFAULT NULL,
-  `num` varchar(20) DEFAULT NULL,
-  `content` varchar(1024) DEFAULT NULL,
+  `bigimg` varchar(500) DEFAULT NULL,
+  `smallimg` varchar(500) DEFAULT NULL,
+  `name` varchar(500) DEFAULT NULL,
+  `starnum` varchar(20) DEFAULT NULL,
+  `content` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_story
 -- ----------------------------
-INSERT INTO `tbl_story` VALUES ('1', '后进生的奋斗史', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01fe4ce2f51047f96c.jpg', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01588c850cf16d3c9c.jpg', 'http://i-1.binzz.com/2018/10/27/W3dtOjEucG5nLHI6MTMsYjoxM10oNjAweCk=/6f307a6a-1c72-47a0-a04c-0dc2120e51a4.png', '88', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才， 没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
-INSERT INTO `tbl_story` VALUES ('2', '从现在开始努力', 'https://p0.ssl.qhimgs1.com/sdr/400__/t0168f2443cee7a5bbe.jpg', 'http://uploads.5068.com/allimg/1805/147-1P51Q03208.png', 'http://uzzf.com/up/2016-6/14652010952310087.png', '157', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着， 一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
-INSERT INTO `tbl_story` VALUES ('3', '做一个崭新的自己', 'https://p0.ssl.qhimgs1.com/sdr/400__/t019fc63acd104c5490.jpg', 'http://upload.mnw.cn/2017/0606/1496708899187.jpg', 'https://p2.ssl.qhimgs1.com/sdr/400__/t01bf7eeaf33fce2032.jpg', '224', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
-INSERT INTO `tbl_story` VALUES ('4', '过去的都是浮云', 'https://p1.ssl.qhimgs1.com/sdr/400__/t01989576057c377587.jpg', 'http://img.smzy.com/Soft/UploadPic/2016-3/201631214351846179.jpg', 'https://p0.ssl.qhimgs1.com/sdr/400__/t01221d3ed68502af20.jpg', '61', '时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着， 一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
+INSERT INTO `tbl_story` VALUES ('1', '没动力？No,加油少年！', 'http://uploads.5068.com/allimg/1805/147-1P51Q03208.png', 'tf3', '昊先生123', '100', '      在高考中有位考生写过这样一段话:我曾经埋怨过，脚底发黄的布鞋，踏不出青春的活力，直到我发觉霍金转动的轮椅，嵌出深深的历史痕迹;我曾咒骂过，脸边黝黑的胎记，映不出美丽的脸庞，直到我看见全身黝黑的黑人，露出甜甜的美丽微笑……\r\n      也许你曾抱怨过上帝是捉弄人的，他对你吝啬幸福，却让痛苦折磨着你，日日夜夜，疲惫不堪，换来的只是滚烫的泪珠。但苦尽甘来后，当你揭开那沉重的幕纱，你会看清，上帝是公平的，磨难也是一种财富。\r\n      曾经有人做了一个试验。他点清了一座山林中的红羊后，把山中的狼全部捕捉起来，让红羊没有敌人。照理说，红羊应该是悠闲自得、快乐地生活了，但事与愿违，红羊为了争夺一小片土地、甚至一棵青草而搏斗，由原来一支整齐的队伍变为一盘散沙。\r\n      经过搏斗的红羊一只只疲惫不堪，过去那种矫健、奔跑如飞的红羊在这座山林中再未曾出现过，而且，红羊的数量也在逐渐减少。是什么原因呢?因为人们捕获了狼，红羊没有了给它们造成生命威胁的动物，而自相残杀直至消亡，失去了危机。同时也失去了生机。可见，在生态环境中，没有磨难就不会有生态平衡的系统。\r\n      张海迪胸部以下失去知觉，但这些困难反而使她有了更为远大的目标，学习掌握了德语、日语、英语。她为什么能取得常人都不容易取得的成就呢?因为她在承受巨大挫折的同时，也将挫折化为了动力，让挫折成为自己的奴隶，再一次战胜了磨难。\r\n      人生如一块璞玉，这是上帝赐予你最大的财富，这块璞玉中有着酸甜苦辣，也许痛苦过后便是幸福，这是上帝给予你最大的机遇。只有自己努力来雕琢这块璞玉，才能使它成为完美无瑕的艺术品。同学们，当你遇到挫折、困难时，不妨想想，上帝是公平的，有时磨难也是一种财富。');
+INSERT INTO `tbl_story` VALUES ('2', '努力从现在开始', 'https://p0.ssl.qhimgs1.com/sdr/400__/t0168f2443cee7a5bbe.jpg', 'tf2', '学霸狗', '160', '      在高考中有位考生写过这样一段话:我曾经埋怨过，脚底发黄的布鞋，踏不出青春的活力，直到我发觉霍金转动的轮椅，嵌出深深的历史痕迹;我曾咒骂过，脸边黝黑的胎记，映不出美丽的脸庞，直到我看见全身黝黑的黑人，露出甜甜的美丽微笑……\r\n      也许你曾抱怨过上帝是捉弄人的，他对你吝啬幸福，却让痛苦折磨着你，日日夜夜，疲惫不堪，换来的只是滚烫的泪珠。但苦尽甘来后，当你揭开那沉重的幕纱，你会看清，上帝是公平的，磨难也是一种财富。\r\n      曾经有人做了一个试验。他点清了一座山林中的红羊后，把山中的狼全部捕捉起来，让红羊没有敌人。照理说，红羊应该是悠闲自得、快乐地生活了，但事与愿违，红羊为了争夺一小片土地、甚至一棵青草而搏斗，由原来一支整齐的队伍变为一盘散沙。\r\n      经过搏斗的红羊一只只疲惫不堪，过去那种矫健、奔跑如飞的红羊在这座山林中再未曾出现过，而且，红羊的数量也在逐渐减少。是什么原因呢?因为人们捕获了狼，红羊没有了给它们造成生命威胁的动物，而自相残杀直至消亡，失去了危机。同时也失去了生机。可见，在生态环境中，没有磨难就不会有生态平衡的系统。\r\n      张海迪胸部以下失去知觉，但这些困难反而使她有了更为远大的目标，学习掌握了德语、日语、英语。她为什么能取得常人都不容易取得的成就呢?因为她在承受巨大挫折的同时，也将挫折化为了动力，让挫折成为自己的奴隶，再一次战胜了磨难。\r\n      人生如一块璞玉，这是上帝赐予你最大的财富，这块璞玉中有着酸甜苦辣，也许痛苦过后便是幸福，这是上帝给予你最大的机遇。只有自己努力来雕琢这块璞玉，才能使它成为完美无瑕的艺术品。同学们，当你遇到挫折、困难时，不妨想想，上帝是公平的，有时磨难也是一种财富。时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着， 一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
+INSERT INTO `tbl_story` VALUES ('3', '每天迎接一个崭新的自己', 'https://p0.ssl.qhimgs1.com/sdr/400__/t019fc63acd104c5490.jpg', 'tf1', '迷心兔', '226', '      在高考中有位考生写过这样一段话:我曾经埋怨过，脚底发黄的布鞋，踏不出青春的活力，直到我发觉霍金转动的轮椅，嵌出深深的历史痕迹;我曾咒骂过，脸边黝黑的胎记，映不出美丽的脸庞，直到我看见全身黝黑的黑人，露出甜甜的美丽微笑……\r\n      也许你曾抱怨过上帝是捉弄人的，他对你吝啬幸福，却让痛苦折磨着你，日日夜夜，疲惫不堪，换来的只是滚烫的泪珠。但苦尽甘来后，当你揭开那沉重的幕纱，你会看清，上帝是公平的，磨难也是一种财富。\r\n      曾经有人做了一个试验。他点清了一座山林中的红羊后，把山中的狼全部捕捉起来，让红羊没有敌人。照理说，红羊应该是悠闲自得、快乐地生活了，但事与愿违，红羊为了争夺一小片土地、甚至一棵青草而搏斗，由原来一支整齐的队伍变为一盘散沙。\r\n      经过搏斗的红羊一只只疲惫不堪，过去那种矫健、奔跑如飞的红羊在这座山林中再未曾出现过，而且，红羊的数量也在逐渐减少。是什么原因呢?因为人们捕获了狼，红羊没有了给它们造成生命威胁的动物，而自相残杀直至消亡，失去了危机。同时也失去了生机。可见，在生态环境中，没有磨难就不会有生态平衡的系统。\r\n      张海迪胸部以下失去知觉，但这些困难反而使她有了更为远大的目标，学习掌握了德语、日语、英语。她为什么能取得常人都不容易取得的成就呢?因为她在承受巨大挫折的同时，也将挫折化为了动力，让挫折成为自己的奴隶，再一次战胜了磨难。\r\n      人生如一块璞玉，这是上帝赐予你最大的财富，这块璞玉中有着酸甜苦辣，也许痛苦过后便是幸福，这是上帝给予你最大的机遇。只有自己努力来雕琢这块璞玉，才能使它成为完美无瑕的艺术品。同学们，当你遇到挫折、困难时，不妨想想，上帝是公平的，有时磨难也是一种财富。时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。 因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着，一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
+INSERT INTO `tbl_story` VALUES ('4', '99%的汗水+1%的智力=成功', 'http://img.smzy.com/Soft/UploadPic/2016-3/201631214351846179.jpg', 'tanimal4', 'HelloWorld!', '62', '      在高考中有位考生写过这样一段话:我曾经埋怨过，脚底发黄的布鞋，踏不出青春的活力，直到我发觉霍金转动的轮椅，嵌出深深的历史痕迹;我曾咒骂过，脸边黝黑的胎记，映不出美丽的脸庞，直到我看见全身黝黑的黑人，露出甜甜的美丽微笑……\r\n      也许你曾抱怨过上帝是捉弄人的，他对你吝啬幸福，却让痛苦折磨着你，日日夜夜，疲惫不堪，换来的只是滚烫的泪珠。但苦尽甘来后，当你揭开那沉重的幕纱，你会看清，上帝是公平的，磨难也是一种财富。\r\n      曾经有人做了一个试验。他点清了一座山林中的红羊后，把山中的狼全部捕捉起来，让红羊没有敌人。照理说，红羊应该是悠闲自得、快乐地生活了，但事与愿违，红羊为了争夺一小片土地、甚至一棵青草而搏斗，由原来一支整齐的队伍变为一盘散沙。\r\n      经过搏斗的红羊一只只疲惫不堪，过去那种矫健、奔跑如飞的红羊在这座山林中再未曾出现过，而且，红羊的数量也在逐渐减少。是什么原因呢?因为人们捕获了狼，红羊没有了给它们造成生命威胁的动物，而自相残杀直至消亡，失去了危机。同时也失去了生机。可见，在生态环境中，没有磨难就不会有生态平衡的系统。\r\n      张海迪胸部以下失去知觉，但这些困难反而使她有了更为远大的目标，学习掌握了德语、日语、英语。她为什么能取得常人都不容易取得的成就呢?因为她在承受巨大挫折的同时，也将挫折化为了动力，让挫折成为自己的奴隶，再一次战胜了磨难。\r\n      人生如一块璞玉，这是上帝赐予你最大的财富，这块璞玉中有着酸甜苦辣，也许痛苦过后便是幸福，这是上帝给予你最大的机遇。只有自己努力来雕琢这块璞玉，才能使它成为完美无瑕的艺术品。同学们，当你遇到挫折、困难时，不妨想想，上帝是公平的，有时磨难也是一种财富。时光飞逝，一年时光就这样悄悄从指尖溜走, 或许除了自己没人能知道这一年我是怎么过来的，但现在的我所向披靡，战无不胜。因为我有勇气和信念。高二时是班里的末等生，高三毕业时在班中名列前茅，不是天才，没有过人天赋，就是努力和坚持，还有那星星点点微光，那个叫做信念的东西支撑着， 一直向前，度过最难过的时段，走过最泥泞的路。谁都有过不堪，都有过过去');
