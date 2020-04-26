@@ -11,6 +11,12 @@
 	        <if test="tag != null and !tag.equals('')">
 	            and tag = #{tag}
 	        </if>
+	        <if test="date != null">
+	            and time = #{date}
+	        </if>
+	        <if test="type != null and !type.equals('')">
+	            and type = #{type}
+	        </if>
     	</where>	
 	</select>
 	<!--查找上一题-->
@@ -45,5 +51,126 @@
 	<!--统计错题数量  -->
 	<select id="countForSubjectMsgById" resultType="int">
 		select count(*) from tbl_mistaken where uId= #{uId}
+	</select>
+	<!--批量删除  -->
+	<delete id="deleteSubjectMsgById">
+		delete from tbl_mistaken where id in
+		<foreach collection="list" item="arr" index="no" open="("
+			separator="," close=")">
+        	#{arr}
+    	</foreach>
+	</delete>
+	<!--以下是自主组卷的查询方法 -->
+	<!--按照学科和用户id查题目  -->
+	<select id="findSubjectMsgByCondition" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken where uId = #{uId} and subject = #{subject}
+	</select>
+	<!--按照学科，用户id和多种题型查题目  -->
+	<select id="findSubjectMsgByConditionByTypes" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken where uId = #{uId} and subject = #{subject}
+		     and type in
+		     <foreach collection="types" item="arr" index="no" open="("
+				separator="," close=")">
+        		#{arr}
+    		</foreach>
+	</select>
+	<!--按照学科，用户id和多种标签查题目 -->
+	<select id="findSubjectMsgByConditionByTags" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken where uId = #{uId} and subject = #{subject}
+		     and tag in
+		     <foreach collection="tags" item="brr" index="no" open="("
+				separator="," close=")">
+	        	#{brr}
+	    	</foreach>
+	</select>
+	<!--按照学科，用户id和多种标签,多种题型查题目 -->
+	<select id="findSubjectMsgByConditionByTagsAndTypes" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken where uId = #{uId} and subject = #{subject}
+		     and tag in
+		      <foreach collection="tags" item="brr" index="no" open="("
+				separator="," close=")">
+	        	#{brr}
+	    	</foreach> 
+		     and type in
+		     <foreach collection="types" item="arr" index="no" open="("
+				separator="," close=")">
+        		#{arr}
+    		</foreach>
+	</select>
+	<!--按照学科,用户id和时间（2018年及以前时间）查题目  -->
+	<select id="findSubjectMsgByConditionByMoreTime" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken where uId = #{uId} and subject = #{subject} and time &lt;= #{date}
+	</select>
+	<!--按照学科,用户id和时间（2018年及以前时间）多种题型查题目 -->
+	<select id="findSubjectMsgByConditionByTypesAndMoreTime" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken where uId = #{uId} and subject = #{subject} and time &lt;= #{date}
+			 and type in
+		     <foreach collection="types" item="arr" index="no" open="("
+				separator="," close=")">
+        		#{arr}
+    		</foreach>
+	</select>
+	<!--按照学科,用户id和时间（2018年及以前时间）多种标签查题目 -->
+	<select id="findSubjectMsgByConditionByTagsAndMoreTime" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken where uId = #{uId} and subject = #{subject} and time &lt;= #{date}
+			 and tag in
+		     <foreach collection="tags" item="brr" index="no" open="("
+				separator="," close=")">
+	        	#{brr}
+	    	</foreach> 
+	</select>
+	<!--按照学科,用户id和时间（2018年及以前时间）多种标签多种题型查题目-->
+	<select id="findSubjectMsgByConditionByTagsAndTypesAndMoreTime" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken where uId = #{uId} and subject = #{subject} and time &lt;= #{date}
+			 and tag in
+		      <foreach collection="tags" item="brr" index="no" open="("
+				separator="," close=")">
+	        	#{brr}
+	    	</foreach> 
+		     and type in
+		     <foreach collection="types" item="arr" index="no" open="("
+				separator="," close=")">
+        		#{arr}
+    		</foreach>
+	</select>
+	<!--按照学科和用户id和年份查题目  -->
+	<select id="findSubjectMsgByCondition2" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken where uId = #{uId} and subject = #{subject}
+		and Year(time) = #{date}
+	</select>
+	<!--按照学科和用户id和年份和多个题型查题目  -->
+	<select id="findSubjectMsgByCondition2ByTypes" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken where uId = #{uId} and subject = #{subject}
+		     and Year(time) = #{date}
+		     and type in
+		     <foreach collection="types" item="arr" index="no" open="("
+				separator="," close=")">
+        		#{arr}
+    		</foreach>
+	</select>
+	<!--按照学科和用户id和年份和多个标签查题目  -->
+	<select id="findSubjectMsgByConditionByTags2" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken where uId = #{uId} and subject = #{subject}
+		     and Year(time) = #{date}
+		    and tag in
+		      <foreach collection="tags" item="brr" index="no" open="("
+				separator="," close=")">
+	        	#{brr}
+	    	</foreach>
+	</select>
+	<!--按照学科和用户id和年份和多个标签和多个题型查题目  -->
+	<select id="findSubjectMsgByCondition2ByTagsAndTypes" resultType="org.turings.mistaken.entity.SubjectMsg">
+		select * from tbl_mistaken where uId = #{uId} and subject = #{subject}
+		     and Year(time) = #{date}
+		     and tag in
+		      <foreach collection="tags" item="brr" index="no" open="("
+				separator="," close=")">
+	        	#{brr}
+	    	</foreach> 
+		     and type in
+		     <foreach collection="types" item="arr" index="no" open="("
+				separator="," close=")">
+        		#{arr}
+    		</foreach>
 	</select>
 </mapper>

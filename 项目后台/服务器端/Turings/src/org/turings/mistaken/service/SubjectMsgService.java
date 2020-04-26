@@ -1,12 +1,19 @@
 package org.turings.mistaken.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.turings.mistaken.dao.SubjectMsgMapper;
 import org.turings.mistaken.entity.SubjectMsg;
+
+import javafx.scene.chart.PieChart.Data;
+
 
 @Service
 @Transactional(readOnly =true)
@@ -15,52 +22,122 @@ public class SubjectMsgService {
 	@Autowired
 	private SubjectMsgMapper subjectMsgMapper;
 
-	//¸ù¾İ±êÇ©²éÕÒÌâÄ¿£¬Ã»ÓĞ±êÇ©¾Í²éÕÒÈ«²¿ÌâÄ¿
-	public List<SubjectMsg> findSubjectMsgTag(String tag, String subject, int uId) {
-		return this.subjectMsgMapper.findSubjectMsgByTag(tag, subject, uId);
+	//æ ¹æ®æ ‡ç­¾æŸ¥æ‰¾é¢˜ç›®ï¼Œæ²¡æœ‰æ ‡ç­¾å°±æŸ¥æ‰¾å…¨éƒ¨é¢˜ç›®
+	public List<SubjectMsg> findSubjectMsgTag(String tag, String subject, Date dat, String type, int uId) {
+		return this.subjectMsgMapper.findSubjectMsgByTag(tag, subject,dat,type,uId);
 	}
-	//²éÕÒÉÏÒ»Ìâ
+	//æŸ¥æ‰¾ä¸Šä¸€é¢˜
 	public SubjectMsg findPreSubjectMsgById(String tag, String subject, int id, int uId) {
 		return this.subjectMsgMapper.findPreSubjectMsgById(tag,subject,id,uId);
 	}
 
-	//²éÕÒÏÂÒ»Ìâ
+	//æŸ¥æ‰¾ä¸‹ä¸€é¢˜
 	public SubjectMsg findNextSubjectMsgById(String tag, String subject, int id, int uId) {
 		return this.subjectMsgMapper.findNextSubjectMsgById(tag,subject,id,uId);
 	}
-	//¸Ä±äÌâÄ¿±êÇ©
+	//æ”¹å˜é¢˜ç›®æ ‡ç­¾
 	@Transactional(readOnly = false)
 	public int changeTagById(String tag, int id) {
 		return this.subjectMsgMapper.changeTagById(tag,id);
 	}
-	//¸ü¸ÄÌâÄ¿Ñ§¿Æ
+	//æ›´æ”¹é¢˜ç›®å­¦ç§‘
 	@Transactional(readOnly = false)
 	public int changeSubjectById(String subject, int id) {
 		return this.subjectMsgMapper.changeSubjectById(subject,id);
 	}
-	//²éÕÒÏÂÒ»Ìâ»òÕß±¾ÀàĞÍÌâÄ¿µÚÒ»Ìâ
+	//æŸ¥æ‰¾ä¸‹ä¸€é¢˜æˆ–è€…æœ¬ç±»å‹é¢˜ç›®ç¬¬ä¸€é¢˜
 	public SubjectMsg findNextOrFirstSubjectMsgById(String tag, String subject, int id, int uId) {
 		SubjectMsg subjectMsg = this.findNextSubjectMsgById(tag, subject, id, uId);
 		if(subjectMsg == null) {
-			//Ã»ÓĞÏÂÒ»µÀÌâÄ¿ÁË¾Í²éÕÒÉÏÒ»Ìâ
+			//æ²¡æœ‰ä¸‹ä¸€é“é¢˜ç›®äº†å°±æŸ¥æ‰¾ä¸Šä¸€é¢˜
 			subjectMsg = this.subjectMsgMapper.findFirstSubjectMsgById(tag, subject, id, uId);
 		}
 		return subjectMsg;
 	}
-	//É¾³ıÌâÄ¿
+	//åˆ é™¤é¢˜ç›®
 	@Transactional(readOnly = false)
 	public int deleteSubjectMsgById(int id) {
 		return this.subjectMsgMapper.deleteSubjectMsg(id);
 	}
-	//ÉÏ´«´íÌâ
+	//ä¸Šä¼ é”™é¢˜
 	@Transactional(readOnly = false)
 	public int saveSubjectMsg(SubjectMsg subjectMsg) {
 		return this.subjectMsgMapper.saveSubjectMsg(subjectMsg);
 	}
-	//Í³¼ÆÄ³Î»ÓÃ»§µÄ´íÌâÊıÁ¿
+	//ç»Ÿè®¡æŸä½ç”¨æˆ·çš„é”™é¢˜æ•°é‡
 	public int countForSubjectMsgById(int uId) {
 		return this.subjectMsgMapper.countForSubjectMsgById(uId);
 	}
-
+	@Transactional(readOnly = false)
+	//æ‰¹é‡åˆ é™¤
+	public int deleteSubjectMsgById(List<Integer> obj) {
+		return this.subjectMsgMapper.deleteSubjectMsgById(obj);
+	}
+	//æŸ¥è¯¢å…¨éƒ¨(æ›´æ—©)æ—¶é—´æ¡ä»¶ä¸‹çš„é¢˜ç›®
+	public List<SubjectMsg> findSubjectMsgByCondition(String subject, List<String> tagList, List<String> typeList,String date,
+			int uId) {
+		List<SubjectMsg> subjectMsgs = null;
+		if(date.equals("å…¨éƒ¨")) {
+			if(tagList.contains("å…¨éƒ¨")) {
+				if(typeList.contains("å…¨éƒ¨")) {
+					subjectMsgs = this.subjectMsgMapper.findSubjectMsgByCondition(subject,uId);
+				}else {
+					subjectMsgs =this.subjectMsgMapper.findSubjectMsgByConditionByTypes(subject,typeList, uId);
+				}
+			}else {
+				if(typeList.contains("å…¨éƒ¨")) {
+					subjectMsgs =this.subjectMsgMapper.findSubjectMsgByConditionByTags(subject,tagList, uId);
+				}else {
+					subjectMsgs =this.subjectMsgMapper.findSubjectMsgByConditionByTagsAndTypes(subject,tagList,typeList, uId);
+				}
+			}
+			
+		}else {//æ›´æ—©
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy");
+			Date dat=null;
+			try {
+				dat = sf.parse("2018");
+				sf = new SimpleDateFormat("yyyy-MM-dd");
+				String nString = sf.format(dat);
+				dat = sf.parse(nString);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			if(tagList.contains("å…¨éƒ¨")) {
+				if(typeList.contains("å…¨éƒ¨")) {
+					subjectMsgs =this.subjectMsgMapper.findSubjectMsgByConditionByMoreTime(subject,dat,uId);
+				}else {
+					subjectMsgs =this.subjectMsgMapper.findSubjectMsgByConditionByTypesAndMoreTime(subject,typeList,dat,uId);
+				}
+			}else {
+				if(typeList.contains("å…¨éƒ¨")) {
+					subjectMsgs =this.subjectMsgMapper.findSubjectMsgByConditionByTagsAndMoreTime(subject,tagList,dat,uId);
+				}else {
+					subjectMsgs =this.subjectMsgMapper.findSubjectMsgByConditionByTagsAndTypesAndMoreTime(subject,tagList,typeList,dat,uId);
+				}
+			}
+		}
+		return subjectMsgs;
+	}
+	//æŸ¥è¯¢ç¬¦åˆæ¡ä»¶çš„é¢˜ç›®
+	public List<SubjectMsg> findSubjectMsgByCondition2(String subject, List<String> tagList,List<String> typeList,int i,
+			int uId) {
+		List<SubjectMsg> subjectMsgs = null;
+		if(tagList.contains("å…¨éƒ¨")) {
+			if(typeList.contains("å…¨éƒ¨")) {
+				subjectMsgs = this.subjectMsgMapper.findSubjectMsgByCondition2(subject,i,uId);
+			}else {
+				subjectMsgs =this.subjectMsgMapper.findSubjectMsgByCondition2ByTypes(subject,typeList,i, uId);
+			}
+		}else {
+			if(typeList.contains("å…¨éƒ¨")) {
+				subjectMsgs =this.subjectMsgMapper.findSubjectMsgByConditionByTags2(subject,tagList,i, uId);
+			}else {
+				subjectMsgs =this.subjectMsgMapper.findSubjectMsgByCondition2ByTagsAndTypes(subject,tagList,typeList,i, uId);
+			}
+		}
+		return subjectMsgs;
+	}
+	
 
 }
