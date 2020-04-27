@@ -590,7 +590,6 @@ color holo_orange_light
 color holo_red_light
 color list_itease_primary_color
 color list_itease_secondary_color
-color lyh_background
 color material_blue_grey_800
 color material_blue_grey_900
 color material_blue_grey_950

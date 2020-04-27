@@ -1,20 +1,14 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml:2:1-9:12
-INJECTED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml:2:1-9:12
-INJECTED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml:2:1-9:12
+ADDED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml:1:1-4:12
+INJECTED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml:1:1-4:12
+INJECTED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml:1:1-4:12
 	package
-		ADDED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml:3:5-35
+		ADDED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml:1:70-100
 		INJECTED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml
 		INJECTED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml:2:11-69
-application
-ADDED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml:5:5-7:19
-activity#com.hyphenate.easeui.AQQActivity
-ADDED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml:6:9-58
-	android:name
-		ADDED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml:6:19-46
+		ADDED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml:1:11-69
 uses-sdk
 INJECTED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from E:\Turings\AndroidTraining\Turings\easeui\src\main\AndroidManifest.xml

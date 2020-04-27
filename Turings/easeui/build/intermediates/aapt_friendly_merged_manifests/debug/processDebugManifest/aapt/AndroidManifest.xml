@@ -6,8 +6,4 @@
         android:minSdkVersion="16"
         android:targetSdkVersion="26" />
 
-    <application>
-        <activity android:name="com.hyphenate.easeui.AQQActivity" />
-    </application>
-
 </manifest>
