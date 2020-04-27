@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50506
 File Encoding         : 65001
 
-Date: 2020-04-26 10:44:03
+Date: 2020-04-27 19:00:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -352,7 +352,7 @@ CREATE TABLE `tbl_position` (
   `lng` double DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_position
@@ -524,7 +524,7 @@ CREATE TABLE `tbl_self_user` (
 -- ----------------------------
 -- Records of tbl_self_user
 -- ----------------------------
-INSERT INTO `tbl_self_user` VALUES ('1', '15227859968', '王大爽', 'wangshuang', '自信，我是命运的主宰者', 'http://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/i1t1576118560811.png?Expires=1891478561&OSSAccessKeyId=LTAI4FoQ82rmSV5EzaE1KtPU&Signature=YvC0ceYiUXcfAAi2bd7aZX2Buvo%3D', '1586', '36', '6', '4', '0');
+INSERT INTO `tbl_self_user` VALUES ('1', '15227859968', '王大爽', '111111', '自信，我是命运的主宰者', 'http://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/i1t1587985046457.png', '1586', '36', '6', '4', '0');
 INSERT INTO `tbl_self_user` VALUES ('2', '13000001002', '单小楠', 'shanxinnan', '丰富地过每一天，快乐地看每一天', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1256', '86', '3', '3', '0');
 INSERT INTO `tbl_self_user` VALUES ('3', '13000001003', '金小媛', 'jinxinyuan', '人类因梦想而变的伟大', 'http://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/i3t1576119212075.png?Expires=1891479212&OSSAccessKeyId=LTAI4FoQ82rmSV5EzaE1KtPU&Signature=G0jxbEBkJe4aSyAVc21B2i8mA%2F8%3D', '1259', '52', '5', '4', '0');
 INSERT INTO `tbl_self_user` VALUES ('4', '13000001004', '杨小鑫', 'yangliuxin', '人生如茶，粗品是苦的，细品是香的', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1842', '86', '3', '2', '0');

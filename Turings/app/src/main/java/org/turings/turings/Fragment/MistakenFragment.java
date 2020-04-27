@@ -128,14 +128,14 @@ public class MistakenFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //用户是否登录
-        /*if(!checkUserIsLogin()){//未登录
+        if(!checkUserIsLogin()){//未登录
             view = inflater.inflate(R.layout.sxn_activity_unlogged, container,false);
             //加载上方图片
             loadTopImg();
             //点击跳转按钮，跳到登录或注册界面
             jumpToLogin();
             return view;
-        }*/
+        }
 
         // android 7.0系统解决拍照的问题（防止API24以上手机报错）
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
