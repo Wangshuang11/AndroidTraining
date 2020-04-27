@@ -74,7 +74,7 @@ public class EnglishFragment extends Fragment implements View.OnClickListener{
     private String tag = "听力";
     private String date="";//时间
     private String tyep="";//题型
-    private String uId="4";//用户的id
+    private String uId="1";//用户的id
     private OkHttpClient okHttpClient;
     //适配器
     private CustomAdapterYLX customAdapterYLX;//适配器

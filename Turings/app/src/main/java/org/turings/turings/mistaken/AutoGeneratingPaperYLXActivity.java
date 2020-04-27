@@ -86,7 +86,7 @@ public class AutoGeneratingPaperYLXActivity extends AppCompatActivity implements
     private Map<String,String> types=new HashMap<>();//题型
     private String timeYears="全部";//年份
     //用户id
-    private String uId = "4";
+    private String uId = "1";
     //适配器
     private CustomAdapterToAddCartYLX customAdapterToAddCartYLX;
     private GridViewTagAdapter gridViewTagAdapter;
