@@ -248,7 +248,7 @@ public class MistakenFragment extends Fragment {
                 FormBody formBody=new FormBody.Builder()
                         .add("uId", String.valueOf(uId))
                         .build();
-                Request request=new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/CountAllWrongQuestionsServlet").post(formBody).build();
+                Request request=new Request.Builder().url("http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/subjectMsg/count").post(formBody).build();
                 Call call = okHttpClient.newCall(request);
                 try {
                     num=call.execute().body().string();
@@ -266,7 +266,7 @@ public class MistakenFragment extends Fragment {
     //初始化控件
     private void initController() {
 //        uId= Integer.parseInt(getContext().getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
-        uId=4;
+        uId=1;
         lineLayoutList = view.findViewById(R.id.line_layout_list);
         ivClimbMountain_ws=view.findViewById(R.id.ivClimbMountain_ws);
         tvLizhi_ws=view.findViewById(R.id.tvLizhi_ws);

@@ -21,11 +21,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMMessage;
-import com.hyphenate.easeui.EaseConstant;
-import com.hyphenate.exceptions.HyphenateException;
 
 import org.turings.turings.MainActivity;
 import org.turings.turings.R;
@@ -53,8 +48,6 @@ public class InformationActivity extends AppCompatActivity {
     private ImageView ivGuanzhu;
     private TextView tvShare;
     private ImageView ivHeye;
-    private ImageView lyh_qqimg;
-    private TextView lyh_qqtext;
     private CustomeLinstener linstener;
     private ImageView btnFollow_lyh;
     private Handler handler;
@@ -87,8 +80,6 @@ public class InformationActivity extends AppCompatActivity {
         AnimationDrawable amDrawable1 = (AnimationDrawable) ivHeye.getDrawable();
         amDrawable1.start();
         initView();
-//        signup();
-        signin();
         gson = new Gson();
 
         handler = new Handler() {
@@ -125,8 +116,6 @@ public class InformationActivity extends AppCompatActivity {
         btnBack_lyh.setOnClickListener(linstener);
         tvShare.setOnClickListener(linstener);
         btnGuanzhu_lyh.setOnClickListener(linstener);
-        lyh_qqimg.setOnClickListener(linstener);
-        lyh_qqtext.setOnClickListener(linstener);
     }
 
     private void getViews() {
@@ -141,30 +130,12 @@ public class InformationActivity extends AppCompatActivity {
         tvMotto_lyh = findViewById(R.id.tvMotto_lyh);
         tvCurrentTime_lyh = findViewById(R.id.tvCurrentTime_lyh);
         btnGuanzhu_lyh = findViewById(R.id.btnGuanzhu_lyh);
-        lyh_qqtext = findViewById(R.id.lyh_qqtext);
-        lyh_qqimg = findViewById(R.id.lyh_qqimg);
     }
     class CustomeLinstener implements View.OnClickListener{
 
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.lyh_qqimg:
-                    Intent intent2 = new Intent(InformationActivity.this,QQActivity.class);
-//                    intent2.putExtra(EaseConstant.EXTRA_USER_ID,fid+"");
-                    intent2.putExtra(EaseConstant.EXTRA_USER_ID,"user1");
-//                    intent2.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
-                    intent2.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
-                    startActivity(intent2);
-                    break;
-                case R.id.lyh_qqtext:
-                    Intent intent3 = new Intent(InformationActivity.this,QQActivity.class);
-//                    intent3.putExtra(EaseConstant.EXTRA_USER_ID,fid+"");
-                    intent3.putExtra(EaseConstant.EXTRA_USER_ID,"user1");
-//                    intent3.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
-                    intent3.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
-                    startActivity(intent3);
-                    break;
                 case R.id.btnBack_lyh:
                     Intent intent = new Intent(InformationActivity.this, MainActivity.class);
                     intent.setAction("backTonear");
@@ -192,7 +163,7 @@ public class InformationActivity extends AppCompatActivity {
     }
 
 
-    //    初始化布局
+//    初始化布局
     private void initView() {
         mDivergeView = findViewById(R.id.divergeView);
         btnFollow_lyh = findViewById(R.id.btnFollow_lyh);
@@ -329,42 +300,5 @@ public class InformationActivity extends AppCompatActivity {
         public Bitmap getBitmap(Object obj) {
             return mList == null ? null : mList.get((int) obj);
         }
-    }
-
-    //    登录
-    private void signin(){
-        EMClient.getInstance().login("王大爽", "wangshaung", new EMCallBack() {
-            @Override
-            public void onSuccess() {
-
-            }
-
-            @Override
-            public void onError(int i, String s) {
-
-            }
-
-            @Override
-            public void onProgress(int i, String s) {
-
-            }
-        });
-    }
-    //    注册
-    private void signup(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-//                    SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("userInfo",MODE_PRIVATE);
-//                    int aid = Integer.parseInt(sharedPreferences.getString("uId",""));
-                    EMClient.getInstance().createAccount(5+"","111111");
-                    Log.e("lyh","注册成功");
-                } catch (HyphenateException e) {
-                    e.printStackTrace();
-                    Log.e("lyh","注册失败"+e.getErrorCode()+","+e.getMessage());
-                }
-            }
-        }).start();
     }
 }

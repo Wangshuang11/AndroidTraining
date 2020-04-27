@@ -34,10 +34,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 dependencies {
@@ -54,8 +50,7 @@ dependencies {
     implementation 'com.carson_ho:SearchLayout:1.0.1'
     implementation 'com.android.support:cardview-v7:26.0.0'
     implementation 'com.github.ctiao:DanmakuFlameMaster:0.5.3'
-//    implementation 'com.android.support:design:26.0.0'
-    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:design:26.0.0'
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.2'
     implementation 'com.github.bumptech.glide:glide:4.0.0'
@@ -81,13 +76,7 @@ dependencies {
     /*附近的人用包*/
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
     implementation project(':lvlibrary')
-//    implementation files('libs/BaiduLBS_Android.jar')
-
+    implementation files('libs/BaiduLBS_Android.jar')
     implementation project(':ocr_ui')
     implementation files('libs/ocr-sdk.jar')
-
-    implementation project(path: ':easeui')
-
-    //评论
-    implementation 'com.github.bumptech.glide:glide:3.7.0'
 }

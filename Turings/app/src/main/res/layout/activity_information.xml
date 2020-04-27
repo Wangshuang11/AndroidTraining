@@ -244,28 +244,5 @@
             android:layout_below="@id/ivGuanzhu"
             android:src="@drawable/heye"/>
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true">
-        <org.turings.turings.near.entity.RoundImageView
-            android:id="@+id/lyh_qqimg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bj1"/>
-        <TextView
-            android:id="@+id/lyh_qqtext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:textSize="20sp"
-            android:layout_marginBottom="50dp"
-            android:layout_marginRight="32dp"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:text="发消息"/>
-    </RelativeLayout>
 
 </RelativeLayout>

@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ZoomControls;
@@ -39,7 +38,6 @@ import org.turings.turings.login.LoginActivity;
 import org.turings.turings.login.RegisterNewUserActivity;
 import org.turings.turings.near.Location.Location;
 import org.turings.turings.near.Location.ShowPortrait;
-import org.turings.turings.near.comment.CommentActivity;
 import org.turings.turings.near.entity.Position;
 
 import java.io.BufferedReader;
@@ -71,6 +69,7 @@ public class NearFragment extends Fragment {
 
     private double lat;
     private double lng;
+
 
 
     @Nullable
