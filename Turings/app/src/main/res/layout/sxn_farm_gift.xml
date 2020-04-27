@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/farm_gift"
+    android:orientation="vertical"
+    android:id="@+id/farm_gift_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_weight="2"
+            android:layout_width="149dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/farm_gift_flower" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="11"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="190dp"
+                android:hint="收货姓名"
+                android:layout_height="40dp"
+                android:layout_marginTop="35dp"/>
+
+            <EditText
+                android:hint="收货地址"
+                android:layout_width="190dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/sxn_gift_converse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_weight="8"
+            android:alpha="200"
+            android:src="@drawable/farm_gift_converse" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="200"
+            android:layout_marginTop="5dp"
+            android:layout_weight="5"
+            android:src="@drawable/farm_gift_pic" />
+    </LinearLayout>
+</LinearLayout>
