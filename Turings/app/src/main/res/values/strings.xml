@@ -1,0 +1,23 @@
+﻿<resources>
+    <string name="app_name">小葵花</string>
+    <string name="action_settings">Settings</string>
+    <string name="indent">\t\t\t\t</string>
+    <string name="newline">\n</string>
+    <!--<string name="connUrl">http://101.200.86.151:8080/Turings</string>
+    <string name="ipConfig">101.200.86.151</string>-->
+<!--    <string name="connUrl">http://192.168.2.190:8080/Turings</string>-->
+<!--    <string name="ipConfig">192.168.2.190</string>-->
+    <string name="lphipConfig">192.168.1.2</string>
+    <string name="connUrl">http://192.168.1.2:8080/Turings</string>
+    <string name="ipConfig">192.168.1.2</string>
+    <string-array name="tag">
+        <item>集合</item>
+        <item>映射</item>
+        <item>函数</item>
+        <item>导数</item>
+        <item>微积分</item>
+        <item>三角函数</item>
+        <item>平面向量</item>
+        <item>数列</item>
+    </string-array>
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:textSize="18dp"
+            android:text="      语文是语言文字、语言文章或语言文化的简称，其本义是语言文字。语言包括口头语言和书面语言。口头语言较随意，直接易懂，而书面语言讲究准确和语法；文学包括中外古今文学等。而语文中的文章不但有文艺文（文学、曲艺等），还有很多实用文（应用文）。语文课之“语文”一词原系国语（白话文即语体文）与国文（文言文）之合称。"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

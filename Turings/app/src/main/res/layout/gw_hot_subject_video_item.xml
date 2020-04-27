@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+        android:id="@+id/jc_player"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/circleimage"
+            app:civ_border_width="1dp"
+            android:layout_centerVertical="true"
+            app:civ_border_color="#FF000000"/>
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="老郭唠语文" />
+        <RelativeLayout
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_centerVertical="true"
+                android:id="@+id/storeVideo"
+                android:src="@drawable/gray_star"
+                android:layout_width="30dp"
+                android:layout_marginRight="15dp"
+                android:layout_height="30dp"/>
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/storeVideo"
+                android:id="@+id/shareVideo"
+                android:src="@drawable/sharedvideo"
+                android:layout_width="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="30dp"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/group">
+        <item android:id="@+id/item_one" android:title="题型" >
+            <menu>
+                <group android:id="@+id/group2">
+                    <item android:id="@+id/item1" android:title="选择题"/>
+                    <item android:id="@+id/item2" android:title="填空题"/>
+                    <item android:id="@+id/item3" android:title="大题"/>
+                </group>
+            </menu>
+        </item>
+        <item android:id="@+id/item_two" android:title="时间" />
+    </group>
+</menu>

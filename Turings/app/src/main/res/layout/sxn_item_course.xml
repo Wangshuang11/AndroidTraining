@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:padding="5dp"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="100dp">
+    <LinearLayout
+        android:id="@+id/relat"
+        android:layout_margin="20dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="18dp"
+            android:id="@+id/sxn_course_title"
+            android:text="30分钟教会你地道口语"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/sxn_course_info"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:text="直播时间:  17:30" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/sxn_course_img"
+        android:layout_width="140dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@+id/relat"
+        android:foregroundGravity="center" />
+
+</RelativeLayout>
