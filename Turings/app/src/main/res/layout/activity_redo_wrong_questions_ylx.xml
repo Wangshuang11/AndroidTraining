@@ -125,8 +125,7 @@
                         android:gravity="center"
                         android:paddingRight="50dp"
                         android:text="1/2"
-                        android:textAlignment="center"
-                        android:textSize="26sp" />
+                        android:textAlignment="center" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -158,8 +157,7 @@
                         android:gravity="center"
                         android:paddingRight="50dp"
                         android:text="1/2"
-                        android:textAlignment="center"
-                        android:textSize="26sp" />
+                        android:textAlignment="center" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -191,8 +189,7 @@
                         android:gravity="center"
                         android:paddingRight="50dp"
                         android:text="1/2"
-                        android:textAlignment="center"
-                        android:textSize="26sp" />
+                        android:textAlignment="center"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -224,8 +221,7 @@
                         android:gravity="center"
                         android:paddingRight="50dp"
                         android:text="1/2"
-                        android:textAlignment="center"
-                        android:textSize="26sp" />
+                        android:textAlignment="center"/>
                 </LinearLayout>
 
                 <TextView

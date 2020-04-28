@@ -81,7 +81,6 @@
                 android:layout_alignTop="@+id/img_ti_tag"
                 android:layout_marginTop="3dp"
                 android:layout_height="200dp"
-                android:scaleType="centerCrop"
                 android:text="我是题目" />
         </RelativeLayout>
     </LinearLayout>
