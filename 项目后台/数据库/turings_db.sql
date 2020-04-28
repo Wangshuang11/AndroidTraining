@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50506
 File Encoding         : 65001
 
-Date: 2020-04-27 19:00:37
+Date: 2020-04-28 15:20:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -303,22 +303,23 @@ CREATE TABLE `tbl_mistaken` (
   `optionA` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `optionB` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `optionC` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `optionD` varchar(255) DEFAULT NULL,
+  `optionD` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `answer` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uId` int(11) DEFAULT NULL,
+  `content` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_mistaken
 -- ----------------------------
-INSERT INTO `tbl_mistaken` VALUES ('1', '已知向量a，b满足|a|=1，a·b=-1，则a·（2a-b）=？', '数学', '选择', '20191126', 'img', '4', '3', '2', '0', 'D', '1');
-INSERT INTO `tbl_mistaken` VALUES ('2', '曲线y=2ln(x+1)在点（0,0）处的切线方程为', '数学', '填空', '20191126', 'img', null, null, null, null, 'y=2x', null);
-INSERT INTO `tbl_mistaken` VALUES ('3', '数学', '集合', '填空题', '2019-12-09', '1575893457455.jpg', '', '', '', '', '', '1');
-INSERT INTO `tbl_mistaken` VALUES ('4', '数学', '集合', '填空题', '2019-12-10', '1575936251811.jpg', '', '', '', '', '哈哈哈', '4');
-INSERT INTO `tbl_mistaken` VALUES ('5', '数学', '集合', '填空题', '2019-12-10', '1575937052405.jpg', '', '', '', '', '斤斤计较', '4');
-INSERT INTO `tbl_mistaken` VALUES ('6', '数学', '集合', '填空题', '2019-12-10', '1575937471020.jpg', '', '', '', '', '', '4');
-INSERT INTO `tbl_mistaken` VALUES ('7', '数学', '集合', '填空题', '2019-12-10', '1575960060606.jpg', '', '', '', '', '', '4');
+INSERT INTO `tbl_mistaken` VALUES ('1', '已知向量a，b满足|a|=1，a·b=-1，则a·（2a-b）=？', '数学', '选择', '20191126', 'img', '4', '3', '2', '0', 'D', '1', null);
+INSERT INTO `tbl_mistaken` VALUES ('2', '曲线y=2ln(x+1)在点（0,0）处的切线方程为', '数学', '填空', '20191126', 'img', null, null, null, null, 'y=2x', null, null);
+INSERT INTO `tbl_mistaken` VALUES ('3', '数学', '集合', '填空题', '2019-12-09', '1575893457455.jpg', '', '', '', '', '', '1', null);
+INSERT INTO `tbl_mistaken` VALUES ('4', '数学', '集合', '填空题', '2019-12-10', '1575936251811.jpg', '', '', '', '', '哈哈哈', '4', null);
+INSERT INTO `tbl_mistaken` VALUES ('5', '数学', '集合', '填空题', '2019-12-10', '1575937052405.jpg', '', '', '', '', '斤斤计较', '4', null);
+INSERT INTO `tbl_mistaken` VALUES ('6', '数学', '集合', '填空题', '2019-12-10', '1575937471020.jpg', '', '', '', '', '', '4', null);
+INSERT INTO `tbl_mistaken` VALUES ('7', '数学', '集合', '填空题', '2019-12-10', '1575960060606.jpg', '', '', '', '', '', '4', null);
 
 -- ----------------------------
 -- Table structure for `tbl_myself_user`

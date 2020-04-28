@@ -265,8 +265,8 @@ public class MistakenFragment extends Fragment {
 
     //初始化控件
     private void initController() {
-//        uId= Integer.parseInt(getContext().getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
-        uId=1;
+        uId= Integer.parseInt(getContext().getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
+//        uId=1;
         lineLayoutList = view.findViewById(R.id.line_layout_list);
         ivClimbMountain_ws=view.findViewById(R.id.ivClimbMountain_ws);
         tvLizhi_ws=view.findViewById(R.id.tvLizhi_ws);
@@ -282,7 +282,7 @@ public class MistakenFragment extends Fragment {
         Glide.with(getContext()).load(R.mipmap.mistakenlizhi).apply(requestOptions).into(ivClimbMountain_ws);
     }
 
-//    //饼图数据
+    //    //饼图数据
 //    private void initData(int bigQuestion,int choiceQuestion,int fillBlankQuestion) {
 //        Log.e("hhhhhhhhhhhhhhhhhhh",bigQuestion+","+choiceQuestion+","+fillBlankQuestion);
 //        pieBeanList = new ArrayList<>();
@@ -462,7 +462,7 @@ public class MistakenFragment extends Fragment {
                             IdentifyResultBean identifyResultBean=gson.fromJson(result, IdentifyResultBean.class);
                             Intent intent = new Intent(getContext(), UploadWrongQuestionsActivity.class);
                             for (Words_result words_result:identifyResultBean.getWords_result()){
-                                Log.e("识别内容",words_result.getWords());
+//                                Log.e("识别内容",words_result.getWords());
                                 if(words_result.getWords().startsWith("A")){
                                     intent.putExtra("A",words_result.getWords());
                                 }else if(words_result.getWords().startsWith("B")){
@@ -605,7 +605,7 @@ public class MistakenFragment extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(getActivity().getApplicationContext(), "title"+title+";massage"+message, Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity().getApplicationContext(), "title"+title+";massage"+message, Toast.LENGTH_LONG).show();
             }
         });
 

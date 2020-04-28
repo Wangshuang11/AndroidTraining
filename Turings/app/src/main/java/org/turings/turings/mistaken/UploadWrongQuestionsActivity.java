@@ -16,7 +16,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -69,10 +68,6 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
     private Button fill_ylx;//填空题选择按钮
     private Button big_question_ylx;//大题选择按钮
     private LinearLayout answer_ylx;//选择题答案书写框架
-    //    private EditText answer_A_edt_ylx;//选择题A选项答案
-//    private EditText answer_B_edt_ylx;//选择题B选项答案
-//    private EditText answer_C_edt_ylx;//选择题C选项答案
-//    private EditText answer_D_edt_ylx;//选择题D选项答案
     private EditText option_anwser_ylx;//选择题答案书写
     private LinearLayout answer_big_ylx;//大题答案书写框架
     private EditText anwser_edt_ylx;//大题答题EditText
@@ -85,7 +80,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
     private List<String> list;//存tag
     private ArrayAdapter<String> tagAdapter;
     private String path;//图片存储的路径
-    private org.turings.turings.mistaken.SubjectMsg subjectMsg ;//上传的题目
+    private SubjectMsg subjectMsg;//上传的题目
     private Bitmap photo;//相机拍下的照片
     private String uId;//用户的id
     private Handler handler = new Handler(){
@@ -122,28 +117,18 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
 
 
         //获取用户的id
-//        SharedPreferences sp = getSharedPreferences("userInfo",MODE_PRIVATE);
-//        uId = sp.getString("uId",null);
-        uId="1";
-
-        //初始化数据（默认数据）
-//        initData();
-        //获得传过来的图片识别结果,构建subjectMag类
-        // (如果是选择题，就默认填充各个选项，答案手动输入；如果是填空题或是大题，答案手动输入)
-//        initData2();
-
+        SharedPreferences sp = getSharedPreferences("userInfo",MODE_PRIVATE);
+        uId = sp.getString("uId",null);
 
         //获取控件
         getViews();
+        //获得传过来的图片识别结果,构建subjectMag类
         initData2();
-
-
 
         //绑定事件监听器
         registerListener();
 
         //展示拍照后的图片
-//        showWrongQuestionPhoto();
         showWrongQuestionPhoto2();
 
         //给标签绑定adapter
@@ -178,17 +163,11 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         tagAdapter.notifyDataSetChanged();
         spinner_ylx.setAdapter(tagAdapter);
     }
-    private void initData() {
-        subjectMsg = new org.turings.turings.mistaken.SubjectMsg(1,"数学","集合","填空题",new Date(),"files","","","","","",Integer.parseInt(uId));
-    }
 
-    //百度文字识别结果自动填充到选项上
+    //百度文字识别结果
     private void initData2() {
         Intent intent=getIntent();
-        subjectMsg=new org.turings.turings.mistaken.SubjectMsg();
-        subjectMsg.setId(1);
-        subjectMsg.setuId(Integer.parseInt(uId));
-        subjectMsg.setTime(new Date());
+        subjectMsg=new SubjectMsg();
         String optionA=intent.getStringExtra("A");
         String optionB=intent.getStringExtra("B");
         String optionC=intent.getStringExtra("C");
@@ -200,22 +179,17 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
             subjectMsg.setOptionC(optionC);
             subjectMsg.setOptionD(optionD);
             question_ws.setText(question+"\n"+optionA+"\n"+optionB+"\n"+optionC+"\n"+optionD);
+            subjectMsg.setContent(question);
         }else{//填空题或者大题
-            //存题干：subjectMsg需要加一个属性
             question_ws.setText(question);
+            subjectMsg.setContent(question);
         }
-
-//        subjectMsg = new org.turings.turings.mistaken.SubjectMsg(1,"数学","三角形","选择题",new Date(),"files","","","","","",Integer.parseInt(uId));
-    }
-
-    //展示拍照后的图片
-    private void showWrongQuestionPhoto() {
-        Intent intent=getIntent();
-        byte[] bytes=intent.getByteArrayExtra("photo");
-        Bitmap bitmap= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-        path = saveImgToFile(bitmap);
-        subjectMsg.setTitleImg(path);
-        question_img_ylx.setImageBitmap(bitmap);
+        subjectMsg.setSubject("数学");
+        subjectMsg.setTag("集合");
+        subjectMsg.setType("填空题");
+        subjectMsg.setTime(new Date());
+//        subjectMsg.setTitleImg("files");
+        subjectMsg.setuId(Integer.parseInt(uId));
     }
 
     //展示拍照后的图片：百度拍照识别，默认将剪裁后的图片(pic.jpg)放在files文件夹下
@@ -227,134 +201,136 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
 //        question_img_ylx.setImageBitmap(bitmap);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //获得用户拍照上传的照片
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {                // 选择请求码
-                case CAMERA_REQUEST_CODE:
-                    try {
-                        // 裁剪
-                        startCrop();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case UCrop.REQUEST_CROP:
-                    //保存裁剪后的图片并显示
-                    final Uri croppedUri = UCrop.getOutput(data);
-                    try {
-                        if (croppedUri != null) {
-                            photo =BitmapFactory.decodeStream(getContentResolver().openInputStream(croppedUri));
-                            path = saveImgToFile(photo);
-                            subjectMsg.setTitleImg(path);
-                            question_img_ylx.setPadding(25,25,25,25);
-                            question_img_ylx.setScaleType(ImageView.ScaleType.FIT_XY);
-                            question_img_ylx.setImageBitmap(photo);
-                            delete_ylx.setVisibility(View.VISIBLE);
-                            question_content_ylx.setVisibility(View.VISIBLE);
-                            //删除裁剪后保存的图片
-                            deletePathFromFile(pathCropPhoto);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        //获得用户拍照上传的照片
+//        if (resultCode == RESULT_OK) {
+//            switch (requestCode) {                // 选择请求码
+//                case CAMERA_REQUEST_CODE:
+//                    try {
+//                        // 裁剪
+//                        startCrop();
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                    break;
+//                case UCrop.REQUEST_CROP:
+//                    //保存裁剪后的图片并显示
+//                    final Uri croppedUri = UCrop.getOutput(data);
+//                    try {
+//                        if (croppedUri != null) {
+//                            photo =BitmapFactory.decodeStream(getContentResolver().openInputStream(croppedUri));
+//                            path = saveImgToFile(photo);
+//                            subjectMsg.setTitleImg(path);
+//                            question_img_ylx.setPadding(25,25,25,25);
+//                            question_img_ylx.setScaleType(ImageView.ScaleType.FIT_XY);
+//                            question_img_ylx.setImageBitmap(photo);
+//                            delete_ylx.setVisibility(View.VISIBLE);
+//                            question_content_ylx.setVisibility(View.VISIBLE);
+//                            //删除裁剪后保存的图片
+//                            deletePathFromFile(pathCropPhoto);
+//                        }
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                    break;
+//
+//                case UCrop.RESULT_ERROR:
+//                    final Throwable cropError = UCrop.getError(data);
+//                    break;
+//            }
+//        }
+//    }
 
-                case UCrop.RESULT_ERROR:
-                    final Throwable cropError = UCrop.getError(data);
-                    break;
-            }
-        }
-    }
+//    //删除file目录下指定路径的图片
+//    private void deletePathFromFile(String pathCropPhoto) {
+//        File file = new File(pathCropPhoto);
+//        if (file.exists()) {
+//            file.delete();
+//        }
+//    }
 
-    //删除file目录下指定路径的图片
-    private void deletePathFromFile(String pathCropPhoto) {
-        File file = new File(pathCropPhoto);
-        if (file.exists()) {
-            file.delete();
-        }
-    }
-
-    //保存拍的图片到系统中
-    private String saveImgToFile(Bitmap photo) {
-        dataFileStr = getFilesDir().getAbsolutePath()+"/";
-        String fileName = System.currentTimeMillis() + ".jpg";
-        File file = new File(dataFileStr+fileName);
-        try {// 写入图片
-            FileOutputStream fos = new FileOutputStream(file);
-            BufferedOutputStream bos = new BufferedOutputStream(fos);
-            photo.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-            bos.flush();
-            bos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //通知更新
-        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        Uri uri = Uri.fromFile(file);
-        intent.setData(uri);
-        sendBroadcast(intent);
-        return fileName;
-    }
+//    //保存拍的图片到系统中
+//    private String saveImgToFile(Bitmap photo) {
+//        dataFileStr = getFilesDir().getAbsolutePath()+"/";
+//        String fileName = System.currentTimeMillis() + ".jpg";
+//        File file = new File(dataFileStr+fileName);
+//        try {// 写入图片
+//            FileOutputStream fos = new FileOutputStream(file);
+//            BufferedOutputStream bos = new BufferedOutputStream(fos);
+//            photo.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+//            bos.flush();
+//            bos.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        //通知更新
+//        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//        Uri uri = Uri.fromFile(file);
+//        intent.setData(uri);
+//        sendBroadcast(intent);
+//        return fileName;
+//    }
     //点击删除，重新拍照上传
-    private void uploadWrongQuestionPhotoAgain() {
-        delete_ylx.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                question_img_ylx.setVisibility(View.INVISIBLE);
-                question_img_ylx.setImageResource(R.mipmap.mistakencamera_2);
-                question_img_ylx.setVisibility(View.VISIBLE);
-                question_img_ylx.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                question_img_ylx.setPadding(50,80,50,50);
-                delete_ylx.setVisibility(View.INVISIBLE);
-                question_content_ylx.setVisibility(View.INVISIBLE);
-                //删除刚刚保存的图片
-                deletePathFromFile(dataFileStr+path);
-            }
-        });
-        question_img_ylx.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //调用手机照相机
-                takePhoto();
-            }
-        });
-    }
+//    private void uploadWrongQuestionPhotoAgain() {
+//        delete_ylx.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                question_img_ylx.setVisibility(View.INVISIBLE);
+//                question_img_ylx.setImageResource(R.mipmap.mistakencamera_2);
+//                question_img_ylx.setVisibility(View.VISIBLE);
+//                question_img_ylx.setScaleType(ImageView.ScaleType.FIT_CENTER);
+//                question_img_ylx.setPadding(50,80,50,50);
+//                delete_ylx.setVisibility(View.INVISIBLE);
+//                question_content_ylx.setVisibility(View.INVISIBLE);
+//                //删除刚刚保存的图片
+//                deletePathFromFile(dataFileStr+path);
+//            }
+//        });
+//        question_img_ylx.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //调用手机照相机
+//                takePhoto();
+//            }
+//        });
+//    }
+
     //调用相机拍照
-    private void takePhoto(){
-        // 跳转到系统的拍照界面
-        Intent intentToTakePhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // 指定照片存储位置为sd卡本目录下
-        // 这里设置为固定名字 这样就只会只有一张temp图 如果要所有中间图片都保存可以通过时间或者加其他东西设置图片的名称
-        // File.separator为系统自带的分隔符 是一个固定的常量
-        mTempPhotoPath = Environment.getExternalStorageDirectory() + File.separator + "photo.jpeg";
-        // 获取图片所在位置的Uri路径    *****这里为什么这么做参考问题2*****
-        imageUri = Uri.fromFile(new File(mTempPhotoPath));
-        //下面这句指定调用相机拍照后的照片存储的路径
-        intentToTakePhoto.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        startActivityForResult(intentToTakePhoto,CAMERA_REQUEST_CODE);
-    }
+//    private void takePhoto(){
+//        // 跳转到系统的拍照界面
+//        Intent intentToTakePhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        // 指定照片存储位置为sd卡本目录下
+//        // 这里设置为固定名字 这样就只会只有一张temp图 如果要所有中间图片都保存可以通过时间或者加其他东西设置图片的名称
+//        // File.separator为系统自带的分隔符 是一个固定的常量
+//        mTempPhotoPath = Environment.getExternalStorageDirectory() + File.separator + "photo.jpeg";
+//        // 获取图片所在位置的Uri路径    *****这里为什么这么做参考问题2*****
+//        imageUri = Uri.fromFile(new File(mTempPhotoPath));
+//        //下面这句指定调用相机拍照后的照片存储的路径
+//        intentToTakePhoto.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+//        startActivityForResult(intentToTakePhoto,CAMERA_REQUEST_CODE);
+//    }
+
     //裁剪图片
-    private void startCrop() {
-        String dataFileStr = getFilesDir().getAbsolutePath()+"/";
-        String fileName = System.currentTimeMillis() + ".jpg";
-        pathCropPhoto = dataFileStr+fileName;
-        Uri destinationUri = Uri.fromFile(new File(dataFileStr+fileName));
-        UCrop uCrop = UCrop.of(imageUri, destinationUri);
-        UCrop.Options options = new UCrop.Options();
-        //设置裁剪图片可操作的手势
-        options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.ROTATE, UCropActivity.ALL);
-        //设置toolbar颜色
-        options.setToolbarColor(ActivityCompat.getColor(getApplicationContext(),R.color.themeColor));
-        //设置状态栏颜色
-        options.setStatusBarColor(ActivityCompat.getColor(getApplicationContext(), R.color.themeColor));
-        uCrop.withOptions(options);
-        uCrop.start(this);
-    }
+//    private void startCrop() {
+//        String dataFileStr = getFilesDir().getAbsolutePath()+"/";
+//        String fileName = System.currentTimeMillis() + ".jpg";
+//        pathCropPhoto = dataFileStr+fileName;
+//        Uri destinationUri = Uri.fromFile(new File(dataFileStr+fileName));
+//        UCrop uCrop = UCrop.of(imageUri, destinationUri);
+//        UCrop.Options options = new UCrop.Options();
+//        //设置裁剪图片可操作的手势
+//        options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.ROTATE, UCropActivity.ALL);
+//        //设置toolbar颜色
+//        options.setToolbarColor(ActivityCompat.getColor(getApplicationContext(),R.color.themeColor));
+//        //设置状态栏颜色
+//        options.setStatusBarColor(ActivityCompat.getColor(getApplicationContext(), R.color.themeColor));
+//        uCrop.withOptions(options);
+//        uCrop.start(this);
+//    }
 
     //绑定事件
     private void registerListener() {
@@ -382,10 +358,6 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         fill_ylx = findViewById(R.id.fill_ylx);
         big_question_ylx = findViewById(R.id.big_question_ylx);
         answer_ylx = findViewById(R.id.answer_ylx);
-//        answer_A_edt_ylx = findViewById(R.id.answer_A_edt_ylx);
-//        answer_B_edt_ylx = findViewById(R.id.answer_B_edt_ylx);
-//        answer_C_edt_ylx = findViewById(R.id.answer_C_edt_ylx);
-//        answer_D_edt_ylx = findViewById(R.id.answer_D_edt_ylx);
         answer_big_ylx = findViewById(R.id.answer_big_ylx);
         anwser_edt_ylx = findViewById(R.id.anwser_edt_ylx);
         add_wrong_questions_ylx =findViewById(R.id.add_wrong_questions_ylx);
@@ -454,13 +426,6 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
                     ap.height=1000;
                     answer_ylx.setLayoutParams(ap);
                     subjectMsg.setType("选择题");
-
-                    //自动填充ABCD选项
-//                    answer_A_edt_ylx.setText(subjectMsg.getOptionA());
-//                    answer_B_edt_ylx.setText(subjectMsg.getOptionB());
-//                    answer_C_edt_ylx.setText(subjectMsg.getOptionC());
-//                    answer_D_edt_ylx.setText(subjectMsg.getOptionD());
-
                     break;
                 case R.id.fill_ylx://填空题
                     choose_ylx.setBackgroundColor(Color.WHITE);
@@ -486,15 +451,6 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
                 case R.id.add_wrong_questions_ylx:
                     //错题答案
                     if(subjectMsg.getType().equals("选择题")){
-                        //四个选项的内容
-//                        String optionA = answer_A_edt_ylx.getText().toString().trim();
-//                        String optionB = answer_B_edt_ylx.getText().toString().trim();
-//                        String optionC = answer_C_edt_ylx.getText().toString().trim();
-//                        String optionD = answer_D_edt_ylx.getText().toString().trim();
-//                        subjectMsg.setOptionA(optionA);
-//                        subjectMsg.setOptionB(optionB);
-//                        subjectMsg.setOptionC(optionC);
-//                        subjectMsg.setOptionD(optionD);
                         subjectMsg.setAnswer(option_anwser_ylx.getText().toString().trim());
                     }else {
                         subjectMsg.setAnswer(anwser_edt_ylx.getText().toString().trim());

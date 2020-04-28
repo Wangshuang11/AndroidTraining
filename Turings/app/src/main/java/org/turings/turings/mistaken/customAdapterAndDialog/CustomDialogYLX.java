@@ -100,7 +100,7 @@ public class CustomDialogYLX extends DialogFragment {
         String subject = gson.toJson(subjectMsg);
         okHttpClient = new OkHttpClient();
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain;charset=utf-8"),subject);
-        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/UploadWrongQuestionsServlet";
+        String url = "http://"+getResources().getString(R.string.ipConfig)+":8080/Turings/subjectMsg/uploadSubejctMsg";
 //        String url = "http://192.168.2.142:8080/Turings/UploadWrongQuestionsServlet";
         Request request = new Request.Builder().post(requestBody).url(url).build();
         final Call call = okHttpClient.newCall(request);

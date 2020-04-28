@@ -45,8 +45,10 @@
 	</delete>
 	<!--上传错题  -->
 	<insert id="saveSubjectMsg" parameterType="org.turings.mistaken.entity.SubjectMsg">
-		insert into tbl_mistaken(subject,tag,type,time,titleImg,optionA,optionB,optionC,optionD,answer,uId) 
-    	values(#{subject},#{tag},#{type},#{time},#{titleImg},#{optionA},#{optionB},#{optionC},#{optionD},#{answer},#{uId}) 
+		<!-- insert into tbl_mistaken(subject,tag,type,time,titleImg,optionA,optionB,optionC,optionD,answer,uId) 
+    	values(#{subject},#{tag},#{type},#{time},#{titleImg},#{optionA},#{optionB},#{optionC},#{optionD},#{answer},#{uId})  -->
+		insert into tbl_mistaken(subject,tag,type,time,titleImg,optionA,optionB,optionC,optionD,answer,uId,content) 
+    	values(#{subject},#{tag},#{type},#{time},#{titleImg},#{optionA},#{optionB},#{optionC},#{optionD},#{answer},#{uId},#{content}) 
 	</insert>
 	<!--统计错题数量  -->
 	<select id="countForSubjectMsgById" resultType="int">

@@ -3,6 +3,12 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
+    <declare-styleable name="OCRCameraLayout">
+        <attr format="reference" name="contentView"/>
+        <attr format="reference" name="centerView"/>
+        <attr format="reference" name="leftDownView"/>
+        <attr format="reference" name="rightUpView"/>
+    </declare-styleable>
     <dimen name="camera_bottom_margin">16dp</dimen>
     <dimen name="camera_left_margin">18dp</dimen>
     <dimen name="camera_right_margin">18dp</dimen>
@@ -15,10 +21,4 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <declare-styleable name="OCRCameraLayout">
-        <attr format="reference" name="contentView"/>
-        <attr format="reference" name="centerView"/>
-        <attr format="reference" name="leftDownView"/>
-        <attr format="reference" name="rightUpView"/>
-    </declare-styleable>
 </resources>

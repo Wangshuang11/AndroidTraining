@@ -17,6 +17,7 @@ import com.rance.lvlibrary.ButtonEventListener;
 import com.rance.lvlibrary.SectorMenuButton;
 
 import org.turings.turings.R;
+import org.turings.turings.near.comment.CommentActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +69,7 @@ public class SharedThingsActivity extends AppCompatActivity {
     }
 
 
-   private void initTopSectorMenuButton() {
+    private void initTopSectorMenuButton() {
         SectorMenuButton sectorMenuButton = (SectorMenuButton) findViewById(R.id.top_sector_menu);
         final List<ButtonData> buttonDatas = new ArrayList<>();
         int[] drawable = {R.mipmap.menu, R.mipmap.shoucang,
@@ -90,6 +91,8 @@ public class SharedThingsActivity extends AppCompatActivity {
                     case 1:
                         break;
                     case 2:
+                        Intent intent1 = new Intent(SharedThingsActivity.this, CommentActivity.class);
+                        startActivity(intent1);
                         break;
                     case 3:
                         Intent intent = new Intent(SharedThingsActivity.this, WriteActivity.class);

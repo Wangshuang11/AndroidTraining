@@ -16,6 +16,9 @@ public class SubjectMsg {
     private String optionD;//D选项
     private String answer;//大题或填空题答案
     private int uId;//用户id
+    
+    private String content;//题目内容
+    
 	public SubjectMsg() {
 		super();
 	}
@@ -107,11 +110,24 @@ public class SubjectMsg {
 	public void setuId(int uId) {
 		this.uId = uId;
 	}
+//	@Override
+//	public String toString() {
+//		return "SubjectMsg [id=" + id + ", subject=" + subject + ", tag=" + tag + ", type=" + type + ", time=" + time
+//				+ ", titleImg=" + titleImg + ", optionA=" + optionA + ", optionB=" + optionB + ", optionC=" + optionC
+//				+ ", optionD=" + optionD + ", answer=" + answer + ", uId=" + uId + "]";
+//	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	@Override
 	public String toString() {
 		return "SubjectMsg [id=" + id + ", subject=" + subject + ", tag=" + tag + ", type=" + type + ", time=" + time
 				+ ", titleImg=" + titleImg + ", optionA=" + optionA + ", optionB=" + optionB + ", optionC=" + optionC
-				+ ", optionD=" + optionD + ", answer=" + answer + ", uId=" + uId + "]";
+				+ ", optionD=" + optionD + ", answer=" + answer + ", uId=" + uId + ", content=" + content + "]";
 	}
+	
     
 }

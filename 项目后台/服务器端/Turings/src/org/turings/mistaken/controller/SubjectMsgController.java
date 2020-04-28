@@ -1,6 +1,9 @@
 package org.turings.mistaken.controller;
 
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,12 +32,12 @@ public class SubjectMsgController {
 	@Resource
 	private SubjectMsgService subjectMsgService;
 	
-	//æŒ‰ç…§æ ‡ç­¾ï¼Œé¢˜å‹ï¼Œå­¦ç§‘ï¼Œæ—¶é—´æœç´¢é¢˜ç›®ï¼ˆé”™é¢˜é›†å±•ç¤ºé¢˜ç›®ç”¨åˆ°çš„ç­›é€‰æ¡ä»¶æŸ¥è¯¢ï¼‰
+	//°´ÕÕ±êÇ©£¬ÌâĞÍ£¬Ñ§¿Æ£¬Ê±¼äËÑË÷ÌâÄ¿£¨´íÌâ¼¯Õ¹Ê¾ÌâÄ¿ÓÃµ½µÄÉ¸Ñ¡Ìõ¼ş²éÑ¯£©
 	@RequestMapping(value ="/findByTag",produces="text/json;charset=utf-8")
 	@ResponseBody
 	public String findSubjectMsgByTag(@RequestParam(value = "tag") String tag,@RequestParam(value = "subject") String subject,@RequestParam(value = "date") String date,@RequestParam(value = "type") String type,@RequestParam(value="uId") int uId) {
 		System.out.println("tag"+tag+"subject"+subject+"uId"+uId+"date"+date+"type"+type);
-		//è½¬æ¢æ—¥æœŸæ ¼å¼
+		//×ª»»ÈÕÆÚ¸ñÊ½
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dat=null;
 		if(!date.equals("") && date !=null) {
@@ -54,7 +57,7 @@ public class SubjectMsgController {
 		String subjectMsgList = gson.toJson(subjectMsgs);
 		return subjectMsgList;
 	}
-	//æŸ¥è¯¢é”™é¢˜ï¼ŒæŒ‰ç…§å­¦ç§‘ï¼Œæ ‡ç­¾ï¼Œé¢˜å‹ï¼Œæ—¶é—´ç­‰æ¡ä»¶æœç´¢ï¼ˆç”¨äºè‡ªä¸»ç»„å·çš„ç­›é€‰æ¡ä»¶ï¼Œå…¶ä¸­æ ‡ç­¾ï¼Œé¢˜å‹å¯èƒ½ä¸ºå¤šä¸ªï¼‰
+	//²éÑ¯´íÌâ£¬°´ÕÕÑ§¿Æ£¬±êÇ©£¬ÌâĞÍ£¬Ê±¼äµÈÌõ¼şËÑË÷£¨ÓÃÓÚ×ÔÖ÷×é¾íµÄÉ¸Ñ¡Ìõ¼ş£¬ÆäÖĞ±êÇ©£¬ÌâĞÍ¿ÉÄÜÎª¶à¸ö£©
 	@RequestMapping(value ="/findSubForPaper",produces="text/json;charset=utf-8")
 	@ResponseBody
 	public String findSubjectMsgForPaper(@RequestParam(value = "tags") String tags,@RequestParam(value = "subject") String subject,@RequestParam(value = "date") String date,@RequestParam(value = "types") String types,@RequestParam(value="uId") int uId) {
@@ -72,7 +75,7 @@ public class SubjectMsgController {
 			typeList.add(value);
 		}
 		List<SubjectMsg> subjectMsgs = null;
-		if(date.equals("å…¨éƒ¨") || date.equals("æ›´æ—©")) {
+		if(date.equals("È«²¿") || date.equals("¸üÔç")) {
 			subjectMsgs = this.subjectMsgService.findSubjectMsgByCondition(subject,tagList,typeList,date,uId);	
 		}else {
 			int dat = Integer.valueOf(date);
@@ -83,131 +86,137 @@ public class SubjectMsgController {
 		return subjectMsgList;
 		
 	}
-	//æŸ¥è¯¢ä¸Šä¸€é¢˜
+	//²éÑ¯ÉÏÒ»Ìâ
 	@RequestMapping(value ="/findPre",produces="text/json;charset=utf-8")
 	@ResponseBody
 	public String findPreSubjectMsgById(@RequestParam(value = "tag") String tag,@RequestParam(value = "subject") String subject,@RequestParam(value = "id") int id,@RequestParam(value = "uId") int uId) {
 		SubjectMsg subjectMsg = this.subjectMsgService.findPreSubjectMsgById(tag,subject,id,uId);
-		System.out.println("æ‰“å°ä¸Šä¸€é¢˜"+subjectMsg);
+		System.out.println("´òÓ¡ÉÏÒ»Ìâ"+subjectMsg);
 		if(subjectMsg != null) {
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String subjectMsgStr = gson.toJson(subjectMsg);
 			return subjectMsgStr;
 		}else {
-			return "è¿™å·²ç»æ˜¯ç¬¬ä¸€é¢˜äº†".toString();
+			return "ÕâÒÑ¾­ÊÇµÚÒ»ÌâÁË".toString();
 		}
 	}
-	//æŸ¥è¯¢ä¸‹ä¸€é¢˜
+	//²éÑ¯ÏÂÒ»Ìâ
 	@RequestMapping(value ="/findNext",produces="text/json;charset=utf-8")
 	@ResponseBody
 	public String findNextSubjectMsgById(@RequestParam(value = "tag") String tag,@RequestParam(value = "subject") String subject,@RequestParam(value = "id") int id,@RequestParam(value = "uId") int uId) {
 		SubjectMsg subjectMsg = this.subjectMsgService.findNextSubjectMsgById(tag,subject,id,uId);
-		System.out.println("æ‰“å°ä¸‹ä¸€é¢˜"+subjectMsg);
+		System.out.println("´òÓ¡ÏÂÒ»Ìâ"+subjectMsg);
 		if(subjectMsg != null) {
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String subjectMsgStr = gson.toJson(subjectMsg);
 			return subjectMsgStr;
 		}else {
-			return "è¿™å·²ç»æ˜¯æœ€åä¸€é“é¢˜äº†".toString();
+			return "ÕâÒÑ¾­ÊÇ×îºóÒ»µÀÌâÁË".toString();
 		}
 	}
-	//æ›´æ”¹é¢˜ç›®çš„æ ‡ç­¾tag
+	//¸ü¸ÄÌâÄ¿µÄ±êÇ©tag
 	@RequestMapping(value = "/changeTag",produces="text/json;charset=utf-8")
 	@ResponseBody
 	public String changeTagOfSubjectMsgById(@RequestParam(value = "tag") String tag,@RequestParam(value = "id") int id) {
 		int count = this.subjectMsgService.changeTagById(tag,id);
 		if(count > 0) {
-			return "ä¿®æ”¹æˆåŠŸ";
+			return "ĞŞ¸Ä³É¹¦";
 		}else {
-			return "ä¿®æ”¹å¤±è´¥";
+			return "ĞŞ¸ÄÊ§°Ü";
 		}
 	}
 	
-	//æ›´æ”¹é¢˜ç›®çš„å­¦ç§‘subject
+	//¸ü¸ÄÌâÄ¿µÄÑ§¿Æsubject
 	@RequestMapping(value = "/changeSubject",produces="text/json;charset=utf-8")
 	@ResponseBody
 	public String changeSubjectOfSubjectMsgById(@RequestParam(value = "subject") String subject,@RequestParam(value = "id") int id) {
 		int count = this.subjectMsgService.changeSubjectById(subject,id);
 		if(count > 0) {
-			return "ä¿®æ”¹æˆåŠŸ";
+			return "ĞŞ¸Ä³É¹¦";
 		}else {
-			return "ä¿®æ”¹å¤±è´¥";
+			return "ĞŞ¸ÄÊ§°Ü";
 		}
 	}
 	
-	//åˆ é™¤å½“å‰é¢˜ç›®ï¼ˆåˆ é™¤å®Œæœ¬é¢˜ç›®ï¼Œè‡ªåŠ¨æŸ¥è¯¢ä¸‹ä¸€é¢˜æˆ–è€…ç¬¬ä¸€æ¡åŒç±»å‹é¢˜ç›®ï¼‰
+	//É¾³ıµ±Ç°ÌâÄ¿£¨É¾³ıÍê±¾ÌâÄ¿£¬×Ô¶¯²éÑ¯ÏÂÒ»Ìâ»òÕßµÚÒ»ÌõÍ¬ÀàĞÍÌâÄ¿£©
 	@RequestMapping(value = "/deleteSubjectMsg",produces="text/json;charset=utf-8")
 	@ResponseBody
 	public String deleteSubjectMsg(@RequestParam(value = "tag") String tag,@RequestParam(value = "subject") String subject,@RequestParam(value = "id") int id,@RequestParam(value = "uId") int uId) {
-		//åˆ é™¤å½“å‰é¢˜ç›®ä¹‹å‰ï¼Œå…ˆæŸ¥å‡ºä¸‹ä¸€é¢˜æˆ–è€…æœ¬ç±»å‹é¢˜ç›®çš„ç¬¬ä¸€é“é¢˜
+		//É¾³ıµ±Ç°ÌâÄ¿Ö®Ç°£¬ÏÈ²é³öÏÂÒ»Ìâ»òÕß±¾ÀàĞÍÌâÄ¿µÄµÚÒ»µÀÌâ
 		SubjectMsg subjectMsg = this.subjectMsgService.findNextOrFirstSubjectMsgById(tag,subject,id,uId);
-		System.out.println("ä¸‹ä¸€é¢˜æˆ–è€…å¤´ä¸€é“ç¬¦åˆæ¡ä»¶çš„é¢˜ç›®"+subjectMsg);
-		//åˆ é™¤è¦åˆ æ‰çš„é¢˜ç›®
+		System.out.println("ÏÂÒ»Ìâ»òÕßÍ·Ò»µÀ·ûºÏÌõ¼şµÄÌâÄ¿"+subjectMsg);
+		//É¾³ıÒªÉ¾µôµÄÌâÄ¿
 		int n = this.subjectMsgService.deleteSubjectMsgById(id);
-		if(n>0) {//è¡¨ç¤ºåˆ é™¤æˆåŠŸï¼Œä¼ å›é¢˜ç›®
-			if(subjectMsg == null) {//è¡¨ç¤ºå·²ç»æ²¡æœ‰åŒç±»å‹çš„é¢˜ç›®äº†ï¼Œæç¤ºé‡æ–°æŸ¥æ‰¾
-				return "æœ€åä¸€é“é¢˜è¢«åˆ é™¤äº†å‘¢ï¼Œè¯·é‡æ–°ç­›é€‰é¢˜ç›®å§".toString();
+		if(n>0) {//±íÊ¾É¾³ı³É¹¦£¬´«»ØÌâÄ¿
+			if(subjectMsg == null) {//±íÊ¾ÒÑ¾­Ã»ÓĞÍ¬ÀàĞÍµÄÌâÄ¿ÁË£¬ÌáÊ¾ÖØĞÂ²éÕÒ
+				return "×îºóÒ»µÀÌâ±»É¾³ıÁËÄØ£¬ÇëÖØĞÂÉ¸Ñ¡ÌâÄ¿°É".toString();
 			}else {
 				Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 				String subjectMsgStr = gson.toJson(subjectMsg);
 				return subjectMsgStr;
 			}
 		}else {
-			return "åˆ é™¤å¤±è´¥,è¯·é‡æ–°åˆ é™¤";
+			return "É¾³ıÊ§°Ü,ÇëÖØĞÂÉ¾³ı";
 		}
 	}
-	//åˆ é™¤ä¸€é“æˆ–å¤šåˆ°é¢˜ç›®
+	//É¾³ıÒ»µÀ»ò¶àµ½ÌâÄ¿
 	@RequestMapping(value = "/deleteSubjectMsgById",produces="text/json;charset=utf-8")
 	@ResponseBody
 	public String deleteSubjectById(@RequestParam(value = "ids") String ids) {
 		Gson gson = new Gson();
 	    List<Integer> obj = gson.fromJson(ids,new TypeToken<List<Integer>>(){}.getType());
 	    int n = this.subjectMsgService.deleteSubjectMsgById(obj);
-	    if(n>0) {//è¡¨ç¤ºåˆ é™¤æˆåŠŸï¼Œä¼ å›é¢˜ç›®
-			return "åˆ é™¤æˆåŠŸ";
+	    if(n>0) {//±íÊ¾É¾³ı³É¹¦£¬´«»ØÌâÄ¿
+			return "É¾³ı³É¹¦";
 		}else {
 			return null;
 		}
 	}
 	
-	//ä¸Šä¼ é”™é¢˜
+	//ÉÏ´«´íÌâ
 	@RequestMapping(value = "/uploadSubejctMsg",produces="text/json;charset=utf-8")
 	@ResponseBody
 	public String uploadWrongQuestions(HttpServletRequest request) {
-//		InputStream in = request.getInputStream();
-//		BufferedReader br = new BufferedReader(
-//				new InputStreamReader(in, "utf-8"));
-//		String subjectJson = br.readLine();
-//		in.close();
-//		br.close();
-//		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-//		SubjectMsg subjectMsg = gson.fromJson(subjectJson, SubjectMsg.class);
-		//å‘æ•°æ®åº“ä¸­ä¿å­˜é”™é¢˜
-//		int n = new MistakenService().uploadWrongQuestionsService(subjectMsg);
-		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-		String nString = sf.format(new Date());
-		Date date = null;
 		try {
-			date = sf.parse(nString);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			InputStream in = request.getInputStream();
+			BufferedReader br = new BufferedReader(
+					new InputStreamReader(in, "utf-8"));
+			String subjectJson = br.readLine();
+			in.close();
+			br.close();
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			SubjectMsg subjectMsg = gson.fromJson(subjectJson, SubjectMsg.class);
+			//ÏòÊı¾İ¿âÖĞ±£´æ´íÌâ
+			int n = this.subjectMsgService.saveSubjectMsg(subjectMsg);
+			System.out.println("Ê¶±ğÄÚÈİ¹ş¹ş¹ş¹ş"+subjectMsg.getContent());
+//			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+//			String nString = sf.format(new Date());
+//			Date date = null;
+//			try {
+//				date = sf.parse(nString);
+//			} catch (ParseException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			SubjectMsg subjectMsg = new SubjectMsg(1,"Ó¢Óï","ÌıÁ¦","Ñ¡ÔñÌâ",date,"img","","","","","´ğ°¸",4);
+//			int n = this.subjectMsgService.saveSubjectMsg(subjectMsg);
+			if(n>0) {
+				return "ÉÏ´«³É¹¦";
+			}else {
+				return "ÉÏ´«Ê§°Ü";
+			}
+		} catch (Exception e) {
+			return "ÉÏ´«Ê§°Ü";
 		}
-		SubjectMsg subjectMsg = new SubjectMsg(1,"è‹±è¯­","å¬åŠ›","é€‰æ‹©é¢˜",date,"img","","","","","ç­”æ¡ˆ",4);
-		int n = this.subjectMsgService.saveSubjectMsg(subjectMsg);
-		if(n>0) {
-			return "ä¸Šä¼ æˆåŠŸ";
-		}else {
-			return "ä¸Šä¼ å¤±è´¥";
-		}
+		
 	}
 	
-	//ç»Ÿè®¡é”™é¢˜æ•°é‡
+	//Í³¼Æ´íÌâÊıÁ¿
 	@RequestMapping(value = "/count",produces="text/json;charset=utf-8")
 	@ResponseBody
 	public String countForSubjectMsg(@RequestParam(value = "uId") int uId) {
 		int count = this.subjectMsgService.countForSubjectMsgById(uId);
-		System.out.println("ç”¨æˆ·ä¿å­˜çš„é”™é¢˜æ€»æ•°"+count);
+		System.out.println("ÓÃ»§±£´æµÄ´íÌâ×ÜÊı"+count);
 		return count+"";
 	}
 	

@@ -18,6 +18,8 @@ public class SubjectMsg implements Serializable{
     private String answer;//大题或填空题答案
     private int uId;//用户id
 
+    private String content;//题目内容
+
     public SubjectMsg() {
     }
 
@@ -132,6 +134,14 @@ public class SubjectMsg implements Serializable{
         this.uId = uId;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     @Override
     public String toString() {
         return "SubjectMsg{" +
@@ -146,6 +156,8 @@ public class SubjectMsg implements Serializable{
                 ", optionC='" + optionC + '\'' +
                 ", optionD='" + optionD + '\'' +
                 ", answer='" + answer + '\'' +
+                ", uId=" + uId +
+                ", content='" + content + '\'' +
                 '}';
     }
 }
