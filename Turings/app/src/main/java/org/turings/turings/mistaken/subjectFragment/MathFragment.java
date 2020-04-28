@@ -3,6 +3,7 @@ package org.turings.turings.mistaken.subjectFragment;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -41,7 +42,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import org.turings.turings.R;
 import org.turings.turings.mistaken.RedoWrongBigQuestionActivity;
 import org.turings.turings.mistaken.RedoWrongQuestionsActivity;
-import org.turings.turings.mistaken.SubjectMsg;
+import org.turings.turings.mistaken.entity.SubjectMsg;
 import org.turings.turings.mistaken.customAdapterAndDialog.CustomAdapterYLX;
 import org.turings.turings.mistaken.customAdapterAndDialog.GridViewAdapter;
 
@@ -58,6 +59,8 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * 数学学科下的所有错题类型检索展示
@@ -77,7 +80,7 @@ public class MathFragment extends Fragment implements View.OnClickListener{
     private String tag = "集合";
     private String date="";//时间
     private String tyep="";//题型
-    private String uId="1";//用户的id
+    private String uId;//用户的id
     private OkHttpClient okHttpClient;
     //适配器
     private CustomAdapterYLX customAdapterYLX;//适配器
@@ -191,8 +194,9 @@ public class MathFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.ylx_math_fragment_layout, container, false);
         //获取用户的id
-//        SharedPreferences sp = getSharedPreferences("userInfo",MODE_PRIVATE);
-//        uId = sp.getString("uId",null);
+        //获取用户的id
+        SharedPreferences sp = getContext().getSharedPreferences("userInfo",MODE_PRIVATE);
+        uId = sp.getString("uId",null);
         getViews(view);
         setData();
         setGridView();
@@ -251,7 +255,9 @@ public class MathFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //进入错题重做页
-                redoErrorQuestions(list.get(position));
+                if(mLlEditBar.getVisibility() != View.VISIBLE){
+                    redoErrorQuestions(list.get(position));
+                }
                 updateCheckBoxStatus(view, position);
             }
 

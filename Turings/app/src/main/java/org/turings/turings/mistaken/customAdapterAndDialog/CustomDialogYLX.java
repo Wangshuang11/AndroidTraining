@@ -19,7 +19,7 @@ import com.google.gson.GsonBuilder;
 
 import org.turings.turings.R;
 import org.turings.turings.mistaken.LookUpAndErrorReDoActivity;
-import org.turings.turings.mistaken.SubjectMsg;
+import org.turings.turings.mistaken.entity.SubjectMsg;
 
 import java.io.IOException;
 

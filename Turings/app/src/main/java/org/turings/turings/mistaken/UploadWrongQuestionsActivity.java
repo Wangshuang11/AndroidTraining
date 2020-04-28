@@ -6,12 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
-import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -26,20 +23,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.yalantis.ucrop.UCrop;
-import com.yalantis.ucrop.UCropActivity;
 
 import org.turings.turings.MainActivity;
 import org.turings.turings.R;
 import org.turings.turings.mistaken.customAdapterAndDialog.CustomDialogYLX;
+import org.turings.turings.mistaken.entity.SubjectMsg;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -463,7 +452,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
     }
 
     //确认添加弹出框
-    private void showCustomDialog(org.turings.turings.mistaken.SubjectMsg subjectMsg) {
+    private void showCustomDialog(SubjectMsg subjectMsg) {
         //管理多个Fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         //事务（一系列原子性操作）

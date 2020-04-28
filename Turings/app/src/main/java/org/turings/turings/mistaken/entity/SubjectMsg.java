@@ -1,4 +1,4 @@
-package org.turings.turings.mistaken;
+package org.turings.turings.mistaken.entity;
 
 
 import java.io.Serializable;

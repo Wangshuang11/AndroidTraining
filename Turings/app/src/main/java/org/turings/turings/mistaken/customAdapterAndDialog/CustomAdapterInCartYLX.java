@@ -1,15 +1,18 @@
 package org.turings.turings.mistaken.customAdapterAndDialog;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.turings.turings.R;
-import org.turings.turings.mistaken.SubjectMsg;
+import org.turings.turings.mistaken.entity.SubjectMsg;
 
 import java.util.List;
 
@@ -61,6 +64,7 @@ public class CustomAdapterInCartYLX extends BaseAdapter {
             holder.topSub = convertView.findViewById(R.id.top_ylx);
             holder.downSub = convertView.findViewById(R.id.down_ylx);
             holder.subjectSub = convertView.findViewById(R.id.subject_ylx);
+            holder.subjectImgSub=convertView.findViewById(R.id.subject_img_ylx);
             holder.cart = convertView.findViewById(R.id.cart_ylx);
             convertView.setTag(holder);
         }else {
@@ -71,7 +75,26 @@ public class CustomAdapterInCartYLX extends BaseAdapter {
 //        String dataFileStr = context.getFilesDir().getAbsolutePath()+"/"+list.get(position).getTitleImg();
 //        Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
         //添加图片
-        holder.subjectSub.setText("题目"+subjectMsgs.get(position).getId());
+//        if(subjectMsgs.get(position).getTitleImg()!=null){
+//            String dataFileStr = context.getFilesDir().getAbsolutePath()+"/"+subjectMsgs.get(position).getTitleImg();
+//            Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
+//            //添加图片
+////            holder.tvImg.setImageResource(R.mipmap.aylx);
+//            holder.subjectImgSub.setImageBitmap(bitmap);
+//            holder.subjectImgSub.setVisibility(View.VISIBLE);
+//            holder.subjectSub.setVisibility(View.GONE);
+//        }else {
+        if(subjectMsgs.get(position).getType().equals("选择题")){
+            holder.subjectSub.setText(subjectMsgs.get(position).getContent()+"\n"+subjectMsgs.get(position).getOptionA()
+                    +"\n"+subjectMsgs.get(position).getOptionB()+"\n"
+                    +subjectMsgs.get(position).getOptionC()+"\n"
+                    +subjectMsgs.get(position).getOptionD());
+        }else {
+            holder.subjectSub.setText(subjectMsgs.get(position).getContent());
+        }
+        holder.subjectImgSub.setVisibility(View.GONE);
+        holder.subjectSub.setVisibility(View.VISIBLE);
+//        }
 //        holder.imageView.setImageBitmap(bitmap);
         holder.cart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +122,7 @@ public class CustomAdapterInCartYLX extends BaseAdapter {
         public LinearLayout topSub;//上移
         public LinearLayout downSub;//下移
         public TextView subjectSub;//题目
+        public ImageView subjectImgSub;//题目图片
         public LinearLayout cart;//删除
     }
     /**

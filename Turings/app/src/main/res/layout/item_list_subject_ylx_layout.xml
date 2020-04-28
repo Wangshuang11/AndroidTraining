@@ -57,15 +57,32 @@
         android:layout_marginRight="20dp"
         android:orientation="horizontal"
         android:paddingBottom="10dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/bluetagsubkectylx" />
-        <ImageView
-            android:id="@+id/subject_ylx"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:layout_weight="1"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/img_ti_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/bluetagsubkectylx" />
+            <ImageView
+                android:id="@+id/subject_img_ylx"
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@+id/img_ti_tag"
+                android:layout_alignTop="@+id/img_ti_tag"
+                android:layout_marginTop="3dp"
+                android:layout_height="200dp"
+                android:visibility="gone"
+                android:scaleType="centerCrop" />
+            <TextView
+                android:id="@+id/subject_tv_ylx"
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@+id/img_ti_tag"
+                android:layout_alignTop="@+id/img_ti_tag"
+                android:layout_marginTop="3dp"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:text="我是题目" />
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

@@ -2,6 +2,9 @@ package org.turings.turings.mistaken;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -34,6 +37,7 @@ import com.google.gson.GsonBuilder;
 
 import org.turings.turings.MainActivity;
 import org.turings.turings.R;
+import org.turings.turings.mistaken.entity.SubjectMsg;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,6 +56,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
     private ImageView img_ylx;//返回键
     private ImageView choose_ylx;//选择修改键
     private ImageView subjectImg_ylx;//题目图片
+    private TextView subjectText_ylx;//题目文字
     private EditText write_ylx;//答案书写区
     private TextView answer_show_ylx;//答案展示
     private RelativeLayout show_more;//展开答案
@@ -68,7 +73,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
     private PopupWindow popupWindow;
     private SubjectMsg msgs;//题目内容
     private OkHttpClient okHttpClient;
-    private int uId=4;//用户的id
+    private int uId;//用户的id
     private String tagChange;//标签（存更改的标签）
     private String subjectChange;//学科(存更改的学科)
     private AlertDialog alertDialog;
@@ -97,11 +102,18 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                             finish();
                         }
-                        //获取图片id,从data的files目录下取出来
-//                        String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
-//                        Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
-//                        //添加题目图片
-//                        subjectImg_ylx.setImageBitmap(bitmap);
+//                        if(msgs.getTitleImg()!=null){
+//                            String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
+//                            Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
+//                            //添加图片
+//                            subjectImg_ylx.setImageBitmap(bitmap);
+//                            subjectImg_ylx.setVisibility(View.VISIBLE);
+//                            subjectText_ylx.setVisibility(View.GONE);
+//                        }else {
+                        subjectText_ylx.setText(msgs.getContent());
+                        subjectImg_ylx.setVisibility(View.GONE);
+                        subjectText_ylx.setVisibility(View.VISIBLE);
+//                        }
                         answer_show_ylx.setBackgroundColor(getResources().getColor(R.color.answerColor));
                         answer_show_ylx.setText("刮刮乐查看答案");
                         answer_show_ylx.setTextColor(getResources().getColor(R.color.themeColor));
@@ -163,11 +175,18 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
                             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                             finish();
                         }
-                        //获取图片id,从data的files目录下取出来
-//                        String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
-//                        Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
-//                        //添加题目图片
-//                        subjectImg_ylx.setImageBitmap(bitmap);
+//                        if(msgs.getTitleImg()!=null){
+//                            String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
+//                            Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
+//                            //添加图片
+//                            subjectImg_ylx.setImageBitmap(bitmap);
+//                            subjectImg_ylx.setVisibility(View.VISIBLE);
+//                            subjectText_ylx.setVisibility(View.GONE);
+//                        }else {
+                        subjectText_ylx.setText(msgs.getContent());
+                        subjectImg_ylx.setVisibility(View.GONE);
+                        subjectText_ylx.setVisibility(View.VISIBLE);
+//                        }
                         answer_show_ylx.setBackgroundColor(getResources().getColor(R.color.answerColor));
                         answer_show_ylx.setText("刮刮乐查看答案");
                         answer_show_ylx.setTextColor(getResources().getColor(R.color.themeColor));
@@ -201,8 +220,8 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redo_wrong_big_question_ylx);
         //获取用户的id
-//        SharedPreferences sp = getSharedPreferences("userInfo",MODE_PRIVATE);
-//        uId = Integer.parseInt(sp.getString("uId",null));
+        SharedPreferences sp = getSharedPreferences("userInfo",MODE_PRIVATE);
+        uId = Integer.parseInt(sp.getString("uId",null));
         //获取控件
         getViews();
         //获取从LookUpAndErrorReDoActivity传来的数据
@@ -215,11 +234,18 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
     private void initData() {
         Intent intent = getIntent();
         msgs = (SubjectMsg) intent.getSerializableExtra("subject");
-        //获取图片id,从data的files目录下取出来
-//        String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
-//        Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
-//        //添加题目图片
-//        subjectImg_ylx.setImageBitmap(bitmap);
+//        if(msgs.getTitleImg()!=null){
+//            String dataFileStr = getFilesDir().getAbsolutePath()+"/"+msgs.getTitleImg();
+//            Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
+//            //添加图片
+//            subjectImg_ylx.setImageBitmap(bitmap);
+//            subjectImg_ylx.setVisibility(View.VISIBLE);
+//            subjectText_ylx.setVisibility(View.GONE);
+//        }else {
+        subjectText_ylx.setText(msgs.getContent());
+        subjectImg_ylx.setVisibility(View.GONE);
+        subjectText_ylx.setVisibility(View.VISIBLE);
+//        }
     }
 
     //删除file目录下指定路径的图片
@@ -255,6 +281,7 @@ public class RedoWrongBigQuestionActivity extends AppCompatActivity {
         spread = findViewById(R.id.spread);
         shrink_up = findViewById(R.id.shrink_up);
         scroll_view_ylx = findViewById(R.id.scroll_view_ylx);
+        subjectText_ylx = findViewById(R.id.subjectText_ylx);
     }
     class CustomOnclickListener implements View.OnClickListener{
 

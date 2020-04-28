@@ -1,17 +1,20 @@
 package org.turings.turings.mistaken.customAdapterAndDialog;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.turings.turings.R;
-import org.turings.turings.mistaken.SubjectMsg;
+import org.turings.turings.mistaken.entity.SubjectMsg;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -67,6 +70,7 @@ public class CustomAdapterToAddCartYLX extends BaseAdapter {
             holder.timeSub = convertView.findViewById(R.id.time_ylx);
             holder.typeSub = convertView.findViewById(R.id.tag_ylx);
             holder.subjectSub = convertView.findViewById(R.id.subject_ylx);
+            holder.subjectImgSub=convertView.findViewById(R.id.subject_img_ylx);
             holder.cart = convertView.findViewById(R.id.cart_ylx);
             convertView.setTag(holder);
         }else {
@@ -85,10 +89,29 @@ public class CustomAdapterToAddCartYLX extends BaseAdapter {
         //添加题型
         holder.typeSub.setText(subjectMsgs.get(position).getType().toString());
         //获取图片id,从data的files目录下取出来
-//        String dataFileStr = context.getFilesDir().getAbsolutePath()+"/"+list.get(position).getTitleImg();
-//        Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
         //添加图片
-        holder.subjectSub.setText("题目"+position);
+        Log.i("www", "getView: "+subjectMsgs.get(position).getContent());
+//        if(subjectMsgs.get(position).getTitleImg()==null) {
+        if(subjectMsgs.get(position).getType().equals("选择题")){
+            holder.subjectSub.setText(subjectMsgs.get(position).getContent()+"\n"+subjectMsgs.get(position).getOptionA()
+                    +"\n"+subjectMsgs.get(position).getOptionB()+"\n"
+                    +subjectMsgs.get(position).getOptionC()+"\n"
+                    +subjectMsgs.get(position).getOptionD());
+        }else {
+            holder.subjectSub.setText(subjectMsgs.get(position).getContent());
+        }
+        holder.subjectImgSub.setVisibility(View.GONE);
+        holder.subjectSub.setVisibility(View.VISIBLE);
+//        }else {
+//            String dataFileStr = context.getFilesDir().getAbsolutePath()+"/"+subjectMsgs.get(position).getContent();
+//            Bitmap bitmap = BitmapFactory.decodeFile(dataFileStr);
+//            //添加图片
+////            holder.tvImg.setImageResource(R.mipmap.aylx);
+//            holder.subjectImgSub.setImageBitmap(bitmap);
+//            holder.subjectImgSub.setVisibility(View.VISIBLE);
+//            holder.subjectSub.setVisibility(View.GONE);
+//        }
+//        holder.subjectSub.setText("题目"+position);
 //        holder.imageView.setImageBitmap(bitmap);
         holder.cart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,10 +135,11 @@ public class CustomAdapterToAddCartYLX extends BaseAdapter {
         public TextView timeSub;//时间
         public TextView typeSub;//类型
         public TextView subjectSub;//题目
+        public ImageView subjectImgSub;//题目图片
         public RelativeLayout cart;//添加到错题篮
     }
     /**
-     * 删除按钮的监听接口
+     * 添加按钮的监听接口
      */
     public interface onItemAddListener {
         void onAddClick(int number, int position);

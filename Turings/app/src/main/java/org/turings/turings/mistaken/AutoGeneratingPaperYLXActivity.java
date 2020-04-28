@@ -2,6 +2,7 @@ package org.turings.turings.mistaken;
 
 import android.animation.Animator;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,6 +28,7 @@ import org.turings.turings.MainActivity;
 import org.turings.turings.R;
 import org.turings.turings.mistaken.customAdapterAndDialog.CustomAdapterToAddCartYLX;
 import org.turings.turings.mistaken.customAdapterAndDialog.GridViewTagAdapter;
+import org.turings.turings.mistaken.entity.SubjectMsg;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -86,7 +88,7 @@ public class AutoGeneratingPaperYLXActivity extends AppCompatActivity implements
     private Map<String,String> types=new HashMap<>();//题型
     private String timeYears="全部";//年份
     //用户id
-    private String uId = "1";
+    private String uId;
     //适配器
     private CustomAdapterToAddCartYLX customAdapterToAddCartYLX;
     private GridViewTagAdapter gridViewTagAdapter;
@@ -131,6 +133,9 @@ public class AutoGeneratingPaperYLXActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auto_generating_paper_ylx);
+        //获取用户的id
+        SharedPreferences sp = getSharedPreferences("userInfo",MODE_PRIVATE);
+        uId = sp.getString("uId",null);
         //获取控件
         getViewss();
         Intent intent = getIntent();
@@ -311,7 +316,7 @@ public class AutoGeneratingPaperYLXActivity extends AppCompatActivity implements
             public void onAddClick(int number, int position) {
                 Log.i("www", "onAddClick: 篮子中题目数量"+number);
                 Log.i("www", "onAddClick: 篮子中题目位置"+position);
-                lanSubCount.setText(number+"");
+                lanSubCount.setText(subInCart.size()+1+"");
                 customAdapterToAddCartYLX.notifyDataSetChanged();
                 subInCart.add(subjectMsgs.get(position));
             }
@@ -444,9 +449,9 @@ public class AutoGeneratingPaperYLXActivity extends AppCompatActivity implements
 
         }else if(type.equals("选择题")){
             if(types.containsKey("全部")){
-               types.remove("全部");
-               btnTypeAll.setBackground(getResources().getDrawable(R.drawable.ylx_check_ifinfo_no_layput));
-               btnTypeAll.setTextColor(Color.BLACK);
+                types.remove("全部");
+                btnTypeAll.setBackground(getResources().getDrawable(R.drawable.ylx_check_ifinfo_no_layput));
+                btnTypeAll.setTextColor(Color.BLACK);
             }
             if(!types.containsKey("选择题")){
                 types.put("选择题","选择题");

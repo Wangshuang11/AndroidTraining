@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import org.turings.turings.R;
 import org.turings.turings.mistaken.customAdapterAndDialog.CustomAdapterInCartYLX;
+import org.turings.turings.mistaken.entity.SubjectMsg;
 
 import java.io.Serializable;
 import java.util.ArrayList;
