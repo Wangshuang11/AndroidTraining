@@ -5,20 +5,35 @@
 <!-- namespace:映射器接口的全名 -->
 <mapper namespace="org.turings.myself.dao.MyselfMapper">
 	<!--显示全部课程-->
-	<select id="listAllCourses" resultType="org.turings.myself.entity.CourseInfo">
+	<resultMap type="org.turings.myself.entity.CourseInfo" id="courseMap">
+		<id property="id" column="parentid"/>
+		<result property="image" column="courseimage"/>
+		<result property="title" column="coursetitle"/>
+		<result property="person" column="courseperson"/>
+		<result property="data" column="coursedata"/>
+		<result property="views" column="courseviews"/>
+	</resultMap>
+	<select id="listAllCourses" resultMap="courseMap">
 		select * from tbl_indexcourse where parentid in (select cId from tbl_self_courses_my where uId=#{uid})
 	</select>
 	<!-- 显示全部粉丝 -->
-	<select id="listAllFans" resultType="org.turings.myself.entity.UserInfo">
+	<resultMap type="org.turings.myself.entity.UserInfo" id="fansMap">
+		<id property="id" column="uId"/>
+		<result property="name" column="uName"/>
+		<result property="motto" column="uMotto"/>
+		<result property="time" column="uTime"/>
+		<result property="avatar" column="uAvatar"/>
+	</resultMap>
+	<select id="listAllFans" resultMap="fansMap">
 		select uId , uName , uMotto , uTime , uAvatar from tbl_self_user where uId IN (select fId from tbl_self_fans where uId= #{uid} )
 	</select>
 	<!-- 显示全部关注 -->
-	<select id="listAllAttentions" resultType="org.turings.myself.entity.UserInfo">
+	<select id="listAllAttentions" resultMap="fansMap">
 		select uId , uName , uMotto , uTime , uAvatar from tbl_self_user where uId IN (select uId from tbl_self_fans where fId= #{fid} )
 	</select>
 	<!-- 添加关注 -->
 	<insert id="addAttention">
-		select * from tbl_self_fans where uId= #{uid} and fid=#{fid}
+		insert into tbl_self_fans(uId,fId) values (#{uid},#{fid})
 	</insert>
 	<!-- 取消关注 -->
 	<delete id="delAttention">
