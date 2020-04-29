@@ -34,6 +34,7 @@ public class MyselfController {
 	//显示全部课程
 	@RequestMapping(value="/GetCoursesList",produces="text/json;charset=utf-8")
 	public  String sendCourse(@RequestParam(value = "uid") int uid) {
+		System.out.println("是的法规环境是的非官方皇冠国际---------------------------------------------------------------------------------------");
 		List<CourseInfo> courseInfos= this.myselfService.listAllCourses(uid);
 		String json = JSONArray.fromObject(courseInfos).toString();
 		return json;
@@ -42,6 +43,7 @@ public class MyselfController {
 	@ResponseBody
 	@RequestMapping(value="/FansList",produces="text/json;charset=utf-8")
 	public String listFan(@RequestParam(value = "uid") int uid) {
+		System.out.println(uid+"-------------------------------");
 		List<UserInfo> userInfos= this.myselfService.listAllFans(uid);
 		String json = JSONArray.fromObject(userInfos).toString();
 		return json;
