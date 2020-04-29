@@ -131,6 +131,8 @@
         <activity android:name=".myself.sxn.MyNicknameActivity" />
         <activity android:name=".myself.sxn.MySchoolActivity" />
         <activity android:name=".myself.sxn.AboutInfoActivity" />
+        <activity android:name=".myself.farm.FarmActivity" />
+        <activity android:name=".myself.farm.GiftChangeActivity" />
         <!-- 设置环信应用的AppKey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
