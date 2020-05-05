@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00ffffff">
+
+    <LinearLayout
+        android:id="@+id/popup_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/jxy_white_bg_top"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="15dp"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#00ffffff">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:text="小葵花雨滴任务"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/background_gray"/>
+
+        <RelativeLayout
+            android:id="@+id/tesk_first"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:background="@drawable/jxy_btn_lightgreen"
+            android:textColor="@color/colorMainGreen"
+            android:elevation="1dp"
+            android:outlineProvider="background"
+            android:translationZ="1dp">
+            <ImageView
+                android:id="@+id/firstimg"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/jxy_jifen"
+                android:scaleType="fitCenter"
+                android:layout_alignParentStart="true"/>
+
+            <LinearLayout
+                android:id="@+id/firstlayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/firstimg"
+                android:layout_marginEnd="61dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="每日登陆"
+                    android:textSize="18dp"
+                    android:textColor="#ffffff"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="每天登陆后，可以获得一次雨滴"
+                    android:textColor="#ffffff"
+                    android:textSize="12dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/islogin"
+                android:layout_width="51dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/jxy_btn_white"
+                android:text="领取"
+                android:textSize="14dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@android:color/holo_green_light"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/tesk_second"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:background="@drawable/jxy_btn_lightorange"
+            android:textColor="@color/colorMainGreen"
+            android:elevation="1dp"
+            android:outlineProvider="background"
+            android:translationZ="1dp">
+            <ImageView
+                android:id="@+id/secondimg"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/jxy_jifen"
+                android:layout_alignParentStart="true"
+                android:contentDescription="错题"/>
+
+            <LinearLayout
+                android:id="@+id/secondlayout"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/secondimg"
+                android:layout_marginEnd="71dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="上传错题"
+                    android:textSize="18dp"
+                    android:textColor="#ffffff"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="上传一道错题，可获得一次雨滴"
+                    android:textColor="#ffffff"
+                    android:textSize="12dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/countmis"
+                android:layout_width="51dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/jxy_btn_white"
+                android:text="去完成"
+                android:textSize="14dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@android:color/holo_orange_light"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/tesk_third"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:background="@drawable/jxy_btn_lightblue"
+            android:textColor="@color/colorMainGreen"
+            android:elevation="1dp"
+            android:outlineProvider="background"
+            android:translationZ="1dp">
+            <ImageView
+                android:id="@+id/thirdimg"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/jxy_jifen"
+                android:layout_alignParentStart="true"/>
+
+            <LinearLayout
+                android:id="@+id/thirdlayout"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/thirdimg"
+                android:layout_marginEnd="71dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="学习课程"
+                    android:textSize="18dp"
+                    android:textColor="#ffffff"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="每日学习课程，可获得雨滴"
+                    android:textColor="#ffffff"
+                    android:textSize="12dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/iscourse"
+                android:layout_width="51dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/jxy_btn_white"
+                android:text="去完成"
+                android:textSize="14dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@android:color/holo_blue_light"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/tesk_forth"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:background="@drawable/jxy_btn_purple"
+            android:textColor="@color/colorMainGreen"
+            android:elevation="1dp"
+            android:outlineProvider="background"
+            android:translationZ="1dp">
+            <ImageView
+                android:id="@+id/forthimg"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/jxy_jifen"
+                android:layout_alignParentStart="true"/>
+
+            <LinearLayout
+                android:id="@+id/forthlayout"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/forthimg"
+                android:layout_marginEnd="71dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="发表评论"
+                    android:textSize="18dp"
+                    android:textColor="#ffffff"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="发表评论，可获得雨滴"
+                    android:textColor="#ffffff"
+                    android:layout_weight="1"
+                    android:textSize="12dp"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/iscomment"
+                android:layout_width="51dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/jxy_btn_white"
+                android:padding="0dp"
+                android:text="去完成"
+                android:textSize="14dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@android:color/holo_purple"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/hidden_bg"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignTop="@id/popup_bg"/>
+
+
+    <!--<Button
+        android:id="@+id/icon_btn_camera"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignBottom="@+id/hidden_bg"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/jes_circleicon"
+        android:elevation="10dp"
+        android:outlineProvider="bounds"
+        android:translationZ="3dp"/>-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/hidden_bg"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/jxy_bg_radius30"
+        android:elevation="1dp"
+        android:outlineProvider="background"
+        android:translationZ="1dp">
+        <ImageView
+            android:id="@+id/icon_btn_camera"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/jes_circleicon"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>

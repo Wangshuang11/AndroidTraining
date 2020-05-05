@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,6 +33,7 @@ public class FarmActivity extends AppCompatActivity {
     private Intent intent=new Intent();
     private int giftSatus=0;//不能交换礼物的状态
     private int dryStatus=0;//非枯萎状态
+    private TeskPopupwindow mPhotoPopupWindow;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,25 +48,56 @@ public class FarmActivity extends AppCompatActivity {
         judgeNotGetWater();
         //3.根据2及成长值显示小葵花的生长状态、判断花盆状态
         judgeProcess1(250,dryStatus);
+        //金鑫媛的部分
+        jxypart();
+
     }
+
+    private void jxypart() {
+        Button tesk_btn = findViewById(R.id.sxn_flower_task);
+        Button gift_btn = findViewById(R.id.sxn_change_gift);
+        tesk_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                mPhotoPopupWindow = new TeskPopupwindow(FarmActivity.this);
+                View rootView = LayoutInflater.from(FarmActivity.this).inflate(R.layout.sxn_farm_index, null);
+                mPhotoPopupWindow.showAtLocation(rootView,
+                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+            }
+        });
+
+        gift_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                GiftPopupwindow giftPopupwindow = new GiftPopupwindow(FarmActivity.this);
+                View rootView = LayoutInflater.from(FarmActivity.this).inflate(R.layout.sxn_farm_index, null);
+                giftPopupwindow.showAtLocation(rootView,
+                        Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+            }
+        });
+    }
+
     class MyListener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.sxn_change_gift:
-                    //跳转交换礼物（当无法交换礼物时，可以理解规则，可以交换礼物时进行填信息交换）
-                    intent.setClass(FarmActivity.this, GiftChangeActivity.class);
-                    startActivity(intent);
-                    break;
+//                case R.id.sxn_change_gift:
+//                    //跳转交换礼物（当无法交换礼物时，可以理解规则，可以交换礼物时进行填信息交换）
+//                    intent.setClass(FarmActivity.this, GiftChangeActivity.class);
+//                    startActivity(intent);
+//                    break;
                 case R.id.farm_head:
                     //跳转主页或fragment
                     intent.setClass(FarmActivity.this, MainActivity.class);
                     intent.setAction("loginBackMyself");
                     startActivityForResult(intent,0);
                     break;
-                case R.id.sxn_flower_task:
-                    //出现上拉框
-                    break;
+//                case R.id.sxn_flower_task:
+//                    //出现上拉框
+//                    break;
                 case R.id.sxn_flower_water:
                     //出现动画浇水
                     break;
