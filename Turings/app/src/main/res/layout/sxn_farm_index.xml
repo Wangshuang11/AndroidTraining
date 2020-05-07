@@ -7,41 +7,104 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
+
+        <RelativeLayout
+            android:id="@+id/farm_header"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_marginTop="40dp">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="27dp">
             <!--点击头像，返回我的-->
-            <!--
-            <org.turings.turings.near.entity.RoundImageView
-                android:id="@+id/farm_head"
+            <LinearLayout
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"/>-->
-            <ImageView
-                android:id="@+id/farm_head"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"/>
-            <TextView
-                android:id="@+id/farm_"
-                android:text="当前积分：250"
-                android:layout_width="100dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/jxy_avatarbg"
+                android:elevation="2dp"
+                android:outlineProvider="background"
+                android:translationZ="1dp">
+                <org.turings.turings.near.entity.RoundImageView
+                    android:id="@+id/farm_head"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/jxy_jifen"/>
+            </LinearLayout>
+
+            <!--<ImageView-->
+            <!--android:id="@+id/farm_head"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:layout_marginLeft="20dp"/>-->
+            <LinearLayout
+                android:layout_width="160dp"
                 android:layout_height="35dp"
-                android:layout_gravity="center_vertical"/>
-        </LinearLayout>
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="63dp"
+                android:background="@drawable/jxy_bg0"
+                android:elevation="1dp"
+                android:outlineProvider="background"
+                android:translationZ="1dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:text="当前积分："
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/farm_"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="250"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/jxy_btn_white"
+                android:elevation="1dp"
+                android:outlineProvider="background"
+                android:translationZ="1dp">
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/jxy_jifen"/>
+                <TextView
+                    android:id="@+id/water"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:text="35" />
+            </LinearLayout>
+        </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="482dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="center">
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:paddingTop="97dp"
+            android:paddingBottom="30dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_alignParentTop="true">
+                android:layout_height="60dp">
                 <!--暂定，主要是三个不好看-->
                 <ImageView
                     android:id="@+id/sxn_flower_"
@@ -50,17 +113,69 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp" />
             </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:layout_above="@+id/sxn_flower"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/jxy_textbg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="点我会说一些话哦" />
+            </RelativeLayout>
             <!--花成熟后换礼物，之后清零-->
-            <Button
+            <ImageView
                 android:id="@+id/sxn_change_gift"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/farm_change_gift"
-                android:layout_marginRight="20dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true" />
+                android:layout_marginEnd="14dp"
+                android:src="@drawable/jxy_gift"
+                android:background="@drawable/jxy_bg_colorless_radius30"
+                android:elevation="3dp"
+                android:outlineProvider="background"
+                android:translationZ="1dp"
+                />
 
+            <!--水壶-->
+            <ImageView
+                android:id="@+id/jxy_kettle"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_above="@+id/sxn_flower"
+                android:layout_alignEnd="@+id/jxy_waterdrop"
+
+                android:elevation="2dp"
+                android:scaleType="fitEnd"
+                android:src="#00ffffff" />
+            <!--流水-->
+            <ImageView
+                android:id="@+id/jxy_waterdrop"
+                android:layout_width="123dp"
+                android:layout_height="158dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="108dp"
+                android:elevation="2dp"
+                android:scaleType="fitEnd"
+                android:src="#00ffffff" />
+            <!--花：五种形态，幼苗和开花，第二阶段，成熟，枯萎-->
+            <ImageView
+                android:id="@+id/sxn_flower"
+                android:layout_width="123dp"
+                android:layout_height="158dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="108dp"
+                android:elevation="1dp"
+                android:scaleType="fitEnd"
+                android:src="@drawable/farm_flower_1" />
             <!--花盆：两种形态，滋润和干涸-->
             <ImageView
                 android:id="@+id/sxn_flowerpot"
@@ -70,50 +185,92 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="55dp"
                 android:src="@drawable/farm_flowerpot1" />
-            <!--花：五种形态，幼苗和开花，第二阶段，成熟，枯萎-->
-            <ImageView
-                android:id="@+id/sxn_flower"
-                android:layout_width="123dp"
-                android:layout_height="158dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="220dp"
-                android:scaleType="fitEnd"
-                android:src="@drawable/farm_flower_1"></ImageView>
+
             <!--成长值：暂定进度条显示-->
-            <ImageView
-                android:id="@+id/sxn_process"
+
+            <LinearLayout
                 android:layout_width="180dp"
                 android:layout_height="20dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="38dp"
-                android:text="成长值" />
+                android:layout_marginBottom="25dp"
+                android:background="@drawable/jxy_btn_white"
+                android:elevation="3dp"
+                android:text="成长值">
+                <LinearLayout
+                    android:id="@+id/sxn_process"
+                    android:layout_width="100dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="38dp"
+                    android:background="@drawable/jxy_btn_lightblue"
+                    android:elevation="4dp"
+                    android:paddingLeft="10dp">
+                    <TextView
+                        android:id="@+id/grow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="100" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="/" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingRight="10dp"
+                        android:text="250" />
+                </LinearLayout>
+            </LinearLayout>
+
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="80dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="14dp">
+            android:paddingBottom="0dp">
             <!--增加水滴的任务-->
             <Button
                 android:id="@+id/sxn_flower_task"
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/farm_task"
-                android:gravity="center_horizontal" />
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="22dp"
+                android:background="@drawable/jxy_btn_lightorange"
+                android:text="任务"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
 
             <!--花洒，有时间间隔，一次浇水存在上限-->
-            <ImageView
-                android:id="@+id/sxn_flower_water"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="180dp"
-                android:layout_marginRight="15dp"
-                android:src="@drawable/farm_water" />
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="18dp">
+
+                <ImageView
+                    android:id="@+id/sxn_flower_water"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/jxy_kettle2"
+                    android:background="@drawable/jxy_bg_colorless_radius30"
+                    android:elevation="3dp"
+                    android:outlineProvider="background"
+                    android:translationZ="1dp"/>
+            </LinearLayout>
+
+            <!--<Button-->
+                <!---->
+                <!--android:background="@drawable/jxy_btn_lightorange"-->
+                <!--android:text="任务"-->
+                <!--android:textSize="18dp"-->
+                <!--android:textColor="@color/white"/>-->
+        </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>
