@@ -60,16 +60,29 @@
 
             </android.support.design.widget.CollapsingToolbarLayout>
 <!--        </android.support.v4.widget.NestedScrollView>-->
-
-            <android.support.design.widget.TabLayout
-                android:background="#fff"
-                android:layout_marginTop="-35dp"
+            <com.androidkun.xtablayout.XTabLayout
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:tabIndicatorColor="#666666"
-                app:tabSelectedTextColor="#4D4D4D"
-                app:tabTextColor="#A7A7A7" />
+                android:layout_height="50dp"
+                app:xTabDividerWidthWidthText="true"
+                app:xTabBackgroundColor="#fff"
+                app:xTabIndicatorColor="@android:color/holo_blue_light"
+                app:xTabIndicatorHeight="3dp"
+                app:xTabTextSize="18sp"
+                app:xTabTextBold="false"
+                app:xTabSelectedTextSize="22sp"
+                app:xTabSelectedTextColor="@android:color/background_dark"
+                app:xTabTextColor="@android:color/darker_gray"
+                app:xTabTextSelectedBold="true"/>
+<!--            <android.support.design.widget.TabLayout-->
+<!--                android:background="#fff"-->
+<!--                android:layout_marginTop="-35dp"-->
+<!--                android:id="@+id/tabLayout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                app:tabIndicatorColor="#666666"-->
+<!--                app:tabSelectedTextColor="#4D4D4D"-->
+<!--                app:tabTextColor="#A7A7A7" />-->
 
         </android.support.design.widget.AppBarLayout>
 
