@@ -27,6 +27,7 @@ android {
                 includeCompileClasspath = true
             }
         }
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -88,6 +89,7 @@ dependencies {
     implementation('com.github.good-good-study:Chart:1.0.0.0') {
         exclude group: 'com.android.support'
     }
+    implementation 'com.youth.banner:banner:1.4.10'
     /*附近的人用包*/
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
     implementation project(':lvlibrary')

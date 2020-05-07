@@ -53,6 +53,7 @@ import org.turings.turings.mistaken.StatisticsResult;
 import org.turings.turings.mistaken.UploadWrongQuestionsActivity;
 import org.turings.turings.mistaken.entity.IdentifyResultBean;
 import org.turings.turings.mistaken.entity.Words_result;
+import org.turings.turings.mistaken.myReview.MyReviewActivity;
 import org.turings.turings.mistaken.util.FileUtil;
 import org.turings.turings.mistaken.util.RecognizeService;
 
@@ -124,6 +125,8 @@ public class MistakenFragment extends Fragment {
 
     private static final int REQUEST_CODE_ACCURATE_BASIC = 107;//百度云文字识别响应码
     private boolean hasGotToken = false;//百度云文字识别的ak,sk是否有效
+
+    private ImageView myReview_ws;//我的回顾
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -210,6 +213,15 @@ public class MistakenFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        //跳到我的回顾
+        myReview_ws.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MyReviewActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -274,6 +286,7 @@ public class MistakenFragment extends Fragment {
         btnSeeAll=view.findViewById(R.id.btnSeeAll_ws);
         tvInfo_ws=view.findViewById(R.id.tvInfo_ws);
         autoPaper_ylx=view.findViewById(R.id.autoPaper_ylx);
+        myReview_ws=view.findViewById(R.id.myReview_ws);
     }
 
     //无缝填充顶部图片
