@@ -47,13 +47,23 @@
             android:orientation="vertical"
             android:focusable="true"
             android:focusableInTouchMode="true">
-
-            <ImageView
-                android:id="@+id/subjectImg_ylx"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="202dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/chooseylx" />
+                android:layout_height="202dp">
+                <ImageView
+                    android:id="@+id/subjectImg_ylx"
+                    android:layout_width="match_parent"
+                    android:layout_height="202dp"
+                    android:scaleType="fitXY"
+                    android:visibility="gone"/>
+                <TextView
+                    android:id="@+id/subjectText_ylx"
+                    android:layout_width="match_parent"
+                    android:layout_height="202dp"
+                    android:text="题目"
+                    android:textAlignment="textStart"
+                    android:textSize="18sp"/>
+            </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

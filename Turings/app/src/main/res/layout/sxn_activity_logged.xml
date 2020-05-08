@@ -307,5 +307,36 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
+<RelativeLayout
+            android:id="@+id/sxn_farm_linear"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp">
+            <ImageView
+                android:id="@+id/ivFarmLeft_ws"
+                android:src="@drawable/sxn_farm_sign"
+                android:layout_margin="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"></ImageView>
+            <TextView
+                android:layout_toRightOf="@+id/ivFarmLeft_ws"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/sxn_normal"
+                android:text="小葵花庄园"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/myselfright"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
     </LinearLayout>
 </ScrollView>

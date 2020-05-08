@@ -49,8 +49,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
+<<<<<<< HEAD
         <activity android:name=".near.Location.MiddleActivity"></activity>
         <activity android:name=".near.comment.JumpActivity" />
+=======
+        <activity android:name=".mistaken.myReview.MathMistakenReportActivity" />
+        <activity android:name=".mistaken.myReview.MyReviewActivity" />
+>>>>>>> e2bbd20d3d797e8dc07589a6ee7a4d4863bf0af8
         <activity android:name=".near.comment.CommentActivity" />
         <activity android:name=".near.ListPattern.UsersListActivity" /> <!-- <activity android:name=".near.Location.CommentActivity" /> -->
         <activity android:name=".near.Location.QQActivity" />
@@ -95,6 +100,9 @@
         <activity android:name=".login.LoginActivity" /> <!-- 错题本的页面 -->
         <activity android:name=".mistaken.LookUpAndErrorReDoActivity" />
         <activity android:name=".mistaken.RedoWrongQuestionsActivity" />
+        <activity android:name=".mistaken.ShowPaperActivity" />
+        <activity android:name=".mistaken.WrongBasketActivity" />
+        <activity android:name=".mistaken.AutoGeneratingPaperYLXActivity" />
         <activity android:name=".mistaken.UploadWrongQuestionsActivity" /> <!-- 照片裁剪页面 -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
@@ -128,7 +136,13 @@
         <activity android:name=".myself.sxn.MyMottoActivity" />
         <activity android:name=".myself.sxn.MyNicknameActivity" />
         <activity android:name=".myself.sxn.MySchoolActivity" />
+<<<<<<< HEAD
         <activity android:name=".myself.sxn.AboutInfoActivity" /> <!-- 设置环信应用的AppKey -->
+=======
+        <activity android:name=".myself.sxn.AboutInfoActivity" />
+        <activity android:name=".myself.farm.FarmActivity" />
+        <activity android:name=".myself.farm.GiftChangeActivity" /> <!-- 设置环信应用的AppKey -->
+>>>>>>> e2bbd20d3d797e8dc07589a6ee7a4d4863bf0af8
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="1123200316168606#huanxin" /> <!-- 声明SDK所需的service SDK核心功能 -->

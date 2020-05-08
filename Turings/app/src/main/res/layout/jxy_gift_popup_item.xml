@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00ffffff">
+
+    <LinearLayout
+        android:id="@+id/popup_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/jxy_white_bg_top"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="15dp"
+        android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#00ffffff">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:text="小葵花礼物兑换"/>
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/background_gray"
+                android:layout_marginBottom="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/tesk_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/jxy_btn_lightgreen"
+                    android:padding="5dp"
+                    android:textColor="@color/colorMainGreen"
+                    android:layout_margin="3dp">
+
+                    <ImageView
+                        android:id="@+id/firstimg"
+                        android:layout_width="71dp"
+                        android:layout_height="74dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/jxy_jifen" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="46dp"
+                        android:layout_weight="1"
+                        android:text="小礼物"
+                        android:textColor="#ffffff"
+                        android:textSize="18dp" />
+
+                    <Button
+                        android:layout_width="51dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="11dp"
+                        android:background="@drawable/jxy_btn_white"
+                        android:text="领取"
+                        android:textColor="@android:color/holo_green_light"
+                        android:textSize="14dp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/tesk_second"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/jxy_btn_lightorange"
+                    android:padding="5dp"
+                    android:textColor="@color/colorMainGreen"
+                    android:layout_margin="3dp">
+
+                    <ImageView
+                        android:id="@+id/secondimg"
+                        android:layout_width="71dp"
+                        android:layout_height="74dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/jxy_jifen" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="46dp"
+                        android:layout_weight="1"
+                        android:text="精美礼物"
+                        android:textColor="#ffffff"
+                        android:textSize="18dp" />
+
+                    <Button
+                        android:layout_width="51dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="11dp"
+                        android:background="@drawable/jxy_btn_white"
+                        android:text="领取"
+                        android:textColor="@android:color/holo_green_light"
+                        android:textSize="14dp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/tesk_third"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_weight="1"
+
+                    android:padding="5dp"
+                    android:background="@drawable/jxy_btn_lightblue"
+                    android:textColor="@color/colorMainGreen"
+                    android:layout_margin="3dp">
+                    <ImageView
+                        android:id="@+id/thirdimg"
+                        android:layout_width="71dp"
+                        android:layout_height="74dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/jxy_jifen" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="46dp"
+                        android:layout_weight="1"
+                        android:text="大号礼物"
+                        android:textColor="#ffffff"
+                        android:textSize="18dp" />
+
+                    <Button
+                        android:layout_width="51dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="11dp"
+                        android:background="@drawable/jxy_btn_white"
+                        android:text="领取"
+                        android:textColor="@android:color/holo_green_light"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/tesk_forth"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_margin="3dp"
+            android:padding="5dp"
+            android:background="@drawable/jxy_btn_purple"
+            android:textColor="@color/colorMainGreen">
+            <ImageView
+                android:id="@+id/forthimg"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/jxy_jifen"
+                android:layout_alignParentStart="true"/>
+
+            <LinearLayout
+                android:id="@+id/forthlayout"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/forthimg"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="敬请期待"
+                    android:textColor="#ffffff"
+                    android:textSize="18dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="更多礼物将于XX月XX日更新"
+                    android:textColor="#ffffff"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/background_gray"
+            android:layout_marginBottom="5dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:padding="5dp"
+            android:textColor="@color/colorMainGreen">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="兑换礼物将清空小葵花的所有成长值" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/hidden_bg"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignTop="@id/popup_bg"/>
+
+    <ImageView
+        android:id="@+id/icon_btn_camera"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignBottom="@+id/hidden_bg"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/jxy_icon"
+        android:textColor="@color/colorMainGreen" />
+</RelativeLayout>

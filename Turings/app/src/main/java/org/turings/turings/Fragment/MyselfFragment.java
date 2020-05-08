@@ -34,6 +34,7 @@ import org.turings.turings.MainActivity;
 import org.turings.turings.R;
 import org.turings.turings.login.LoginActivity;
 import org.turings.turings.login.RegisterNewUserActivity;
+import org.turings.turings.myself.farm.FarmActivity;
 import org.turings.turings.myself.sxn.AboutInfoActivity;
 import org.turings.turings.myself.sxn.MyAchieveActivity;
 import org.turings.turings.myself.sxn.MyConcernActivity;
@@ -63,6 +64,7 @@ public class MyselfFragment extends Fragment {
     private LinearLayout myattention;
     private LinearLayout myachieve;
     private RelativeLayout myshare;
+    private RelativeLayout myfarm;
     private LinearLayout nameL;
     private LinearLayout mottoL;
     private RelativeLayout mycourse;
@@ -257,6 +259,7 @@ public class MyselfFragment extends Fragment {
         myshare.setOnClickListener(myListener);
         school.setOnClickListener(myListener);
         mycourse.setOnClickListener(myListener);
+        myfarm.setOnClickListener(myListener);
         track.setOnClickListener(myListener);
         nameT.setOnClickListener(myListener);
         nameL.setOnClickListener(myListener);
@@ -281,7 +284,7 @@ public class MyselfFragment extends Fragment {
         myfans=view.findViewById(R.id.sxn_myfans_linear);
         mycourse=view.findViewById(R.id.sxn_course_linear);
         myshare=view.findViewById(R.id.sxn_share_linear);
-
+        myfarm=view.findViewById(R.id.sxn_farm_linear);
         school=view.findViewById(R.id.sxn_school_linear);
         track=view.findViewById(R.id.sxn_track_linear);
         //本页面我的头像
@@ -332,6 +335,10 @@ public class MyselfFragment extends Fragment {
                     break;
                 case R.id.sxn_myattention_linear:
                     intent.setClass(getContext(), MyConcernActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.sxn_farm_linear:
+                    intent.setClass(getContext(),FarmActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.sxn_school_linear:

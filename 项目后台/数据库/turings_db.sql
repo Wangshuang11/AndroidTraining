@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
-Source Server Version : 50506
+Source Server Version : 50701
 Source Host           : localhost:3306
 Source Database       : turings_db
 
 Target Server Type    : MYSQL
-Target Server Version : 50506
+Target Server Version : 50701
 File Encoding         : 65001
 
-Date: 2020-04-28 15:20:24
+Date: 2020-05-05 10:56:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -100,6 +100,23 @@ CREATE TABLE `tbl_fans` (
 
 -- ----------------------------
 -- Records of tbl_fans
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tbl_farm_gift`
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_farm_gift`;
+CREATE TABLE `tbl_farm_gift` (
+  `uid` int(11) NOT NULL DEFAULT '0',
+  `uname` varchar(50) DEFAULT NULL,
+  `uaddress` varchar(100) DEFAULT NULL,
+  `uphone` varchar(12) DEFAULT NULL,
+  `unumber` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tbl_farm_gift
 -- ----------------------------
 
 -- ----------------------------

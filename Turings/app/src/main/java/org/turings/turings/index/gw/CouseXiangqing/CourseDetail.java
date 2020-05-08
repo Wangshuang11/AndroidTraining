@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.androidkun.xtablayout.XTabLayout;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import org.turings.turings.R;
@@ -30,6 +31,7 @@ import org.turings.turings.index.gw.ThreeLayout.CourseOneFragment;
 import org.turings.turings.index.gw.ThreeLayout.CourseThreeFragment;
 import org.turings.turings.index.gw.ThreeLayout.CourseTwoFragment;
 import org.turings.turings.index.gw.ThreeLayout.GuoFragmentPager;
+import org.turings.turings.index.gw.ThreeLayout.GuoFragmentPager2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +39,8 @@ import java.util.List;
 public class CourseDetail extends AppCompatActivity {
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbar;
-    TabLayout tabLayout;
+//    TabLayout tabLayout;
+    XTabLayout xTabLayout;
     AppBarLayout appbar;
     private ViewPager viewpager;
     private Button button;
@@ -45,8 +48,9 @@ public class CourseDetail extends AppCompatActivity {
     private ImageView zixun;
 
     //*******************
-    private String [] mTitles = {"课程简介", "目录", "评论"};
-    private GuoFragmentPager guoFragmentPager;
+    private String [] mTitles = {"课程", "目录", "评论"};
+//    private GuoFragmentPager guoFragmentPager;
+    private GuoFragmentPager2 guoFragmentPager2;
     private CourseTwoFragment courseTwoFragment;
     private CourseOneFragment courseOneFragment;
     private CourseThreeFragment courseThreeFragment;
@@ -66,7 +70,8 @@ public class CourseDetail extends AppCompatActivity {
         setContentView(R.layout.gw_course_detail);
         //toolbar = (Toolbar) findViewById(R.id.toolbar);
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+//        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        xTabLayout=findViewById(R.id.tabLayout);
         appbar = (AppBarLayout) findViewById(R.id.appbar);
         viewpager = (ViewPager) findViewById(R.id.viewpagerguo);
         button = findViewById(R.id.qiangou);
@@ -114,12 +119,6 @@ public class CourseDetail extends AppCompatActivity {
         courseTwoFragment.setArguments(bundle);
         courseThreeFragment.setArguments(bundle);
         courseOneFragment.setArguments(bundle);
-
-
-
-
-
-
         setupWithViewPager();
     }
 
@@ -128,7 +127,8 @@ public class CourseDetail extends AppCompatActivity {
 
     private void addTabToTabLayout() {
         for (int i = 0; i < mTitles.length; i++) {
-            tabLayout.addTab(tabLayout.newTab().setText(mTitles[i]));
+//            tabLayout.addTab(tabLayout.newTab().setText(mTitles[i]));
+            xTabLayout.addTab(xTabLayout.newTab().setText(mTitles[i]));
         }
     }
 
@@ -141,11 +141,13 @@ public class CourseDetail extends AppCompatActivity {
         mFragments.add(courseTwoFragment);
         mFragments.add(courseThreeFragment);
 
-        guoFragmentPager = new GuoFragmentPager(getSupportFragmentManager());
-        guoFragmentPager.addTitlesAndFragments(mTitles, mFragments);
-
-        viewpager.setAdapter(guoFragmentPager); // 给ViewPager设置适配器
-        tabLayout.setupWithViewPager(viewpager); //关联TabLayout和ViewPager
+//        guoFragmentPager = new GuoFragmentPager(getSupportFragmentManager());
+//        guoFragmentPager.addTitlesAndFragments(mTitles, mFragments);
+        guoFragmentPager2=new GuoFragmentPager2(getSupportFragmentManager(),mTitles,mFragments);
+//        viewpager.setAdapter(guoFragmentPager); // 给ViewPager设置适配器
+        viewpager.setAdapter(guoFragmentPager2);
+//        tabLayout.setupWithViewPager(viewpager); //关联TabLayout和ViewPager
+        xTabLayout.setupWithViewPager(viewpager);
     }
     public static boolean isQQClientAvailable(Context context) {
         final PackageManager packageManager = context.getPackageManager();

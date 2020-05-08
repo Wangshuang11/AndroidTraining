@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import org.turings.turings.R;
 import org.turings.turings.mistaken.customAdapterAndDialog.CustomAdapterInPagerYLX;
+import org.turings.turings.mistaken.entity.SubjectMsg;
 
 import java.util.ArrayList;
 import java.util.List;
