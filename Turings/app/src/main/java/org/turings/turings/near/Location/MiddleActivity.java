@@ -82,18 +82,22 @@ public class MiddleActivity extends AppCompatActivity {
         anim.start(); // 启动动画
 
 
-        TimerTask task = new TimerTask() {
+        new Thread() {
             @Override
             public void run() {
-                Intent intent = new Intent(MiddleActivity.this, InformationActivity.class);
-                intent.setAction("lyhToInfo");
-                intent.putExtra("lat",lat1);
-                intent.putExtra("lng",lng1);
-                startActivity(intent);
+                super.run();
+                try {
+                    Thread.sleep(500);//休眠3秒
+                    Intent intent = new Intent(MiddleActivity.this, InformationActivity.class);
+                    intent.setAction("lyhToInfo");
+                    intent.putExtra("lat",lat1);
+                    intent.putExtra("lng",lng1);
+                    startActivity(intent);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-        };
-        Timer timer = new Timer();
-        timer.schedule(task, 500);//3秒后执行TimeTask的run方法
+        }.start();
 
     }
 }
