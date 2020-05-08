@@ -1,4 +1,4 @@
-package org.turings.turings.near.comment.bean;
+package org.turings.near.entity;
 
 public class ReplyDetailBean {
     private String nickName;
@@ -62,4 +62,10 @@ public class ReplyDetailBean {
     public String getCreateDate() {
         return createDate;
     }
+
+	@Override
+	public String toString() {
+		return "ReplyDetailBean [nickName=" + nickName + ", userLogo=" + userLogo + ", id=" + id + ", commentId="
+				+ commentId + ", content=" + content + ", status=" + status + ", createDate=" + createDate + "]";
+	}
 }

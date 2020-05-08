@@ -49,7 +49,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".near.comment.CommentActivity"></activity>
+        <activity android:name=".near.Location.MiddleActivity"></activity>
+        <activity android:name=".near.comment.JumpActivity" />
+        <activity android:name=".near.comment.CommentActivity" />
         <activity android:name=".near.ListPattern.UsersListActivity" /> <!-- <activity android:name=".near.Location.CommentActivity" /> -->
         <activity android:name=".near.Location.QQActivity" />
         <activity
@@ -126,8 +128,7 @@
         <activity android:name=".myself.sxn.MyMottoActivity" />
         <activity android:name=".myself.sxn.MyNicknameActivity" />
         <activity android:name=".myself.sxn.MySchoolActivity" />
-        <activity android:name=".myself.sxn.AboutInfoActivity" />
-        <!-- 设置环信应用的AppKey -->
+        <activity android:name=".myself.sxn.AboutInfoActivity" /> <!-- 设置环信应用的AppKey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="1123200316168606#huanxin" /> <!-- 声明SDK所需的service SDK核心功能 -->

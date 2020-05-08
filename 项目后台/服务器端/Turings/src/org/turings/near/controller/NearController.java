@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.turings.near.entity.CommentDetailBean;
 import org.turings.near.entity.Information;
 import org.turings.near.entity.Position;
 import org.turings.near.entity.Share;
@@ -25,6 +26,18 @@ public class NearController {
 
 	@Resource
 	private NearService nearService;
+	
+	@ResponseBody
+	@RequestMapping(value="/showComment",produces="text/json;charset=utf-8")
+	public String showComment(@RequestParam(value="sId") int sId) {
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+sId);
+		List<CommentDetailBean> list = nearService.showAllComment();
+//		String json = JSONArray.fromObject(list).toString();
+//		String name = "ssssssssssssss";
+		Gson gson = new Gson();
+		String json = gson.toJson(list);
+		return list.get(1).toString();
+	}
 	
 	//LocationServlet
 	@ResponseBody

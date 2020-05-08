@@ -323,6 +323,14 @@ public class InformationActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(InformationActivity.this, MainActivity.class);
+        intent.setAction("backTonear");
+        startActivity(intent);
+    }
+
     class Provider implements DivergeView.DivergeViewProvider {
 
         @Override

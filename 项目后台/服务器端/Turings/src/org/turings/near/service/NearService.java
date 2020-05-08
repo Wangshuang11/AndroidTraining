@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.turings.near.dao.CommentMapper;
 import org.turings.near.dao.InformationMapper;
 import org.turings.near.dao.PositionMapper;
 import org.turings.near.dao.ShareMapper;
+import org.turings.near.entity.CommentDetailBean;
 import org.turings.near.entity.Information;
 import org.turings.near.entity.Share;
 
@@ -21,6 +23,18 @@ public class NearService {
 	private PositionMapper positionMapper;
 	@Autowired
 	private ShareMapper shareMapper;
+	@Autowired
+	private CommentMapper commentMapper;
+	
+	/**
+	 * 
+	*<p>Title: showAllComment</p> 
+	*<p>Description: 显示文章评论</p> 
+	　 * @return
+	 */
+	public List<CommentDetailBean> showAllComment(){
+		return commentMapper.showAllComment(1);
+	}
 	
 	/**
 	 * 更新定位，显示其他用户

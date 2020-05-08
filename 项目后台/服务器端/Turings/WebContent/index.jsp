@@ -9,6 +9,6 @@
 <body>
 
 	<a href="/Turings/lph/findStoryAll">findAll</a>
-	
+	<a href="/Turings/lyh/showComment?sId=1">comments</a>
 </body>
 </html>

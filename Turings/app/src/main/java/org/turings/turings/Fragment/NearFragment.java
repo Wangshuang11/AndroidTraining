@@ -16,8 +16,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ZoomControls;
 
@@ -37,7 +39,10 @@ import com.google.gson.reflect.TypeToken;
 import org.turings.turings.R;
 import org.turings.turings.login.LoginActivity;
 import org.turings.turings.login.RegisterNewUserActivity;
+import org.turings.turings.near.Adapter.ListMapAdapter;
+import org.turings.turings.near.Location.InformationActivity;
 import org.turings.turings.near.Location.Location;
+import org.turings.turings.near.Location.MiddleActivity;
 import org.turings.turings.near.Location.ShowPortrait;
 import org.turings.turings.near.comment.CommentActivity;
 import org.turings.turings.near.entity.Position;
@@ -50,7 +55,10 @@ import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -62,6 +70,8 @@ public class NearFragment extends Fragment {
 
     private MapView mapView;
     private BaiduMap baiduMap;
+    private Button btn_list;
+    private ListView lv_map;
     //ui控制器
     private UiSettings uiSettings;
     private Context context;
@@ -71,7 +81,8 @@ public class NearFragment extends Fragment {
 
     private double lat;
     private double lng;
-
+    private int n;
+    private ListMapAdapter adapterDemo;
 
     @Nullable
     @Override
@@ -102,6 +113,7 @@ public class NearFragment extends Fragment {
                 posList = gson.fromJson(json, type);
                 ShowPortrait sp = new ShowPortrait(mapView,baiduMap,context,posList,getResources());
                 sp.showInfoWindowOp(posList);
+                initData(posList);
             }
         };
 
@@ -126,6 +138,24 @@ public class NearFragment extends Fragment {
         //设置图层覆盖物
         SharedPreferences preferences = getContext().getSharedPreferences("userInfo",MODE_PRIVATE);
         sendToServer(preferences.getString("name",""),lat,lng);
+        btn_list = view.findViewById(R.id.btn_list);
+        lv_map = view.findViewById(R.id.lv_map);
+        btn_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (n%2==0){
+                    btn_list.setText("地图模式");
+                    lv_map.setVisibility(View.VISIBLE);
+                    mapView.setVisibility(View.GONE);
+                    n++;
+                }else {
+                    btn_list.setText("列表模式");
+                    mapView.setVisibility(View.VISIBLE);
+                    lv_map.setVisibility(View.GONE);
+                    n++;
+                }
+            }
+        });
         return view;
     }
 
@@ -154,6 +184,44 @@ public class NearFragment extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+
+    private void initData(List<Position> posList) {
+        //准备数据
+        final List<Map<String,String>> poss = new ArrayList<>();
+        for (int i = 0;i<posList.size();i++){
+            Map<String,String> pos = new HashMap<>();
+            pos.put("portrait",posList.get(i).getPortrait());
+            pos.put("name",posList.get(i).getUserName());
+            pos.put("lat",posList.get(i).getLat()+"");
+            pos.put("lng",posList.get(i).getLng()+"");
+            poss.add(pos);
+        }
+//        List<String> list = new ArrayList<>();
+//        for (int i = 0;i<posList.size();i++){
+//            String background = posList.get(i).getBackground();
+//            list.add(background);
+//        }
+        //创建Adapter
+        adapterDemo = new ListMapAdapter(getActivity(),poss,R.layout.lyh_maplist_item,getResources());
+
+        //绑定Adapter
+        lv_map.setAdapter(adapterDemo);
+
+        //给AdapterView绑定事件监听器
+        lv_map.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), MiddleActivity.class);
+                intent.putExtra("lat",poss.get(position).get("lat"));
+                intent.putExtra("lng",poss.get(position).get("lng"));
+                intent.putExtra("portrait",poss.get(position).get("portrait"));
+                intent.putExtra("name",poss.get(position).get("name"));
+                intent.putExtra("top",view.getTop()+"");
+                startActivity(intent);
+            }
+        });
+
     }
 
     //用户是否登录

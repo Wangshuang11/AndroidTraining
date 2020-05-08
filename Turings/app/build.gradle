@@ -91,7 +91,6 @@ dependencies {
     /*附近的人用包*/
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
     implementation project(':lvlibrary')
-//    implementation files('libs/BaiduLBS_Android.jar')
 
     implementation project(':ocr_ui')
     implementation files('libs/ocr-sdk.jar')

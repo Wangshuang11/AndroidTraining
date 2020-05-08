@@ -1,6 +1,8 @@
 package org.turings.turings.near.comment;
 
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -23,7 +25,9 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.turings.turings.R;
 import org.turings.turings.near.comment.adapter.CommentExpandAdapter;
@@ -31,7 +35,16 @@ import org.turings.turings.near.comment.bean.CommentBean;
 import org.turings.turings.near.comment.bean.CommentDetailBean;
 import org.turings.turings.near.comment.bean.ReplyDetailBean;
 import org.turings.turings.near.comment.view.CommentExpandableListView;
+import org.turings.turings.near.entity.Information;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 
 public class CommentActivity extends AppCompatActivity {
@@ -45,6 +58,9 @@ public class CommentActivity extends AppCompatActivity {
     private CommentBean commentBean;
     private List<CommentDetailBean> commentsList;
     private BottomSheetDialog dialog;
+//    private String textIson;
+    private Handler handler;
+    private Gson gson;
     private String testJson = "{\n" +
             "\t\"code\": 1000,\n" +
             "\t\"message\": \"查看评论成功\",\n" +
@@ -297,5 +313,32 @@ public class CommentActivity extends AppCompatActivity {
         });
         dialog.show();
     }
+
+//    public void sendToServer() {
+//
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                try {
+//                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/lyh/comments");
+//                    URLConnection conn = url.openConnection();
+//                    InputStream in = conn.getInputStream();
+//                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
+//                    String info = reader.readLine();
+//                    wrapperMessage(info);
+//                } catch (MalformedURLException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }.start();
+//    }
+//
+//    private void wrapperMessage(String info){
+//        Message msg = Message.obtain();
+//        msg.obj = info;
+//        handler.sendMessage(msg);
+//    }
 
 }

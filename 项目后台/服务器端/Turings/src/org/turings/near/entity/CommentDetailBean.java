@@ -1,4 +1,4 @@
-package org.turings.turings.near.comment.bean;
+package org.turings.near.entity;
 
 import java.util.List;
 
@@ -81,4 +81,11 @@ public class CommentDetailBean {
     public List<ReplyDetailBean> getReplyList() {
         return replyList;
     }
+
+	@Override
+	public String toString() {
+		return "CommentDetailBean [id=" + id + ", sId=" + sId + ", nickName=" + nickName + ", userLogo=" + userLogo
+				+ ", content=" + content + ", imgId=" + imgId + ", replyTotal=" + replyTotal + ", createDate="
+				+ createDate + ", replyList=" + replyList + "]";
+	}
 }

@@ -18,6 +18,7 @@ import com.rance.lvlibrary.SectorMenuButton;
 
 import org.turings.turings.R;
 import org.turings.turings.near.comment.CommentActivity;
+import org.turings.turings.near.comment.JumpActivity;
 
 import java.util.ArrayList;
 import java.util.List;

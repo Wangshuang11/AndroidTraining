@@ -35,54 +35,62 @@
             android:text="附近的人"
             android:textColor="@android:color/white"/>
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/r2"
-        android:layout_below="@id/r1"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_below="@id/r1"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/b4"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingBottom="8dp"
-        android:background="@drawable/b4">
+        android:paddingBottom="8dp">
+
         <org.turings.turings.near.entity.DivergeView
             android:id="@+id/divergeView"
             android:layout_width="60dp"
             android:layout_height="150dp"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true" />
+
         <ImageView
             android:id="@+id/btnFollow_lyh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:src="@drawable/near_dianzan"/>
+            android:src="@drawable/near_dianzan" />
+
         <Button
             android:id="@+id/btnGuanzhu_lyh"
             android:layout_width="60dp"
             android:layout_height="30dp"
-            android:background="@color/colorPink"
-            android:textColor="@android:color/white"
             android:layout_alignParentRight="true"
             android:layout_marginTop="20dp"
+            android:background="@color/colorPink"
+            android:text="+ 关 注"
+            android:textColor="@android:color/white"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="+ 关 注"/>
+            android:textStyle="bold" />
+
         <org.turings.turings.near.entity.RoundImageView
             android:id="@+id/ivPortrait_lyh"
             android:layout_width="70dp"
             android:layout_height="87dp"
             android:layout_centerInParent="true"
             android:layout_marginTop="25dp" />
+
         <TextView
             android:id="@+id/tvFollowName_lyh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_below="@id/ivPortrait_lyh"
-            android:textSize="20sp"
-            android:textColor="@android:color/black"/>
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
 
     </RelativeLayout>
+
     <TextView
         android:id="@+id/r3"
         android:layout_below="@id/r2"
