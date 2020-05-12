@@ -39,7 +39,7 @@
         <ImageView
             android:id="@+id/ivLeftOneIcon_ws"
             android:layout_width="3dp"
-            android:layout_height="21dp"
+            android:layout_height="19dp"
             android:background="@color/colorBlue"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="5dp"
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="拍错量"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="@android:color/black"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/ivLeftOneIcon_ws"/>
@@ -78,8 +78,8 @@
                 android:layout_height="wrap_content"
                 android:text="本周"
                 android:layout_below="@id/tvWeekCount_ws"
-                android:textColor="@color/colorGray"
-                android:textSize="23sp"/>
+                android:textColor="@color/colorDeafult"
+                android:textSize="18sp"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -100,8 +100,8 @@
                 android:layout_height="wrap_content"
                 android:text="总共"
                 android:layout_below="@id/tvAllCount_ws"
-                android:textColor="@color/colorGray"
-                android:textSize="23sp"/>
+                android:textColor="@color/colorDeafult"
+                android:textSize="18sp"/>
         </RelativeLayout>
 
     </RelativeLayout>
@@ -110,13 +110,13 @@
         android:id="@+id/rlCuotiBaogao_ws"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="18dp"
         android:layout_below="@id/rlPaicuoLiangXiangxi_ws"
         android:layout_marginBottom="12dp">
         <ImageView
             android:id="@+id/ivLeftTwoIcon_ws"
             android:layout_width="3dp"
-            android:layout_height="21dp"
+            android:layout_height="19dp"
             android:background="@color/colorBlue"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="5dp"
@@ -125,7 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="错题报告"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="@android:color/black"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/ivLeftTwoIcon_ws"/>
@@ -137,18 +137,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@id/rlCuotiBaogao_ws"
-        android:paddingLeft="35dp"
-        android:paddingRight="35dp">
-        <LinearLayout
+        android:paddingLeft="26dp"
+        android:paddingRight="26dp">
+
+        <RelativeLayout
             android:id="@+id/llsankews"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_weight="1">
+                android:layout_alignParentLeft="true">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -158,13 +158,13 @@
                     android:layout_height="wrap_content"
                     android:text="语文"
                     android:textColor="@android:color/black"
-                    android:textSize="22sp"/>
+                    android:textSize="20sp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_weight="1">
+                android:layout_centerHorizontal="true">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -174,13 +174,14 @@
                     android:layout_height="wrap_content"
                     android:text="数学"
                     android:textColor="@android:color/black"
-                    android:textSize="22sp"/>
+                    android:textSize="20sp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_weight="1">
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -190,16 +191,19 @@
                     android:layout_height="wrap_content"
                     android:text="英语"
                     android:textColor="@android:color/black"
-                    android:textSize="22sp"/>
+                    android:textSize="20sp"/>
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
+
 
         <com.youth.banner.Banner
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             image_scale_type="fit_xy"
-            android:layout_below="@id/llsankews"/>
+            android:layout_below="@id/llsankews"
+            android:layout_marginTop="12dp"
+            android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -212,7 +216,7 @@
         <ImageView
             android:id="@+id/ivLeftThreeIcon_ws"
             android:layout_width="3dp"
-            android:layout_height="21dp"
+            android:layout_height="19dp"
             android:background="@color/colorBlue"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="5dp"
@@ -221,7 +225,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="错题重做"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="@android:color/black"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/ivLeftThreeIcon_ws"/>
@@ -237,7 +241,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="83dp">
+            android:layout_marginLeft="90dp">
             <TextView
                 android:id="@+id/tvRedoMistaken_ws"
                 android:layout_width="wrap_content"
@@ -251,8 +255,8 @@
                 android:layout_height="wrap_content"
                 android:text="消灭错题"
                 android:layout_below="@id/tvRedoMistaken_ws"
-                android:textColor="@color/colorGray"
-                android:textSize="23sp"/>
+                android:textColor="@color/colorDeafult"
+                android:textSize="18sp"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -272,17 +276,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="%"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@color/colorBlue"
                 android:layout_toRightOf="@id/tvRevisionRate_ws"
-                android:layout_alignBottom="@id/tvRevisionRate_ws"/>
+                android:layout_alignBottom="@id/tvRevisionRate_ws" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="订正率"
                 android:layout_below="@id/tvRevisionRate_ws"
-                android:textColor="@color/colorGray"
-                android:textSize="23sp"/>
+                android:textColor="@color/colorDeafult"
+                android:textSize="18sp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"/>
         </RelativeLayout>
     </RelativeLayout>
 
@@ -293,14 +299,14 @@
         android:background="@drawable/radius_text_bg2"
         android:layout_gravity="center_horizontal"
         android:paddingBottom="8dp"
-        android:paddingLeft="98dp"
-        android:paddingRight="98dp"
+        android:paddingLeft="118dp"
+        android:paddingRight="118dp"
         android:paddingTop="8dp"
         android:text="去重做"
         android:textSize="19sp"
         android:textColor="#1AA8D7"
         android:layout_below="@id/rlCuotiChongzuoXiangxi_ws"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="26dp"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

@@ -9,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#1AA8D7"
-        android:layout_alignParentTop="true"
-        >
+        android:layout_alignParentTop="true">
         <ImageView
             android:id="@+id/img_ylx"
             android:layout_width="30dp"
@@ -42,22 +41,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
-                <!-- <ImageView
-                     android:id="@+id/question_img_ylx"
-                     android:layout_width="match_parent"
-                     android:layout_height="180dp"
-                     android:src="@mipmap/mathylx"
-                     android:scaleType="fitXY"
-                     android:padding="10dp"
-                     android:layout_centerHorizontal="true"
-                     android:layout_centerInParent="true"
-                     android:layout_centerVertical="true"/>
-                 <ImageView
-                     android:id="@+id/delete_ylx"
-                     android:layout_alignRight="@+id/question_img_ylx"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:src="@mipmap/deletelyx"/>-->
                 <TextView
                     android:id="@+id/timuxiaozi_ws"
                     android:layout_width="match_parent"
@@ -66,12 +49,31 @@
                     android:textColor="#1AA8D7"
                     android:gravity="left|center"
                     android:textSize="20sp"/>
-                <TextView
-                    android:id="@+id/question_ws"
-                    android:layout_width="wrap_content"
+                <FrameLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/timuxiaozi_ws"
-                    android:singleLine="false"/>
+                    android:layout_below="@id/timuxiaozi_ws">
+                    <RelativeLayout
+                        android:id="@+id/rl_card_root"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/questionPic_ws"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true" />
+
+                        <TextView
+                            android:id="@+id/question_ws"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false"
+                            android:layout_centerInParent="true"/>
+
+                    </RelativeLayout>
+                </FrameLayout>
+
             </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"

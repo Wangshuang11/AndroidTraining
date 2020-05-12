@@ -90,6 +90,9 @@ dependencies {
         exclude group: 'com.android.support'
     }
     implementation 'com.youth.banner:banner:1.4.10'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.yayandroid:Rotatable:1.1.2'
+    implementation 'com.nineoldandroids:library:2.4.0'
     /*附近的人用包*/
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.3'
     implementation project(':lvlibrary')

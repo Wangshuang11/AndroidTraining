@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,6 +25,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.nineoldandroids.view.ViewHelper;
+import com.yayandroid.rotatable.Rotatable;
 
 import org.turings.turings.MainActivity;
 import org.turings.turings.R;
@@ -94,6 +99,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
     };
 
     private TextView question_ws;//识别出的题目
+    private ImageView questionPic_ws;//拍的题目图片
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +117,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
 
         //获取控件
         getViews();
+
         //获得传过来的图片识别结果,构建subjectMag类
         initData2();
 
@@ -119,6 +126,21 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
 
         //展示拍照后的图片
         showWrongQuestionPhoto2();
+
+        //设置触摸翻转
+        Rotatable rotatable = new Rotatable.Builder(findViewById(R.id.rl_card_root))
+                .sides(R.id.question_ws, R.id.questionPic_ws)
+                .listener(new Rotatable.RotationListener() {
+                    @Override
+                    public void onRotationChanged(float newRotationX, float newRotationY) {
+                        initData2();
+                        ViewHelper.setRotationY(questionPic_ws, 180f);
+                        showWrongQuestionPhoto2();
+                    }
+                })
+                .direction(Rotatable.ROTATE_Y)
+                .build();
+
 
         //给标签绑定adapter
         tags = getResources().getStringArray(R.array.spinner);
@@ -188,6 +210,11 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         path=picDir;
         subjectMsg.setTitleImg(picDir);
 //        question_img_ylx.setImageBitmap(bitmap);
+        ViewGroup.LayoutParams lp = questionPic_ws.getLayoutParams();
+        lp.width=question_ws.getWidth();
+        lp.height=question_ws.getHeight();
+        questionPic_ws.setLayoutParams(lp);
+        questionPic_ws.setImageBitmap(bitmap);
     }
 
 //    @Override
@@ -334,6 +361,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
 //        delete_ylx.setOnClickListener(listener);
         back_ylx.setOnClickListener(listener);
         add_wrong_questions_ylx.setOnClickListener(listener);
+
     }
     //获取控件
     private void getViews() {
@@ -357,6 +385,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         option_anwser_ylx = findViewById(R.id.option_answer_ylx);
 
         question_ws=findViewById(R.id.question_ws);
+        questionPic_ws=findViewById(R.id.questionPic_ws);
     }
     //点击事件
     public class CustomOnclickListener implements View.OnClickListener{
@@ -447,6 +476,7 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
                     //弹出框
                     showCustomDialog(subjectMsg);
                     break;
+
             }
         }
     }

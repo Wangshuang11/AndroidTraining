@@ -72,9 +72,9 @@ public class MyReviewActivity extends AppCompatActivity {
         banner.setImageLoader(new GlideImageLoader());
         //设置图片集合
         List<Integer> images=new ArrayList<>();
-        images.add(R.mipmap.chinesews);
-        images.add(R.mipmap.mathws);
-        images.add(R.mipmap.englishws);
+        images.add(R.mipmap.chinese3ws);
+        images.add(R.mipmap.math3ws);
+        images.add(R.mipmap.english3ws);
         banner.setImages(images);
         //设置banner动画效果
         banner.setBannerAnimation(Transformer.CubeOut);
