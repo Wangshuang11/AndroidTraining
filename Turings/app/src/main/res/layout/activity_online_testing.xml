@@ -21,6 +21,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:src="@mipmap/anandonylx"
+                android:layout_marginLeft="10dp"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"/>
             <TextView
