@@ -887,8 +887,14 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
     }
     //生成最终的选项字符串
     public static String getOptionStr(String str){
-        String strOld = removeCharAt(str,0);
-        String strNow = removeCharAt(strOld,0);
+        String strOld = str;
+        String strNow = str;
+        if(str.length()>1){
+            strOld = removeCharAt(str,0);
+        }
+        if(strOld.length()>1){
+            strNow = removeCharAt(strOld,0);
+        }
         return strNow;
     }
     //删除字符
