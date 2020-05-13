@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +49,9 @@ public class WrongBasketActivity extends AppCompatActivity implements View.OnCli
     private ImageView ivTitle;//组卷标题
     private TextView titleName;//卷名
     private Button btnFinish;//完成组卷
+    private LinearLayout xLayout;
+    private LinearLayout tLayout;
+    private LinearLayout dLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +80,7 @@ public class WrongBasketActivity extends AppCompatActivity implements View.OnCli
         txX.setText("一、选择题(共"+lsDataX.size()+"题)");
         txT.setText("二、填空题(共"+lsDataT.size()+"题)");
         txD.setText("三、大题(共"+lsDataD.size()+"题)");
+        typeJudge();
         //注册适配器绑定数据源
         customAdapterInCartYLXX = new CustomAdapterInCartYLX(lsDataX,getApplicationContext(), R.layout.ylx_subject_list_item_cart_layout);
         customAdapterInCartYLXT = new CustomAdapterInCartYLX(lsDataT,getApplicationContext(), R.layout.ylx_subject_list_item_cart_layout);
@@ -104,7 +109,7 @@ public class WrongBasketActivity extends AppCompatActivity implements View.OnCli
                 lsDataX.remove(position);
                 customAdapterInCartYLXX.notifyDataSetChanged();
                 ListViewUtil.setListViewHeightBasedOnChildren(listViewX);
-                txX.setText("一、选择题(共"+lsDataX.size()+"题)");
+                typeJudge();
             }
         });
         customAdapterInCartYLXT.setmOnItemDeleteClickListener(new CustomAdapterInCartYLX.onItemDeleteListener() {
@@ -115,7 +120,7 @@ public class WrongBasketActivity extends AppCompatActivity implements View.OnCli
                 lsDataT.remove(position);
                 customAdapterInCartYLXT.notifyDataSetChanged();
                 ListViewUtil.setListViewHeightBasedOnChildren(listViewT);
-                txT.setText("二、填空题(共"+lsDataT.size()+"题)");
+                typeJudge();
             }
         });
         customAdapterInCartYLXD.setmOnItemDeleteClickListener(new CustomAdapterInCartYLX.onItemDeleteListener() {
@@ -126,7 +131,7 @@ public class WrongBasketActivity extends AppCompatActivity implements View.OnCli
                 lsDataD.remove(position);
                 customAdapterInCartYLXD.notifyDataSetChanged();
                 ListViewUtil.setListViewHeightBasedOnChildren(listViewD);
-                txD.setText("三、大题(共"+lsDataD.size()+"题)");
+                typeJudge();
             }
         });
         //上移题目
@@ -224,8 +229,42 @@ public class WrongBasketActivity extends AppCompatActivity implements View.OnCli
         ivTitle=findViewById(R.id.fixName_ylx);
         btnFinish=findViewById(R.id.btnFinish_ylx);
         titleName = findViewById(R.id.titleName_ylx);
+        xLayout = findViewById(R.id.x_layout);
+        tLayout = findViewById(R.id.t_layout);
+        dLayout = findViewById(R.id.d_layout);
     }
 
+    //判断题目
+    public void typeJudge(){
+        //选择题情况
+        if(lsDataX.size() == 0){
+            xLayout.setVisibility(View.GONE);
+        }else {
+            txX.setText("一、选择题(共"+lsDataX.size()+"题)");
+        }
+        //填空题情况
+        if(lsDataT.size() == 0){
+            tLayout.setVisibility(View.GONE);
+        }else {
+            if(lsDataX.size() == 0){
+                txT.setText("一、填空题(共"+lsDataT.size()+"题)");
+            }else {
+                txT.setText("二、填空题(共"+lsDataT.size()+"题)");
+            }
+        }
+        //大题情况
+        if(lsDataD.size() == 0){
+            dLayout.setVisibility(View.GONE);
+        }else {
+            if(lsDataX.size() == 0 && lsDataT.size()==0){
+                txD.setText("一、大题(共"+lsDataD.size()+"题)");
+            }else if(lsDataX.size() == 0 || lsDataT.size()==0){
+                txD.setText("二、大题(共"+lsDataD.size()+"题)");
+            }else {
+                txD.setText("三、大题(共"+lsDataD.size()+"题)");
+            }
+        }
+    }
     @Override
     public void onClick(View view) {
         switch (view.getId()){

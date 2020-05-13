@@ -100,6 +100,8 @@
         <activity android:name=".mistaken.ShowPaperActivity" />
         <activity android:name=".mistaken.WrongBasketActivity" />
         <activity android:name=".mistaken.AutoGeneratingPaperYLXActivity" />
+        <activity android:name=".mistaken.ViewDownloadedPapersActivity"></activity>
+        <activity android:name=".mistaken.TestResultActivity" />
         <activity android:name=".mistaken.UploadWrongQuestionsActivity" /> <!-- 照片裁剪页面 -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"

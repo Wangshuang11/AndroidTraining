@@ -20,6 +20,7 @@
             android:id="@+id/titleName_ylx"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginRight="30dp"
             android:textColor="#ffffff"
             android:gravity="center"
             android:layout_weight="1"
@@ -38,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
+                android:id="@+id/x_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -64,6 +66,7 @@
                     android:layout_height="10dp"
                     android:background="@color/colorBlue"/>
                 <LinearLayout
+                    android:id="@+id/t_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -86,6 +89,7 @@
                     android:layout_height="10dp"
                     android:background="@color/colorBlue"/>
                 <LinearLayout
+                    android:id="@+id/d_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -136,4 +140,13 @@
             android:textColor="#fff"
             android:textSize="20sp"/>
     </LinearLayout>
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/load_gif"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentTop="true"
+        android:visibility="gone"
+        android:src="@mipmap/ylxloading"/>
 </RelativeLayout>
