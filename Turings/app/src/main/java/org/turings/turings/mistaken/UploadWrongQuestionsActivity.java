@@ -61,6 +61,23 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
     private Button choose_ylx;//选择题选择按钮
     private Button fill_ylx;//填空题选择按钮
     private Button big_question_ylx;//大题选择按钮
+
+    //难度选择按钮
+    private Button easy_ws;
+    private Button middle_ws;
+    private Button difficult_ws;
+
+    //掌握程度选择按钮
+    private Button notMastered_ws;
+    private Button mastered_ws;
+    private Button skilled_ws;
+
+    //错误原因选择按钮
+    private Button confusedIdeas_ws;
+    private Button wrongThinking_ws;
+    private Button arithmeticError_ws;
+    private Button examinationError_ws;
+
     private LinearLayout answer_ylx;//选择题答案书写框架
     private EditText option_anwser_ylx;//选择题答案书写
     private LinearLayout answer_big_ylx;//大题答案书写框架
@@ -133,9 +150,12 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
                 .listener(new Rotatable.RotationListener() {
                     @Override
                     public void onRotationChanged(float newRotationX, float newRotationY) {
-                        initData2();
-                        ViewHelper.setRotationY(questionPic_ws, 180f);
-                        showWrongQuestionPhoto2();
+                        if (View.VISIBLE == question_ws.getVisibility()) {
+                            initData2();
+                        }else if(View.VISIBLE == questionPic_ws.getVisibility()){
+                            ViewHelper.setRotationY(questionPic_ws, 180f);
+                            showWrongQuestionPhoto2();
+                        }
                     }
                 })
                 .direction(Rotatable.ROTATE_Y)
@@ -362,6 +382,19 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
         back_ylx.setOnClickListener(listener);
         add_wrong_questions_ylx.setOnClickListener(listener);
 
+        easy_ws.setOnClickListener(listener);
+        middle_ws.setOnClickListener(listener);
+        difficult_ws.setOnClickListener(listener);
+
+        notMastered_ws.setOnClickListener(listener);
+        mastered_ws.setOnClickListener(listener);
+        skilled_ws.setOnClickListener(listener);
+
+        confusedIdeas_ws.setOnClickListener(listener);
+        wrongThinking_ws.setOnClickListener(listener);
+        arithmeticError_ws.setOnClickListener(listener);
+        examinationError_ws.setOnClickListener(listener);
+
     }
     //获取控件
     private void getViews() {
@@ -386,6 +419,19 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
 
         question_ws=findViewById(R.id.question_ws);
         questionPic_ws=findViewById(R.id.questionPic_ws);
+
+        easy_ws=findViewById(R.id.easy_ws);
+        middle_ws=findViewById(R.id.middle_ws);
+        difficult_ws=findViewById(R.id.difficult_ws);
+
+        notMastered_ws=findViewById(R.id.notMastered_ws);
+        mastered_ws=findViewById(R.id.mastered_ws);
+        skilled_ws=findViewById(R.id.skilled_ws);
+
+        confusedIdeas_ws=findViewById(R.id.confusedIdeas_ws);
+        wrongThinking_ws=findViewById(R.id.wrongThinking_ws);
+        arithmeticError_ws=findViewById(R.id.arithmeticError_ws);
+        examinationError_ws=findViewById(R.id.examinationError_ws);
     }
     //点击事件
     public class CustomOnclickListener implements View.OnClickListener{
@@ -464,6 +510,63 @@ public class UploadWrongQuestionsActivity extends AppCompatActivity {
                     lp.height=1200;
                     answer_big_ylx.setLayoutParams(lp);
                     subjectMsg.setType("大题");
+                    break;
+                    //选择难度
+                case R.id.easy_ws://选择易
+                    easy_ws.setBackgroundColor(getResources().getColor(R.color.themeColor));
+                    middle_ws.setBackgroundColor(Color.WHITE);
+                    difficult_ws.setBackgroundColor(Color.WHITE);
+                    break;
+                case R.id.middle_ws://选择中等
+                    middle_ws.setBackgroundColor(getResources().getColor(R.color.themeColor));
+                    easy_ws.setBackgroundColor(Color.WHITE);
+                    difficult_ws.setBackgroundColor(Color.WHITE);
+                    break;
+                case R.id.difficult_ws://选择难
+                    difficult_ws.setBackgroundColor(getResources().getColor(R.color.themeColor));
+                    easy_ws.setBackgroundColor(Color.WHITE);
+                    middle_ws.setBackgroundColor(Color.WHITE);
+                    break;
+                    //选择掌握程度
+                case R.id.notMastered_ws:
+                    notMastered_ws.setBackgroundColor(getResources().getColor(R.color.themeColor));
+                    mastered_ws.setBackgroundColor(Color.WHITE);
+                    skilled_ws.setBackgroundColor(Color.WHITE);
+                    break;
+                case R.id.mastered_ws:
+                    mastered_ws.setBackgroundColor(getResources().getColor(R.color.themeColor));
+                    notMastered_ws.setBackgroundColor(Color.WHITE);
+                    skilled_ws.setBackgroundColor(Color.WHITE);
+                    break;
+                case R.id.skilled_ws:
+                    skilled_ws.setBackgroundColor(getResources().getColor(R.color.themeColor));
+                    mastered_ws.setBackgroundColor(Color.WHITE);
+                    notMastered_ws.setBackgroundColor(Color.WHITE);
+                    break;
+                    //选择错误原因
+                case R.id.confusedIdeas_ws:
+                    confusedIdeas_ws.setBackgroundColor(getResources().getColor(R.color.themeColor));
+                    wrongThinking_ws.setBackgroundColor(Color.WHITE);
+                    arithmeticError_ws.setBackgroundColor(Color.WHITE);
+                    examinationError_ws.setBackgroundColor(Color.WHITE);
+                    break;
+                case R.id.wrongThinking_ws:
+                    wrongThinking_ws.setBackgroundColor(getResources().getColor(R.color.themeColor));
+                    confusedIdeas_ws.setBackgroundColor(Color.WHITE);
+                    arithmeticError_ws.setBackgroundColor(Color.WHITE);
+                    examinationError_ws.setBackgroundColor(Color.WHITE);
+                    break;
+                case R.id.arithmeticError_ws:
+                    arithmeticError_ws.setBackgroundColor(getResources().getColor(R.color.themeColor));
+                    wrongThinking_ws.setBackgroundColor(Color.WHITE);
+                    confusedIdeas_ws.setBackgroundColor(Color.WHITE);
+                    examinationError_ws.setBackgroundColor(Color.WHITE);
+                    break;
+                case R.id.examinationError_ws:
+                    examinationError_ws.setBackgroundColor(getResources().getColor(R.color.themeColor));
+                    wrongThinking_ws.setBackgroundColor(Color.WHITE);
+                    arithmeticError_ws.setBackgroundColor(Color.WHITE);
+                    confusedIdeas_ws.setBackgroundColor(Color.WHITE);
                     break;
                 //信息填写完毕添加错题到数据库
                 case R.id.add_wrong_questions_ylx:
