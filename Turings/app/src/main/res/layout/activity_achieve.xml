@@ -77,12 +77,14 @@
             android:layout_margin="7dp"
             android:orientation="horizontal">
             <ImageView
-                android:src="@mipmap/qq1"
+                android:id="@+id/qq1"
+                android:src="@mipmap/qq11"
                 android:layout_width="match_parent"
                 android:layout_weight="2"
                 android:layout_height="130dp"/>
             <ImageView
-                android:src="@mipmap/qq2"
+                android:id="@+id/qq2"
+                android:src="@mipmap/qq21"
                 android:layout_width="match_parent"
                 android:layout_weight="2"
                 android:layout_height="130dp"/>
@@ -93,12 +95,14 @@
             android:orientation="horizontal"
             android:layout_margin="7dp">
             <ImageView
-                android:src="@mipmap/qq3"
+                android:id="@+id/qq3"
+                android:src="@mipmap/qq31"
                 android:layout_width="match_parent"
                 android:layout_weight="2"
                 android:layout_height="130dp"/>
             <ImageView
-                android:src="@mipmap/qq4"
+                android:id="@+id/qq4"
+                android:src="@mipmap/qq41"
                 android:layout_width="match_parent"
                 android:layout_weight="2"
                 android:layout_height="130dp"/>
@@ -109,12 +113,14 @@
             android:layout_margin="7dp"
             android:orientation="horizontal">
             <ImageView
-                android:src="@mipmap/qq5"
+                android:id="@+id/qq5"
+                android:src="@mipmap/qq51"
                 android:layout_width="match_parent"
                 android:layout_weight="2"
                 android:layout_height="130dp"/>
             <ImageView
-                android:src="@mipmap/qq6"
+                android:id="@+id/qq6"
+                android:src="@mipmap/qq61"
                 android:layout_width="match_parent"
                 android:layout_weight="2"
                 android:layout_height="130dp"/>

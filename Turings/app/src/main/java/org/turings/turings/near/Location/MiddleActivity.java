@@ -110,6 +110,8 @@ public class MiddleActivity extends AppCompatActivity {
                     intent.setAction("lyhToInfo");
                     intent.putExtra("lat",lat1);
                     intent.putExtra("lng",lng1);
+                    intent.putExtra("touxiang",portrait);
+                    intent.putExtra("name",name);
                     startActivity(intent);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

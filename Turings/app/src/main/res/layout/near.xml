@@ -22,7 +22,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:layout_marginTop="500dp"
-            android:background="@color/colorBlue"
+            android:background="@drawable/button_shape"
             android:textColor="@color/white"
             android:text="列表模式"/>
     </RelativeLayout>

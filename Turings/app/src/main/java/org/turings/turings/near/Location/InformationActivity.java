@@ -79,8 +79,17 @@ public class InformationActivity extends AppCompatActivity {
 
         resources = getResources();
         Intent intent = getIntent();
+        if (intent.getAction()!=null){
+            btnGuanzhu_lyh.setText("已关注");
+            count++;
+        }
+        String portrait = intent.getStringExtra("touxiang");
+        String name = intent.getStringExtra("name");
+        int id = getResources().getIdentifier(portrait, "mipmap", getApplicationContext().getPackageName());
 
         getViews();
+        ivPortrait_lyh.setImageResource(id);
+        tvFollowName_lyh.setText(name);
         registeLinstener();
         AnimationDrawable amDrawable = (AnimationDrawable) ivGuanzhu.getDrawable();
         amDrawable.start();
@@ -100,8 +109,8 @@ public class InformationActivity extends AppCompatActivity {
                 information = gson.fromJson(json, Information.class);
                 otherName = information.getUserName();
                 fid=information.getId();
-                tvFollowName_lyh.setText(information.getUserName());
-                Glide.with(getApplicationContext()).load(information.getPortrait()).into(ivPortrait_lyh);
+//                tvFollowName_lyh.setText(information.getUserName());
+//                Glide.with(getApplicationContext()).load(information.getPortrait()).into(ivPortrait_lyh);
                 tvTime_lyh.setText(String.valueOf(information.getTotalTime()));
                 tvCurrentTime_lyh.setText(String.valueOf(information.getCurrentTime()));
                 tvUniversity_lyh.setText(information.getUniversity());

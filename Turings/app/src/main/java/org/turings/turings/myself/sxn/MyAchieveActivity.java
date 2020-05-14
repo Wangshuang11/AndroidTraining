@@ -7,6 +7,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,6 +32,13 @@ public class MyAchieveActivity extends AppCompatActivity {
     private TextView name;
     private MyUrl myUrl;
     private int id;
+    private ImageView qq1;
+    private ImageView qq2;
+    private ImageView qq3;
+    private ImageView qq4;
+    private ImageView qq5;
+    private ImageView qq6;
+    private MyLinstener linstener;
 
 
     @Override
@@ -39,8 +50,28 @@ public class MyAchieveActivity extends AppCompatActivity {
         back=findViewById(R.id.sxn_achieve_back);
         avatar=findViewById(R.id.sxn_achieve_avatar);
         name=findViewById(R.id.sxn_achieve_name);
+        qq1 = findViewById(R.id.qq1);
+        qq2 = findViewById(R.id.qq2);
+        qq3 = findViewById(R.id.qq3);
+        qq4 = findViewById(R.id.qq4);
+        qq5 = findViewById(R.id.qq5);
+        qq6 = findViewById(R.id.qq6);
+        linstener = new MyLinstener();
+        qq1.setOnClickListener(linstener);
+        qq2.setOnClickListener(linstener);
+        qq3.setOnClickListener(linstener);
+        qq4.setOnClickListener(linstener);
+        qq5.setOnClickListener(linstener);
+        qq6.setOnClickListener(linstener);
+        startShakeByView(qq1,1,1.1f,10,1000);
         circleAvatar();
+
         Intent intent1=getIntent();
+        if (intent1.getAction() != null){
+            qq1.setImageResource(R.mipmap.qq1);
+            qq1.clearAnimation();
+        }
+
         myUrl=new MyUrl(this);
         id= Integer.parseInt(getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
         if(intent1!=null){
@@ -67,5 +98,56 @@ public class MyAchieveActivity extends AppCompatActivity {
         bitmap= BitmapFactory.decodeResource(getResources(),R.mipmap.girl);
         RequestOptions requestOptions=new RequestOptions().circleCrop();
         Glide.with(this).load(new BitmapDrawable(bitmap)).apply(requestOptions).into(avatar);
+    }
+
+    private void startShakeByView(View view, float scaleSmall, float scaleLarge, float shakeDegrees, long duration) {
+        //由小变大
+        Animation scaleAnim = new ScaleAnimation(scaleSmall, scaleLarge, scaleSmall, scaleLarge);
+        //从左向右
+        Animation rotateAnim = new RotateAnimation(-shakeDegrees, shakeDegrees, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+
+        scaleAnim.setDuration(duration);
+        rotateAnim.setDuration(duration / 10);
+        rotateAnim.setRepeatMode(Animation.REVERSE);
+        rotateAnim.setRepeatCount(100);
+
+        AnimationSet smallAnimationSet = new AnimationSet(false);
+        smallAnimationSet.addAnimation(scaleAnim);
+        smallAnimationSet.addAnimation(rotateAnim);
+
+        view.startAnimation(smallAnimationSet);
+    }
+
+    class MyLinstener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.qq1:
+                    Intent intent = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.qq2:
+                    Intent intent1 = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
+                    startActivity(intent1);
+                    break;
+                case R.id.qq3:
+                    Intent intent2 = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
+                    startActivity(intent2);
+                    break;
+                case R.id.qq4:
+                    Intent intent3 = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
+                    startActivity(intent3);
+                    break;
+                case R.id.qq5:
+                    Intent intent4 = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
+                    startActivity(intent4);
+                    break;
+                case R.id.qq6:
+                    Intent intent5 = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
+                    startActivity(intent5);
+                    break;
+            }
+        }
     }
 }
