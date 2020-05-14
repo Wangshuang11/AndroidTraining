@@ -6,7 +6,10 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,9 +30,18 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import org.turings.turings.R;
 import org.turings.turings.near.entity.RoundImageView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -41,6 +53,9 @@ public class MiddleActivity extends AppCompatActivity {
     private TextView tvFollowName_lyh1;
     private RelativeLayout rl_lyh;
     private RelativeLayout r2;
+    private Handler handler;
+    private int aid;
+    private Gson gson;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -76,6 +91,19 @@ public class MiddleActivity extends AppCompatActivity {
         tvFollowName_lyh1 = findViewById(R.id.tvFollowName_lyh1);
         rl_lyh = findViewById(R.id.rl_lyh);
         r2 = findViewById(R.id.r2);
+
+        gson = new Gson();
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                String json = msg.obj.toString();
+                Log.e("lyh",json);
+            }
+        };
+
+        SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("userInfo",MODE_PRIVATE);
+        aid= Integer.parseInt(sharedPreferences.getString("uId",""));
 
         Intent intent1 = getIntent();
         String lat1 = intent1.getStringExtra("lat");
@@ -181,17 +209,33 @@ public class MiddleActivity extends AppCompatActivity {
             }
         });
 
-
-
-//        ObjectAnimator animator = ObjectAnimator
-//                .ofFloat(rl_lyh, "alpha",
-//                        1f, 0);
-//        animator.setDuration(900);
-//        animator.start();
-
-
-
-
-
     }
+
+    public void sendToServer(final double lat, final double lng,final int uId) {
+
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("http://" + getResources().getString(R.string.ipConfig) + ":8080/Turings/lyh/fid?lat=" + lat + "&lng=" + lng+"&uId="+uId);
+                    URLConnection conn = url.openConnection();
+                    InputStream in = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
+                    String info = reader.readLine();
+                    wrapperMessage(info);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    private void wrapperMessage(String info){
+        Message msg = Message.obtain();
+        msg.obj = info;
+        handler.sendMessage(msg);
+    }
+
 }

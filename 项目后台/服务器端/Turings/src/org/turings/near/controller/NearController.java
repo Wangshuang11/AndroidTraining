@@ -28,6 +28,21 @@ public class NearController {
 	private NearService nearService;
 	
 	@ResponseBody
+	@RequestMapping(value="/fid",produces="text/json;charset=utf-8")
+	public String fid(@RequestParam(value="uId") int uId,@RequestParam(value="lat") double lat,@RequestParam(value="lng") double lng) {
+		Information info = nearService.browseInfo(lat,lng);
+		int fid = info.getId();
+		List<Integer> list = nearService.ifFid(uId);
+		int n=0;
+		for(int i=0;i<list.size();i++) {
+			if (fid==list.get(i)) {
+				n=1;
+			}
+		}
+		return n+"";
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/showComment",produces="text/json;charset=utf-8")
 	public String showComment(@RequestParam(value="sId") int sId) {
 		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+sId);

@@ -26,6 +26,10 @@ public class NearService {
 	@Autowired
 	private CommentMapper commentMapper;
 	
+	public List<Integer> ifFid(int id) {
+		return informationMapper.ifFid(id);
+	}
+	
 	/**
 	 * 
 	*<p>Title: showAllComment</p> 

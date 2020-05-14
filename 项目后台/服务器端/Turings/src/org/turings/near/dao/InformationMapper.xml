@@ -4,15 +4,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.turings.near.dao.InformationMapper">
 	
+	<select id="ifFid" resultType="Integer">
+		select fId
+		from tbl_self_fans
+		where uId=#{id}
+	</select>
+	
 	<select id="browseInfo" resultType="org.turings.near.entity.Information">
-		select b.uId,b.uName userName,b.uAvatar portrait,b.uTime totalTime,b.uScore currentTime,c.name university,b.uMotto motto
+		select b.uId id,b.uName userName,b.uAvatar portrait,b.uTime totalTime,b.uScore currentTime,c.name university,b.uMotto motto
 		from tbl_position a,tbl_self_user b,tbl_indexcollege c
 		where a.lat=#{lat} and a.lng=#{lng} and b.uName=a.username and c.id IN(select sId from tbl_self_schools_favorite where uId= a.id) limit 1
 	</select>
 	
 	<select id="browseInfoByName" resultType="org.turings.near.entity.Information">
-		select b.uId,b.uName userName,b.uAvatar portrait,b.uTime totalTime,b.uScore currentTime,c.name university,b.uMotto motto
+		select b.uId id,b.uName userName,b.uAvatar portrait,b.uTime totalTime,b.uScore currentTime,c.name university,b.uMotto motto
 		from tbl_position a,tbl_self_user b,tbl_indexcollege c
-		where a.username='王大爽' and b.uName=a.username and c.id IN(select sId from tbl_self_schools_favorite where uId= a.id) limit 1
+		where a.username=#{name} and b.uName=a.username and c.id IN(select sId from tbl_self_schools_favorite where uId= a.id) limit 1
 	</select>
 </mapper>

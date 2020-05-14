@@ -79,15 +79,16 @@ public class InformationActivity extends AppCompatActivity {
 
         resources = getResources();
         Intent intent = getIntent();
-        if (intent.getAction()!=null){
-            btnGuanzhu_lyh.setText("已关注");
-            count++;
-        }
+
         String portrait = intent.getStringExtra("touxiang");
         String name = intent.getStringExtra("name");
         int id = getResources().getIdentifier(portrait, "mipmap", getApplicationContext().getPackageName());
 
         getViews();
+        if (intent.getAction()!=null){
+            btnGuanzhu_lyh.setText("已关注");
+            count++;
+        }
         ivPortrait_lyh.setImageResource(id);
         tvFollowName_lyh.setText(name);
         registeLinstener();

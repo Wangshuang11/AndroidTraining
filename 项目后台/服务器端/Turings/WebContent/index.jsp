@@ -10,5 +10,6 @@
 
 	<a href="/Turings/lph/findStoryAll">findAll</a>
 	<a href="/Turings/lyh/showComment?sId=1">comments</a>
+	<a href="/Turings/lyh/fid?uId=2&lat=0&lng=0">fid</a>
 </body>
 </html>
