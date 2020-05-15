@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:映射器接口的全名 -->
+<mapper namespace="org.turings.index.comment.dao.CommentMapper6">
+    <!-- 结果映射 -->
+    <resultMap type="org.turings.index.entity.Comment" id="commentMapper2">
+    	<id column="id" property="id"/>
+        <result column="icon" property="icon"/>
+        <result column="name" property="name"/>
+        <result column="content" property="content"/>
+        <result column="dj_icon" property="djIcon"/>
+        <result column="dj_name" property="djName"/>
+        <result column="num" property="num"/>
+        <result column="time" property="time"/>
+    </resultMap>
+    <select id="findComments" resultMap="commentMapper2">
+           select * from tbl_comment
+    </select>
+    <insert id="insertCommentFromId">
+    	insert into tbl_comment(icon,name,content,time) values((select uAvatar from tbl_self_user where uId=#{id}),(select uName from tbl_self_user where uId=#{id}),#{comm.content},#{comm.time})
+    </insert>
+    <update id="updateComment">
+   		update tbl_comment set num=#{arg0} where id=#{arg1}
+   	</update>
+</mapper>

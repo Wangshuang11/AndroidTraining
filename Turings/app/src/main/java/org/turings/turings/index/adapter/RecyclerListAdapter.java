@@ -169,7 +169,9 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         });
 
         AlertDialog alertDialog = builder.create();
+
         alertDialog.show();
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(context.getResources().getColor(R.color.colorPink));
     }
     public void sendToServer(final int id,final String num){
         new Thread(){

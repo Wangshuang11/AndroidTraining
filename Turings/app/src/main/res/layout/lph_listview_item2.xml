@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3755"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/colorPink"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
