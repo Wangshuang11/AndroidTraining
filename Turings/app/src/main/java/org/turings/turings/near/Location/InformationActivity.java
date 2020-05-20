@@ -1,6 +1,7 @@
 package org.turings.turings.near.Location;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -98,6 +99,7 @@ public class InformationActivity extends AppCompatActivity {
         amDrawable1.start();
         initView();
 //        signup();
+        spContext();
         signin();
         gson = new Gson();
 
@@ -201,6 +203,12 @@ public class InformationActivity extends AppCompatActivity {
         }
     }
 
+    private void spContext(){
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("achStatus", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("status",1);
+        editor.commit();
+    }
 
 //    初始化布局
     private void initView() {

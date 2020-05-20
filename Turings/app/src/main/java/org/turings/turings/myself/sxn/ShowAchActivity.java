@@ -1,6 +1,8 @@
 package org.turings.turings.myself.sxn;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +36,11 @@ public class ShowAchActivity extends AppCompatActivity {
                 }
             }
         }.start();
+
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("achStatus",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("status",2);
+        editor.commit();
 
         ivAch = findViewById(R.id.ivAch);
         AnimationDrawable amDrawable = (AnimationDrawable) ivAch.getDrawable();

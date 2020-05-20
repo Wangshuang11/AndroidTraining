@@ -1,6 +1,8 @@
 package org.turings.turings.myself.sxn;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -22,6 +24,7 @@ import com.bumptech.glide.request.RequestOptions;
 import org.turings.turings.MainActivity;
 import org.turings.turings.R;
 import org.turings.turings.myself.tools.MyUrl;
+import org.turings.turings.near.Location.InformationActivity;
 
 
 public class MyAchieveActivity extends AppCompatActivity {
@@ -39,6 +42,7 @@ public class MyAchieveActivity extends AppCompatActivity {
     private ImageView qq5;
     private ImageView qq6;
     private MyLinstener linstener;
+    private int status;
 
 
     @Override
@@ -65,6 +69,14 @@ public class MyAchieveActivity extends AppCompatActivity {
         qq6.setOnClickListener(linstener);
         startShakeByView(qq1,1,1.1f,10,1000);
         circleAvatar();
+
+        status = getApplicationContext().
+                getSharedPreferences("achStatus", MODE_PRIVATE).getInt("status",0);
+        if (status==2){
+            qq1.setImageResource(R.mipmap.qq1);
+            qq1.setClickable(false);
+            qq1.clearAnimation();
+        }
 
         Intent intent1=getIntent();
         if (intent1.getAction() != null){
@@ -100,6 +112,14 @@ public class MyAchieveActivity extends AppCompatActivity {
         Glide.with(this).load(new BitmapDrawable(bitmap)).apply(requestOptions).into(avatar);
     }
 
+    /**
+     * 动画效果
+     * @param view
+     * @param scaleSmall
+     * @param scaleLarge
+     * @param shakeDegrees
+     * @param duration
+     */
     private void startShakeByView(View view, float scaleSmall, float scaleLarge, float shakeDegrees, long duration) {
         //由小变大
         Animation scaleAnim = new ScaleAnimation(scaleSmall, scaleLarge, scaleSmall, scaleLarge);
@@ -124,30 +144,38 @@ public class MyAchieveActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.qq1:
-                    Intent intent = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
+                    Intent intent = new Intent(MyAchieveActivity.this, ShowAchActivity.class);
                     startActivity(intent);
                     break;
-                case R.id.qq2:
-                    Intent intent1 = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
-                    startActivity(intent1);
-                    break;
-                case R.id.qq3:
-                    Intent intent2 = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
-                    startActivity(intent2);
-                    break;
-                case R.id.qq4:
-                    Intent intent3 = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
-                    startActivity(intent3);
-                    break;
-                case R.id.qq5:
-                    Intent intent4 = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
-                    startActivity(intent4);
-                    break;
-                case R.id.qq6:
-                    Intent intent5 = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
-                    startActivity(intent5);
-                    break;
+//                case R.id.qq2:
+//                    Intent intent1 = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
+//                    startActivity(intent1);
+//                    break;
+//                case R.id.qq3:
+//                    Intent intent2 = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
+//                    startActivity(intent2);
+//                    break;
+//                case R.id.qq4:
+//                    Intent intent3 = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
+//                    startActivity(intent3);
+//                    break;
+//                case R.id.qq5:
+//                    Intent intent4 = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
+//                    startActivity(intent4);
+//                    break;
+//                case R.id.qq6:
+//                    Intent intent5 = new Intent(MyAchieveActivity.this,ShowAchActivity.class);
+//                    startActivity(intent5);
+//                    break;
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(MyAchieveActivity.this, MainActivity.class);
+        intent.setAction("loginBackMyself");
+        startActivity(intent);
     }
 }

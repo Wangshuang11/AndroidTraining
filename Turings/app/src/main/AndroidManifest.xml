@@ -49,7 +49,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".myself.sxn.ShowAchActivity"></activity>
+        <activity android:name=".near.Location.StatusActivity"></activity>
+        <activity android:name=".myself.sxn.ShowAchActivity" />
         <activity android:name=".near.Location.MiddleActivity" />
         <activity android:name=".near.comment.JumpActivity" />
         <activity android:name=".mistaken.myReview.MathMistakenReportActivity" />
@@ -102,7 +103,7 @@
         <activity android:name=".mistaken.WrongBasketActivity" />
         <activity android:name=".mistaken.OnlineTestingActivity" />
         <activity android:name=".mistaken.AutoGeneratingPaperYLXActivity" />
-        <activity android:name=".mistaken.ViewDownloadedPapersActivity"></activity>
+        <activity android:name=".mistaken.ViewDownloadedPapersActivity" />
         <activity android:name=".mistaken.TestResultActivity" />
         <activity android:name=".mistaken.UploadWrongQuestionsActivity" /> <!-- 照片裁剪页面 -->
         <activity
