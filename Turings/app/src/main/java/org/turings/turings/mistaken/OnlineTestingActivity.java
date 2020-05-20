@@ -3,11 +3,14 @@ package org.turings.turings.mistaken;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,10 +22,12 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -83,10 +88,13 @@ public class OnlineTestingActivity extends AppCompatActivity implements GestureD
     private String titleName;
     //返回箭头（放弃此次测试）
     private ImageView ivBack;
+    private TuyaView tuyaView;//自定义涂鸦板
+    private List<Integer> list = new ArrayList<>();//颜色
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_testing);
+        init();
         getViews();
         register();
         chronometer.start();
@@ -110,6 +118,21 @@ public class OnlineTestingActivity extends AppCompatActivity implements GestureD
         fixQType(subjectMsgs.get(0));
     }
 
+    //初始化颜色值
+    private void init() {
+        list.add(Color.parseColor("#BBFFFF"));
+        list.add(Color.CYAN);
+        list.add(Color.GREEN);
+        list.add(Color.parseColor("#FFF68F"));
+        list.add(Color.YELLOW);
+        list.add(Color.parseColor("#FFA500"));
+        list.add(Color.parseColor("#FF4500"));
+        list.add(Color.RED);
+        list.add(Color.parseColor("#CD69C9"));
+        list.add(Color.parseColor("#C7C7C7"));
+        list.add(Color.GRAY);
+        list.add(Color.BLACK);
+    }
     //获取控件
     private void getViews() {
         mViewFlipper = findViewById(R.id.viewFlipper);
@@ -142,6 +165,19 @@ public class OnlineTestingActivity extends AppCompatActivity implements GestureD
         return lists;
     }
 
+    //画笔粗细的滚动条
+    class MySeekChangeListener implements SeekBar.OnSeekBarChangeListener {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            tuyaView.selectPaintSize(seekBar.getProgress());
+        }
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            tuyaView.selectPaintSize(seekBar.getProgress());
+        }
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {}
+    }
     private View addQuestionView(SubjectMsg subjectMsg, int pos){
         View view = View.inflate(this, R.layout.ylx_item_test_content_layout, null);
         TextView textView = view.findViewById(R.id.tv_num);
@@ -340,6 +376,9 @@ public class OnlineTestingActivity extends AppCompatActivity implements GestureD
                     tvCount.setText((mViewFlipper.getDisplayedChild()+1)+"/"+subjectMsgs.size());
                     fixQType(subjectMsgs.get(mViewFlipper.getDisplayedChild()));
                 }
+                break;
+            case R.id.practise_draft:
+                showPaletteDialog();
                 break;
             case R.id.practise_btnSubmit://交卷
                 this.chronometer.stop();
@@ -661,6 +700,177 @@ public class OnlineTestingActivity extends AppCompatActivity implements GestureD
             public void onClick(View v) {
                 Log.i("www", "onClick: 关闭答题卡");
                 dialog2.dismiss();
+            }
+        });
+    }
+    private int select_paint_color_index = 0;
+    private int select_paint_style_index = 0;
+    //画板弹出框
+    private void showPaletteDialog() {
+        View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.drawing_board_layout,null,false);
+        final AlertDialog dialog3 = new AlertDialog.Builder(OnlineTestingActivity.this).setView(view).create();
+        /*弹出框样式设置*/
+        dialog3.setCancelable(false);
+        dialog3.show();
+
+        showSizeAndColorDialog();
+        //获取控件
+        FrameLayout frameLayout = view.findViewById(R.id.fl_boardcontainer);
+        ImageView ivBack = view.findViewById(R.id.cancel);//关闭按钮
+        final ImageView ivPen = view.findViewById(R.id.huabi);//画笔
+        ImageView ivRedo = view.findViewById(R.id.btn_redo);//重画
+        final ImageView ivRubber = view.findViewById(R.id.btn_ca);//橡皮
+        ImageView ivLast = view.findViewById(R.id.btn_last);//撤销
+        ImageView ivRecover = view.findViewById(R.id.btn_recover);//恢复
+
+        Window window = dialog3.getWindow();
+        window.setBackgroundDrawable(null);
+        window.getDecorView().setPadding(0, 0, 0, 0);
+        WindowManager.LayoutParams lp = window.getAttributes();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        window.setDimAmount(0f);
+        window.setAttributes(lp);
+        //虽然此时获取的是屏幕宽高，但是我们可以通过控制framlayout来实现控制涂鸦板大小
+        Display defaultDisplay = getWindowManager().getDefaultDisplay();
+        int screenWidth = defaultDisplay.getWidth();
+        int screenHeight = defaultDisplay.getHeight();
+        tuyaView = new TuyaView(this,screenWidth,screenHeight);
+        frameLayout.addView(tuyaView);
+        tuyaView.requestFocus();
+//        tuyaView.selectPaintSize(sb_size.getProgress());
+        /*点击事件*/
+        //撤销
+        ivLast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tuyaView.undo();
+            }
+        });
+        //重画
+        ivRedo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tuyaView.redo();
+            }
+        });
+        //橡皮
+        ivRubber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                select_paint_style_index = 1;
+                tuyaView.selectPaintStyle(1);
+                ivRubber.setBackgroundColor(Color.parseColor("#FFE7BA"));
+                ivPen.setBackgroundColor(Color.WHITE);
+            }
+        });
+        //画笔
+        ivPen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                select_paint_style_index = 0;
+                ivPen.setBackgroundColor(Color.parseColor("#FFE7BA"));
+                ivRubber.setBackgroundColor(Color.WHITE);
+                tuyaView.selectPaintStyle(0);
+                //还要弹出颜色和尺寸
+                showSizeAndColorDialog();
+
+            }
+        });
+        //恢复
+        ivRecover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tuyaView.recover();
+            }
+        });
+        //关闭画板
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("www", "onClick: 关闭画板");
+                dialog3.dismiss();
+            }
+        });
+    }
+    public void showSizeAndColorDialog(){
+        View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.size_and_color_layout,null,false);
+        final AlertDialog dialog4 = new AlertDialog.Builder(OnlineTestingActivity.this).setView(view).create();
+        /*弹出框样式设置*/
+        dialog4.show();
+        //获取控件
+        SeekBar seekBar = view.findViewById(R.id.sb_size);
+        GridView gvColor = view.findViewById(R.id.gv_color);
+        ImageView ivBack = view.findViewById(R.id.cancel);//关闭按钮
+        final ImageView ivPen = view.findViewById(R.id.huabi);//画笔
+        ImageView ivRedo = view.findViewById(R.id.btn_redo);//重画
+        final ImageView ivRubber = view.findViewById(R.id.btn_ca);//橡皮
+        ImageView ivLast = view.findViewById(R.id.btn_last);//撤销
+        ImageView ivRecover = view.findViewById(R.id.btn_recover);//恢复
+        seekBar.setOnSeekBarChangeListener(new MySeekChangeListener());
+        CustomAdapterGridViewForColor customAdapterGridViewForColor = new CustomAdapterGridViewForColor(getApplicationContext(),list,R.layout.ylx_color_gv_layout);
+        gvColor.setAdapter(customAdapterGridViewForColor);
+        Window window = dialog4.getWindow();
+        window.setBackgroundDrawable(null);
+        window.getDecorView().setPadding(0, 0, 0, 0);
+        WindowManager.LayoutParams lp = window.getAttributes();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setGravity(Gravity.TOP);
+        window.setDimAmount(0f);
+        window.setAttributes(lp);
+        //点击每个颜色的事件
+        customAdapterGridViewForColor.setmOnItemClickListener(new CustomAdapterGridViewForColor.onItemClickListener() {
+            @Override
+            public void onNumClick(int position) {
+                select_paint_color_index = position;
+                tuyaView.selectPaintColor(position);
+                dialog4.dismiss();
+            }
+        });
+        //点击事件
+        //撤销
+        ivLast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog4.dismiss();
+            }
+        });
+        //重画
+        ivRedo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog4.dismiss();
+            }
+        });
+        //橡皮
+        ivRubber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog4.dismiss();
+            }
+        });
+        //画笔
+        ivPen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog4.dismiss();
+
+            }
+        });
+        //恢复
+        ivRecover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog4.dismiss();
+            }
+        });
+        //关闭画板
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("www", "onClick: 关闭画板");
+                dialog4.dismiss();
             }
         });
     }
