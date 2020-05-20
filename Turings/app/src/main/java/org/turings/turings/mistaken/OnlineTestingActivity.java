@@ -63,6 +63,7 @@ public class OnlineTestingActivity extends AppCompatActivity implements GestureD
     private LinearLayout nextMsg;
     //做题计时
     private Chronometer chronometer;
+    private ImageView practiseDraft;
     private int miss=0;
     private boolean isChronometerStart = false;
     private int mRangeTime;
@@ -144,6 +145,7 @@ public class OnlineTestingActivity extends AppCompatActivity implements GestureD
         tvQType = findViewById(R.id.practise_tvQType);
         carBtn = findViewById(R.id.practise_btnNumMenu);
         ivBack = findViewById(R.id.practise_back);
+        practiseDraft = findViewById(R.id.practise_draft);
     }
     //绑定事件
     private void register() {
@@ -153,6 +155,7 @@ public class OnlineTestingActivity extends AppCompatActivity implements GestureD
         finishBtn.setOnClickListener(this);
         carBtn.setOnClickListener(this);
         ivBack.setOnClickListener(this);
+        practiseDraft.setOnClickListener(this);
     }
     public List<SubjectMsg> initData() {
         //正常是其他页面传来的
