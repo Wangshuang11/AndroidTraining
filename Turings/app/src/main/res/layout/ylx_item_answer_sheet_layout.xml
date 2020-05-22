@@ -10,6 +10,7 @@
         android:background="@drawable/ylx_answer_circle_background2"
         android:focusable="true"
         android:gravity="center"
+        android:layout_margin="3dp"
         android:textColor="#000"
         android:text="1"
         android:textSize="15sp" />
