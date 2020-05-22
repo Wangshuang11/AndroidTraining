@@ -149,17 +149,21 @@ public class ShowPaperActivity extends AppCompatActivity implements View.OnClick
                 finish();
                 break;
             case R.id.btnNow_ylx://在线做题
-                Intent intent = new Intent(ShowPaperActivity.this, OnlineTestingActivity.class);
                 lsData.clear();
                 addLsData(lsDataX);
                 addLsData(lsDataT);
                 addLsData(lsDataD);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("subInCart", (Serializable)lsData);
-                intent.putExtras(bundle);
-                intent.putExtra("title",titleName.getText().toString().trim());
-                startActivity(intent);
-                finish();
+                if(lsData.size()!=0){
+                    Intent intent = new Intent(ShowPaperActivity.this, OnlineTestingActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("subInCart", (Serializable)lsData);
+                    intent.putExtras(bundle);
+                    intent.putExtra("title",titleName.getText().toString().trim());
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Toast.makeText(getApplicationContext(),"空卷,去添加题目做题吧",Toast.LENGTH_LONG).show();
+                }
                 break;
             case R.id.btnDown_ylx://下载
                 try {
