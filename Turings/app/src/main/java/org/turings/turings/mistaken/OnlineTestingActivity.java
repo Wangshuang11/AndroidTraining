@@ -671,7 +671,7 @@ public class OnlineTestingActivity extends AppCompatActivity implements GestureD
         Window window = dialog2.getWindow();
         WindowManager.LayoutParams lp = window.getAttributes();
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         window.setAttributes(lp);
         /*点击事件*/
         //点击题号跳转到题目
