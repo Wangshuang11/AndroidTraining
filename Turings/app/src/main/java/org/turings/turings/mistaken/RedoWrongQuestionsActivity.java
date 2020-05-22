@@ -889,10 +889,10 @@ public class RedoWrongQuestionsActivity extends AppCompatActivity {
     public static String getOptionStr(String str){
         String strOld = str;
         String strNow = str;
-        if(str.length()>1){
+        if(str != null && str.length()>1){
             strOld = removeCharAt(str,0);
         }
-        if(strOld.length()>1){
+        if(strOld != null && strOld.length()>1){
             strNow = removeCharAt(strOld,0);
         }
         return strNow;

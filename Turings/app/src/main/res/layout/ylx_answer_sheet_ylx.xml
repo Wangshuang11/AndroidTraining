@@ -4,12 +4,40 @@
     android:layout_width="match_parent"
     android:background="#fff"
     xmlns:android="http://schemas.android.com/apk/res/android" >
+    <LinearLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorBlue">
+        <ImageView
+            android:id="@+id/practise_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:src="@mipmap/anandonylx"
+            android:layout_marginLeft="10dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"/>
+        <TextView
+            android:id="@+id/practise_tvQType"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:paddingLeft="15dp"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:text="答题卡"
+            android:textColor="#fff"
+            android:textSize="15sp" />
+    </LinearLayout>
     <TextView
         android:id="@+id/tvMess"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="以下是您的答题状况，注意填空题和大题要提交才会记录哟！！"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/title"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:gravity="center"
@@ -18,86 +46,85 @@
         android:textSize="15sp"
         android:layout_marginBottom="10dp"/>
     <LinearLayout
-        android:id="@+id/x_layout"
-        android:layout_below="@+id/tvMess"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/tv_x"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:textSize="20sp"
-            android:text="一、选择题(共2题)"
-            android:textColor="@color/colorBlue"
-            android:textStyle="italic"
-            android:gravity="left|center"/>
-        <GridView
-            android:id="@+id/x_gv"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/tvMess">
+        <LinearLayout
+            android:id="@+id/x_layout"
+            android:layout_below="@+id/tvMess"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:verticalSpacing="10dp"
-            android:numColumns="4"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/t_layout"
-        android:layout_below="@+id/x_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/tv_t"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:textSize="20sp"
-            android:text="二、填空题(共2题)"
-            android:textColor="@color/colorBlue"
-            android:textStyle="italic"
-            android:gravity="left|center"/>
-        <GridView
-            android:id="@+id/t_gv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:verticalSpacing="10dp"
-            android:numColumns="4"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/d_layout"
-        android:layout_below="@+id/t_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/tv_d"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:textSize="20sp"
-            android:text="三、大题(共2题)"
-            android:textColor="@color/colorBlue"
-            android:textStyle="italic"
-            android:gravity="left|center"/>
-        <GridView
-            android:id="@+id/d_gv"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_x"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textSize="20sp"
+                android:text="一、选择题(共2题)"
+                android:textColor="@color/colorBlue"
+                android:textStyle="italic"
+                android:gravity="left|center"/>
+            <GridView
+                android:id="@+id/x_gv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:verticalSpacing="10dp"
+                android:numColumns="4"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/t_layout"
+            android:layout_below="@+id/x_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:verticalSpacing="10dp"
-            android:numColumns="4"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_t"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textSize="20sp"
+                android:text="二、填空题(共2题)"
+                android:textColor="@color/colorBlue"
+                android:textStyle="italic"
+                android:gravity="left|center"/>
+            <GridView
+                android:id="@+id/t_gv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:verticalSpacing="10dp"
+                android:numColumns="4"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/d_layout"
+            android:layout_below="@+id/t_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_d"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textSize="20sp"
+                android:text="三、大题(共2题)"
+                android:textColor="@color/colorBlue"
+                android:textStyle="italic"
+                android:gravity="left|center"/>
+            <GridView
+                android:id="@+id/d_gv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:verticalSpacing="10dp"
+                android:numColumns="4"/>
+        </LinearLayout>
     </LinearLayout>
-    <Button
-        android:id="@+id/close_answer_sheet"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/colorBlue"
-        android:textColor="#fff"
-        android:text="关闭答题卡"/>
+
 </RelativeLayout>

@@ -38,6 +38,7 @@ import org.turings.turings.mistaken.customAdapterAndDialog.GridViewAnswerSheetAd
 import org.turings.turings.mistaken.entity.SubjectMsg;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -233,7 +234,6 @@ public class OnlineTestingActivity extends AppCompatActivity implements GestureD
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String ans = "";
-                Toast.makeText(OnlineTestingActivity.this,position + "", Toast.LENGTH_SHORT).show();
                 switch (position){
                     case 1:
                         ans = "A";
@@ -305,7 +305,7 @@ public class OnlineTestingActivity extends AppCompatActivity implements GestureD
 
     @Override
     public void onLongPress(MotionEvent e) {
-        Toast.makeText(OnlineTestingActivity.this,"按下",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(OnlineTestingActivity.this,"按下",Toast.LENGTH_SHORT).show();
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -315,6 +315,7 @@ public class OnlineTestingActivity extends AppCompatActivity implements GestureD
     //重点实现在这里切换
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        fixQType(subjectMsgs.get(mViewFlipper.getDisplayedChild()));
         if (e1.getX() - e2.getX() < FLIP_DISTANCE){
             if (mViewFlipper.getDisplayedChild() == 0) {
                 mViewFlipper.stopFlipping();
@@ -415,7 +416,32 @@ public class OnlineTestingActivity extends AppCompatActivity implements GestureD
                         chronometer.start();
                     }
                 });
-                builder.show();
+                AlertDialog dialog2 = builder.create();
+                dialog2.show();
+                dialog2.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1AA8D7"));
+                dialog2.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1AA8D7"));
+                try {
+                    //获取mAlert对象
+                    Field mAlert = AlertDialog.class.getDeclaredField("mAlert");
+                    mAlert.setAccessible(true);
+                    Object mAlertController = mAlert.get(dialog2);
+
+                    //获取mTitleView并设置大小颜色
+                    Field mTitle = mAlertController.getClass().getDeclaredField("mTitleView");
+                    mTitle.setAccessible(true);
+                    TextView mTitleView = (TextView) mTitle.get(mAlertController);
+                    mTitleView.setTextColor(Color.parseColor("#1AA8D7"));
+                    //获取mMessageView并设置大小颜色
+                    Field mMessage = mAlertController.getClass().getDeclaredField("mMessageView");
+                    mMessage.setAccessible(true);
+                    TextView mMessageView = (TextView) mMessage.get(mAlertController);
+                    mMessageView.setTextColor(Color.parseColor("#9b9b9b"));
+                    mMessageView.setTextSize(15);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
@@ -553,10 +579,10 @@ public class OnlineTestingActivity extends AppCompatActivity implements GestureD
     }
     //答题卡弹出框
     private void showAnswerSheetDialog() {
-        View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.ylx_answer_sheet_ylx,null,false);
-        AlertDialog dialog2 = new AlertDialog.Builder(OnlineTestingActivity.this).setView(view).create();
+        View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.ylx_answer_sheet_ylx,null);
+        AlertDialog dialog2 = new AlertDialog.Builder(OnlineTestingActivity.this,R.style.Dialog_Fullscreen).setView(view).create();
         //关闭答题卡按钮
-        Button btn = view.findViewById(R.id.close_answer_sheet);
+        ImageView btn = view.findViewById(R.id.practise_back);
         //选择题区域
         LinearLayout linearLayoutX = view.findViewById(R.id.x_layout);
         TextView tvX = view.findViewById(R.id.tv_x);
@@ -643,12 +669,9 @@ public class OnlineTestingActivity extends AppCompatActivity implements GestureD
         dialog2.show();
 
         Window window = dialog2.getWindow();
-        dialog2.getWindow().setBackgroundDrawable(null);
-        window.getDecorView().setPadding(0, 100, 0, 0);
         WindowManager.LayoutParams lp = window.getAttributes();
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.y=400;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(lp);
         /*点击事件*/
         //点击题号跳转到题目

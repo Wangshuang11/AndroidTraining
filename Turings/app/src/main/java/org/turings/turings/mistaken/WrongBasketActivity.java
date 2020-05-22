@@ -3,6 +3,7 @@ package org.turings.turings.mistaken;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -24,8 +25,10 @@ import org.turings.turings.mistaken.customAdapterAndDialog.CustomAdapterInCartYL
 import org.turings.turings.mistaken.entity.SubjectMsg;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Inflater;
 
 public class WrongBasketActivity extends AppCompatActivity implements View.OnClickListener {
     private List<SubjectMsg> lsData = new ArrayList<>();//选在篮子里的所有题目
@@ -301,20 +304,39 @@ public class WrongBasketActivity extends AppCompatActivity implements View.OnCli
     }
     //修改框
     private void showFixDialog() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(WrongBasketActivity.this);
-        builder.setTitle("请输入标题名");
-        final EditText editText = new EditText(WrongBasketActivity.this);
-        builder.setView(editText);
-        builder.setPositiveButton("是",new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if(editText.getText().toString().trim()!=null && !editText.getText().toString().trim().equals("")){
-                    titleName.setText(editText.getText().toString().trim());
-                }
-            }
-        });
-        builder.setNegativeButton("否", null);
-        builder.show();
+        final View view = getLayoutInflater().inflate(R.layout.ylx_editview_layout, null);
+        final EditText editText =view.findViewById(R.id.editText1);
+        AlertDialog dialog;
+        AlertDialog.Builder builder = new AlertDialog.Builder(WrongBasketActivity.this).setTitle("请输入标题名")
+                .setView(view)
+                .setPositiveButton("是",new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if(editText.getText().toString().trim()!=null && !editText.getText().toString().trim().equals("")){
+                            titleName.setText(editText.getText().toString().trim());
+                        }
+                    }
+                }).setNegativeButton("否", null);
+        dialog = builder.create();
+        dialog.show();
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(Color.parseColor("#9b9b9b"));
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#9b9b9b"));
+        try {
+            //获取mAlert对象
+            Field mAlert = AlertDialog.class.getDeclaredField("mAlert");
+            mAlert.setAccessible(true);
+            Object mAlertController = mAlert.get(dialog);
+
+            //获取mTitleView并设置大小颜色
+            Field mTitle = mAlertController.getClass().getDeclaredField("mTitleView");
+            mTitle.setAccessible(true);
+            TextView mTitleView = (TextView) mTitle.get(mAlertController);
+            mTitleView.setTextColor(Color.parseColor("#9b9b9b"));
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
     }
 
     //清空错题篮
@@ -344,7 +366,32 @@ public class WrongBasketActivity extends AppCompatActivity implements View.OnCli
                 finish();
             }
         });
-        builder.show();
+        AlertDialog dialog2 = builder.create();
+        dialog2.show();
+        dialog2.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(Color.parseColor("#1AA8D7"));
+        dialog2.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#1AA8D7"));
+        try {
+            //获取mAlert对象
+            Field mAlert = AlertDialog.class.getDeclaredField("mAlert");
+            mAlert.setAccessible(true);
+            Object mAlertController = mAlert.get(dialog2);
+
+            //获取mTitleView并设置大小颜色
+            Field mTitle = mAlertController.getClass().getDeclaredField("mTitleView");
+            mTitle.setAccessible(true);
+            TextView mTitleView = (TextView) mTitle.get(mAlertController);
+            mTitleView.setTextColor(Color.parseColor("#1AA8D7"));
+            //获取mMessageView并设置大小颜色
+            Field mMessage = mAlertController.getClass().getDeclaredField("mMessageView");
+            mMessage.setAccessible(true);
+            TextView mMessageView = (TextView) mMessage.get(mAlertController);
+            mMessageView.setTextColor(Color.parseColor("#9b9b9b"));
+            mMessageView.setTextSize(15);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
     }
     //初始化并弹出对话框方法
     private void showDialog(){
