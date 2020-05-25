@@ -2,11 +2,14 @@ package org.turings.turings.myself.farm;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.PopupWindow;
 
 import org.turings.turings.R;
@@ -14,6 +17,13 @@ import org.turings.turings.R;
 public class GiftPopupwindow extends PopupWindow {
     private View mView; // PopupWindow 菜单布局
     private Activity mContext; // 上下文参数
+    private Button giftSbtn;
+    private Button giftMbtn;
+    private Button giftLbtn;
+    private Intent intent=new Intent();
+    private Bundle bundle=new Bundle();
+    private MyListener myListener=new MyListener();
+
 
     public GiftPopupwindow(Activity context) {
         super(context);
@@ -28,6 +38,12 @@ public class GiftPopupwindow extends PopupWindow {
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mView = inflater.inflate(R.layout.jxy_gift_popup_item, null);
+        giftLbtn=mView.findViewById(R.id.gift_get_3);
+        giftLbtn.setOnClickListener(myListener);
+        giftMbtn=mView.findViewById(R.id.gift_get_2);
+        giftMbtn.setOnClickListener(myListener);
+        giftSbtn=mView.findViewById(R.id.gift_get_1);
+        giftSbtn.setOnClickListener(myListener);
 //        Button btn_camera = (Button) mView.findViewById(R.id.icon_btn_camera);
 //        Button btn_select = (Button) mView.findViewById(R.id.icon_btn_select);
 //        Button btn_cancel = (Button) mView.findViewById(R.id.icon_btn_cancel);
@@ -69,5 +85,24 @@ public class GiftPopupwindow extends PopupWindow {
                 return true;
             }
         });
+    }
+    class MyListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            intent.setClass(mContext,GiftChangeActivity.class);
+            switch (v.getId()){
+                case R.id.gift_get_1:
+                    intent.putExtra("info",1);
+                    break;
+                case R.id.gift_get_2:
+                    intent.putExtra("info",2);
+                    break;
+                case R.id.gift_get_3:
+                    intent.putExtra("info",3);
+                    break;
+            }
+            mContext.startActivityForResult(intent,0);
+        }
     }
 }

@@ -2,6 +2,9 @@ package org.turings.turings.myself.farm;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -12,43 +15,55 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.turings.turings.R;
 import org.turings.turings.MainActivity;
+import org.turings.turings.myself.tools.MyUrl;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 /*
-*小葵花农场主页
-* 其中包括：
-* 1.小葵花浇水后不同时期的生长状态（4个）判断
-* 2.根据用户收集水滴周期判断花盆的繁盛枯萎（2个）
-* 3.最后阶段交换礼物
-* 4.任务上拉菜单
-* 5.点击小葵花出现励志名言
+ *小葵花农场主页
+ * 其中包括：
+ * 1.小葵花浇水后不同时期的生长状态（4个）判断
+ * 2.根据用户收集水滴周期判断花盆的繁盛枯萎（2个）
+ * 3.最后阶段交换礼物
+ * 4.任务上拉菜单
+ * 5.点击小葵花出现励志名言
  */
 public class FarmActivity extends AppCompatActivity {
+    private int id;
+    private MyUrl myUrl;
+    private ImageView avatar;//头像
     private ImageView flowerImg;//花
     private ImageView flowerpotImg;//花盆
-    private int waterDroplet;//水滴（积分）
     private ImageView changeGiftImg;//交换礼物
     private ImageView flowerWaterImg;//浇花
     private LinearLayout process;//成长
     private Button taskBtn;//任务
     private MyListener listener;
     private Intent intent=new Intent();
-    private int giftSatus=0;//不能交换礼物的状态
     private int dryStatus=0;//非枯萎状态
-
+    private Bitmap bitmap;
+    private TextView name;
+    private TextView waterTxt;//水滴（积分）
+    private TextView processTxt;//成长值
+    private int waterNum;
+    private int processNum;
 
     //以下3行为金鑫媛的
     private TeskPopupwindow mPhotoPopupWindow;//任务弹窗
@@ -60,26 +75,37 @@ public class FarmActivity extends AppCompatActivity {
     private Animation btnanim;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        if (getSupportActionBar() != null) { getSupportActionBar().hide(); }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sxn_farm_index);
         //获取控件
         getViews();
+        myUrl=new MyUrl(this);
         //加载点击事件
         registerClick();
-        //1.获取当前用户成长值,水滴拥有量
-        getWaterDroplet(1);
+        //与后台交互
+        toServer();
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    }
+                }
+        }.start();
+        //加载头像
+        circleAvatar();
         //2.判断多久未用本APP,修改dry值
         judgeNotGetWater();
         //3.根据2及成长值显示小葵花的生长状态、判断花盆状态
-        judgeProcess1(250,dryStatus);
-
-
+        judgeProcess1(processNum,dryStatus);
 
         //金鑫媛的部分
         jxypart();
-
     }
-
 
     @SuppressLint("ClickableViewAccessibility")
     private void jxypart() {
@@ -94,8 +120,6 @@ public class FarmActivity extends AppCompatActivity {
         tesk_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 mPhotoPopupWindow = new TeskPopupwindow(FarmActivity.this);
                 View rootView = LayoutInflater.from(FarmActivity.this).inflate(R.layout.sxn_farm_index, null);
                 mPhotoPopupWindow.showAtLocation(rootView,
@@ -106,7 +130,6 @@ public class FarmActivity extends AppCompatActivity {
         gift_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 GiftPopupwindow giftPopupwindow = new GiftPopupwindow(FarmActivity.this);
                 View rootView = LayoutInflater.from(FarmActivity.this).inflate(R.layout.sxn_farm_index, null);
                 gift_btn.startAnimation(btnanim);
@@ -114,17 +137,31 @@ public class FarmActivity extends AppCompatActivity {
 
             }
         });
-
         flowerWaterImg.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+                Log.d(waterNum+"66666666666666666666", "是否不点进入");
+                if (waterNum < 5) {
+                    Toast.makeText(getApplicationContext(), "水滴不够！", Toast.LENGTH_LONG).show();
+                } else {
                 switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         if (view.getId() == R.id.sxn_flower_water) {
-                            flowerWaterImg.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100).start();
+                            waterTheFlower();
                         }
                         break;
                     case MotionEvent.ACTION_UP:
+                        //浇水按钮的数据变化
+                        changeNums();
+                        //浇水后的水滴值、积分值的改变
+                        myUrl.sendToServerChange(getResources().getString(R.string.connUrl) +
+                                        "/EditFarm?uid=" + id + "&uprocess=" + processNum + "&uwater=" + waterNum,
+                                R.layout.sxn_mynickname);
+                        //显示在页面
+                        Log.e("进程数量",processNum+"xxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+                        grow.setText(processNum);
+                        processTxt.setText(processNum);
+                        waterTxt.setText(waterNum);
                         if (view.getId() == R.id.sxn_flower_water) {
                             flowerWaterImg.animate().scaleX(1).scaleY(1).setDuration(100).start();
                             Log.e("点击事件", "浇水");
@@ -169,14 +206,12 @@ public class FarmActivity extends AppCompatActivity {
                         break;
                     default:
                 }
+                }
                 return true;
             }
 
         });
-
-
     }
-
     class MyListener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
@@ -192,15 +227,19 @@ public class FarmActivity extends AppCompatActivity {
                     intent.setAction("loginBackMyself");
                     startActivityForResult(intent,0);
                     break;
-//                case R.id.sxn_flower_task:
-//                    //出现上拉框
-//                    break;
-//                case R.id.sxn_flower_water:
-//
-//
-//                    break;
             }
         }
+    }
+    //给花浇水动画实现
+    private void waterTheFlower(){
+        AnimationSet set = new AnimationSet(false);// 创建动画效果
+        TranslateAnimation translateAnimation=new TranslateAnimation(0,-80,0,-650);
+        translateAnimation.setDuration(1500);
+        RotateAnimation rotateAnimation= new RotateAnimation(0f,-20);
+        rotateAnimation.setDuration(1500);
+        set.addAnimation(translateAnimation);
+        set.addAnimation(rotateAnimation);
+        kettle.startAnimation(set);
     }
     //判断已经多少天未使用本软件（未收集水滴）
     private void judgeNotGetWater(){
@@ -218,8 +257,6 @@ public class FarmActivity extends AppCompatActivity {
                 flowerImg.setImageResource(R.drawable.farm_flower_3);
             } else if (250 < process1 || process1 == 250) {
                 flowerImg.setImageResource(R.drawable.farm_flower_4);
-                //交换礼物的按钮出现变化
-                giftSatus = 1;
             }
         } else if(dryStatus1==1) {
             //花枯萎
@@ -230,21 +267,19 @@ public class FarmActivity extends AppCompatActivity {
             flowerpotImg.setImageResource(R.drawable.farm_flower_dry2);
         }
     }
-    //获得当前用户的水滴（积分）
-    private int getWaterDroplet(int userId){
-        return 0;
-    }
-    //获得当前用户的成长值
-    private int getProcess(int userId){
-        return 0;
-    }
+
     //获取视图
     private void getViews(){
+        avatar=findViewById(R.id.farm_head);
         flowerImg=findViewById(R.id.sxn_flower);
         flowerpotImg=findViewById(R.id.sxn_flowerpot);
         flowerWaterImg=findViewById(R.id.sxn_flower_water);
         changeGiftImg=findViewById(R.id.sxn_change_gift);
         process=findViewById(R.id.sxn_process);
+        //积分值、成长值
+        waterTxt=findViewById(R.id.farm_water);
+        processTxt=findViewById(R.id.farm_process);
+
         taskBtn=findViewById(R.id.sxn_flower_task);
         kettle=findViewById(R.id.jxy_kettle);
         waterdrop=findViewById(R.id.jxy_waterdrop);
@@ -252,11 +287,35 @@ public class FarmActivity extends AppCompatActivity {
     }
     //点击事件
     private void registerClick(){
-
         listener=new MyListener();
         changeGiftImg.setOnClickListener(listener);
         changeGiftImg.setOnClickListener(listener);
         taskBtn.setOnClickListener(listener);
-//        flowerWaterImg.setOnClickListener(listener);
+        avatar.setOnClickListener(listener);
+    }
+    //加载头像
+    private void circleAvatar(){
+        bitmap= BitmapFactory.decodeResource(getResources(),R.mipmap.girl);
+        RequestOptions requestOptions=new RequestOptions().circleCrop();
+        Glide.with(this).load(new BitmapDrawable(bitmap)).apply(requestOptions).into(avatar);
+    }
+    //浇水动作进行时后台数据修改
+    private void changeNums(){
+        processNum=processNum+2;
+        waterNum=waterNum-5;
+    }
+    //与后台交互
+    private void toServer(){
+
+        id= Integer.parseInt(getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
+        if(intent!=null){
+            //获得头像
+            myUrl.sendToServerMyAch(getResources().getString(R.string.connUrl)+"/ReFreshMyInfomation?uid="+id,
+                    R.layout.activity_achieve,avatar,name);
+            Log.e("来了：","toserce");
+            //获得积分值、水滴值、干枯状态
+            myUrl.sendToServerFarmWater(getResources().getString(R.string.connUrl)+"/FarmIndex?uid="+id,
+                    R.layout.sxn_farm_index,waterTxt,processTxt,grow,processNum,waterNum);
+        }
     }
 }
