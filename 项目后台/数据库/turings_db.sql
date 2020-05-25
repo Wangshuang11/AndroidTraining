@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50506
 File Encoding         : 65001
 
-Date: 2020-05-15 11:45:49
+Date: 2020-05-25 15:20:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -134,7 +134,7 @@ CREATE TABLE `tbl_farm_gift` (
   `uname` varchar(50) DEFAULT NULL,
   `uaddress` varchar(100) DEFAULT NULL,
   `uphone` varchar(12) DEFAULT NULL,
-  `unumber` tinyint(4) DEFAULT NULL,
+  `size` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -181,7 +181,7 @@ CREATE TABLE `tbl_farm_score` (
 -- ----------------------------
 INSERT INTO `tbl_farm_score` VALUES ('1', '13', '10', '0');
 INSERT INTO `tbl_farm_score` VALUES ('3', '5', '56', '0');
-INSERT INTO `tbl_farm_score` VALUES ('2', '2', '140', '1');
+INSERT INTO `tbl_farm_score` VALUES ('2', '8', '140', '1');
 INSERT INTO `tbl_farm_score` VALUES ('4', '11', '100', '0');
 INSERT INTO `tbl_farm_score` VALUES ('5', '7', '240', '1');
 INSERT INTO `tbl_farm_score` VALUES ('6', '6', '266', '0');
@@ -348,7 +348,7 @@ CREATE TABLE `tbl_mistaken` (
   `uId` int(11) DEFAULT NULL,
   `content` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of tbl_mistaken
