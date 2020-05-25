@@ -58,6 +58,11 @@ public class CourseInfo {
 	public void setViews(int views) {
 		this.views = views;
 	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
 	
 
 	

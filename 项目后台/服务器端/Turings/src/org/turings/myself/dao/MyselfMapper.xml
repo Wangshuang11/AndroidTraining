@@ -4,6 +4,34 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace:映射器接口的全名 -->
 <mapper namespace="org.turings.myself.dao.MyselfMapper">
+	<!-- 添加礼物 -->
+	<resultMap type="org.turings.myself.entity.Gift" id="giftMap">
+		<id property="uid" column="id"/>
+		<result property="uname" column="giftName"/>
+		<result property="uaddress" column="giftAddr"/>
+		<result property="phone" column="phone"/>
+		<result property="size" column="giftId"/>
+	</resultMap>
+	<insert id="addGift">
+		insert into tbl_farm_gift(uid,uname,uaddress,uphone,size) values (#{id},#{gitfName},#{giftAddr},#{phone},#{giftId})
+	</insert>
+	<update id="updateProc">
+		update tbl_farm_score set uprocess=0 where uid=#{uid}
+	</update>
+	<!-- 显示农场信息 -->
+	<resultMap type="org.turings.myself.entity.Water" id="farmMap">
+		<id property="id" column="uid"/>
+		<result property="waterdrop" column="uwater"/>
+		<result property="process" column="uprocess"/>
+		<result property="dryStatus" column="status"/>
+	</resultMap>
+	<select id="showFarm" resultMap="farmMap">
+		select * from tbl_farm_score where uid=#{uid}
+	</select>
+	<!-- 更新农场信息 -->
+	<update id="updateFarm">
+		update tbl_farm_score set uwater=#{waterdrop},uprocess=#{process},status=#{dryStatus} where uid=#{id}
+	</update>
 	<!--显示全部课程-->
 	<resultMap type="org.turings.myself.entity.CourseInfo" id="courseMap">
 		<id property="id" column="parentid"/>
@@ -37,14 +65,14 @@
 	</insert>
 	<!-- 取消关注 -->
 	<delete id="delAttention">
-		delete * from tbl_self_fans where uId= #{uid} and fid=#{fid}
+		delete from tbl_self_fans where uId= #{uid} and fId=#{fid}
 	</delete>
 	<!-- 编辑座右铭 -->
 	<update id="editMotto">
 		update tbl_self_user set uMotto=#{umotto} where uId=#{uid}
 	</update>
 	<!-- 编辑网名 -->
-	<update id="edituName">
+	<update id="editName">
 		update tbl_self_user set uName=#{uname} where uId=#{uid}
 	</update>
 	<!-- 编辑头像 -->

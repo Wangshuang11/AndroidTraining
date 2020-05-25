@@ -9,16 +9,32 @@ import org.springframework.transaction.annotation.Transactional;
 import org.turings.login.entity.User;
 import org.turings.myself.dao.MyselfMapper;
 import org.turings.myself.entity.CourseInfo;
+import org.turings.myself.entity.Gift;
 import org.turings.myself.entity.Myself;
 import org.turings.myself.entity.SchoolInfo;
 import org.turings.myself.entity.UserInfo;
+import org.turings.myself.entity.Water;
 
 @Service
 @Transactional(readOnly=true)
 public class MyselfService {
 	@Resource
 	private MyselfMapper myselfMapper;
-	
+	//交换礼物
+	public int giftChange(Gift gift) {
+		return this.myselfMapper.addGift(gift);
+	}
+	public int giftChange1(Gift gift) {
+		return this.myselfMapper.updateProc(gift.getId());
+	}
+	//显示农场
+	public Water showFarm(int uid) {
+		return this.myselfMapper.showFarm(uid);
+	}
+	//添加农场
+	public int updateFarm(Water water) {
+		return this.myselfMapper.updateFarm(water);
+	}
 	//加载全部的课程
 	public List<CourseInfo> listAllCourses(int uid) {
 		return this.myselfMapper.listAllCourses(uid);
@@ -35,14 +51,21 @@ public class MyselfService {
 	public int addAttentions(int attentionId, int fanId) {
 		return this.myselfMapper.addAttention(attentionId,fanId);
 	}
+	//删除关注
+	public int delAttentions(int attentionId, int fanId) {
+		return this.myselfMapper.delAttention(attentionId,fanId);
+	}
 	//修改座右铭
-	public int editMotto(int uid, int uMotto) {
+	public int editMotto(int uid, String uMotto) {
 		return this.myselfMapper.editMotto(uid,uMotto);
 	}
 	//修改网名
-	public int edituName(int uid, int uName) {
-		return this.myselfMapper.edituName(uid,uName);
+	public int edituName(int uid, String uName) {
+		return this.myselfMapper.editName(uid,uName);
 	}
+	
+	
+	
 	
 	//金鑫媛2020/4/14注释
 /*	//显示学校

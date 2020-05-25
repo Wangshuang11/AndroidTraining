@@ -4,19 +4,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.xml.ws.Response;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.turings.login.entity.SendSms;
 import org.turings.myself.entity.CourseInfo;
+import org.turings.myself.entity.Gift;
 import org.turings.myself.entity.Myself;
 import org.turings.myself.entity.SchoolInfo;
 import org.turings.myself.entity.UserInfo;
+import org.turings.myself.entity.Water;
 import org.turings.myself.service.MyselfService;
 import org.turings.myself.service.UpdateAvatarService;
 
@@ -24,12 +29,70 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.PutObjectRequest;
 
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import sun.net.www.content.image.gif;
 
 @Controller
 public class MyselfController {
 	@Resource
 	private MyselfService myselfService;
+	@ResponseBody
+	//添加礼物信息
+		@Transactional(readOnly =false)
+		@RequestMapping(value="/ChangeGift",produces="text/json;charset=utf-8")
+		public  String giftChange(@RequestParam(value = "uid") int uid,
+				@RequestParam(value = "name") String name,
+				@RequestParam(value = "addr") String addr,
+				@RequestParam(value = "gid") int gid,
+				@RequestParam(value = "phone") String phone) {
+			Gift gift=new Gift();
+			gift.setId(uid);
+			gift.setGitfName(name);
+			gift.setGiftAddr(addr);
+			gift.setGiftId(gid);
+			gift.setPhone(phone);
+			int result= this.myselfService.giftChange(gift);
+			int result1= this.myselfService.giftChange1(gift);
+			if(result==1) {
+				return "true";
+			}else {
+				return "false";
+			}
+		}
+	//显示农场信息
+	@ResponseBody
+	@RequestMapping(value="/FarmIndex",produces="text/json;charset=utf-8")
+	public  String farmIndex(@RequestParam(value = "uid") int uid) {
+		Water water=new Water();
+		water=this.myselfService.showFarm(uid);
+		String json = JSONArray.fromObject(water).toString();
+		//去掉收尾的中括号
+		return json.substring(1, json.length()-1);
+		
+	}
+	//修改农场信息
+	@ResponseBody
+	@Transactional(readOnly =false)
+	@RequestMapping(value="/EditFarm",produces="text/json;charset=utf-8")
+	public  String editFarm(@RequestParam(value = "uid") int uid,
+			@RequestParam(value = "waterdrop") int waterdrop,
+			@RequestParam(value = "process") int process,
+			@RequestParam(value = "status") int status) {
+		Water water=new Water();
+		water.setId(uid);
+		water.setWaterdrop(waterdrop);
+		water.setDryStatus(status);
+		water.setProcess(process);
+		int result= this.myselfService.updateFarm(water);
+		
+		if(result==1) {
+			return "true";
+		}else {
+			return "false";
+		}
+	}
 	@ResponseBody
 	//显示全部课程
 	@RequestMapping(value="/GetCoursesList",produces="text/json;charset=utf-8")
@@ -57,6 +120,7 @@ public class MyselfController {
 		return json;
 	}
 	//添加关注
+	@Transactional(readOnly =false)
 	@ResponseBody
 	@RequestMapping(value="/SetAt",produces="text/json;charset=utf-8")
 	public String addAttention(@RequestParam(value = "aid") int attentionId,@RequestParam(value = "fid") int fanId) {
@@ -67,21 +131,23 @@ public class MyselfController {
 			return "false";
 		}
 	}
-//	//取消关注
-//	@ResponseBody
-//	@RequestMapping(value="/DelAt",produces="text/json;charset=utf-8")
-//	public String delAttention(@RequestParam(value = "aid") int attentionId,@RequestParam(value = "fid") int fanId) {
-//		int result= this.myselfService.delAttentions(attentionId,fanId);
-//		if(result==1) {
-//			return "true";
-//		}else {
-//			return "false";
-//		}
-//	}
+	//取消关注
+	@Transactional(readOnly =false)
+	@ResponseBody
+	@RequestMapping(value="/DelAt",produces="text/json;charset=utf-8")
+	public String delAttention(@RequestParam(value = "aid") int attentionId,@RequestParam(value = "fid") int fanId) {
+		int result= this.myselfService.delAttentions(attentionId,fanId);
+		if(result==1) {
+			return "true";
+		}else {
+			return "false";
+		}
+	}
 	//编辑座右铭
+	@Transactional(readOnly =false)
 	@ResponseBody
 	@RequestMapping(value="/EditMotto",produces="text/json;charset=utf-8")
-	public String editMotto(@RequestParam(value = "uid") int uid,@RequestParam(value = "umotto") int uMotto) {
+	public String editMotto(@RequestParam(value = "uid") int uid,@RequestParam(value = "umotto") String uMotto) {
 		int result= this.myselfService.editMotto(uid,uMotto);
 		if(result==1) {
 			return "true";
@@ -90,9 +156,10 @@ public class MyselfController {
 		}
 	}
 	//编辑网名
-	@ResponseBody
+	@Transactional(readOnly =false)
 	@RequestMapping(value="/EditUname",produces="text/json;charset=utf-8")
-	public String edituName(@RequestParam(value = "uid") int uid,@RequestParam(value = "uname") int uName) {
+	@ResponseBody
+	public String edituName(@RequestParam(value = "uid") int uid,@RequestParam(value = "uname") String uName) {
 		int result= this.myselfService.edituName(uid,uName);
 		if(result==1) {
 			return "true";

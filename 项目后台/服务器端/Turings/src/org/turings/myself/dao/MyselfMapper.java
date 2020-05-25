@@ -4,11 +4,20 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.turings.myself.entity.CourseInfo;
+import org.turings.myself.entity.Gift;
 import org.turings.myself.entity.Myself;
 import org.turings.myself.entity.SchoolInfo;
 import org.turings.myself.entity.UserInfo;
+import org.turings.myself.entity.Water;
 
 public interface MyselfMapper {
+	//添加礼物
+	public int addGift(Gift gift);
+	public int updateProc(@Param("uid")int uid);
+	//显示农场
+	public Water showFarm(@Param("uid")int uid);
+	//修改农场
+	public int updateFarm(Water water);
 	//加载用户全部课程
 	public List<CourseInfo> listAllCourses(@Param("uid")int uid);
 	//加载用户全部粉丝
@@ -18,11 +27,15 @@ public interface MyselfMapper {
 	//添加关注
 	public int addAttention(@Param("uid")int uid,@Param("fid")int fid);
 	//取消关注
-	public int delAttention(@Param("uid")int attentionId, @Param("fid")int fanId);
+	public int delAttention(@Param("uid")int uid, @Param("fid")int fid);
 	//编辑座右铭
-	public int editMotto(@Param("uid")int uid,@Param("umotto")int umotto);
+	public int editMotto(@Param("uid")int uid,@Param("umotto")String umotto);
 	//编辑网名
-	public int edituName(@Param("uid")int uid,@Param("uname")int uname);
+	public int editName(@Param("uid")int uid,@Param("uname")String uname);
+	
+	
+	
+
 	
 	//金鑫媛2020/4/14注释
 	/*//编辑头像
