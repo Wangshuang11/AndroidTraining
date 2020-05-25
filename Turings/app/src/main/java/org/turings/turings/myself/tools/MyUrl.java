@@ -21,8 +21,10 @@ import org.turings.turings.R;
 import org.turings.turings.index.gw.CouseXiangqing.CourseDetail;
 import org.turings.turings.myself.entity.Course;
 import org.turings.turings.myself.entity.Fan;
+import org.turings.turings.myself.entity.Gift;
 import org.turings.turings.myself.entity.School;
 import org.turings.turings.myself.entity.User;
+import org.turings.turings.myself.entity.Water;
 import org.turings.turings.near.Location.InformationActivity;
 
 import java.io.BufferedReader;
@@ -39,6 +41,7 @@ public class MyUrl {
     private List<Fan> fans;
     private List<School> schools;
     private User user;
+    private Water water;
     private List<Course> courses;
     private Gson gson;
     private Context mc;
@@ -55,15 +58,33 @@ public class MyUrl {
     private CourseAdapter courseAdapter;
     private Intent intent;
     private RequestOptions requestOptions;
+    //农场
+    private Gift gift;
+    private TextView waterT;
+    private TextView processT;
+    private TextView growT;
+    private int w1;
+    private int p1;
+    private TextView sentence;
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
+                case R.layout.sxn_farm_gift:
+                    break;
+                case R.layout.sxn_farm_index:
+                    info= (String) msg.obj;
+                    water=gson.fromJson(info, new TypeToken<Water>(){}.getType());
+                    waterT.setText(String.valueOf(water.getWaterdrop()));
+                    processT.setText(String.valueOf(water.getProcess()));
+                    growT.setText(String.valueOf(water.getProcess()));
+                    w1=water.getWaterdrop();
+                    p1=water.getProcess();
+                    break;
                 case R.layout.activity_achieve:
                     info= (String) msg.obj;
                     user=gson.fromJson(info, new TypeToken<User>(){}.getType());
                     Log.e("1234567",user.getName());
-                    name.setText(user.getName());
                     requestOptions=new RequestOptions().circleCrop();
                     Glide.with(mc).load(user.getAvatar()).apply(requestOptions).into(avatar);
                     break;
@@ -109,7 +130,7 @@ public class MyUrl {
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            //跳转粉丝个人你主页
+                            //跳转粉丝个人主页
                             intent=new Intent();
                             String name1=fans.get(position).getName();
                             intent.setClass(mc.getApplicationContext(), InformationActivity.class);
@@ -181,7 +202,7 @@ public class MyUrl {
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Log.e("点点","sssssssssssss");
+                            Log.e("点击粉丝item","sssssssssssss");
                         }
                     });
                     msg.what=layout;
@@ -280,6 +301,37 @@ public class MyUrl {
         };
         thread.start();
     }
-
+    public void sendToServerFarmWater(final String str, final int layout,
+                                      final TextView waterNum,final TextView processNum,final TextView growNum,
+                                      final int p,final int w) {
+        gson=new Gson();
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(str);
+                    URLConnection conn = url.openConnection();
+                    Log.e("1",conn.toString());
+                    InputStream in = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
+                     String info = reader.readLine();
+                    Message msg = Message.obtain();
+                    msg.obj = info;
+                    msg.what=layout;
+                    waterT=waterNum;
+                    processT=processNum;
+                    growT=growNum;
+                    w1=w;
+                    p1=p;
+                    handler.sendMessage(msg);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        thread.start();
+    }
 }
 
