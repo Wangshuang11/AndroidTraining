@@ -1,6 +1,8 @@
 package org.turings.turings.myself.sxn;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -23,6 +25,7 @@ public class MyFansActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         if (getSupportActionBar() != null) { getSupportActionBar().hide(); }
         super.onCreate(savedInstanceState);
+        spContext();
         setContentView(R.layout.sxn_activity_fans);
         myUrl=new MyUrl(this);
         getViews();
@@ -44,5 +47,10 @@ public class MyFansActivity extends AppCompatActivity {
         back=findViewById(R.id.sxn_fans_back);
     }
 
-
+    private void spContext(){
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("achStatus", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("status",1);
+        editor.commit();
+    }
 }

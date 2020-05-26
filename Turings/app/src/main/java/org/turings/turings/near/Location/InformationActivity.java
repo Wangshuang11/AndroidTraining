@@ -81,17 +81,17 @@ public class InformationActivity extends AppCompatActivity {
         resources = getResources();
         Intent intent = getIntent();
 
-        String portrait = intent.getStringExtra("touxiang");
-        String name = intent.getStringExtra("name");
-        int id = getResources().getIdentifier(portrait, "mipmap", getApplicationContext().getPackageName());
+//        String portrait = intent.getStringExtra("touxiang");
+//        String name = intent.getStringExtra("name");
+//        int id = getResources().getIdentifier(portrait, "mipmap", getApplicationContext().getPackageName());
 
         getViews();
         if (intent.getAction()!=null){
             btnGuanzhu_lyh.setText("已关注");
             count++;
         }
-        ivPortrait_lyh.setImageResource(id);
-        tvFollowName_lyh.setText(name);
+//        ivPortrait_lyh.setImageResource(id);
+//        tvFollowName_lyh.setText(name);
         registeLinstener();
         AnimationDrawable amDrawable = (AnimationDrawable) ivGuanzhu.getDrawable();
         amDrawable.start();
@@ -112,7 +112,9 @@ public class InformationActivity extends AppCompatActivity {
                 information = gson.fromJson(json, Information.class);
                 otherName = information.getUserName();
                 fid=information.getId();
-//                tvFollowName_lyh.setText(information.getUserName());
+                tvFollowName_lyh.setText(information.getUserName());
+                int id = getResources().getIdentifier(information.getPortrait(), "mipmap", getApplicationContext().getPackageName());
+                ivPortrait_lyh.setImageResource(id);
 //                Glide.with(getApplicationContext()).load(information.getPortrait()).into(ivPortrait_lyh);
                 tvTime_lyh.setText(String.valueOf(information.getTotalTime()));
                 tvCurrentTime_lyh.setText(String.valueOf(information.getCurrentTime()));

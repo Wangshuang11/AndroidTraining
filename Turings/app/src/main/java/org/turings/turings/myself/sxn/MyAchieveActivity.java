@@ -62,11 +62,11 @@ public class MyAchieveActivity extends AppCompatActivity {
         qq6 = findViewById(R.id.qq6);
         linstener = new MyLinstener();
         qq1.setOnClickListener(linstener);
-        qq2.setOnClickListener(linstener);
-        qq3.setOnClickListener(linstener);
-        qq4.setOnClickListener(linstener);
-        qq5.setOnClickListener(linstener);
-        qq6.setOnClickListener(linstener);
+//        qq2.setOnClickListener(linstener);
+//        qq3.setOnClickListener(linstener);
+//        qq4.setOnClickListener(linstener);
+//        qq5.setOnClickListener(linstener);
+//        qq6.setOnClickListener(linstener);
         startShakeByView(qq1,1,1.1f,10,1000);
         circleAvatar();
 
@@ -79,9 +79,11 @@ public class MyAchieveActivity extends AppCompatActivity {
         }
 
         Intent intent1=getIntent();
-        if (intent1.getAction() != null){
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("achStatus", Context.MODE_PRIVATE);
+        if (sharedPref.getInt("status",1)==2){
             qq1.setImageResource(R.mipmap.qq1);
             qq1.clearAnimation();
+            qq1.setClickable(false);
         }
 
         myUrl=new MyUrl(this);
@@ -173,9 +175,16 @@ public class MyAchieveActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+<<<<<<< Updated upstream
         super.onBackPressed();
         Intent intent = new Intent(MyAchieveActivity.this, MainActivity.class);
         intent.setAction("loginBackMyself");
         startActivity(intent);
+=======
+        Intent intent=new Intent();
+        intent.setClass(MyAchieveActivity.this, MainActivity.class);
+        intent.setAction("loginBackMyself");
+        startActivityForResult(intent,0);
+>>>>>>> Stashed changes
     }
 }
