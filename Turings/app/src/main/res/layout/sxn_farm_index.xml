@@ -17,19 +17,23 @@
             android:layout_marginTop="27dp">
             <!--点击头像，返回我的-->
             <LinearLayout
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/jxy_avatarbg"
                 android:elevation="2dp"
+                android:gravity="center_horizontal"
                 android:outlineProvider="background"
                 android:translationZ="1dp">
                 <org.turings.turings.near.entity.RoundImageView
+                    android:layout_marginTop="7dp"
                     android:id="@+id/farm_head"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="4dp"
+                    android:background="@drawable/avatar_shape"
                     android:src="@drawable/jxy_jifen"/>
             </LinearLayout>
 
@@ -45,7 +49,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="63dp"
+                android:layout_marginStart="73dp"
                 android:background="@drawable/jxy_bg0"
                 android:elevation="1dp"
                 android:outlineProvider="background"
@@ -199,7 +203,7 @@
                 android:text="成长值">
                 <LinearLayout
                     android:id="@+id/sxn_process"
-                    android:layout_width="100dp"
+                    android:layout_width="1dp"
                     android:layout_height="20dp"
                     android:layout_marginBottom="38dp"
                     android:background="@drawable/jxy_btn_lightblue"

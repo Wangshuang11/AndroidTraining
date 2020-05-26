@@ -5,10 +5,14 @@
     android:background="@drawable/farm_gift"
     android:orientation="vertical"
     android:id="@+id/sxn_gift_linear">
-
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -21,7 +25,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="150dp"
             android:layout_weight="11"
             android:orientation="vertical">
             <EditText
@@ -29,30 +33,31 @@
                 android:layout_width="190dp"
                 android:hint="收货姓名"
                 android:layout_height="40dp"
-                android:layout_marginTop="25dp"/>
+                android:layout_marginTop="5dp"/>
             <EditText
                 android:id="@+id/sxn_gift_phoneEdit"
                 android:layout_width="190dp"
                 android:hint="收货电话"
                 android:layout_height="40dp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="4dp"/>
 
             <EditText
                 android:id="@+id/sxn_gift_addrEdit"
                 android:hint="收货地址"
                 android:layout_width="190dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="4dp"/>
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/sxn_gift_converse"
-            android:layout_width="wrap_content"
+            android:layout_width="169dp"
             android:layout_height="110dp"
             android:layout_marginTop="10dp"
             android:layout_weight="8"
@@ -62,31 +67,39 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="120dp"
-            android:alpha="200"
-            android:layout_marginTop="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="44dp"
             android:layout_weight="5"
+            android:alpha="200"
             android:src="@drawable/farm_gift_pic" />
-    </LinearLayout>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"></LinearLayout>
+        android:layout_height="50dp">
+    </LinearLayout>
     <TextView
         android:id="@+id/sxn_gift_type"
         android:layout_width="wrap_content"
         android:text="小号礼物"
         android:layout_height="30dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="260dp"
+        android:layout_marginLeft="250dp"
         android:textColor="#000"
         android:textSize="21dp"/>
-    <Button
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="105dp">
+        <Button
             android:id="@+id/sxn_gift_ok_btn"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:layout_marginTop="50dp"
             android:layout_marginLeft="100dp"
             android:background="@drawable/sxn_gift_btn"
             android:text="OK"
             android:textColor="#fff"
             android:textSize="35dp" />
+    </RelativeLayout>
 </LinearLayout>

@@ -44,8 +44,10 @@
                 android:layout_height="70dp">
                     <ImageView
                         android:id="@+id/sxn_achieve_avatar"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/avatar_shape"
+                        android:padding="4dp"
                         android:gravity="center"></ImageView>
             </FrameLayout>
         </LinearLayout>
