@@ -32,21 +32,21 @@
                 android:id="@+id/sxn_gift_nameEdit"
                 android:layout_width="190dp"
                 android:hint="收货姓名"
-                android:layout_height="40dp"
+                android:layout_height="44dp"
                 android:layout_marginTop="5dp"/>
             <EditText
                 android:id="@+id/sxn_gift_phoneEdit"
                 android:layout_width="190dp"
                 android:hint="收货电话"
-                android:layout_height="40dp"
+                android:layout_height="44dp"
                 android:layout_marginTop="4dp"/>
 
             <EditText
                 android:id="@+id/sxn_gift_addrEdit"
                 android:hint="收货地址"
                 android:layout_width="190dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="4dp"/>
+                android:layout_height="44dp"
+                android:layout_marginTop="1dp"/>
         </LinearLayout>
     </RelativeLayout>
 
