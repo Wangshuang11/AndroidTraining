@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="150dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -24,14 +24,21 @@
             android:layout_marginLeft="20dp"
             android:layout_weight="11"
             android:orientation="vertical">
-
             <EditText
+                android:id="@+id/sxn_gift_nameEdit"
                 android:layout_width="190dp"
                 android:hint="收货姓名"
                 android:layout_height="40dp"
-                android:layout_marginTop="35dp"/>
+                android:layout_marginTop="25dp"/>
+            <EditText
+                android:id="@+id/sxn_gift_phoneEdit"
+                android:layout_width="190dp"
+                android:hint="收货电话"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"/>
 
             <EditText
+                android:id="@+id/sxn_gift_addrEdit"
                 android:hint="收货地址"
                 android:layout_width="190dp"
                 android:layout_height="40dp"
@@ -46,25 +53,37 @@
         <ImageView
             android:id="@+id/sxn_gift_converse"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="8"
             android:alpha="200"
             android:src="@drawable/farm_gift_converse" />
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="120dp"
             android:alpha="200"
             android:layout_marginTop="5dp"
             android:layout_weight="5"
             android:src="@drawable/farm_gift_pic" />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"></LinearLayout>
+    <TextView
+        android:id="@+id/sxn_gift_type"
+        android:layout_width="wrap_content"
+        android:text="小号礼物"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="260dp"
+        android:textColor="#000"
+        android:textSize="21dp"/>
     <Button
             android:id="@+id/sxn_gift_ok_btn"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:layout_marginTop="240dp"
+            android:layout_marginTop="50dp"
             android:layout_marginLeft="100dp"
             android:background="@drawable/sxn_gift_btn"
             android:text="OK"
