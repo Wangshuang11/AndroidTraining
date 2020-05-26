@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,11 +42,11 @@ public class GiftChangeActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (name.getText()==null || addr.getText()==null || phone.getText()==null){
-                    Toast.makeText(getApplicationContext(),"请完善信息！",Toast.LENGTH_LONG).show();
-                }else {
+                if (!(name.getText().toString().equals("") || addr.getText().toString().equals("") || phone.getText().toString().equals(""))){
                     toServer();
-                    Toast.makeText(getApplicationContext(),"信息获取成功！",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"信息获取成功!",Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(getApplicationContext(),"请完善信息!",Toast.LENGTH_LONG).show();
                 }
 
             }
