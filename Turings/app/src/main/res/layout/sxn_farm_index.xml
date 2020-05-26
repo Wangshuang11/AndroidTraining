@@ -59,7 +59,7 @@
                     android:textColor="@color/white"/>
 
                 <TextView
-                    android:id="@+id/farm_"
+                    android:id="@+id/farm_process"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -84,7 +84,7 @@
                     android:layout_height="35dp"
                     android:src="@drawable/jxy_jifen"/>
                 <TextView
-                    android:id="@+id/water"
+                    android:id="@+id/farm_water"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
