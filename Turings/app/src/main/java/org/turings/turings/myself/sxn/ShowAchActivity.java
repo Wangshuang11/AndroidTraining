@@ -37,11 +37,7 @@ public class ShowAchActivity extends AppCompatActivity {
             }
         }.start();
 
-<<<<<<< Updated upstream
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("achStatus",Context.MODE_PRIVATE);
-=======
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("achStatus", Context.MODE_PRIVATE);
->>>>>>> Stashed changes
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("status",2);
         editor.commit();

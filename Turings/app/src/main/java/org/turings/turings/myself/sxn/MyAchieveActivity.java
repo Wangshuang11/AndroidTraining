@@ -175,16 +175,9 @@ public class MyAchieveActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-<<<<<<< Updated upstream
-        super.onBackPressed();
-        Intent intent = new Intent(MyAchieveActivity.this, MainActivity.class);
-        intent.setAction("loginBackMyself");
-        startActivity(intent);
-=======
         Intent intent=new Intent();
         intent.setClass(MyAchieveActivity.this, MainActivity.class);
         intent.setAction("loginBackMyself");
         startActivityForResult(intent,0);
->>>>>>> Stashed changes
     }
 }
