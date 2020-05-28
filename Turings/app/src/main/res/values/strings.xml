@@ -6,12 +6,12 @@
     <!--        <string name="connUrl">http://192.168.2.170:8080/Turings</string>-->
     <!--        <string name="ipConfig">192.168.2.170</string>-->
     <!--        <string name="lphipConfig">192.168.2.170</string>-->
-<!--    <string name="connUrl">http://121.199.75.149:8080/Turings</string>-->
-<!--    <string name="ipConfig">121.199.75.149</string>-->
-<!--    <string name="lphipConfig">121.199.75.149</string>-->
-    <string name="connUrl">http://192.168.2.190:8080/Turings</string>
+    <string name="connUrl">http://121.199.75.149:8080/Turings</string>
+    <string name="ipConfig">121.199.75.149</string>
+    <string name="lphipConfig">121.199.75.149</string>
+   <!-- <string name="connUrl">http://192.168.2.190:8080/Turings</string>
     <string name="ipConfig">192.168.2.190</string>
-    <string name="lphipConfig">192.168.2.190</string>
+    <string name="lphipConfig">192.168.2.190</string>-->
 <!--    <string name="connUrl">http://121.199.75.149:8080/Turings</string>-->
 <!--    <string name="ipConfig">121.199.75.149</string>-->
 <!--    <string name="lphipConfig">121.199.75.149</string>-->

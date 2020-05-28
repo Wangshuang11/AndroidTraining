@@ -40,14 +40,8 @@
                 android:layout_width="40dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
-                android:src="@mipmap/caogaoylx" />
-            <ImageView
-                android:id="@+id/practise_calculator"
-                android:layout_width="40dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
                 android:layout_marginRight="20dp"
-                android:src="@mipmap/jisuanqiylx" />
+                android:src="@mipmap/caogaoylx" />
             <Chronometer
                 android:id="@+id/practise_tvTestTime"
                 android:layout_width="wrap_content"
