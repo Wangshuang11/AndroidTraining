@@ -49,17 +49,18 @@
             android:focusableInTouchMode="true">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="202dp">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp">
                 <ImageView
                     android:id="@+id/subjectImg_ylx"
                     android:layout_width="match_parent"
-                    android:layout_height="202dp"
+                    android:layout_height="wrap_content"
                     android:scaleType="fitXY"
                     android:visibility="gone"/>
                 <TextView
                     android:id="@+id/subjectText_ylx"
                     android:layout_width="match_parent"
-                    android:layout_height="202dp"
+                    android:layout_height="wrap_content"
                     android:text="题目"
                     android:textAlignment="textStart"
                     android:textSize="18sp"/>
