@@ -5,5 +5,5 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/qq3"/>
+        android:background="@drawable/viewpager2"/>
 </LinearLayout>

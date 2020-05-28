@@ -88,10 +88,12 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content" />
         </LinearLayout>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/comment_list"
             android:layout_width="match_parent"
-            android:layout_height="300dp"/>
+            android:layout_height="300dp" />
+
         <LinearLayout
             android:id="@+id/rl_comment"
             android:layout_width="match_parent"
