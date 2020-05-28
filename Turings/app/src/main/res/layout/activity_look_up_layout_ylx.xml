@@ -60,13 +60,13 @@
 
                         <ImageView
                             android:id="@+id/questionPic_ws"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true" />
 
                         <TextView
                             android:id="@+id/question_ws"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:singleLine="false"
                             android:layout_centerInParent="true"/>

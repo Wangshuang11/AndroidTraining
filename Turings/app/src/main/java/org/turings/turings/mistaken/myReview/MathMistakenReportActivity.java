@@ -214,10 +214,10 @@ public class MathMistakenReportActivity extends AppCompatActivity {
 
         //模拟数据
         ArrayList<BarEntry> yVals1 = new ArrayList<>();
-        yVals1.add(new BarEntry(0,33));
-        yVals1.add(new BarEntry(1,18));
-        yVals1.add(new BarEntry(2,26));
-        yVals1.add(new BarEntry(3,9));
+        yVals1.add(new BarEntry(0,3));
+        yVals1.add(new BarEntry(1,8));
+        yVals1.add(new BarEntry(2,2));
+        yVals1.add(new BarEntry(3,6));
         setData1(yVals1);
 
         //XY轴动画
@@ -298,11 +298,11 @@ public class MathMistakenReportActivity extends AppCompatActivity {
 
         // 获取的坐标数据集合
         List<Entry> entries = new ArrayList<>();
-        entries.add(new Entry(0,7));
-        entries.add(new Entry(1,18));
-        entries.add(new Entry(2,39));
-        entries.add(new Entry(3,23));
-        entries.add(new Entry(4,4));
+        entries.add(new Entry(0,3));
+        entries.add(new Entry(1,7));
+        entries.add(new Entry(2,5));
+        entries.add(new Entry(3,8));
+        entries.add(new Entry(4,2));
         //设置数据
         setData2(entries);
 
