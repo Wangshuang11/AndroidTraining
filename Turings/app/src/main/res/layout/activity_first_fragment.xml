@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_gravity="center_vertical"
-                android:textColor="@color/colorAccent"
+                android:textColor="#d71345"
                 android:id="@+id/day"
                 android:layout_width="26dp"
                 android:layout_height="wrap_content"/>
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_gravity="center_vertical"
-                android:textColor="@color/colorAccent"
+                android:textColor="#d71345"
                 android:id="@+id/hour"
                 android:layout_width="19dp"
                 android:layout_height="wrap_content"/>
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_gravity="center_vertical"
-                android:textColor="@color/colorAccent"
+                android:textColor="#d71345"
                 android:id="@+id/minute"
                 android:layout_width="19dp"
                 android:layout_height="wrap_content"/>
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_gravity="center_vertical"
-                android:textColor="@color/colorAccent"
+                android:textColor="#d71345"
                 android:id="@+id/second"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"/>
@@ -84,7 +84,7 @@
         </LinearLayout>
         <!--Turing精选-->
         <TextView
-            android:textColor="@color/colorAccent"
+            android:textColor="#d71345"
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
             android:text="TURNINGS精选"
