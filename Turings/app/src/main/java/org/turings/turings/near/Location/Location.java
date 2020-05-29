@@ -98,6 +98,5 @@ public class Location {
         MyLocationData locData = new MyLocationData.Builder().latitude(lat).longitude(lng).build();
         baiduMap.setMyLocationData(locData);
         //移动到中心位置
-        MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(new LatLng(lat,lng));
-    }
+        MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(new LatLng(lat,lng));    }
 }
