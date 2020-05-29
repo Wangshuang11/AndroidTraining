@@ -30,6 +30,7 @@ import com.hyphenate.exceptions.HyphenateException;
 
 import org.turings.turings.MainActivity;
 import org.turings.turings.R;
+import org.turings.turings.myself.sxn.MyFansActivity;
 import org.turings.turings.near.entity.DivergeView;
 import org.turings.turings.near.entity.Information;
 import org.turings.turings.near.entity.RoundImageView;
@@ -124,6 +125,14 @@ public class InformationActivity extends AppCompatActivity {
         };
 
         if (intent.getAction().equals("sxnToInfo")){
+            btnBack_lyh.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent1 = new Intent(InformationActivity.this, MyFansActivity.class);
+                    startActivity(intent1);
+                }
+            });
+
             sendToServer1(intent.getStringExtra("name"));
         }else{
             String lat1 = intent.getStringExtra("lat");

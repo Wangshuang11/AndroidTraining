@@ -28,7 +28,7 @@ public class QQActivity extends AppCompatActivity {
 //        chatFragment.setArguments(getIntent().getExtras());
         Bundle args = new Bundle();
         args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
-        args.putString(EaseConstant.EXTRA_USER_ID, "user1");
+        args.putString(EaseConstant.EXTRA_USER_ID, "USER");
         chatFragment.setArguments(args);
         getSupportFragmentManager().beginTransaction().add(R.id.container,chatFragment).commit();
 

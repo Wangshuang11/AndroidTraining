@@ -66,9 +66,11 @@ public class NearController {
 	//browseInfoServlet
 	@ResponseBody
 	@RequestMapping(value="/findOneByName",produces="text/json;charset=utf-8")
-	public String findOneByName(@RequestParam(value="userName") String name) {
+	public String findOneByName(@RequestParam(value="name") String name) {
+		System.out.println(name+"999999");
 		Information info = nearService.browseInfoByName(name);
 		Gson gson = new Gson();
+		System.out.println(gson+"sssssssss");
 		String json = gson.toJson(info);
 		return json;
 	}
