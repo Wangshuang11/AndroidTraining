@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:映射器接口的全名 -->
+<mapper namespace="org.turings.myself.farm.task.dao.TaskMapper">
+    <!-- 结果映射 -->
+    <resultMap type="org.turings.myself.farm.entity.MyTask" id="myTaskMapper">
+    	<result column="uid" property="uid"/>
+        <result column="islogin" property="islogin"/>
+        <result column="countmistaken" property="countmistaken"/>
+        <result column="iscourse" property="iscourse"/>
+        <result column="isschool" property="isschool"/>
+    </resultMap>
+    <select id="getMyTasks" resultMap="myTaskMapper">
+    	select * from tbl_myself_farm_task where uid = #{uid}
+    </select>
+    
+    <update id="refreshLoginTask">
+  		update tbl_myself_farm_task set islogin = 0
+  	</update>
+    
+    <update id="changeLoginStatus">
+  		update tbl_myself_farm_task set islogin = #{i} where uid = #{id}
+  	</update>
+  	
+    <update id="changeWater">
+  		update  tbl_farm_score  set uwater = uwater + (#{changeNum}) where uid = #{id}
+  	</update>
+</mapper>

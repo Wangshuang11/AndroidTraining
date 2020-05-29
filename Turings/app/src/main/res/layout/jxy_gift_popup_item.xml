@@ -253,12 +253,28 @@
         android:layout_height="40dp"
         android:layout_alignTop="@id/popup_bg"/>
 
-    <ImageView
-        android:id="@+id/icon_btn_camera"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/hidden_bg"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/jxy_icon"
-        android:textColor="@color/colorMainGreen" />
+        android:background="@drawable/jxy_bg_radius30"
+        android:elevation="1dp"
+        android:outlineProvider="background"
+        android:translationZ="1dp">
+        <ImageView
+            android:id="@+id/icon_btn_camera"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/jes_circleicon"
+            />
+    </LinearLayout>
+    <!--<ImageView-->
+        <!--android:id="@+id/icon_btn_camera"-->
+        <!--android:layout_width="60dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:layout_alignBottom="@+id/hidden_bg"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:src="@drawable/jxy_icon"-->
+        <!--android:textColor="@color/colorMainGreen" />-->
 </RelativeLayout>

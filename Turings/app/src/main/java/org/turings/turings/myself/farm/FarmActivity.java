@@ -60,7 +60,7 @@ public class FarmActivity extends AppCompatActivity {
     private int dryStatus=0;//非枯萎状态
     private Bitmap bitmap;
     private TextView name;
-    private TextView waterTxt;//水滴（积分）
+    public TextView waterTxt;//水滴（积分）
     private TextView processTxt;//成长值
     private int waterNum;
     private int processNum;
@@ -91,10 +91,10 @@ public class FarmActivity extends AppCompatActivity {
                 super.run();
                 try {
                     Thread.sleep(500);
-                    } catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
-                    }
                 }
+            }
         }.start();
         //加载头像
         circleAvatar();
@@ -141,54 +141,55 @@ public class FarmActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 Log.d(waterNum+"66666666666666666666", "是否不点进入");
-                if (waterNum < 5) {
-                    Toast.makeText(getApplicationContext(), "水滴不够！", Toast.LENGTH_LONG).show();
-                } else {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        if (view.getId() == R.id.sxn_flower_water) {
-                            waterTheFlower();
-                        }
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        //浇水按钮的数据变化
-                        changeNums();
-                        //浇水后的水滴值、积分值的改变
-                        myUrl.sendToServerChange(getResources().getString(R.string.connUrl) +
-                                        "/EditFarm?uid=" + id + "&uprocess=" + processNum + "&uwater=" + waterNum,
-                                R.layout.sxn_mynickname);
-                        //显示在页面
-                        Log.e("进程数量",processNum+"xxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-                        grow.setText(processNum);
-                        processTxt.setText(processNum);
-                        waterTxt.setText(waterNum);
-                        if (view.getId() == R.id.sxn_flower_water) {
-                            flowerWaterImg.animate().scaleX(1).scaleY(1).setDuration(100).start();
-                            Log.e("点击事件", "浇水");
+//                if (waterNum < 5) {
+//                    Toast.makeText(getApplicationContext(), "水滴不够！", Toast.LENGTH_LONG).show();
+//                } else {
+                    switch (motionEvent.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            if (view.getId() == R.id.sxn_flower_water) {
+//                                waterTheFlower();
+                                flowerWaterImg.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100).start();
+                            }
+                            break;
+                        case MotionEvent.ACTION_UP:
+                           /* //浇水按钮的数据变化
+                            changeNums();
+                            //浇水后的水滴值、积分值的改变
+                            myUrl.sendToServerChange(getResources().getString(R.string.connUrl) +
+                                            "/EditFarm?uid=" + id + "&uprocess=" + processNum + "&uwater=" + waterNum,
+                                    R.layout.sxn_mynickname);
+                            //显示在页面
+                            Log.e("进程数量",processNum+"xxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+                            grow.setText(processNum);
+                            processTxt.setText(processNum);
+                            waterTxt.setText(waterNum);*/
+                            if (view.getId() == R.id.sxn_flower_water) {
+                                flowerWaterImg.animate().scaleX(1).scaleY(1).setDuration(100).start();
+                                Log.e("点击事件", "浇水");
 //                            kettle.setAlpha(255);
 
-                            if (a != null) {
-                                Log.e("点击事件", "!=null");
-                                kettle.setImageResource(R.drawable.jxy_kettle0);
+                                if (a != null) {
+                                    Log.e("点击事件", waterNum+"");
+                                    kettle.setImageResource(R.drawable.jxy_kettle0);
 
-                                kettle.startAnimation(a);
-                                waterdrop.startAnimation(anim1);
+                                    kettle.startAnimation(a);
+                                    waterdrop.startAnimation(anim1);
 
 
-                                Integer width = process.getWidth();
-                                Log.e("宽度", width.toString());
-                                if (width <= 520) {
-                                    LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) process.getLayoutParams(); //取控件textView当前的布局参数 linearParams.height = 20;// 控件的高强制设成20
-                                    linearParams.width = width + 20;// 控件的宽强制设成30
-                                    process.setLayoutParams(linearParams); //使设置好的布局参数应用到控件
+                                    Integer width = process.getWidth();
+                                    Log.e("宽度", width.toString());
+                                    if (width <= 520) {
+                                        LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) process.getLayoutParams(); //取控件textView当前的布局参数 linearParams.height = 20;// 控件的高强制设成20
+                                        linearParams.width = width + 20;// 控件的宽强制设成30
+                                        process.setLayoutParams(linearParams); //使设置好的布局参数应用到控件
+                                    }
+                                    Integer grownumber = Integer.parseInt(grow.getText().toString()) + 20;
+                                    grow.setText(grownumber.toString());
+                                    //                        process.setLayoutParams(width+20);
+
+                                    Glide.with(FarmActivity.this).load(R.drawable.jxy_waterdrop).into(waterdrop);
+                                    //                        waterdrop.setImageResource(R.drawable.jxy_waterdrop);
                                 }
-                                Integer grownumber = Integer.parseInt(grow.getText().toString()) + 20;
-                                grow.setText(grownumber.toString());
-                                //                        process.setLayoutParams(width+20);
-
-                                Glide.with(FarmActivity.this).load(R.drawable.jxy_waterdrop).into(waterdrop);
-                                //                        waterdrop.setImageResource(R.drawable.jxy_waterdrop);
-                            }
 //                            new Thread() {
 //                                @Override
 //                                public void run() {
@@ -202,11 +203,11 @@ public class FarmActivity extends AppCompatActivity {
 //                                    waterdrop.setAlpha(0);
 //                                }
 //                            }.start();
-                        }
-                        break;
-                    default:
-                }
-                }
+                            }
+                            break;
+                        default:
+                    }
+//                }
                 return true;
             }
 
