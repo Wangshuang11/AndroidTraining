@@ -7,9 +7,7 @@
     >
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:background="#f1f1f1">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -44,11 +42,12 @@
 
 
             <TextView
-
+                android:textColor="#000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="检测更新"
+                android:padding="4dp"
                 android:layout_alignParentLeft="true"
                  />
 
@@ -57,7 +56,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="已是最新版本"
-                android:textSize="20dp"
+                android:padding="4dp"
+                android:textSize="19dp"
                 android:layout_alignParentEnd="true"/>
 
     </RelativeLayout>
@@ -79,14 +79,17 @@
             android:textSize="20dp"
             android:text="当前版本号"
             android:layout_alignParentLeft="true"
+            android:textColor="#000"
+            android:padding="4dp"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="小葵花 1.0"
-            android:textSize="20dp"
+            android:text="小葵花 2.0"
+            android:textSize="19dp"
+            android:padding="4dp"
             android:layout_alignParentEnd="true"/>
 
     </RelativeLayout>
@@ -108,13 +111,17 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:text="版权信息"
+            android:textColor="#000"
+            android:padding="4dp"
             android:layout_alignParentLeft="true"
             />
 
         <ImageView
             android:id="@+id/bjqr"
-            android:layout_width="20dp"
+            android:layout_width="25dp"
             android:layout_height="20dp"
+            android:padding="3dp"
+            android:layout_marginTop="5dp"
             android:layout_alignParentEnd="true"
             android:src="@drawable/rightb" />
 
@@ -122,7 +129,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="290dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="3dp"
@@ -137,12 +144,16 @@
             android:id="@+id/textb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="15dp"
+            android:padding="4dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#000"
             android:text="分享小葵花给好友"/>
 
         <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/qq11"/>
 
