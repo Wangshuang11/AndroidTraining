@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -28,11 +29,21 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.turings.turings.R;
 import org.turings.turings.MainActivity;
+import org.turings.turings.myself.entity.Water;
 import org.turings.turings.myself.tools.MyUrl;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -73,6 +84,28 @@ public class FarmActivity extends AppCompatActivity {
     private Animation a;
     private Animation anim1;
     private Animation btnanim;
+    //存数据到内存
+    private Water water;
+    private String info;
+    private Gson gson;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 100:
+                    break;
+                //获得farm的值
+                case 200:
+                    info= (String) msg.obj;
+                    water=gson.fromJson(info, new TypeToken<Water>(){}.getType());
+                    waterTxt.setText(String.valueOf(water.getWaterdrop()));
+                    processTxt.setText(String.valueOf(water.getProcess()));
+                    grow.setText(String.valueOf(water.getProcess()));
+                    break;
+
+            }
+        }
+    };
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         if (getSupportActionBar() != null) { getSupportActionBar().hide(); }
@@ -85,17 +118,6 @@ public class FarmActivity extends AppCompatActivity {
         registerClick();
         //与后台交互
         toServer();
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
         //加载头像
         circleAvatar();
         //2.判断多久未用本APP,修改dry值
@@ -140,10 +162,9 @@ public class FarmActivity extends AppCompatActivity {
         flowerWaterImg.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                Log.d(waterNum+"66666666666666666666", "是否不点进入");
-//                if (waterNum < 5) {
-//                    Toast.makeText(getApplicationContext(), "水滴不够！", Toast.LENGTH_LONG).show();
-//                } else {
+                if(water.getWaterdrop()<5){
+                    Toast.makeText(getApplicationContext(),"旱了旱了,水滴不够",Toast.LENGTH_SHORT).show();
+                }else {
                     switch (motionEvent.getAction()) {
                         case MotionEvent.ACTION_DOWN:
                             if (view.getId() == R.id.sxn_flower_water) {
@@ -152,29 +173,16 @@ public class FarmActivity extends AppCompatActivity {
                             }
                             break;
                         case MotionEvent.ACTION_UP:
-                           /* //浇水按钮的数据变化
-                            changeNums();
-                            //浇水后的水滴值、积分值的改变
-                            myUrl.sendToServerChange(getResources().getString(R.string.connUrl) +
-                                            "/EditFarm?uid=" + id + "&uprocess=" + processNum + "&uwater=" + waterNum,
-                                    R.layout.sxn_mynickname);
-                            //显示在页面
-                            Log.e("进程数量",processNum+"xxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-                            grow.setText(processNum);
-                            processTxt.setText(processNum);
-                            waterTxt.setText(waterNum);*/
                             if (view.getId() == R.id.sxn_flower_water) {
                                 flowerWaterImg.animate().scaleX(1).scaleY(1).setDuration(100).start();
                                 Log.e("点击事件", "浇水");
-//                            kettle.setAlpha(255);
-
+                                //kettle.setAlpha(255);
                                 if (a != null) {
-                                    Log.e("点击事件", waterNum+"");
+                                    Log.e("点击事件", waterNum + "");
                                     kettle.setImageResource(R.drawable.jxy_kettle0);
 
                                     kettle.startAnimation(a);
                                     waterdrop.startAnimation(anim1);
-
 
                                     Integer width = process.getWidth();
                                     Log.e("宽度", width.toString());
@@ -190,24 +198,16 @@ public class FarmActivity extends AppCompatActivity {
                                     Glide.with(FarmActivity.this).load(R.drawable.jxy_waterdrop).into(waterdrop);
                                     //                        waterdrop.setImageResource(R.drawable.jxy_waterdrop);
                                 }
-//                            new Thread() {
-//                                @Override
-//                                public void run() {
-//                                    super.run();
-//                                    try {
-//                                        Thread.sleep(1000);
-//                                    } catch (InterruptedException e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                    kettle.setAlpha(0);
-//                                    waterdrop.setAlpha(0);
-//                                }
-//                            }.start();
                             }
+                            //浇水后的水滴值、积分值的改变
+                            myUrl.sendToServerChange(getResources().getString(R.string.connUrl) +
+                                            "/EditFarm?uid=" + id + "&process=" + (water.getProcess()+2) + "&waterdrop=" +(water.getWaterdrop()-5)+"&status=0",
+                                    R.layout.sxn_mynickname);
+                            sendToServerFarmWater(getResources().getString(R.string.connUrl)+"/FarmIndex?uid="+id);
                             break;
                         default:
                     }
-//                }
+                }
                 return true;
             }
 
@@ -217,11 +217,6 @@ public class FarmActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-//                case R.id.sxn_change_gift:
-//                    //跳转交换礼物（当无法交换礼物时，可以理解规则，可以交换礼物时进行填信息交换）
-//                    intent.setClass(FarmActivity.this, GiftChangeActivity.class);
-//                    startActivity(intent);
-//                    break;
                 case R.id.farm_head:
                     //跳转主页或fragment
                     intent.setClass(FarmActivity.this, MainActivity.class);
@@ -268,7 +263,6 @@ public class FarmActivity extends AppCompatActivity {
             flowerpotImg.setImageResource(R.drawable.farm_flower_dry2);
         }
     }
-
     //获取视图
     private void getViews(){
         avatar=findViewById(R.id.farm_head);
@@ -300,14 +294,8 @@ public class FarmActivity extends AppCompatActivity {
         RequestOptions requestOptions=new RequestOptions().circleCrop();
         Glide.with(this).load(new BitmapDrawable(bitmap)).apply(requestOptions).into(avatar);
     }
-    //浇水动作进行时后台数据修改
-    private void changeNums(){
-        processNum=processNum+2;
-        waterNum=waterNum-5;
-    }
     //与后台交互
     private void toServer(){
-
         id= Integer.parseInt(getSharedPreferences("userInfo",MODE_PRIVATE).getString("uId","0"));
         if(intent!=null){
             //获得头像
@@ -315,8 +303,32 @@ public class FarmActivity extends AppCompatActivity {
                     R.layout.activity_achieve,avatar,name);
             Log.e("来了：","toserce");
             //获得积分值、水滴值、干枯状态
-            myUrl.sendToServerFarmWater(getResources().getString(R.string.connUrl)+"/FarmIndex?uid="+id,
-                    R.layout.sxn_farm_index,waterTxt,processTxt,grow,processNum,waterNum);
+            sendToServerFarmWater(getResources().getString(R.string.connUrl)+"/FarmIndex?uid="+id);
         }
+    }
+    private void sendToServerFarmWater(final String str) {
+        gson=new Gson();
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(str);
+                    URLConnection conn = url.openConnection();
+                    Log.e("1",conn.toString());
+                    InputStream in = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
+                    String info = reader.readLine();
+                    Message msg = Message.obtain();
+                    msg.obj = info;
+                    msg.what=200;
+                    handler.sendMessage(msg);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        thread.start();
     }
 }
