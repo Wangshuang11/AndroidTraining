@@ -2,6 +2,7 @@ package org.turings.turings.myself.tools;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -38,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyUrl {
+    private int id;
     private List<Fan> fans;
     private List<School> schools;
     private User user;
@@ -63,23 +65,15 @@ public class MyUrl {
     private TextView waterT;
     private TextView processT;
     private TextView growT;
-    private int w1;
     private int p1;
+    private int w1;
+    private SharedPreferences sharedPreferences;
     private TextView sentence;
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
-                case R.layout.sxn_farm_gift:
-                    break;
-                case R.layout.sxn_farm_index:
-                    info= (String) msg.obj;
-                    water=gson.fromJson(info, new TypeToken<Water>(){}.getType());
-                    waterT.setText(String.valueOf(water.getWaterdrop()));
-                    processT.setText(String.valueOf(water.getProcess()));
-                    growT.setText(String.valueOf(water.getProcess()));
-                    w1=water.getWaterdrop();
-                    p1=water.getProcess();
+                case R.layout.sxn_mynickname:
                     break;
                 case R.layout.activity_achieve:
                     info= (String) msg.obj;
@@ -132,10 +126,10 @@ public class MyUrl {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             //跳转粉丝个人主页
                             intent=new Intent();
-                            String name1=fans.get(position).getName();
+                            id=fans.get(position).getId();
                             intent.setClass(mc.getApplicationContext(), InformationActivity.class);
                             intent.setAction("sxnToInfo");
-                            intent.putExtra("name",name1);
+                            intent.putExtra("fanId",id);
                             mc.startActivity(intent);
 
                         }
@@ -154,10 +148,10 @@ public class MyUrl {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             //跳转粉丝个人你主页
                             intent=new Intent();
-                            String name1=fans.get(position).getName();
+                            id=fans.get(position).getId();
                             intent.setClass(mc.getApplicationContext(), InformationActivity.class);
                             intent.setAction("sxnToInfo");
-                            intent.putExtra("name",name1);
+                            intent.putExtra("fanId",id);
                             mc.startActivity(intent);
                         }
                     });
@@ -174,7 +168,7 @@ public class MyUrl {
                     Glide.with(mc).load(user.getAvatar()).apply(requestOptions).into(avatar);
                     fanC.setText(String.valueOf(user.getFancount()));
                     concernC.setText(String.valueOf(user.getConcount()));
-                    achieveC.setText(String.valueOf(user.getAchcount()));
+                    achieveC.setText("1");
                     break;
             }
         }
@@ -226,7 +220,6 @@ public class MyUrl {
                 try {
                     URL url = new URL(str);
                     URLConnection conn = url.openConnection();
-                    Log.e("1",conn.toString());
                     InputStream in = conn.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
                     String info = reader.readLine();
@@ -291,38 +284,6 @@ public class MyUrl {
                     msg.what=layout;
                     name=uName;
                     avatar=uAvatar;
-                    handler.sendMessage(msg);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        thread.start();
-    }
-    public void sendToServerFarmWater(final String str, final int layout,
-                                      final TextView waterNum,final TextView processNum,final TextView growNum,
-                                      final int p,final int w) {
-        gson=new Gson();
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(str);
-                    URLConnection conn = url.openConnection();
-                    Log.e("1",conn.toString());
-                    InputStream in = conn.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, "utf-8"));
-                     String info = reader.readLine();
-                    Message msg = Message.obtain();
-                    msg.obj = info;
-                    msg.what=layout;
-                    waterT=waterNum;
-                    processT=processNum;
-                    growT=growNum;
-                    w1=w;
-                    p1=p;
                     handler.sendMessage(msg);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
