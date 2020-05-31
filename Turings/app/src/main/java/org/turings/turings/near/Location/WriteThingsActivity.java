@@ -163,7 +163,8 @@ public class WriteThingsActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.btnBack_lyh:
-                    finish();
+                    Intent intent1 = new Intent(WriteThingsActivity.this,WriteActivity.class);
+                    startActivity(intent1);
                     break;
                 case R.id.btnOk:
                     SharedPreferences sharedPreferences=getSharedPreferences("userInfo",MODE_PRIVATE);
@@ -207,5 +208,11 @@ public class WriteThingsActivity extends AppCompatActivity {
         Message msg = Message.obtain();
         msg.obj = info;
         handler.sendMessage(msg);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(WriteThingsActivity.this,WriteActivity.class);
+        startActivity(intent);
     }
 }

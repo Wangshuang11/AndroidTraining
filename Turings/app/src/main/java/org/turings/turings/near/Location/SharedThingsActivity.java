@@ -90,6 +90,7 @@ public class SharedThingsActivity extends AppCompatActivity {
             public void onButtonClicked(int index) {
                 switch (index){
                     case 1:
+                        showToast("收藏成功");
                         break;
                     case 2:
                         Intent intent1 = new Intent(SharedThingsActivity.this, CommentActivity.class);
@@ -109,7 +110,6 @@ public class SharedThingsActivity extends AppCompatActivity {
 
             @Override
             public void onCollapse() {
-                showToast("收藏成功");
             }
         });
     }

@@ -108,7 +108,7 @@ public class NearController {
 	@ResponseBody
 	@RequestMapping(value="/insertShare",produces="text/json;charset=utf-8")
 	public int insertShare(@RequestParam(value="userName") String userName,@RequestParam(value="title") String title
-			,@RequestParam(value="content") String content,@RequestParam(value="background);") String background) {
+			,@RequestParam(value="content") String content,@RequestParam(value="background") String background) {
 		int info = nearService.insertShare(userName, title, content, background);
 		return info;
 	}
