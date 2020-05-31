@@ -152,11 +152,14 @@ public class FarmActivity extends AppCompatActivity {
         gift_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GiftPopupwindow giftPopupwindow = new GiftPopupwindow(FarmActivity.this);
-                View rootView = LayoutInflater.from(FarmActivity.this).inflate(R.layout.sxn_farm_index, null);
-                gift_btn.startAnimation(btnanim);
-                giftPopupwindow.showAtLocation(rootView,Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-
+                if(water.getProcess()<140){
+                    Toast.makeText(getApplicationContext(),"积分值不够哟",Toast.LENGTH_SHORT).show();
+                }else {
+                    GiftPopupwindow giftPopupwindow = new GiftPopupwindow(FarmActivity.this);
+                    View rootView = LayoutInflater.from(FarmActivity.this).inflate(R.layout.sxn_farm_index, null);
+                    gift_btn.startAnimation(btnanim);
+                    giftPopupwindow.showAtLocation(rootView, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                }
             }
         });
         flowerWaterImg.setOnTouchListener(new View.OnTouchListener() {
