@@ -202,12 +202,12 @@ public class InformationActivity extends AppCompatActivity {
                     count++;
                     SharedPreferences sharedPreferences=getApplicationContext().getSharedPreferences("userInfo",MODE_PRIVATE);
                     aid= Integer.parseInt(sharedPreferences.getString("uId",""));
-                    if (count%2 == 0){
+                    if (count%2 != 0){
                         btnGuanzhu_lyh.setText("+ 关 注");
-                        sendToServer3(aid,fid);
+                        sendToServer3(fid,aid);
                     }else {
                         btnGuanzhu_lyh.setText("已关注");
-                        sendToServer2(aid,fid);
+//                        sendToServer2(fid,aid);
                     }
                     break;
             }

@@ -19,12 +19,15 @@
 		select * from tbl_share where sharetitle=#{title}
 	</select>
 	
-	<insert id="insertShare" useGeneratedKeys="true" parameterType="org.turings.near.entity.Share">
-		<selectKey resultType="int" keyProperty="id" order="AFTER">
+	<insert id="insertShare" parameterType="org.turings.near.entity.Share">
+		<!-- <selectKey resultType="int" keyProperty="id" order="AFTER">
 			select last_insert_id()
-		</selectKey>
-		insert into tbl_share (username,sharetitle,sharecontent,background) 
-		values (#{userName},#{title},#{content},#{background})
+		</selectKey> -->
+		<!-- insert into tbl_share (id,username,sharetitle,sharecontent,background) 
+		values (null,#{userName},#{title},#{content},#{background})-->
+		
+		insert into tbl_share (id,username,sharetitle,sharecontent,background) 
+		values (null,'王大爽','哈哈哈','哈哈哈','bj1') 
 	</insert>
 	
 	

@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.turings.turings.MainActivity;
 import org.turings.turings.R;
 import org.turings.turings.near.Adapter.AdepterDemo;
 import org.turings.turings.near.entity.Share;
@@ -50,7 +51,9 @@ public class WriteActivity extends AppCompatActivity {
         btnBack_lyh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(WriteActivity.this, MainActivity.class);
+                intent.setAction("loginBackMyself");
+                startActivity(intent);
             }
         });
         ivInsert_lyh.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +63,6 @@ public class WriteActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
         handler = new Handler() {
             @Override
@@ -74,9 +76,13 @@ public class WriteActivity extends AppCompatActivity {
             }
         };
 
-        SharedPreferences sharedPreferences=getSharedPreferences("userInfo",MODE_PRIVATE);
+        Intent intent = getIntent();
+        if (intent.getAction() == null){
+            SharedPreferences sharedPreferences=getSharedPreferences("userInfo",MODE_PRIVATE);
 
-        sendToServer(sharedPreferences.getString("name",""));
+            sendToServer(sharedPreferences.getString("name",""));
+        }
+
     }
 
     private void getViews() {

@@ -129,7 +129,7 @@ public class MyUrl {
                             id=fans.get(position).getId();
                             intent.setClass(mc.getApplicationContext(), InformationActivity.class);
                             intent.setAction("sxnToInfo");
-                            intent.putExtra("fanId",id);
+                            intent.putExtra("name",fans.get(position).getName());
                             mc.startActivity(intent);
 
                         }
@@ -151,7 +151,7 @@ public class MyUrl {
                             id=fans.get(position).getId();
                             intent.setClass(mc.getApplicationContext(), InformationActivity.class);
                             intent.setAction("sxnToInfo");
-                            intent.putExtra("fanId",id);
+                            intent.putExtra("name",fans.get(position).getName());
                             mc.startActivity(intent);
                         }
                     });

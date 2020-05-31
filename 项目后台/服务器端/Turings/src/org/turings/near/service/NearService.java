@@ -88,6 +88,7 @@ public class NearService {
 	 */
 	@Transactional(readOnly = false)
 	public int insertShare(String userName,String title,String content,String background) {
+		System.out.println(userName+title+content+background+"hhhhhhhhhhhhhhhhhhhh");
 		return shareMapper.insertShare(userName, title, content, background);
 	}
 	

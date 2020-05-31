@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import org.turings.turings.MainActivity;
 import org.turings.turings.R;
 
 import java.io.BufferedReader;
@@ -163,7 +164,9 @@ public class WriteThingsActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.btnBack_lyh:
-                    finish();
+                    Intent intent1 = new Intent(WriteThingsActivity.this, MainActivity.class);
+                    intent1.setAction("loginBackMyself");
+                    startActivity(intent1);
                     break;
                 case R.id.btnOk:
                     SharedPreferences sharedPreferences=getSharedPreferences("userInfo",MODE_PRIVATE);
@@ -207,5 +210,12 @@ public class WriteThingsActivity extends AppCompatActivity {
         Message msg = Message.obtain();
         msg.obj = info;
         handler.sendMessage(msg);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent1 = new Intent(WriteThingsActivity.this, MainActivity.class);
+        intent1.setAction("loginBackMyself");
+        startActivity(intent1);
     }
 }
