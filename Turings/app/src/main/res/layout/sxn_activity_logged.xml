@@ -188,14 +188,14 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp">
+            android:paddingRight="9dp"
+            android:paddingLeft="9dp">
             <ImageView
                 android:id="@+id/ivSchoolLeft_ws"
                 android:src="@mipmap/myselfschool"
                 android:layout_margin="10dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"></ImageView>
             <TextView
@@ -254,7 +254,7 @@
             android:paddingLeft="10dp">
             <ImageView
                 android:id="@+id/ivShareLeft_ws"
-                android:src="@mipmap/myselfshare"
+                android:src="@mipmap/myelfshare"
                 android:layout_margin="10dp"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
