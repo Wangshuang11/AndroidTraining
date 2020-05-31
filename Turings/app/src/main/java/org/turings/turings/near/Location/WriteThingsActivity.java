@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import org.turings.turings.MainActivity;
 import org.turings.turings.R;
 
 import java.io.BufferedReader;
@@ -163,7 +164,8 @@ public class WriteThingsActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.btnBack_lyh:
-                    Intent intent1 = new Intent(WriteThingsActivity.this,WriteActivity.class);
+                    Intent intent1 = new Intent(WriteThingsActivity.this, MainActivity.class);
+                    intent1.setAction("loginBackMyself");
                     startActivity(intent1);
                     break;
                 case R.id.btnOk:
@@ -212,7 +214,8 @@ public class WriteThingsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(WriteThingsActivity.this,WriteActivity.class);
-        startActivity(intent);
+        Intent intent1 = new Intent(WriteThingsActivity.this, MainActivity.class);
+        intent1.setAction("loginBackMyself");
+        startActivity(intent1);
     }
 }
