@@ -238,7 +238,7 @@ public class TestResultActivity extends AppCompatActivity implements View.OnClic
                     +"\n"+subjectMsg.get(position).getOptionB()+"\n"
                     +subjectMsg.get(position).getOptionC()+"\n"
                     +subjectMsg.get(position).getOptionD());
-            switch (result.get(list.get(position))){
+            switch (Integer.parseInt(String.valueOf(choosesStated.get(list.get(position))))){
                 case 0:
                     textView1.setText("您此题没有选择答案");
                     break;

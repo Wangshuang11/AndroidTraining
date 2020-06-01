@@ -2,7 +2,9 @@ package org.turings.turings.mistaken;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +39,11 @@ public class ViewDownloadedPapersActivity extends AppCompatActivity {
     {
         File file = new File(Path);
         Intent intent = new Intent("android.intent.action.VIEW");
+        // 这是比较流氓的方法，绕过7.0的文件权限检查
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+        }
         intent.addCategory("android.intent.category.DEFAULT");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Uri uri = Uri.fromFile(file);
