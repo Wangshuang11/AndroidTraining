@@ -127,10 +127,10 @@
                 android:background="@drawable/jxy_textbg">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="220dp"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="点我会说一些话哦" />
+                    android:text="小葵花爸爸课堂开课了，撸起袖子加油干就完事了！" />
             </RelativeLayout>
             <!--花成熟后换礼物，之后清零-->
             <ImageView
