@@ -24,6 +24,7 @@ import org.turings.myself.entity.UserInfo;
 import org.turings.myself.entity.Water;
 import org.turings.myself.service.MyselfService;
 import org.turings.myself.service.UpdateAvatarService;
+import org.turings.near.entity.Information;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
@@ -72,19 +73,30 @@ public class MyselfController {
 		return json.substring(1, json.length()-1);
 		
 	}
+	//显示农场信息
+		@ResponseBody
+		@RequestMapping(value="/fanDetail",produces="text/json;charset=utf-8")
+		public  String fanDetail(@RequestParam(value = "uid") int uid) {
+			Information information=new Information();
+			information=this.myselfService.showFanDetail(uid);
+			String json = JSONArray.fromObject(information).toString();
+			//去掉收尾的中括号
+			return json.substring(1, json.length()-1);
+			
+		}
 	//修改农场信息
 	@ResponseBody
 	@Transactional(readOnly =false)
 	@RequestMapping(value="/EditFarm",produces="text/json;charset=utf-8")
 	public  String editFarm(@RequestParam(value = "uid") int uid,
 			@RequestParam(value = "waterdrop") int waterdrop,
-			@RequestParam(value = "process") int process,
-			@RequestParam(value = "status") int status) {
+			@RequestParam(value = "process") int process) {
 		Water water=new Water();
 		water.setId(uid);
 		water.setWaterdrop(waterdrop);
-		water.setDryStatus(status);
+		water.setDryStatus(0);
 		water.setProcess(process);
+		System.out.println(process+"2222222222222222222222");
 		int result= this.myselfService.updateFarm(water);
 		
 		if(result==1) {

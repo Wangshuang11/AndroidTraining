@@ -9,6 +9,7 @@ import org.turings.myself.entity.Myself;
 import org.turings.myself.entity.SchoolInfo;
 import org.turings.myself.entity.UserInfo;
 import org.turings.myself.entity.Water;
+import org.turings.near.entity.Information;
 
 public interface MyselfMapper {
 	//添加礼物
@@ -32,6 +33,8 @@ public interface MyselfMapper {
 	public int editMotto(@Param("uid")int uid,@Param("umotto")String umotto);
 	//编辑网名
 	public int editName(@Param("uid")int uid,@Param("uname")String uname);
+	//显示粉丝详情
+	public Information showFanDetail(@Param("uid")int uid);
 	
 	
 	

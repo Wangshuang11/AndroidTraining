@@ -14,6 +14,7 @@ import org.turings.myself.entity.Myself;
 import org.turings.myself.entity.SchoolInfo;
 import org.turings.myself.entity.UserInfo;
 import org.turings.myself.entity.Water;
+import org.turings.near.entity.Information;
 
 @Service
 @Transactional(readOnly=true)
@@ -62,6 +63,10 @@ public class MyselfService {
 	//修改网名
 	public int edituName(int uid, String uName) {
 		return this.myselfMapper.editName(uid,uName);
+	}
+	//显示粉丝详情
+	public Information showFanDetail(int uid) {
+		return this.myselfMapper.showFanDetail(uid);
 	}
 	
 	
