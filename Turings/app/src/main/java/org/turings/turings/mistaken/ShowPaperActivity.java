@@ -319,7 +319,7 @@ public class ShowPaperActivity extends AppCompatActivity implements View.OnClick
                     .setLargeIcon(largeBitmap)
                     .setSmallIcon(R.mipmap.icon1)     //收到信息后状态栏显示的小图标
                     .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE)    //设置默认的三色灯与振动器
-                    .setDefalts(Notification.DEFAULT_SOUND)    //设置系统的提示音
+                    .setDefaults(Notification.DEFAULT_SOUND)    //设置系统的提示音
                     .setAutoCancel(true);       //设置点击后取消Notification
             builder.setContentIntent(pendingIntent);    //绑定PendingIntent对象
             notification1 = builder.build();

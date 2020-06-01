@@ -177,7 +177,8 @@ public class WriteThingsActivity extends AppCompatActivity {
                     background = back.replace("R.drawable","");
                     Log.i("lww",userName + title+content+background);
                     sendToServer(userName,title,content,background);
-                    Intent intent = new Intent(WriteThingsActivity.this,WriteActivity.class);
+                    Intent intent = new Intent(WriteThingsActivity.this,MainActivity.class);
+                    intent.setAction("loginBackMyself");
                     startActivity(intent);
                     break;
             }
