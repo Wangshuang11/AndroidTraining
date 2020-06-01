@@ -101,6 +101,10 @@ public class FarmActivity extends AppCompatActivity {
                     waterTxt.setText(String.valueOf(water.getWaterdrop()));
                     processTxt.setText(String.valueOf(water.getProcess()));
                     grow.setText(String.valueOf(water.getProcess()));
+                    //2.判断多久未用本APP,修改dry值
+                    judgeNotGetWater();
+                    //3.根据2及成长值显示小葵花的生长状态、判断花盆状态
+                    judgeProcess1(water.getProcess(),dryStatus);
                     break;
 
             }
@@ -120,10 +124,6 @@ public class FarmActivity extends AppCompatActivity {
         toServer();
         //加载头像
         circleAvatar();
-        //2.判断多久未用本APP,修改dry值
-        judgeNotGetWater();
-        //3.根据2及成长值显示小葵花的生长状态、判断花盆状态
-        judgeProcess1(processNum,dryStatus);
 
         //金鑫媛的部分
         jxypart();
