@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50506
 File Encoding         : 65001
 
-Date: 2020-06-02 17:33:48
+Date: 2020-06-02 19:28:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -570,7 +570,7 @@ INSERT INTO `tbl_self_user` VALUES ('2', '13000001002', '单小楠', 'shanxinnan
 INSERT INTO `tbl_self_user` VALUES ('3', '13000001003', '金小媛', 'jinxinyuan', '人类因梦想而变的伟大', 'http://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/i3t1576119212075.png?Expires=1891479212&OSSAccessKeyId=LTAI4FoQ82rmSV5EzaE1KtPU&Signature=G0jxbEBkJe4aSyAVc21B2i8mA%2F8%3D', '1259', '52', '5', '4', '0');
 INSERT INTO `tbl_self_user` VALUES ('4', '13000001004', '杨小鑫', 'yangliuxin', '人生如茶，粗品是苦的，细品是香的', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1842', '86', '3', '2', '0');
 INSERT INTO `tbl_self_user` VALUES ('5', '13000001005', '吕小浩', 'lvyihao', '失败的是事，绝不应是人', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1263', '75', '3', '3', '0');
-INSERT INTO `tbl_self_user` VALUES ('6', '13000001006', '郭小伟', 'guowei', '从来不让认识我的朋友后悔', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1862', '86', '2', '4', '0');
+INSERT INTO `tbl_self_user` VALUES ('6', '13000001006', '郭小伟', 'guowei', '从来不让认识我的朋友后悔', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1862', '86', '2', '3', '0');
 INSERT INTO `tbl_self_user` VALUES ('7', '13000001007', '刘小辉', 'liupenghui', '努力改变，不为别人，只为脱胎换骨', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1230', '95', '3', '3', '0');
 INSERT INTO `tbl_self_user` VALUES ('8', '13256899853', '西瓜', '111111', '态度决定高度，习惯主宰人生', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '56', '0', '0', '0');
 INSERT INTO `tbl_self_user` VALUES ('9', '15987532685', '芒果', '111111', '人生就是距离，距离就是人生', 'https://jxy2019.oss-cn-beijing.aliyuncs.com/avatars/nv.png', '1542', '85', '0', '0', '0');
