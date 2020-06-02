@@ -63,10 +63,16 @@
 	<insert id="addAttention">
 		insert into tbl_self_fans(uId,fId) values (#{uid},#{fid})
 	</insert>
+	<update id="addAtten">
+		update tbl_self_user set uAttentioncount=uAttentioncount+1 where uId=#{uid}
+	</update>
 	<!-- 取消关注 -->
 	<delete id="delAttention">
 		delete from tbl_self_fans where uId= #{uid} and fId=#{fid}
 	</delete>
+	<update id="delAtten">
+		update tbl_self_user set uAttentioncount=uAttentioncount-1 where uId=#{uid}
+	</update>
 	<!-- 编辑座右铭 -->
 	<update id="editMotto">
 		update tbl_self_user set uMotto=#{umotto} where uId=#{uid}

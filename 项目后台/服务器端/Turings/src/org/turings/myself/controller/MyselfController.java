@@ -135,8 +135,9 @@ public class MyselfController {
 	@Transactional(readOnly =false)
 	@ResponseBody
 	@RequestMapping(value="/SetAt",produces="text/json;charset=utf-8")
-	public String addAttention(@RequestParam(value = "aid") int attentionId,@RequestParam(value = "fid") int fanId) {
+	public String addAttention(@RequestParam(value = "uid") int attentionId,@RequestParam(value = "fid") int fanId) {
 		int result= this.myselfService.addAttentions(attentionId,fanId);
+		int result2= this.myselfService.addAtten(attentionId);
 		if(result==1) {
 			return "true";
 		}else {
@@ -147,9 +148,10 @@ public class MyselfController {
 	@Transactional(readOnly =false)
 	@ResponseBody
 	@RequestMapping(value="/DelAt",produces="text/json;charset=utf-8")
-	public String delAttention(@RequestParam(value = "aid") int attentionId,@RequestParam(value = "fid") int fanId) {
-		int result= this.myselfService.delAttentions(attentionId,fanId);
-		if(result==1) {
+	public String delAttention(@RequestParam(value = "uid") int attentionId,@RequestParam(value = "fid") int fanId) {
+		int result1= this.myselfService.delAttentions(attentionId,fanId);
+		int result2= this.myselfService.delAtten(attentionId);
+		if(result1==1) {
 			return "true";
 		}else {
 			return "false";

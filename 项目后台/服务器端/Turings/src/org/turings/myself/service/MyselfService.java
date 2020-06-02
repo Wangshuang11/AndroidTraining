@@ -52,9 +52,15 @@ public class MyselfService {
 	public int addAttentions(int attentionId, int fanId) {
 		return this.myselfMapper.addAttention(attentionId,fanId);
 	}
+	public int addAtten(int attentionId) {
+		return this.myselfMapper.addAtten(attentionId);
+	}
 	//删除关注
 	public int delAttentions(int attentionId, int fanId) {
 		return this.myselfMapper.delAttention(attentionId,fanId);
+	}
+	public int delAtten(int attentionId) {
+		return this.myselfMapper.addAtten(attentionId);
 	}
 	//修改座右铭
 	public int editMotto(int uid, String uMotto) {
